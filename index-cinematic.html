@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>ISIŞAH GROUP — çelikten ısıya, tek nefeste</title>
+  <meta name="description" content="1982'den bugüne Bursa DOSAB'dan sanayi ve ev tipi ısıtma çözümleri. Kaydırarak ISIŞAH GROUP'un dünyasında uçun: Borşah Boru, ISIŞAH Endüstriyel, ŞAHTERM." />
+  <style>
+    /* Koyu premium tema — sahnelerin sıcak kor ışığı öne çıksın */
+    :root, .sw-root {
+      --sw-bg: #14171C;          /* grafit çelik zemin */
+      --sw-ink: #F4F1EC;         /* krem metin */
+      --sw-ink-soft: #9AA3AD;    /* açık çelik ikincil */
+      --sw-accent: #E2231A;      /* ISI kırmızısı — sahne bazında override edilir */
+    }
+    html, body { background: #14171C; }
+  </style>
+</head>
+<body>
+  <div id="top"></div>
+  <div id="world"></div>
+
+  <script src="scrub-engine.js"></script>
+  <script>
+    mountScrollWorld(document.getElementById('world'), {
+      brand: { name: 'ISIŞAH GROUP', href: '#top' },
+      cta: { label: 'İletişime geç', href: 'https://isisah.com.tr/iletisim/' },
+      hint: 'uçmak için kaydır',
+      diveScroll: 1.4,
+      connScroll: 0.9,
+      sections: [
+        {
+          id: 'borsah', label: 'Borşah Boru',
+          still: 'assets/borsah.jpg',
+          clip: 'assets/vid/borsah.mp4',
+          accent: '#F5820D',
+          scroll: 1.6, linger: 0.4,
+          eyebrow: 'HAMMADDE · BORŞAH BORU',
+          title: 'Her şey çelikte başlar.',
+          body: 'Ø6–25 mm paslanmaz çelik borular; soğuk şekillendirme (roll forming) ve TIG kaynağıyla mikron hassasiyetinde üretilir.',
+          tags: ['Paslanmaz çelik', 'Ø6–25 mm', 'TIG kaynak'],
+        },
+        {
+          id: 'rezistans', label: 'ISIŞAH Endüstriyel',
+          still: 'assets/rezistans.jpg',
+          clip: 'assets/vid/rezistans.mp4',
+          accent: '#E2231A',
+          eyebrow: 'SANAYİ · ISIŞAH ENDÜSTRİYEL',
+          title: 'Isıya dönüşen mühendislik.',
+          body: 'Sanayi tipi boru rezistanslar, nichrome tel sarımdan kızıl-kor teste kadar tek üretim hattında biçim alır.',
+          tags: ['Boru rezistans', 'Sanayi tipi', 'ISO 9001-2015'],
+        },
+        {
+          id: 'sahterm', label: 'ŞAHTERM',
+          still: 'assets/sahterm.jpg',
+          clip: 'assets/vid/sahterm.mp4',
+          accent: '#F5820D',
+          eyebrow: 'EV TİPİ · ŞAHTERM',
+          title: 'Her eve giren ısı.',
+          body: 'Elektrikli ev cihazları için krom ısıtıcı elemanlar, seri üretim hattında tek tek kalite kontrolünden geçer.',
+          tags: ['Ev cihazları', 'Krom eleman', 'Seri üretim'],
+        },
+        {
+          id: 'uygulama', label: 'Uygulamalar',
+          still: 'assets/uygulama.jpg',
+          clip: 'assets/vid/uygulama.mp4',
+          accent: '#E2231A',
+          eyebrow: 'UYGULAMA · MÜHENDİSLİK PROJELERİ',
+          title: 'Fikirden fabrikaya.',
+          body: 'Oto boya kurutma fırınları, kanal tipi ve mobil elektrikli ısıtma üniteleriyle anahtar teslim çözümler.',
+          tags: ['Boya kurutma', 'Kanal tipi', 'Mobil ünite'],
+        },
+        {
+          id: 'merkez', label: 'ISIŞAH GROUP',
+          still: 'assets/merkez.jpg',
+          clip: 'assets/vid/merkez.mp4',
+          accent: '#E2231A',
+          scroll: 1.8, linger: 0.5,
+          eyebrow: "1982'DEN BUGÜNE · BURSA",
+          title: 'ISIŞAH GROUP.',
+          body: "40+ yıllık deneyimle DOSAB Bursa'dan Türkiye'nin dört bir yanına sanayi ve ev tipi ısıtma çözümleri.",
+          tags: ['Kuruluş 1982', 'DOSAB / Bursa', 'ISO 9001-2015'],
+          cta: {
+            primary: { label: 'İletişime geç', href: 'https://isisah.com.tr/iletisim/' },
+            secondary: { label: 'E-Katalog', href: 'https://isisah.com.tr/' },
+          },
+        },
+      ],
+      // Mimari A (sürekli ileri kamera): konnektör yok — legler doğrudan zincirlenir.
+      connectors: [],
+    });
+  </script>
+</body>
+</html>

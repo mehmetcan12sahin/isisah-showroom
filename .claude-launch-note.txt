@@ -1,0 +1,1 @@
+Preview: python3 -m http.server 8080  (serves byte ranges — required for scrub)

@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>ISIŞAH GROUP — 3B Ürün Showroom</title>
+<meta name="description" content="ISIŞAH GROUP 3B showroom'u: WebGL sahnede kaydırarak stantların arasında uçun, ürünleri fareyle döndürüp inceleyin. SALMEX, ISIŞAH, BORŞAH." />
+<link rel="icon" href="assets/catalog/logo-group.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&family=Saira:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#06080a;--ink:#F4F1EC;--muted:#9AA3AD;--line:#2A2F38;--red:#E2231A;--ember:#F5820D;
+    --grad:linear-gradient(100deg,var(--red),var(--ember));--disp:'Saira Condensed',sans-serif;--body:'Manrope',sans-serif;--tech:'Saira',sans-serif;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3,.disp{font-family:var(--disp);text-transform:uppercase;line-height:.98;letter-spacing:-.01em}
+  .eyebrow{font-family:var(--tech);font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--ember);font-size:.72rem}
+  ::selection{background:var(--red);color:#fff}
+  canvas{position:fixed;inset:0;z-index:0;display:block;width:100%;height:100%;outline:none}
+  .vig{position:fixed;inset:0;z-index:1;pointer-events:none;box-shadow:inset 0 0 220px 50px #000a}
+
+  .loader{position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#06080a;transition:opacity .7s}
+  .loader.hide{opacity:0;pointer-events:none}
+  .loader .bar{width:210px;height:3px;background:#1a1e24;border-radius:3px;overflow:hidden}
+  .loader .bar i{display:block;height:100%;width:6%;background:var(--grad);transition:width .3s}
+  .loader .lt{font-family:var(--tech);letter-spacing:.24em;text-transform:uppercase;font-size:.72rem;color:var(--muted)}
+  .loader img{height:42px}
+
+  header{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:linear-gradient(#06080acc,#06080a00)}
+  header .l{display:flex;align-items:center;gap:14px}header .l img{height:30px}
+  header .l .t{font-family:var(--disp);font-weight:700;font-size:.95rem;letter-spacing:.04em;border-left:1px solid var(--line);padding-left:14px}
+  header .l .t small{display:block;font-family:var(--tech);font-weight:500;font-size:.58rem;letter-spacing:.3em;color:var(--muted)}
+  header .r{display:flex;align-items:center;gap:20px}
+  header .back{font-family:var(--tech);font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  header .back:hover{color:#fff}
+  .counter{font-family:var(--disp);font-weight:700;font-size:1.05rem}.counter b{color:var(--ember)}.counter span{color:var(--muted);font-size:.8rem}
+  .pbar{position:fixed;top:0;left:0;height:3px;background:var(--grad);width:0;z-index:45;box-shadow:0 0 12px #e2231a88}
+
+  .intro{position:fixed;inset:0;z-index:16;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px;padding:0 24px}
+  .intro .big{font-size:clamp(3rem,9vw,6.6rem);font-weight:800}
+  .intro .big .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .intro p{color:var(--muted);max-width:620px;font-size:1.08rem}
+  .intro .brandrow{display:flex;gap:30px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:4px}
+  .intro .brandrow img{height:38px}
+  .intro .hint{margin-top:8px;font-family:var(--tech);font-size:.74rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ember)}
+  .intro .hint b{display:inline-block;animation:bob 1.4s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+  .outro{position:fixed;inset:0;z-index:16;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:16px;padding:0 24px;pointer-events:none;opacity:0}
+  .outro .big{font-size:clamp(2.2rem,6vw,4rem);font-weight:800}
+  .outro p{color:var(--muted);max-width:540px}
+  .outro .cta{display:flex;gap:14px;margin-top:10px;flex-wrap:wrap;justify-content:center;pointer-events:auto}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--tech);font-weight:600;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;padding:14px 26px;border-radius:2px;background:var(--grad);color:#fff;box-shadow:0 8px 24px #e2231a44;cursor:pointer;border:none}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink);box-shadow:none}
+
+  .info{position:fixed;z-index:14;width:min(380px,86vw);pointer-events:none;opacity:0;transition:opacity .2s;transform:translateX(-50%);text-shadow:0 2px 14px #000e}
+  .info .in{text-align:center;display:flex;flex-direction:column;align-items:center;background:radial-gradient(ellipse at 50% 40%,#050709b0,transparent 78%);padding:9px 14px;border-radius:12px}
+  .info .blogo{height:20px;margin-bottom:6px}
+  .info .idx{font-family:var(--tech);color:var(--muted);letter-spacing:.2em;font-size:.6rem;margin-bottom:3px}
+  .info h2{font-size:clamp(1.1rem,1.9vw,1.6rem);font-weight:800}
+  .info .en{font-family:var(--tech);color:var(--ember);font-size:.72rem;letter-spacing:.04em;margin:1px 0 6px}
+  .info p{color:#cfd4da;font-size:.78rem;line-height:1.42;margin-bottom:8px}
+  .info .chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  .info .chips span{font-family:var(--tech);font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:#fff;border:1px solid #333a44;border-radius:40px;padding:3px 10px;background:#0d1116cc}
+  .info .inspect{margin-top:9px;font-family:var(--tech);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ember);opacity:.9}
+
+  .rail{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:12px}
+  .rail button{width:9px;height:9px;border-radius:50%;border:none;background:#ffffff2e;cursor:pointer;padding:0;transition:.25s}
+  .rail button.on{background:var(--ember);transform:scale(1.4);box-shadow:0 0 10px var(--ember)}
+  .scrollhint{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:40;font-family:var(--tech);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:#ffffff88;pointer-events:none;transition:.4s}
+
+  .inspectbar{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:30;display:none;gap:12px;align-items:center;
+    background:#0b0e13cc;border:1px solid var(--line);border-radius:40px;padding:9px 10px 9px 20px;backdrop-filter:blur(8px)}
+  .inspectbar.on{display:flex}
+  .inspectbar .t{font-family:var(--tech);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .inspectbar .close{font-family:var(--tech);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--grad);border:none;border-radius:40px;padding:9px 16px;cursor:pointer}
+
+  .warn{position:fixed;top:84px;left:50%;transform:translateX(-50%);z-index:55;background:#2a1010ee;border:1px solid #7a2a20;border-radius:8px;
+    padding:12px 18px;font-size:.85rem;color:#ffd9d0;max-width:520px;text-align:center;display:none}
+  .warn code{background:#0008;padding:2px 7px;border-radius:4px;font-size:.8rem}
+
+  #scroll{position:relative;z-index:5}
+  @media(max-width:820px){.rail{display:none}}
+  @media (prefers-reduced-motion:reduce){.intro .hint b{animation:none}}
+</style>
+</head>
+<body>
+
+<div class="loader" id="loader">
+  <img src="assets/catalog/logo-group.png" alt="ISIŞAH GROUP">
+  <div class="lt">3B showroom hazırlanıyor</div>
+  <div class="bar"><i id="lbar"></i></div>
+</div>
+
+<canvas id="c"></canvas>
+<div class="vig"></div>
+
+<header>
+  <a class="l" href="index.html"><img src="assets/catalog/logo-group.png" alt="ISIŞAH GROUP">
+    <span class="t">3B SHOWROOM<small>WEBGL GEZİNTİ</small></span></a>
+  <div class="r">
+    <div class="counter"><b id="cur">01</b> <span>/ <span id="tot">09</span></span></div>
+    <a class="back" href="index.html">← Ana Sayfa</a>
+  </div>
+</header>
+
+<div class="pbar" id="pbar"></div>
+<div class="rail" id="rail"></div>
+<div class="scrollhint" id="shint">uçmak için kaydır ↓</div>
+<div class="warn" id="warn"></div>
+
+<div class="intro" id="intro">
+  <span class="eyebrow">ISIŞAH GROUP · 3B ÜRÜN SHOWROOM</span>
+  <div class="big">3B showroom'da<br><span class="g">uçun.</span></div>
+  <p>Gerçek WebGL sahne. Kaydırdıkça kamera stantların arasında uçsun; bir ürünü yakından görmek için tıklayıp fareyle döndürün.</p>
+  <div class="brandrow">
+    <img src="assets/catalog/logo-salmex.png" alt="SALMEX">
+    <img src="assets/catalog/logo-isisah.png" alt="ISIŞAH">
+    <img src="assets/catalog/logo-borsah.png" alt="BORŞAH">
+  </div>
+  <div class="hint">uçmaya başla <b>↓</b></div>
+</div>
+
+<div class="info" id="info"><div class="in" id="infoIn"></div></div>
+
+<div class="outro" id="outro">
+  <span class="eyebrow">ISIŞAH GROUP</span>
+  <div class="big">Yolun sonu,<br>çözümün başı.</div>
+  <p>Tüm ürün ailesi için DOSAB Bursa'daki merkezimizden teklif ve teknik destek alın.</p>
+  <div class="cta">
+    <a class="btn" href="mailto:info@isisah.com.tr">Teklif İste →</a>
+    <a class="btn ghost" href="index.html">Ana Sayfa</a>
+  </div>
+</div>
+
+<div class="inspectbar" id="inspectbar">
+  <span class="t" id="inspectName">İncele</span>
+  <button class="close" id="inspectClose">Kapat ✕</button>
+</div>
+
+<div id="scroll"></div>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+// file:// açılırsa fotolar tarayıcı tarafından engellenir — kullanıcıyı uyar
+if(location.protocol==='file:'){
+  const w=document.getElementById('warn');
+  w.innerHTML='Dosyayı doğrudan açtınız — tarayıcı ürün fotoğraflarını engeller.<br>Klasörde şunu çalıştırıp <code>http://localhost:8080/urunler.html</code> açın:<br><code>python3 -m http.server 8080</code>';
+  w.style.display='block';
+}
+
+const PRODUCTS=[
+  {img:'salmex',logo:'logo-salmex',idx:'01 · SALMEX',h:'Yoğuşmalı Isı Eşanjörü',en:'Condensing Heat Exchanger',
+   p:'Paslanmaz çelik spiral eşanjör; yüksek verimli, farklı kapasitelerde yoğuşmalı tasarım.',chips:['Paslanmaz Çelik','Yüksek Verim','Değiştirilebilir']},
+  {img:'rezistans',logo:'logo-isisah',idx:'02 · ISIŞAH ENDÜSTRİYEL',h:'Sanayi Rezistansları',en:'Industrial Heating Elements',
+   p:'Daldırma ve boru tipi ısıtıcı elemanlar; sanayi ve proses uygulamaları için.',chips:['Daldırma Tip','Boru Tip','Yerli Üretim']},
+  {img:'izgara',logo:'logo-isisah',idx:'03 · ISIŞAH ENDÜSTRİYEL',h:'Izgara Rezistansları',en:'Grill Heating Elements',
+   p:'Endüstriyel mutfak ızgaraları için dairesel ve serpantin ısıtıcı elemanlar.',chips:['Endüstriyel Mutfak','Izgara','Paslanmaz']},
+  {img:'fritoz',logo:'logo-isisah',idx:'04 · ISIŞAH ENDÜSTRİYEL',h:'Fritöz Rezistansları',en:'Fryer Heating Elements',
+   p:'Endüstriyel fritözler için daldırma tip ısıtıcı raflar; hızlı ve homojen ısıtma.',chips:['Fritöz','Daldırma Tip','Hızlı Isıtma']},
+  {img:'bulasik',logo:'logo-isisah',idx:'05 · ISIŞAH ENDÜSTRİYEL',h:'Bulaşık Makinesi Rezistansları',en:'Dishwasher Heating Elements',
+   p:'Sanayi tipi bulaşık makineleri için boyler ve tank ısıtıcı elemanları.',chips:['Boyler Tip','Tank Isıtıcı','Sanayi Tipi']},
+  {img:'makarna',logo:'logo-isisah',idx:'06 · ISIŞAH ENDÜSTRİYEL',h:'Makarna Haşlama Rezistansları',en:'Pasta Cooking Elements',
+   p:'Makarna haşlama üniteleri için daldırma tip ısıtıcı elemanlar.',chips:['Haşlama','Daldırma Tip','Mutfak']},
+  {img:'beyaz',logo:'logo-isisah',idx:'07 · ISIŞAH ENDÜSTRİYEL',h:'Beyaz Eşya Rezistansları',en:'Household Appliance Elements',
+   p:'Çamaşır kurutma, fırın ve küçük ev aletleri için ısıtıcı üniteler.',chips:['Kurutma Mak.','Fırın','Ev Aletleri']},
+  {img:'defrost',logo:'logo-isisah',idx:'08 · ISIŞAH ENDÜSTRİYEL',h:'Defrost Rezistansları',en:'Defrost Heating Elements',
+   p:'Soğutma sistemleri için defrost elemanları; Ø6,5–11,2 mm, −60…250°C, sektörde ~%90 pay.',chips:['Ø6,5–11,2 mm','−60…250°C','%90 Pay']},
+  {img:'firin',logo:'logo-isisah',idx:'09 · ISIŞAH ENDÜSTRİYEL',h:'Endüstriyel Fırın',en:'Industrial Furnace',
+   p:'Kontrol panelli sanayi tipi ısıl işlem ve kurutma fırınları; projeye özel.',chips:['PLC Kontrol','Isıl İşlem','Projeye Özel']},
+  {img:'kanal',logo:'logo-isisah',idx:'10 · ISIŞAH ENDÜSTRİYEL',h:'Kanal Tipi Isıtıcı',en:'Duct Type Electric Heater',
+   p:'Kanatlı rezistanslı santral, dikdörtgen ve yuvarlak kanal ısıtıcıları.',chips:['Santral','Dikdörtgen','Yuvarlak']},
+  {img:'mobil',logo:'logo-isisah',idx:'11 · ISIŞAH ENDÜSTRİYEL',h:'Mobil Elektrikli Isıtıcı',en:'Mobile Electric Heater',
+   p:'Uğur Böceği serisi taşınabilir fanlı ısıtıcılar; atölye ve saha için.',chips:['Taşınabilir','Fanlı','3 Boy']},
+  {img:'boykur',logo:'logo-isisah',idx:'12 · ISIŞAH · BOYKUR',h:'BOYKUR Boya Kurutma',en:'Infrared Paint Drying',
+   p:'Infrared, bilgisayar kontrollü mobil oto boya kurutma. Tofaş Ar-Ge projesi.',chips:['Infrared','Bilgisayar Kontrollü','Tofaş Ar-Ge']},
+  {img:'boru',logo:'logo-borsah',idx:'13 · BORŞAH BORU',h:'Paslanmaz Borular',en:'Stainless Steel Tubes',
+   p:'Dikişli paslanmaz boru; Ø4–25 mm, 70–300 bar test, 9 kalite kontrolü.',chips:['Ø4–25 mm','TIG Kaynak','9 Test']},
+  {img:'oval',logo:'logo-borsah',idx:'14 · BORŞAH BORU',h:'Oval Borular',en:'Oval Section Tubes',
+   p:'Rezistans imalatı, mobilya ve sanayi için oval kesitli paslanmaz profiller.',chips:['Oval Kesit','Rezistans İmalatı','Profil']},
+  {img:'kangal',logo:'logo-borsah',idx:'15 · BORŞAH BORU',h:'Tavlı & Kangal Borular',en:'Annealed & Coiled Tubes',
+   p:'Ø6–16 mm tavlı boru; 1040–1100°C tav, 100–400 m kangal, 100 bar test.',chips:['Ø6–16 mm','100–400 m','1040–1100°C']},
+];
+const NP=PRODUCTS.length, TOT=NP+2;
+const GAP=15, SIDEX=5.2, PH=2.4, EYE=3.0;
+
+const canvas=document.getElementById('c');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'});
+renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));   // perf: cap DPR
+renderer.setSize(innerWidth,innerHeight);
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=1.05;
+renderer.outputColorSpace=THREE.SRGBColorSpace;
+
+const scene=new THREE.Scene();
+scene.background=new THREE.Color(0x06080a);
+scene.fog=new THREE.FogExp2(0x06080a,0.026);
+
+const pmrem=new THREE.PMREMGenerator(renderer);
+scene.environment=pmrem.fromScene(new RoomEnvironment(),0.04).texture;
+
+const camera=new THREE.PerspectiveCamera(52,innerWidth/innerHeight,0.1,140);
+camera.position.set(0,EYE,10);
+
+// ---- static geometry (textured showroom hall) ----
+const envLoader=new THREE.TextureLoader();  // ambiyans dokuları — yoksa düz renk fallback
+function envTex(url,rx,ry,cb){ envLoader.load(url,(t)=>{t.colorSpace=THREE.SRGBColorSpace;
+  t.wrapS=t.wrapT=THREE.MirroredRepeatWrapping;t.repeat.set(rx,ry);t.anisotropy=8;cb(t);},undefined,()=>{}); }
+
+const floorMat=new THREE.MeshStandardMaterial({color:0x0a0d11,metalness:0.9,roughness:0.35,envMapIntensity:1.0});
+envTex('assets/img/tex-floor.webp',8,40,(t)=>{floorMat.map=t;floorMat.color.set(0x34383d);
+  floorMat.metalness=0.72;floorMat.roughness=0.34;floorMat.needsUpdate=true;});
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(80,400),floorMat);
+floor.rotation.x=-Math.PI/2;floor.position.z=-TOT*GAP/2;scene.add(floor);
+
+const ceil=new THREE.Mesh(new THREE.PlaneGeometry(26,400),new THREE.MeshStandardMaterial({color:0x05070a,roughness:1}));
+ceil.rotation.x=Math.PI/2;ceil.position.y=11;ceil.position.z=floor.position.z;scene.add(ceil);
+
+// fotogerçekçi panorama arka planı — kamerayla birlikte kayar (sonsuz hol hissi)
+let backdrop=null;
+envLoader.load('assets/img/pano-hall.webp',(t)=>{
+  t.colorSpace=THREE.SRGBColorSpace;t.wrapS=THREE.MirroredRepeatWrapping;t.repeat.x=2;t.anisotropy=8;
+  backdrop=new THREE.Mesh(new THREE.CylinderGeometry(34,34,30,48,1,true),
+    new THREE.MeshBasicMaterial({map:t,side:THREE.BackSide,fog:false}));
+  backdrop.position.y=6;scene.add(backdrop);
+  // finale: koridorun sonunda kor kartal amblemli marka duvarı
+  envLoader.load('assets/img/pano-end.webp',(te)=>{te.colorSpace=THREE.SRGBColorSpace;te.anisotropy=8;
+    const fin=new THREE.Mesh(new THREE.PlaneGeometry(30,17),new THREE.MeshBasicMaterial({map:te,fog:false}));
+    fin.position.set(0,6.2,-(TOT)*GAP-6);scene.add(fin);});
+},undefined,()=>{ // panorama yoksa eski düz duvar + kor arka duvar fallback'i
+  const wallMat=new THREE.MeshStandardMaterial({color:0x0c0f14,roughness:0.85,metalness:0.1});
+  envTex('assets/img/tex-wall.webp',36,1.6,(t)=>{wallMat.map=t;wallMat.color.set(0x565c64);wallMat.roughness=0.7;wallMat.metalness=0.25;wallMat.needsUpdate=true;});
+  for(const s of [-1,1]){const w=new THREE.Mesh(new THREE.PlaneGeometry(400,14),wallMat);w.rotation.y=-s*Math.PI/2;w.position.set(s*11,5,floor.position.z);scene.add(w);}
+  const endMat=new THREE.MeshBasicMaterial({color:0x1a0f08});
+  envLoader.load('assets/img/tex-endwall.webp',(t)=>{t.colorSpace=THREE.SRGBColorSpace;endMat.map=t;endMat.color.set(0xffffff);endMat.needsUpdate=true;});
+  const endWall=new THREE.Mesh(new THREE.PlaneGeometry(26,13),endMat);
+  endWall.position.set(0,5.6,-(TOT)*GAP-5);scene.add(endWall);
+});
+
+// çelik kolonlar (instanced — iki duvar boyunca ritim)
+const colGeo=new THREE.BoxGeometry(0.7,11,0.7);
+const colMat=new THREE.MeshStandardMaterial({color:0x141920,roughness:0.6,metalness:0.5,envMapIntensity:0.8});
+const nCols=TOT+2, cols=new THREE.InstancedMesh(colGeo,colMat,nCols*2);
+{const m=new THREE.Matrix4();let k=0;
+ for(let i=0;i<nCols;i++){const z=-i*GAP+GAP/2;
+   m.setPosition(-10.6,5.5,z);cols.setMatrixAt(k++,m);
+   m.setPosition(10.6,5.5,z);cols.setMatrixAt(k++,m);}
+ cols.instanceMatrix.needsUpdate=true;scene.add(cols);}
+
+// tavan makasları (instanced kirişler)
+const beamGeo=new THREE.BoxGeometry(21.5,0.35,0.35);
+const beamMat=new THREE.MeshStandardMaterial({color:0x10141a,roughness:0.7,metalness:0.4});
+const nBeams=Math.ceil(TOT*GAP/7.5)+1, beams=new THREE.InstancedMesh(beamGeo,beamMat,nBeams);
+{const m=new THREE.Matrix4();
+ for(let i=0;i<nBeams;i++){m.setPosition(0,10.3,-i*7.5);beams.setMatrixAt(i,m);}
+ beams.instanceMatrix.needsUpdate=true;scene.add(beams);}
+
+// duvar boyunca kesintisiz kor ışık şeridi
+const stripGeo=new THREE.BoxGeometry(0.06,0.1,TOT*GAP+30);
+const stripMat=new THREE.MeshBasicMaterial({color:0xF5820D});
+for(const s of [-1,1]){const st=new THREE.Mesh(stripGeo,stripMat);st.position.set(s*10.55,2.2,floor.position.z);scene.add(st);}
+
+// süzülen toz partikülleri (atmosfer — ~sıfır maliyet)
+const NPTS=380;const pPos=new Float32Array(NPTS*3);
+for(let i=0;i<NPTS;i++){pPos[3*i]=(Math.random()*2-1)*9.5;pPos[3*i+1]=Math.random()*8.5+0.6;pPos[3*i+2]=-Math.random()*TOT*GAP;}
+const pGeo=new THREE.BufferGeometry();pGeo.setAttribute('position',new THREE.BufferAttribute(pPos,3));
+const dust=new THREE.Points(pGeo,new THREE.PointsMaterial({color:0xffc890,size:0.05,transparent:true,opacity:0.5,depthWrite:false,blending:THREE.AdditiveBlending}));
+scene.add(dust);
+
+// ---- lights: FEW (perf). Ambience + 1 moving spot + sprites for ember glow ----
+scene.add(new THREE.AmbientLight(0x35302a,0.9));
+scene.add(new THREE.HemisphereLight(0x596170,0x0a0b0d,0.7));
+const activeSpot=new THREE.SpotLight(0xffe6c8,140,20,0.55,0.55,1.6);   // ONE spot, follows active product
+activeSpot.position.set(0,PH+8,0);scene.add(activeSpot);scene.add(activeSpot.target);
+const endGlow=new THREE.PointLight(0xF5820D,40,60,2);endGlow.position.set(0,4,-(TOT-0.2)*GAP);scene.add(endGlow);
+
+function radialTex(inner,outer){const c=document.createElement('canvas');c.width=c.height=128;const g=c.getContext('2d');
+  const gr=g.createRadialGradient(64,64,0,64,64,64);gr.addColorStop(0,inner);gr.addColorStop(1,outer);g.fillStyle=gr;g.fillRect(0,0,128,128);
+  const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return t;}
+const shadowTex=radialTex('rgba(0,0,0,0.66)','rgba(0,0,0,0)');
+const glowTex=radialTex('rgba(255,200,140,0.55)','rgba(255,160,80,0)');
+const emberTex=radialTex('rgba(255,150,60,0.8)','rgba(255,120,40,0)');
+
+// ember wall glows as additive sprites — zero light cost
+for(let i=0;i<TOT;i++){const z=-i*GAP;
+  for(const s of [-1,1]){
+    const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:emberTex,transparent:true,opacity:0.55,depthWrite:false,blending:THREE.AdditiveBlending}));
+    sp.scale.set(4.5,3.2,1);sp.position.set(s*9.6,2.2,z);scene.add(sp);
+  }}
+
+// ---- pedestals + products ----
+const pedMat=new THREE.MeshStandardMaterial({color:0x14181e,roughness:0.7,metalness:0.25,envMapIntensity:0.7});
+const pedTopMat=new THREE.MeshStandardMaterial({color:0x1c222a,roughness:0.5,metalness:0.4,envMapIntensity:0.9});
+const seamMat=new THREE.MeshBasicMaterial({color:0xE2231A});
+const loadMgr=new THREE.LoadingManager();
+const texLoader=new THREE.TextureLoader(loadMgr);
+const failed=[];
+function fallbackTex(label){const c=document.createElement('canvas');c.width=512;c.height=512;const g=c.getContext('2d');
+  g.fillStyle='#1a1f26';g.beginPath();g.roundRect(56,166,400,180,18);g.fill();
+  g.fillStyle='#F5820D';g.font='700 34px sans-serif';g.textAlign='center';g.fillText(label,256,246);
+  g.fillStyle='#9AA3AD';g.font='24px sans-serif';g.fillText('görsel yüklenemedi',256,296);
+  const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return t;}
+const items=[];
+PRODUCTS.forEach((d,i)=>{
+  const side=(i%2===0)?1:-1, z=-(i+0.5)*GAP, x=side*SIDEX;
+  const ped=new THREE.Mesh(new THREE.BoxGeometry(3.4,PH,3.0),pedMat);ped.position.set(x,PH/2,z);scene.add(ped);
+  const top=new THREE.Mesh(new THREE.BoxGeometry(3.5,0.12,3.1),pedTopMat);top.position.set(x,PH+0.03,z);scene.add(top);
+  const seam=new THREE.Mesh(new THREE.BoxGeometry(3.5,0.05,3.12),seamMat);seam.position.set(x,PH+0.11,z);scene.add(seam);
+  const glow=new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex,transparent:true,opacity:0.65,depthWrite:false,blending:THREE.AdditiveBlending}));
+  glow.scale.set(6,6,1);glow.position.set(x,PH+2.6,z-0.2);scene.add(glow);
+  const sh=new THREE.Mesh(new THREE.PlaneGeometry(2.6,2.0),new THREE.MeshBasicMaterial({map:shadowTex,transparent:true,depthWrite:false}));
+  sh.rotation.x=-Math.PI/2;sh.position.set(x,PH+0.13,z);scene.add(sh);
+  // product billboard — unlit (always crisp, no light cost)
+  const mat=new THREE.MeshBasicMaterial({transparent:true,depthWrite:false,side:THREE.DoubleSide});
+  const plane=new THREE.Mesh(new THREE.PlaneGeometry(1,1),mat);
+  plane.position.set(x,PH+2.3,z);scene.add(plane);
+  const applyTex=(tex,aspect)=>{mat.map=tex;mat.needsUpdate=true;const H=3.6;plane.scale.set(H*aspect,H,1);plane.position.y=PH+H/2+0.1;};
+  texLoader.load(`assets/products/${d.img}.webp`,(tex)=>{
+    tex.colorSpace=THREE.SRGBColorSpace;tex.anisotropy=4;
+    applyTex(tex,tex.image.width/tex.image.height);
+  },undefined,()=>{ // webp yoksa png dene, o da yoksa etiketli fallback
+    texLoader.load(`assets/products/${d.img}.png`,(tex)=>{tex.colorSpace=THREE.SRGBColorSpace;tex.anisotropy=4;applyTex(tex,tex.image.width/tex.image.height);},
+      undefined,()=>{failed.push(d.img);applyTex(fallbackTex(d.h),1);});
+  });
+  items.push({i,side,x,z,plane,topY:PH});
+});
+
+// ---- controls / UI ----
+const controls=new OrbitControls(camera,renderer.domElement);
+controls.enableDamping=true;controls.dampingFactor=0.08;controls.enablePan=false;controls.enabled=false;
+controls.minDistance=3;controls.maxDistance=12;
+
+const scrollEl=document.getElementById('scroll');scrollEl.style.height=(TOT*100)+'vh';
+const pbar=document.getElementById('pbar'), cur=document.getElementById('cur'), shint=document.getElementById('shint');
+const intro=document.getElementById('intro'), outro=document.getElementById('outro');
+const info=document.getElementById('info'), infoIn=document.getElementById('infoIn');
+const rail=document.getElementById('rail'); document.getElementById('tot').textContent=String(TOT).padStart(2,'0');
+for(let i=0;i<TOT;i++){const b=document.createElement('button');b.onclick=()=>goTo(i);rail.appendChild(b);}
+const dots=[...rail.children];
+const clamp=(x)=>x<0?0:x>1?1:x, lerp=(a,b,t)=>a+(b-a)*t, seg=(p,a,b)=>clamp((p-a)/(b-a));
+
+let infoIdx=-1;
+function setInfo(i){ if(i===infoIdx)return; infoIdx=i; const d=PRODUCTS[i];
+  infoIn.innerHTML=`<img class="blogo" src="assets/catalog/${d.logo}.png" alt=""><div class="idx">${d.idx}</div>`
+    +`<h2>${d.h}</h2><div class="en">${d.en}</div><p>${d.p}</p>`
+    +`<div class="chips">${d.chips.map(c=>`<span>${c}</span>`).join('')}</div>`
+    +`<div class="inspect">tıkla · fareyle döndür</div>`; }
+
+let inspect=null; const inspectbar=document.getElementById('inspectbar');
+const raycaster=new THREE.Raycaster(); const mouse=new THREE.Vector2(); let downXY=[0,0];
+renderer.domElement.addEventListener('pointerdown',(e)=>{ if(!inspect) downXY=[e.clientX,e.clientY]; });
+renderer.domElement.addEventListener('pointerup',(e)=>{ if(inspect)return;
+  if(Math.hypot(e.clientX-downXY[0],e.clientY-downXY[1])>6)return;
+  mouse.x=(e.clientX/innerWidth)*2-1; mouse.y=-(e.clientY/innerHeight)*2+1;
+  raycaster.setFromCamera(mouse,camera);
+  const hit=raycaster.intersectObjects(items.map(t=>t.plane))[0];
+  if(hit) enterInspect(items.find(t=>t.plane===hit.object));
+});
+function enterInspect(it){ inspect=it;
+  controls.enabled=true; controls.target.set(it.x,it.topY+1.9,it.z);
+  camera.position.set(it.x+(it.side*2.2),it.topY+2.1,it.z+6.5);
+  document.getElementById('inspectName').textContent=PRODUCTS[it.i].h;
+  inspectbar.classList.add('on'); info.style.opacity=0; shint.style.opacity=0;
+}
+function exitInspect(){ inspect=null; controls.enabled=false; inspectbar.classList.remove('on'); }
+document.getElementById('inspectClose').onclick=exitInspect;
+addEventListener('keydown',(e)=>{if(e.key==='Escape'&&inspect)exitInspect();});
+
+function goTo(i){ const total=scrollEl.offsetHeight-innerHeight; let p;
+  if(i===0)p=0; else if(i===TOT-1)p=1; else {const A=0.08,B=0.94,span=(B-A)/NP; p=A+(i-1)*span+span/2;}
+  scrollTo({top:scrollEl.offsetTop+p*total,behavior:'smooth'}); }
+function progress(){ const r=scrollEl.getBoundingClientRect(); const total=scrollEl.offsetHeight-innerHeight;
+  return total>0?clamp((-r.top)/total):0; }
+
+// ---- frame loop (single rAF; smoothed camera) ----
+const _v=new THREE.Vector3();
+let camX=0, lookX=0, sp=0;         // sp = smoothed progress → silky camera
+function frame(){
+  const p=progress();
+  sp+=(p-sp)*0.12;                  // easing: kills scroll-step stutter
+  const tNow=performance.now()*0.001;
+  dust.position.y=Math.sin(tNow*0.18)*0.35;      // yavaş toz süzülmesi
+  dust.position.x=Math.sin(tNow*0.11)*0.25;
+  if(backdrop){backdrop.position.z=camera.position.z; backdrop.rotation.y=sp*0.55;} // panorama kamerayla akar + hafif paralaks
+  const A=0.08,B=0.94,span=(B-A)/NP;
+  pbar.style.width=(p*100)+'%';
+  shint.style.opacity=(p>0.02||inspect)?0:1;
+  intro.style.opacity=1-seg(p,0,A);
+  outro.style.opacity=inspect?0:seg(p,B,1.0);
+
+  let act=0; if(p>=B)act=TOT-1; else if(p>A)act=1+Math.min(NP-1,Math.floor((p-A)/span));
+  const prodIdx=Math.max(0,Math.min(NP-1,act-1));
+  cur.textContent=String(act+1).padStart(2,'0');
+  dots.forEach((d,k)=>d.classList.toggle('on',k===act));
+
+  if(!inspect){
+    const LEAD=8;
+    const zoneT=clamp((sp-A)/(B-A),0,1);
+    const camZ=-zoneT*NP*GAP+LEAD;
+    const it=items[prodIdx];
+    const inProdZone=(p>A-0.01&&p<B+0.01);
+    camX=lerp(camX,inProdZone?it.side*1.5:0,0.07);
+    lookX=lerp(lookX,inProdZone?it.side*2.2:0,0.07);
+    camera.position.set(camX,EYE,camZ);
+    camera.lookAt(lookX,EYE-0.4,camZ-9);
+    // single spotlight follows the active pedestal
+    activeSpot.position.set(it.x,it.topY+8,it.z+0.2);
+    activeSpot.target.position.set(it.x,it.topY,it.z);
+    if(inProdZone){
+      setInfo(prodIdx);
+      _v.set(it.x,it.topY+0.1,it.z).project(camera);
+      const sx=(_v.x*0.5+0.5)*innerWidth, sy=(-_v.y*0.5+0.5)*innerHeight;
+      info.style.left=Math.max(21,Math.min(79,sx/innerWidth*100))+'vw';
+      const hVh=info.offsetHeight/innerHeight*100; let topVh=sy/innerHeight*100+2;
+      if(topVh+hVh>95)topVh=Math.max(46,95-hVh);
+      info.style.top=topVh+'vh';
+      const vis=(_v.z<1)?clamp(1.4-Math.abs(_v.x)*1.3):0;
+      info.style.opacity=vis.toFixed(3);
+    } else info.style.opacity=0;
+  } else controls.update();
+
+  renderer.render(scene,camera);
+  requestAnimationFrame(frame);
+}
+
+loadMgr.onProgress=(u,l,t)=>{document.getElementById('lbar').style.width=Math.round(6+l/t*94)+'%';};
+loadMgr.onLoad=()=>{document.getElementById('lbar').style.width='100%';
+  setTimeout(()=>document.getElementById('loader').classList.add('hide'),300);
+  if(failed.length){const w=document.getElementById('warn');
+    w.innerHTML='Bazı ürün görselleri yüklenemedi: <code>'+failed.join(', ')+'</code><br>assets/products/ klasörünün sunucuya yüklendiğinden emin olun.';
+    w.style.display='block';}
+};
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+requestAnimationFrame(frame);
+setTimeout(()=>document.getElementById('loader').classList.add('hide'),6000);
+</script>
+</body>
+</html>
