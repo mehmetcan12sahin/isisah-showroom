@@ -10,7 +10,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&family=Saira:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root{--bg:#06080a;--ink:#F4F1EC;--muted:#9AA3AD;--line:#2A2F38;--red:#E2231A;--ember:#F5820D;
-    --grad:linear-gradient(100deg,var(--red),var(--ember));--disp:'Saira Condensed',sans-serif;--body:'Manrope',sans-serif;--tech:'Saira',sans-serif;}
+    --grad:linear-gradient(100deg,var(--red),var(--ember));--disp:'Saira Condensed',sans-serif;--body:'Manrope',sans-serif;--tech:'Saira',sans-serif;
+    --ease-out:cubic-bezier(0.23,1,0.32,1);}
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--bg);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
   a{color:inherit;text-decoration:none}
@@ -20,10 +21,10 @@
   canvas{position:fixed;inset:0;z-index:0;display:block;width:100%;height:100%;outline:none}
   .vig{position:fixed;inset:0;z-index:1;pointer-events:none;box-shadow:inset 0 0 220px 50px #000a}
 
-  .loader{position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#06080a;transition:opacity .7s}
+  .loader{position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#06080a;transition:opacity .45s var(--ease-out)}
   .loader.hide{opacity:0;pointer-events:none}
   .loader .bar{width:210px;height:3px;background:#1a1e24;border-radius:3px;overflow:hidden}
-  .loader .bar i{display:block;height:100%;width:6%;background:var(--grad);transition:width .3s}
+  .loader .bar i{display:block;height:100%;width:100%;background:var(--grad);transform:scaleX(.06);transform-origin:left;transition:transform .3s var(--ease-out)}
   .loader .lt{font-family:var(--tech);letter-spacing:.24em;text-transform:uppercase;font-size:.72rem;color:var(--muted)}
   .loader img{height:42px}
 
@@ -35,9 +36,14 @@
   header .back{font-family:var(--tech);font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
   header .back:hover{color:#fff}
   .counter{font-family:var(--disp);font-weight:700;font-size:1.05rem}.counter b{color:var(--ember)}.counter span{color:var(--muted);font-size:.8rem}
-  .pbar{position:fixed;top:0;left:0;height:3px;background:var(--grad);width:0;z-index:45;box-shadow:0 0 12px #e2231a88}
+  .pbar{position:fixed;top:0;left:0;height:3px;background:var(--grad);width:0;z-index:45}
 
   .intro{position:fixed;inset:0;z-index:16;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px;padding:0 24px}
+  .intro>*{opacity:0;transform:translateY(10px);transition:opacity .45s var(--ease-out),transform .45s var(--ease-out)}
+  body.ready .intro>*{opacity:1;transform:none}
+  body.ready .intro>*:nth-child(1){transition-delay:.05s} body.ready .intro>*:nth-child(2){transition-delay:.11s}
+  body.ready .intro>*:nth-child(3){transition-delay:.17s} body.ready .intro>*:nth-child(4){transition-delay:.23s}
+  @media (prefers-reduced-motion:reduce){.intro>*{transform:none;transition:opacity .3s}}
   .intro .big{font-size:clamp(3rem,9vw,6.6rem);font-weight:800}
   .intro .big .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
   .intro p{color:var(--muted);max-width:620px;font-size:1.08rem}
@@ -50,10 +56,13 @@
   .outro .big{font-size:clamp(2.2rem,6vw,4rem);font-weight:800}
   .outro p{color:var(--muted);max-width:540px}
   .outro .cta{display:flex;gap:14px;margin-top:10px;flex-wrap:wrap;justify-content:center;pointer-events:auto}
-  .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--tech);font-weight:600;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;padding:14px 26px;border-radius:2px;background:var(--grad);color:#fff;box-shadow:0 8px 24px #e2231a44;cursor:pointer;border:none}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--tech);font-weight:600;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;padding:14px 26px;border-radius:2px;background:var(--grad);color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.5);cursor:pointer;border:none;
+    transition:transform 160ms var(--ease-out),box-shadow 160ms var(--ease-out)}
+  @media(hover:hover) and (pointer:fine){ .btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.6)} }
+  .btn:active{transform:scale(0.97)}
   .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink);box-shadow:none}
 
-  .info{position:fixed;z-index:14;width:min(380px,86vw);pointer-events:none;opacity:0;transition:opacity .2s;transform:translateX(-50%);text-shadow:0 2px 14px #000e}
+  .info{position:fixed;z-index:14;width:min(380px,86vw);pointer-events:none;opacity:0;transition:opacity 180ms var(--ease-out);transform:translateX(-50%);text-shadow:0 2px 14px #000e}
   .info .in{text-align:center;display:flex;flex-direction:column;align-items:center;background:radial-gradient(ellipse at 50% 40%,#050709b0,transparent 78%);padding:9px 14px;border-radius:12px}
   .info .blogo{height:20px;margin-bottom:6px}
   .info .idx{font-family:var(--tech);color:var(--muted);letter-spacing:.2em;font-size:.6rem;margin-bottom:3px}
@@ -65,15 +74,18 @@
   .info .inspect{margin-top:9px;font-family:var(--tech);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ember);opacity:.9}
 
   .rail{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:12px}
-  .rail button{width:9px;height:9px;border-radius:50%;border:none;background:#ffffff2e;cursor:pointer;padding:0;transition:.25s}
-  .rail button.on{background:var(--ember);transform:scale(1.4);box-shadow:0 0 10px var(--ember)}
+  .rail button{width:9px;height:9px;border-radius:50%;border:none;background:#ffffff2e;cursor:pointer;padding:0;transition:background 150ms var(--ease-out),transform 150ms var(--ease-out),box-shadow 150ms var(--ease-out)}
+  .rail button.on{background:var(--ember);transform:scale(1.4)}
   .scrollhint{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:40;font-family:var(--tech);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:#ffffff88;pointer-events:none;transition:.4s}
 
-  .inspectbar{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:30;display:none;gap:12px;align-items:center;
-    background:#0b0e13cc;border:1px solid var(--line);border-radius:40px;padding:9px 10px 9px 20px;backdrop-filter:blur(8px)}
-  .inspectbar.on{display:flex}
+  .inspectbar{position:fixed;left:50%;bottom:26px;z-index:30;display:flex;gap:12px;align-items:center;
+    background:#0b0e13cc;border:1px solid var(--line);border-radius:40px;padding:9px 10px 9px 20px;backdrop-filter:blur(8px);
+    opacity:0;transform:translate(-50%,8px) scale(.97);pointer-events:none;
+    transition:opacity 180ms var(--ease-out),transform 180ms var(--ease-out)}
+  .inspectbar.on{opacity:1;transform:translate(-50%,0) scale(1);pointer-events:auto}
   .inspectbar .t{font-family:var(--tech);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-  .inspectbar .close{font-family:var(--tech);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--grad);border:none;border-radius:40px;padding:9px 16px;cursor:pointer}
+  .inspectbar .close{font-family:var(--tech);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--grad);border:none;border-radius:40px;padding:9px 16px;cursor:pointer;transition:transform 140ms var(--ease-out)}
+  .inspectbar .close:active{transform:scale(0.96)}
 
   .warn{position:fixed;top:84px;left:50%;transform:translateX(-50%);z-index:55;background:#2a1010ee;border:1px solid #7a2a20;border-radius:8px;
     padding:12px 18px;font-size:.85rem;color:#ffd9d0;max-width:520px;text-align:center;display:none}
@@ -110,7 +122,6 @@
 <div class="warn" id="warn"></div>
 
 <div class="intro" id="intro">
-  <span class="eyebrow">ISIŞAH GROUP · 3B ÜRÜN SHOWROOM</span>
   <div class="big">3B showroom'da<br><span class="g">uçun.</span></div>
   <p>Gerçek WebGL sahne. Kaydırdıkça kamera stantların arasında uçsun; bir ürünü yakından görmek için tıklayıp fareyle döndürün.</p>
   <div class="brandrow">
@@ -124,7 +135,6 @@
 <div class="info" id="info"><div class="in" id="infoIn"></div></div>
 
 <div class="outro" id="outro">
-  <span class="eyebrow">ISIŞAH GROUP</span>
   <div class="big">Yolun sonu,<br>çözümün başı.</div>
   <p>Tüm ürün ailesi için DOSAB Bursa'daki merkezimizden teklif ve teknik destek alın.</p>
   <div class="cta">
@@ -347,6 +357,7 @@ const rail=document.getElementById('rail'); document.getElementById('tot').textC
 for(let i=0;i<TOT;i++){const b=document.createElement('button');b.onclick=()=>goTo(i);rail.appendChild(b);}
 const dots=[...rail.children];
 const clamp=(x)=>x<0?0:x>1?1:x, lerp=(a,b,t)=>a+(b-a)*t, seg=(p,a,b)=>clamp((p-a)/(b-a));
+const REDUCED=matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 let infoIdx=-1;
 function setInfo(i){ if(i===infoIdx)return; infoIdx=i; const d=PRODUCTS[i];
@@ -388,8 +399,7 @@ function frame(){
   const p=progress();
   sp+=(p-sp)*0.12;                  // easing: kills scroll-step stutter
   const tNow=performance.now()*0.001;
-  dust.position.y=Math.sin(tNow*0.18)*0.35;      // yavaş toz süzülmesi
-  dust.position.x=Math.sin(tNow*0.11)*0.25;
+  if(!REDUCED){dust.position.y=Math.sin(tNow*0.18)*0.35;dust.position.x=Math.sin(tNow*0.11)*0.25;}
   if(backdrop){backdrop.position.z=camera.position.z; backdrop.rotation.y=sp*0.55;} // panorama kamerayla akar + hafif paralaks
   const A=0.08,B=0.94,span=(B-A)/NP;
   pbar.style.width=(p*100)+'%';
@@ -432,8 +442,8 @@ function frame(){
   requestAnimationFrame(frame);
 }
 
-loadMgr.onProgress=(u,l,t)=>{document.getElementById('lbar').style.width=Math.round(6+l/t*94)+'%';};
-loadMgr.onLoad=()=>{document.getElementById('lbar').style.width='100%';
+loadMgr.onProgress=(u,l,t)=>{document.getElementById('lbar').style.transform='scaleX('+((6+l/t*94)/100).toFixed(3)+')';};
+loadMgr.onLoad=()=>{document.body.classList.add('ready');document.getElementById('lbar').style.transform='scaleX(1)';
   setTimeout(()=>document.getElementById('loader').classList.add('hide'),300);
   if(failed.length){const w=document.getElementById('warn');
     w.innerHTML='Bazı ürün görselleri yüklenemedi: <code>'+failed.join(', ')+'</code><br>assets/products/ klasörünün sunucuya yüklendiğinden emin olun.';
@@ -441,7 +451,7 @@ loadMgr.onLoad=()=>{document.getElementById('lbar').style.width='100%';
 };
 addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
 requestAnimationFrame(frame);
-setTimeout(()=>document.getElementById('loader').classList.add('hide'),6000);
+setTimeout(()=>{document.getElementById('loader').classList.add('hide');document.body.classList.add('ready');},6000);
 </script>
 </body>
 </html>
