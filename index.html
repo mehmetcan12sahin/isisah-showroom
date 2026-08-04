@@ -155,6 +155,30 @@
   .feature .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .feature .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#1a1410,transparent 30%)}
 
+  /* railway */
+  .rail-hero{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;margin-bottom:56px}
+  .rail-hero img{width:100%;filter:drop-shadow(0 26px 30px #000a)}
+  .rail-hero p{color:var(--muted);margin-top:16px}
+  .railgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:64px}
+  .railcard{border:1px solid var(--line);border-radius:6px;padding:20px 22px;background:var(--panel)}
+  .railcard h3{font-size:1.15rem;margin-bottom:6px}
+  .railcard p{color:var(--muted);font-size:.86rem}
+  .railtime{border-top:1px solid var(--line)}
+  .railtime .row{display:grid;grid-template-columns:110px 1fr;gap:18px;padding:13px 0;border-bottom:1px solid var(--line)}
+  .railtime .yr{font-family:var(--disp);font-weight:700;color:var(--ember);font-size:1.15rem}
+  .railtime .tx{color:var(--steel);font-size:.93rem}
+  .railtime .tx b{color:var(--ink)}
+  .railcols{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:56px}
+  .railbox{border:1px solid var(--line);border-radius:6px;padding:26px 28px;background:var(--panel)}
+  .railbox h3{font-size:1.3rem;margin-bottom:14px}
+  .railbox ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+  .railbox li{display:flex;gap:10px;color:var(--muted);font-size:.9rem}
+  .railbox li::before{content:"";flex:none;width:7px;height:7px;margin-top:7px;border-radius:2px;background:var(--grad)}
+  .railrefs{margin-top:34px;color:var(--muted);font-family:var(--tech);font-size:.8rem;letter-spacing:.06em;line-height:2;text-transform:uppercase}
+  .railrefs b{color:var(--steel)}
+  @media(max-width:960px){.rail-hero{grid-template-columns:1fr}.railgrid{grid-template-columns:1fr 1fr}.railcols{grid-template-columns:1fr}}
+  @media(max-width:560px){.railgrid{grid-template-columns:1fr}.railtime .row{grid-template-columns:84px 1fr}}
+
   /* contact */
   .contact{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:stretch}
   .cbox{border:1px solid var(--line);border-radius:6px;padding:40px;background:var(--panel)}
@@ -209,6 +233,7 @@
       <a href="#urunler">Ürünler</a>
       <a href="urunler.html">Showroom</a>
       <a href="#boykur">BOYKUR</a>
+      <a href="#demiryolu">Demiryolu</a>
       <a href="#iletisim">İletişim</a>
       <a class="btn" href="#iletisim">Teklif Al</a>
     </nav>
@@ -351,6 +376,75 @@
   </div>
 </section>
 
+<!-- DEMIRYOLU -->
+<section class="pad" id="demiryolu" style="padding-top:0">
+  <div class="wrap">
+    <div class="rail-hero">
+      <div class="reveal">
+        <h2 style="font-size:clamp(2.2rem,5vw,3.4rem)">Demiryolu<br>İklimlendirme.</h2>
+        <p>ISIŞAH ENDÜSTRİYEL, 80'li yılların sonundan bu yana yurt içi ve yurt dışındaki demiryolu sanayine klima ısıtıcıları, personel ve yolcu koltuk ısıtıcıları, TIJ kasaları, şasi ısıtıcıları ile ray ve makas ısıtıcıları üretiyor.</p>
+        <p>Yüksek hızlı tren standartlarında 2500 V yüksek gerilime dayanıklı, şok ve titreşime hazır rezistanslar; GP03 ve mika izolasyonla kaçak akım gövdeye iletilmez. Her ısıtma ünitesinde çift kademeli termostat koruması bulunur.</p>
+      </div>
+      <div class="reveal" data-d="2"><img src="assets/products/tren.webp" alt="Demiryolu iklimlendirme çözümleri" loading="lazy"></div>
+    </div>
+
+    <div class="railgrid">
+      <div class="railcard reveal"><h3>Klima (HVAC) Isıtıcıları</h3><p>Tren ve tramvay klima santralleri için ısıtıcı elemanlar; fin etkili verimli ısıtma, düşük yüzey yükü.</p></div>
+      <div class="railcard reveal" data-d="1"><h3>Yolcu & Koltuk Altı Isıtıcılar</h3><p>Mevcut koltuk düzenine göre tasarlanan elektrikli ısıtıcılar; yolcu, vestibül ve makinist üniteleri.</p></div>
+      <div class="railcard reveal" data-d="2"><h3>TIJ Kasaları</h3><p>Yolcu vagonlarında pencere altı ısıtma üniteleri; demiryolu çaplarına göre üretilen "tij"ler.</p></div>
+      <div class="railcard reveal"><h3>Şasi Isıtıcıları</h3><p>Vagon altı (under-chassis) ısıtıcı üniteler; TVS 2000'den bu yana süregelen deneyim.</p></div>
+      <div class="railcard reveal" data-d="1"><h3>Ray & Makas Isıtıcıları</h3><p>Karlı ve düşük sıcaklıkta makasların donmasını önler; olası kazaların önüne geçer. 1000 W / 230 V.</p></div>
+      <div class="railcard reveal" data-d="2"><h3>Özel Çözümler</h3><p>Vagon mutfağı ısıtma plakaları (AC-DC), kOhm seviyesinde dirençler, batarya ısıtıcıları.</p></div>
+    </div>
+
+    <div class="sec-head reveal"><h2>Proje geçmişi.</h2><p>1986'dan bugüne demiryolu projelerimiz.</p></div>
+    <div class="railtime reveal">
+      <div class="row"><span class="yr">1986</span><span class="tx"><b>TÜVASAŞ TIJ Projesi</b> — yolcu vagonları pencere altı ısıtma üniteleri.</span></div>
+      <div class="row"><span class="yr">1995</span><span class="tx"><b>TÜVASAŞ TVS 2000</b> — vagon altı (şasi) ısıtıcılar.</span></div>
+      <div class="row"><span class="yr">2009-10</span><span class="tx"><b>TÜLOMSAŞ Projesi</b> — lokomotif rezistans üniteleri.</span></div>
+      <div class="row"><span class="yr">2011-26</span><span class="tx"><b>Makas & Ray Isıtıcıları + Personel Isıtıcıları</b> — tamamı paslanmaz personel ısıtma üniteleri; termostatik aşırı ısınma emniyeti.</span></div>
+      <div class="row"><span class="yr">2014</span><span class="tx"><b>Ankara Metro</b> — koltuk ısıtıcıları (750 W / 1300 W – 380 V), HVAC ısıtma elemanları ve fren borusu projesi (Borşah paslanmaz borularıyla).</span></div>
+      <div class="row"><span class="yr">2015-16</span><span class="tx"><b>Tramvay Klima Isıtıcısı · TÜVASAŞ DMU · İstanbul Ulaşım Modernizasyon · YZK 850 İBB</b> — yüksek hızlı tren yolcu ısıtıcıları, 2500 V dayanım.</span></div>
+      <div class="row"><span class="yr">2016-17</span><span class="tx"><b>E-14000 / İstanbul Ulaşım</b> — tren klima ısıtıcıları (M1 hattı).</span></div>
+      <div class="row"><span class="yr">2018</span><span class="tx"><b>Samsun Projesi</b> — ray ve makas ısıtıcıları.</span></div>
+      <div class="row"><span class="yr">2018-21</span><span class="tx"><b>İzmir Tramvay Projesi</b> — klima rezistans üniteleri.</span></div>
+      <div class="row"><span class="yr">2018-19</span><span class="tx"><b>Durmazlar Alibeyköy</b> — koltuk altı ısıtıcılar (Eminönü–Alibeyköy hattı) ve <b>Yazkar</b> klima batarya ısıtıcısı.</span></div>
+      <div class="row"><span class="yr">2019-23</span><span class="tx"><b>MERAK Brüksel Projesi</b> — ihracat: fanlı ısıtma üniteleri.</span></div>
+      <div class="row"><span class="yr">2020</span><span class="tx"><b>TÜLOMSAŞ & TÜVASAŞ</b> — vagon mutfağı ısıtma plakaları (AC-DC), kOhm dirençler, çubuk rezistanslar.</span></div>
+      <div class="row"><span class="yr">2021-26</span><span class="tx"><b>Romanya Projesi</b> — Bükreş tramvayları için koltuk düzenine özel elektrikli ısıtıcılar.</span></div>
+      <div class="row"><span class="yr">2022-26</span><span class="tx"><b>Kayseri 5 UT</b> — Bozankaya üretimi; Prag–Belgrad–Kayseri hatları için ısıtıcılar.</span></div>
+      <div class="row"><span class="yr">2023-26</span><span class="tx"><b>TÜRASAŞ EMU 225</b> — yolcu, vestibül ve makinist ısıtıcıları.</span></div>
+      <div class="row"><span class="yr">2025-26</span><span class="tx"><b>İstanbul Metro</b> — klima ve koltuk altı ısıtıcıları.</span></div>
+      <div class="row"><span class="yr">2026</span><span class="tx"><b>Samsun Projesi</b> — tramvay koltuk düzenine özel elektrikli ısıtıcılar.</span></div>
+    </div>
+
+    <div class="railcols">
+      <div class="railbox reveal">
+        <h3>Standart Testler</h3>
+        <ul>
+          <li>Güç testi ve izolasyon direnci testi</li>
+          <li>2500 V yüksek gerilimde kaçak akım (dielektrik) testi</li>
+          <li>Şok & titreşim ve yangına dayanım testleri</li>
+          <li>Boyut kontrolleri, çekme testi, topraklama direnci</li>
+          <li>Yüzey/ısıtıcı sıcaklık, fan gürültü seviyesi, IP seviye testi</li>
+        </ul>
+      </div>
+      <div class="railbox reveal" data-d="2">
+        <h3>Malzeme Seçimi</h3>
+        <ul>
+          <li>Korozyona dayanıklı AISI 304 / AISI 316 sac parçalar</li>
+          <li>Isıya dayanıklı cam elyaf izoleli, alev geciktirici 3GKW / 4GKW kablolar</li>
+          <li>Yüksek kaliteli EBM fanlar</li>
+          <li>Titreşime dayanıklı, çözülmez bağlantı ekipmanları</li>
+          <li>Her ünitede çift kademeli termostat koruması</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="railrefs reveal">Referanslar: <b>TÜVASAŞ · TÜLOMSAŞ · TÜRASAŞ · Durmazlar · Bozankaya · MERAK · Safkar · Yazkar · Elite KL · Eltesan · CSR MNG · Air Trade Centre · Heinen & Hopman · Hispacold · Alfa Laval · Bronswerk · Erdemir · Eti Maden · Componenta · Mimsan Grup · Akkim · Elsitel · Alp Enerji · Calorflex · Revenga · Trakya Cam · TPI</b></p>
+  </div>
+</section>
+
 <!-- ILETISIM -->
 <section class="pad" id="iletisim" style="padding-top:0">
   <div class="wrap">
@@ -381,7 +475,7 @@
     <a class="brand" href="#top"><img src="assets/img/logo.png" alt="ISIŞAH Endüstriyel"></a>
     <nav class="fnav">
       <a href="#kurumsal">Kurumsal</a><a href="#markalar">Markalar</a><a href="#urunler">Ürünler</a>
-      <a href="#boykur">BOYKUR</a><a href="#iletisim">İletişim</a>
+      <a href="#boykur">BOYKUR</a><a href="#demiryolu">Demiryolu</a><a href="#iletisim">İletişim</a>
       <a href="https://isisah.com.tr" target="_blank" rel="noopener">isisah.com.tr</a>
     </nav>
     <div class="cp">© <span id="yr"></span> ISIŞAH Endüstriyel · DOSAB Osmangazi / Bursa · ISO 9001-2015 · Tüm hakları saklıdır.</div>
