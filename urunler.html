@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>ISIŞAH GROUP — 3B Ürün Showroom</title>
-<meta name="description" content="ISIŞAH GROUP 3B showroom'u: WebGL sahnede kaydırarak stantların arasında uçun, ürünleri fareyle döndürüp inceleyin. SALMEX, ISIŞAH, BORŞAH." />
+<meta name="description" content="ISIŞAH GROUP 3B showroom'u: WebGL sahnede kaydırarak stantların arasında uçun. SALMEX, ISIŞAH, BORŞAH ürünleri kendi kaidelerinde." />
 <link rel="icon" href="assets/catalog/logo-group.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&family=Saira:wght@500;600&display=swap" rel="stylesheet">
@@ -134,7 +134,7 @@
 
 <div class="intro" id="intro">
   <div class="big">3B showroom'da<br><span class="g">uçun.</span></div>
-  <p>Gerçek WebGL sahne. Kaydırdıkça kamera stantların arasında uçsun; bir ürünü yakından görmek için tıklayıp fareyle döndürün.</p>
+  <p>Gerçek WebGL sahne. Kaydırın; kamera stantların arasında uçsun, her ürün kendi kaidesinde sizi karşılasın.</p>
   <div class="brandrow">
     <img src="assets/catalog/logo-salmex.png" alt="SALMEX">
     <img src="assets/catalog/logo-isisah.png" alt="ISIŞAH">
@@ -182,18 +182,18 @@ if(location.protocol==='file:'){
 const PRODUCTS=[
   {img:'salmex',logo:'logo-salmex',idx:'01 · SALMEX',h:'Yoğuşmalı Isı Eşanjörü',en:'Condensing Heat Exchanger',
    p:'Paslanmaz çelik spiral eşanjör; yüksek verimli, farklı kapasitelerde yoğuşmalı tasarım.',chips:['Paslanmaz Çelik','Yüksek Verim','Değiştirilebilir']},
-  {img:'rezistans',logo:'logo-isisah',idx:'02 · ISIŞAH ENDÜSTRİYEL',h:'Sanayi Rezistansları',en:'Industrial Heating Elements',
+  {img:'rezistans',logo:'logo-isisah',idx:'02 · ISIŞAH ENDÜSTRİYEL',h:'Özel Tip Flanş Rezistansları',en:'Custom Flanged Heating Elements',
    p:'Daldırma ve boru tipi ısıtıcı elemanlar; sanayi ve proses uygulamaları için.',chips:['Daldırma Tip','Boru Tip','Yerli Üretim']},
-  {img:'izgara',logo:'logo-isisah',idx:'03 · ISIŞAH ENDÜSTRİYEL',h:'Izgara Rezistansları',en:'Grill Heating Elements',
-   p:'Endüstriyel mutfak ızgaraları için dairesel ve serpantin ısıtıcı elemanlar.',chips:['Endüstriyel Mutfak','Izgara','Paslanmaz']},
-  {img:'fritoz',logo:'logo-isisah',idx:'04 · ISIŞAH ENDÜSTRİYEL',h:'Fritöz Rezistansları',en:'Fryer Heating Elements',
+  {img:'izgara',logo:'logo-isisah',idx:'03 · ISIŞAH ENDÜSTRİYEL',h:'Konveksiyonel Fırın Rezistansları',en:'Convection Oven Heating Elements',
+   p:'Konveksiyonel fırınlar için dairesel ısıtıcı elemanlar.',chips:['Konveksiyon','Fırın','Paslanmaz']},
+  {img:'fritoz',logo:'logo-isisah',idx:'04 · ISIŞAH ENDÜSTRİYEL',h:'Fritöz Rezistansları (Yassı Rezistans)',en:'Fryer Heating Elements',
    p:'Endüstriyel fritözler için daldırma tip ısıtıcı raflar; hızlı ve homojen ısıtma.',chips:['Fritöz','Daldırma Tip','Hızlı Isıtma']},
   {img:'bulasik',logo:'logo-isisah',idx:'05 · ISIŞAH ENDÜSTRİYEL',h:'Bulaşık Makinesi Rezistansları',en:'Dishwasher Heating Elements',
    p:'Sanayi tipi bulaşık makineleri için boyler ve tank ısıtıcı elemanları.',chips:['Boyler Tip','Tank Isıtıcı','Sanayi Tipi']},
-  {img:'makarna',logo:'logo-isisah',idx:'06 · ISIŞAH ENDÜSTRİYEL',h:'Makarna Haşlama Rezistansları',en:'Pasta Cooking Elements',
+  {img:'makarna',logo:'logo-isisah',idx:'06 · ISIŞAH ENDÜSTRİYEL',h:'Makarna Haşlama Rezistansları (Yassı Rezistans)',en:'Pasta Cooking Elements',
    p:'Makarna haşlama üniteleri için daldırma tip ısıtıcı elemanlar.',chips:['Haşlama','Daldırma Tip','Mutfak']},
-  {img:'beyaz',logo:'logo-isisah',idx:'07 · ISIŞAH ENDÜSTRİYEL',h:'Beyaz Eşya Rezistansları',en:'Household Appliance Elements',
-   p:'Çamaşır kurutma, fırın ve küçük ev aletleri için ısıtıcı üniteler.',chips:['Kurutma Mak.','Fırın','Ev Aletleri']},
+  {img:'beyaz',logo:'logo-isisah',idx:'07 · ISIŞAH ENDÜSTRİYEL',h:'Arçelik & Vestel Kurutma Makinesi Isıtıcıları',en:'Tumble Dryer Heating Elements',
+   p:'Arçelik ve Vestel kurutma makineleri için ısıtıcı üniteler.',chips:['Arçelik','Vestel','Kurutma']},
   {img:'defrost',logo:'logo-isisah',idx:'08 · ISIŞAH ENDÜSTRİYEL',h:'Defrost Rezistansları',en:'Defrost Heating Elements',
    p:'Soğutma sistemleri için defrost elemanları; Ø6,5–11,2 mm, −60…250°C, sektörde ~%90 pay.',chips:['Ø6,5–11,2 mm','−60…250°C','%90 Pay']},
   {img:'firin',logo:'logo-isisah',idx:'09 · ISIŞAH ENDÜSTRİYEL',h:'Endüstriyel Fırın',en:'Industrial Furnace',
@@ -211,7 +211,7 @@ const PRODUCTS=[
   {img:'kangal',logo:'logo-borsah',idx:'15 · BORŞAH BORU',h:'Tavlı & Kangal Borular',en:'Annealed & Coiled Tubes',
    p:'Ø6–16 mm tavlı boru; 1040–1100°C tav, 100–400 m kangal, 100 bar test.',chips:['Ø6–16 mm','100–400 m','1040–1100°C']},
 ];
-const GHOSTS={salmex:'EŞANJÖR',rezistans:'REZİSTANS',izgara:'IZGARA',fritoz:'FRİTÖZ',bulasik:'BULAŞIK',makarna:'MAKARNA',beyaz:'BEYAZ EŞYA',defrost:'DEFROST',firin:'FIRIN',kanal:'KANAL',mobil:'MOBİL',boykur:'BOYKUR',boru:'BORU',oval:'OVAL',kangal:'KANGAL'};
+const GHOSTS={salmex:'EŞANJÖR',rezistans:'FLANŞ',izgara:'KONVEKSİYON',fritoz:'FRİTÖZ',bulasik:'BULAŞIK',makarna:'MAKARNA',beyaz:'KURUTMA',defrost:'DEFROST',firin:'FIRIN',kanal:'KANAL',mobil:'MOBİL',boykur:'BOYKUR',boru:'BORU',oval:'OVAL',kangal:'KANGAL'};
 const NP=PRODUCTS.length, TOT=NP+2;
 const GAP=15, SIDEX=5.2, PH=2.4, EYE=3.0;
 
@@ -386,7 +386,7 @@ function setInfo(i){ if(i===infoIdx)return; infoIdx=i; const d=PRODUCTS[i];
   infoIn.innerHTML=`<img class="blogo" src="assets/catalog/${d.logo}.png" alt=""><div class="idx">${d.idx}</div>`
     +`<h2>${d.h}</h2><div class="en">${d.en}</div><p>${d.p}</p>`
     +`<div class="chips">${d.chips.map((c,ci)=>`<span style="--i:${ci}">${c}</span>`).join('')}</div>`
-    +`<div class="inspect">tıkla · fareyle döndür</div>`; }
+; }
 
 let inspect=null; const inspectbar=document.getElementById('inspectbar');
 const raycaster=new THREE.Raycaster(); const mouse=new THREE.Vector2(); let downXY=[0,0];
