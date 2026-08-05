@@ -337,7 +337,8 @@ const nBeams=Math.ceil(HALLLEN*GAP/7.5)+2, beams=new THREE.InstancedMesh(beamGeo
  beams.instanceMatrix.needsUpdate=true;scene.add(beams);}
 const stripGeo=new THREE.BoxGeometry(0.06,0.1,HALLLEN*GAP+40);
 const stripMat=new THREE.MeshBasicMaterial({color:0xF5820D});
-for(const s of [-1,1]){const st=new THREE.Mesh(stripGeo,stripMat);st.position.set(s*10.55,2.2,floor.position.z);scene.add(st);}
+const strips=[];
+for(const s of [-1,1]){const st=new THREE.Mesh(stripGeo,stripMat);st.position.set(s*10.55,2.2,floor.position.z);scene.add(st);strips.push(st);}
 
 const NPTS=380;const pPos=new Float32Array(NPTS*3);
 for(let i=0;i<NPTS;i++){pPos[3*i]=(Math.random()*2-1)*9.5;pPos[3*i+1]=Math.random()*8.5+0.6;pPos[3*i+2]=8-Math.random()*HALLLEN*GAP;}
@@ -362,6 +363,10 @@ for(let i=0;i<HALLLEN;i++){const z=-i*GAP;
     const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:emberTex,transparent:true,opacity:0.55,depthWrite:false,blending:THREE.AdditiveBlending}));
     sp.scale.set(4.5,3.2,1);sp.position.set(s*9.6,2.2,z);scene.add(sp);
   }}
+
+// lobide hol dekoru (tavan/kiriş/kolon/şerit/spot) gizlenir — portal duvarı temiz kadraj
+function setHallDress(v){[ceil,beams,cols,...strips].forEach(o=>o.visible=v);activeSpot.visible=v;}
+setHallDress(false);
 
 // ================= LOBİ (3 KAPI — fotogerçekçi portal duvarı) =================
 const lobbyGroup=new THREE.Group();scene.add(lobbyGroup);
@@ -525,6 +530,7 @@ function enterHall(brandKey){
   setTimeout(()=>{fade.classList.add('on');},REDUCED?0:620);
   setTimeout(()=>{
     buildHall(brandKey);
+    setHallDress(true);
     lobbyGroup.visible=false; hallGroup.visible=true; if(finWall)finWall.visible=true;
     document.body.classList.add('inhall');
     intro.style.display='none';
@@ -542,6 +548,7 @@ function exitToLobby(){
   setTimeout(()=>{
     MODE='lobby';
     hallGroup.visible=false; if(finWall)finWall.visible=false; lobbyGroup.visible=true;
+    setHallDress(false);
     document.body.classList.remove('inhall');
     holo.material.opacity=0; info.style.opacity=0; ghostEl.style.opacity=0; outro.style.opacity=0;
     scrollEl.style.height='100vh'; scrollTo(0,0);
@@ -572,8 +579,8 @@ function frame(){
 
   if(MODE==='lobby'){
     const swX=REDUCED?0:Math.sin(tNow*0.3)*0.10, swY=REDUCED?0:Math.sin(tNow*0.43)*0.06;
-    camera.position.set(swX,4.6+swY,PORTRAIT?15.5:19);
-    camera.lookAt(0,5.4,3);
+    camera.position.set(swX,7.2+swY,PORTRAIT?16.5:22.8);
+    camera.lookAt(0,8.3,3);
     const fovT=FOVB(); fovCur=lerp(fovCur,fovT,0.08);
     if(Math.abs(camera.fov-fovCur)>0.01){camera.fov=fovCur;camera.updateProjectionMatrix();}
     if(backdrop){backdrop.position.z=camera.position.z-4;backdrop.rotation.y=tNow*0.008;}
@@ -582,8 +589,8 @@ function frame(){
   if(MODE==='entering'){
     const k=REDUCED?1:Math.min(1,(performance.now()-flyT0)/900);
     const e=1-Math.pow(1-k,3);
-    camera.position.set(lerp(camera.position.x,flyDoor,0.12), lerp(camera.position.y,3.6,0.1), 19-e*15.2);
-    camera.lookAt(flyDoor,4.2,2.8);
+    camera.position.set(lerp(camera.position.x,flyDoor,0.12), lerp(camera.position.y,3.8,0.1), 22.8-e*19);
+    camera.lookAt(flyDoor,4.4,2.8);
     renderer.render(scene,camera);return;
   }
 
