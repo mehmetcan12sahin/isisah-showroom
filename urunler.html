@@ -50,7 +50,8 @@
   .pbar{position:fixed;top:0;left:0;height:3px;background:var(--grad);width:0;z-index:45}
 
   /* lobby intro + doors */
-  .intro{position:fixed;inset:0;z-index:16;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:16px;padding:0 24px}
+  .intro{position:fixed;inset:0;z-index:16;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:16px;padding:88px 24px 40px;overflow-y:auto}
+  .intro::-webkit-scrollbar{display:none}
   .intro>*{opacity:0;transform:translateY(10px);transition:opacity .45s var(--ease-out),transform .45s var(--ease-out)}
   body.ready .intro>*{opacity:1;transform:none}
   body.ready .intro>*:nth-child(1){transition-delay:.05s} body.ready .intro>*:nth-child(2){transition-delay:.11s}
@@ -124,7 +125,15 @@
     .info .in{padding:11px 14px}
     .info p{font-size:.74rem}
     header{padding:12px 16px}
-    .doorcard{width:min(300px,84vw)}
+    /* mobil: kompakt yatay kapı kartları */
+    .doors{flex-direction:column;gap:10px;width:100%;max-width:420px}
+    .doorcard{width:100%;min-width:0;flex-direction:row;justify-content:flex-start;text-align:left;padding:14px 16px;gap:14px}
+    .doorcard img{height:30px;flex:none}
+    .doorcard .dn{font-size:1.05rem}
+    .doorcard .ds{display:none}
+    .doorcard .go{margin-top:0;margin-left:auto;flex:none}
+    .intro .big{font-size:clamp(2.1rem,10vw,3.2rem)}
+    .intro p{font-size:.92rem}
   }
   @media (prefers-reduced-motion:reduce){.intro .hint{animation:none}}
 </style>
@@ -522,10 +531,11 @@ document.addEventListener('visibilitychange',()=>{ if(!audioEl)return;
   else if(!muted&&document.body.classList.contains('inhall'))audioEl.play().catch(()=>{}); });
   if(muted)stopTrack();else if(document.body.classList.contains('inhall'))audioEl&&audioEl.play().catch(()=>{});};
 syncMuteUI();
-let flyDoor=null, flyT0=0, entDone=true;
+let flyDoor=null, flyT0=0, flyFromZ=22.8, flyFromY=7.2, entDone=true;
 function enterHall(brandKey){
   if(MODE!=='lobby')return;
   MODE='entering'; flyDoor=BRANDS[brandKey].doorX; flyT0=performance.now();
+  flyFromZ=camera.position.z; flyFromY=camera.position.y;
   intro.style.transition='opacity .3s'; intro.style.opacity=0; intro.style.pointerEvents='none';
   setTimeout(()=>{fade.classList.add('on');},REDUCED?0:620);
   setTimeout(()=>{
@@ -579,8 +589,8 @@ function frame(){
 
   if(MODE==='lobby'){
     const swX=REDUCED?0:Math.sin(tNow*0.3)*0.10, swY=REDUCED?0:Math.sin(tNow*0.43)*0.06;
-    camera.position.set(swX,7.2+swY,PORTRAIT?16.5:22.8);
-    camera.lookAt(0,8.3,3);
+    camera.position.set(swX,PORTRAIT?6.4+swY:7.2+swY,PORTRAIT?17.5:22.8);
+    camera.lookAt(0,PORTRAIT?7.6:8.3,3);
     const fovT=FOVB(); fovCur=lerp(fovCur,fovT,0.08);
     if(Math.abs(camera.fov-fovCur)>0.01){camera.fov=fovCur;camera.updateProjectionMatrix();}
     if(backdrop){backdrop.position.z=camera.position.z-4;backdrop.rotation.y=tNow*0.008;}
@@ -589,7 +599,7 @@ function frame(){
   if(MODE==='entering'){
     const k=REDUCED?1:Math.min(1,(performance.now()-flyT0)/900);
     const e=1-Math.pow(1-k,3);
-    camera.position.set(lerp(camera.position.x,flyDoor,0.12), lerp(camera.position.y,3.8,0.1), 22.8-e*19);
+    camera.position.set(lerp(camera.position.x,flyDoor,0.12), lerp(flyFromY,3.8,e), flyFromZ-e*(flyFromZ-3.8));
     camera.lookAt(flyDoor,4.4,2.8);
     renderer.render(scene,camera);return;
   }
