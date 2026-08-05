@@ -47,7 +47,7 @@ Bursa/DOSAB merkezli **ISIŞAH GROUP** (1982; markalar: **ISIŞAH Endüstriyel**
 ## Test/önizleme tuzakları (zaman kaybetme)
 - Uygulama-içi tarayıcı: arka plan sekmesinde rAF donar → WebGL screenshot SİYAH gelir; taze `navigate` sonrası ilk kareler görünür. FPS ölçülemez. DOM/JS state kontrolüyle doğrula.
 - Sayfada `window.scrollTo` bazı sayfalarda çalışmıyordu (eski sürümlerde); showroom'da çalışıyor.
-- Ses testi yaparken sesi kapat/DOM dışı `new Audio()` sayfa navigasyonuyla ölür (pause yetmez).
+- **SES TEST PROTOKOLÜ (zorunlu):** showroom'da kapı tıklaması simüle etmeden ÖNCE `localStorage.setItem('swMuted','1')` çalıştır — yoksa müzik kullanıcının hoparlöründe çalar ve `new Audio()` DOM dışı olduğu için `querySelectorAll('audio')` ile durdurULAMAZ; tek kesin susturma sekmeyi başka sayfaya `navigate` etmek. (Bu hata iki kez yaşandı.)
 - python http.server byte-range vermez → videolar blob ile oynatılırdı (artık video yok).
 
 ## Bekleyen / olası sonraki adımlar
