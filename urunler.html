@@ -511,6 +511,10 @@ function playTrack(k){ if(!TRACKS[k])return;
   if(!muted)audioEl.play().catch(()=>{}); }
 function stopTrack(){audioEl&&audioEl.pause();}
 muteBtn.onclick=()=>{muted=!muted;localStorage.setItem('swMuted',muted?'1':'0');syncMuteUI();
+// sekme gizlenince müzik dursun; görünür olunca (holdeysen) devam etsin
+document.addEventListener('visibilitychange',()=>{ if(!audioEl)return;
+  if(document.hidden)audioEl.pause();
+  else if(!muted&&document.body.classList.contains('inhall'))audioEl.play().catch(()=>{}); });
   if(muted)stopTrack();else if(document.body.classList.contains('inhall'))audioEl&&audioEl.play().catch(()=>{});};
 syncMuteUI();
 let flyDoor=null, flyT0=0, entDone=true;
