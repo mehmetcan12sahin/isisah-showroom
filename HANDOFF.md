@@ -21,7 +21,7 @@ Bursa/DOSAB merkezli **ISIŞAH GROUP** (1982; markalar: **ISIŞAH Endüstriyel**
 - **MODE:** `lobby | entering | hall`. Lobby: fotogerçekçi portal duvarı (`assets/img/lobby.webp`, 30 birim genişlik plane z=3; sol kor=ISIŞAH, orta buhar=SALMEX, sağ altın boru tüneli=BORŞAH), görünmez hitbox'lar `doorX=±8.1/0`, DOM kapı kartları (mobilde birincil UI). Lobide hol dekoru `setHallDress(false)` ile gizli (tavan/kiriş/kolon/şerit/spot) — yoksa görseli keser.
 - **enterHall(brand):** kapıya uçuş (mevcut kamera z'sinden, 900ms) → fade → `buildHall()` (hallGroup'u söküp markanın kaidelerini kurar; PRODUCTS/NP/TOT/rail/scroll yeniden; idx `d.tag`'den numaralanır) → giriş crane animasyonu → `playTrack(brand)`.
 - **Hol mekaniği:** scroll→progress (geometri tabanlı) → yumuşatılmış kamera koridor uçuşu; aktif ürüne yaslanma+FOV daralması (52→47; portrede taban 66); dev hayalet tipografi (`GHOSTS` map); hologram halkası; ürün bob; künye kartı (masaüstünde projeksiyonla, portrede alta sabit); tıkla→OrbitControls inceleme (yazısı bilerek YOK — kullanıcı istemedi).
-- **Markalar:** `BRANDS{isisah:18 ürün, salmex:1, borsah:3}` — statik geometri `HALLLEN=20` sabitine göre.
+- **Markalar:** `BRANDS{isisah:19 ürün, salmex:8, borsah:3}` — statik geometri `HALLLEN=22` sabitine göre. ISIŞAH sıralaması: endüstriyel ürünler → tren→railcar (demiryolu) → gemi→blast→baseboard (savunma; gemi = TCG Anadolu L400 kartı). SALMEX: salmex, condhex, ehex, bitermik, kazan, boyler, helis, serpantin (sergi fotoğraflarından, Ağu 2026).
 - **Müzik:** `assets/audio/{isisah,salmex,borsah}.mp3` (Higgsfield sonilo_music, 60s loop). Kapı tıklaması=user gesture→autoplay OK; lobiye dönüşte durur; 🔇 butonu localStorage `swMuted`; sekme gizlenince otomatik pause.
 - **Perf kuralları:** ≤7 ışık (tek gezici spot), DPR≤1.5, tek rAF, WebP ürün dokuları `TEXCACHE`'te önceden ısıtılır. `prefers-reduced-motion` her animasyonu kapatır.
 
@@ -30,7 +30,7 @@ Bursa/DOSAB merkezli **ISIŞAH GROUP** (1982; markalar: **ISIŞAH Endüstriyel**
   - Görsel: `generate create gpt_image_2 --prompt ... [--image ref.png] --aspect_ratio 16:9|1:1 --resolution 2k --quality high --wait --json` → `.[0].result_url` → curl.
   - Müzik: `generate create sonilo_music --prompt ... --duration 60` (çıktı M4A → ffmpeg ile mp3 128k).
   - Ürün fotoğrafı temizleme: gerçek/karmaşık foto → `--image` referansla "studio product photo, plain light gray background, generous margins" → knockout.
-- **Knockout:** `~/.claude/skills/scroll-world/references/knockout.py` (TOL=22 beyaz cisimler, 55-70 stüdyo grisi). Halka ürünlerde beyaz göbek → iç-blob temizliği (MIN_BLOB ürüne göre; parlak gövdeli ürünlerde UYGULAMA — deler). Çıktı ≤900px WebP q88 → `assets/products/`.
+- **Knockout:** `~/.claude/skills/scroll-world/references/knockout.py` (TOL=22 beyaz cisimler, 55-70 stüdyo grisi). Halka ürünlerde beyaz göbek → iç-blob temizliği (MIN_BLOB ürüne göre; parlak gövdeli ürünlerde UYGULAMA — deler). Gri-üstü-gri ürünlerde (gemi, kazan gibi) TOL artırma da deler → Higgsfield MCP `remove_background` kullan (media_id = tamamlanmış job id; jobs_wait ile bekle) — pürüzsüz kesim. Çıktı ≤900px WebP q88 → `assets/products/`.
 - Kaynak fotoğraflar/scratch bu oturumların scratchpad'indeydi (uçucu) — orijinaller: kullanıcının Downloads'ı + `assets/catalog/*.jpg` (katalog PDF sayfaları).
 
 ## Veri kaynakları
