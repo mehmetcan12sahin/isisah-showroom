@@ -248,10 +248,6 @@ const ISISAH_LIST=[
    p:'Kanatlı rezistanslı santral, dikdörtgen ve yuvarlak kanal ısıtıcıları.',chips:['Santral','Dikdörtgen','Yuvarlak']},
   {img:'mobil',logo:'logo-isisah',tag:'ISIŞAH ENDÜSTRİYEL',h:'Mobil Elektrikli Isıtıcı',en:'Mobile Electric Heater',
    p:'Uğur Böceği serisi taşınabilir fanlı ısıtıcılar; atölye ve saha için.',chips:['Taşınabilir','Fanlı','3 Boy']},
-  {img:'blast',logo:'logo-isisah',tag:'ISIŞAH · SAVUNMA',h:'Savunma Tipi Blast Heater',en:'Defense Blast Heater',
-   p:'MİLGEM sınıfı gemiler ve savunma platformları için fanlı blast ısıtıcı; NBC uyumlu klima santrali entegrasyonu.',chips:['MİLGEM','Fanlı','Savunma Sanayi']},
-  {img:'baseboard',logo:'logo-isisah',tag:'ISIŞAH · SAVUNMA',h:'Baseboard Konvektör Isıtıcı',en:'Baseboard Convector Heater',
-   p:'Gemi ve savunma platformları için delikli kasalı süpürgelik tipi konvektör üniteler.',chips:['Gemi Tipi','Konvektör','Paslanmaz']},
   {img:'fincoil',logo:'logo-isisah',tag:'ISIŞAH ENDÜSTRİYEL',h:'Fan-Coil & Ortam Isıtıcısı',en:'Fan Coil / Space Heater',
    p:'Fan-coil üniteleri ve ortam ısıtması için dik finli paslanmaz ısıtıcılar.',chips:['FCU','Ortam','Finli']},
   {img:'panel',logo:'logo-isisah',tag:'ISIŞAH ENDÜSTRİYEL',h:'Klima Santrali (AHU) Isıtıcısı',en:'AHU Heater Unit',
@@ -260,14 +256,34 @@ const ISISAH_LIST=[
    p:'Havalandırma kanalları için fanlı silindirik paslanmaz ısıtıcı.',chips:['Kanal','Fanlı','Kompakt']},
   {img:'boykur',logo:'logo-isisah',tag:'ISIŞAH · BOYKUR',h:'BOYKUR Boya Kurutma',en:'Infrared Paint Drying',
    p:'Infrared, bilgisayar kontrollü mobil oto boya kurutma. Tofaş Ar-Ge projesi.',chips:['Infrared','Bilgisayar Kontrollü','Tofaş Ar-Ge']},
-  {img:'railcar',logo:'logo-isisah',tag:'ISIŞAH · DEMİRYOLU',h:'Demiryolu Araç Isıtıcısı',en:'Rail Car Heater',
-   p:'Raylı araçlar için paslanmaz ısıtıcı üniteler; şok ve titreşime dayanıklı, 2500 V izolasyon.',chips:['Raylı Araç','2500V','Paslanmaz']},
   {img:'tren',logo:'logo-isisah',tag:'ISIŞAH · DEMİRYOLU',h:'Demiryolu İklimlendirme Çözümleri',en:'Railway HVAC & Heating Solutions',
    p:"80'lerin sonundan beri demiryolu sanayine: klima ısıtıcıları, yolcu/koltuk altı ve makinist ısıtıcıları, ray & makas ısıtıcıları.",chips:['TÜVASAŞ · TÜRASAŞ','Metro & Tramvay','2500V İzolasyon']},
+  {img:'railcar',logo:'logo-isisah',tag:'ISIŞAH · DEMİRYOLU',h:'Demiryolu Araç Isıtıcısı',en:'Rail Car Heater',
+   p:'Raylı araçlar için paslanmaz ısıtıcı üniteler; şok ve titreşime dayanıklı, 2500 V izolasyon.',chips:['Raylı Araç','2500V','Paslanmaz']},
+  {img:'gemi',logo:'logo-isisah',tag:'ISIŞAH · SAVUNMA',h:'Askeri Gemi İklimlendirme Çözümleri',en:'Naval Ship Heating Solutions',
+   p:'TCG Anadolu (L400) dahil amfibi hücum gemileri ve MİLGEM sınıfı platformlar için ısıtma ve iklimlendirme çözümleri.',chips:['TCG Anadolu','MİLGEM','Savunma Sanayi']},
+  {img:'blast',logo:'logo-isisah',tag:'ISIŞAH · SAVUNMA',h:'Savunma Tipi Blast Heater',en:'Defense Blast Heater',
+   p:'MİLGEM sınıfı gemiler ve savunma platformları için fanlı blast ısıtıcı; NBC uyumlu klima santrali entegrasyonu.',chips:['MİLGEM','Fanlı','Savunma Sanayi']},
+  {img:'baseboard',logo:'logo-isisah',tag:'ISIŞAH · SAVUNMA',h:'Baseboard Konvektör Isıtıcı',en:'Baseboard Convector Heater',
+   p:'Gemi ve savunma platformları için delikli kasalı süpürgelik tipi konvektör üniteler.',chips:['Gemi Tipi','Konvektör','Paslanmaz']},
 ];
 const SALMEX_LIST=[
   {img:'salmex',logo:'logo-salmex',tag:'SALMEX',h:'Yoğuşmalı Isı Eşanjörü',en:'Condensing Heat Exchanger',
    p:'Paslanmaz çelik spiral eşanjör; yüksek verimli, farklı kapasitelerde yoğuşmalı tasarım.',chips:['Paslanmaz Çelik','Yüksek Verim','Değiştirilebilir']},
+  {img:'condhex',logo:'logo-salmex',tag:'SALMEX',h:'Yoğuşmalı Kombi Eşanjörü',en:'Condensing Combi Heat Exchanger',
+   p:'Duvar tipi yoğuşmalı kombiler için alüminyum döküm eşanjör hücresi; pompa grubu ve gaz valfiyle komple ünite.',chips:['Yoğuşmalı','Alüminyum Döküm','CondHex']},
+  {img:'ehex',logo:'logo-salmex',tag:'SALMEX',h:'Elektrikli Kombi Eşanjörü',en:'Electric Combi Heat Exchanger',
+   p:'Elektrikli kombiler için eşanjör ünitesi; sirkülasyon pompası ve kontrol donanımıyla komple çözüm.',chips:['Elektrikli','E-Hex','Komple Ünite']},
+  {img:'bitermik',logo:'logo-salmex',tag:'SALMEX',h:'Kanatlı Kombi Ana Eşanjörü',en:'Finned Main Heat Exchanger',
+   p:'Konvansiyonel kombiler için kanatlı borulu ana eşanjör blokları; kompakt ve yüksek ısı transferi.',chips:['Kanatlı Boru','Konvansiyonel','Kompakt']},
+  {img:'kazan',logo:'logo-salmex',tag:'SALMEX',h:'Kazan Tipi Yoğuşmalı Eşanjör',en:'Condensing Boiler Heat Exchanger',
+   p:'Yüksek kapasiteli kazanlar için paslanmaz gövdeli, alüminyum döküm flanşlı yoğuşmalı eşanjör.',chips:['Kazan Tipi','Yüksek Kapasite','Paslanmaz']},
+  {img:'boyler',logo:'logo-salmex',tag:'SALMEX',h:'Elektrikli Isıtıcı Ünitesi',en:'Electric Heater Vessel',
+   p:'Silindirik paslanmaz gövdeli elektrikli ısıtıcı; flanşlı rezistans grubuyla kombi ve kazan sistemleri için.',chips:['Elektrikli','Paslanmaz','Flanşlı']},
+  {img:'helis',logo:'logo-salmex',tag:'SALMEX',h:'Helisel Boru Eşanjörü',en:'Helical Coil Heat Exchanger',
+   p:'Paslanmaz borudan helisel sarım eşanjör; kompakt hacimde yüksek ısı transfer yüzeyi.',chips:['Helisel Sarım','Paslanmaz Boru','Kompakt']},
+  {img:'serpantin',logo:'logo-salmex',tag:'SALMEX',h:'Spiral Serpantin',en:'Flat Spiral Coil',
+   p:'Yassı spiral sarımlı paslanmaz serpantin; kazan ve boyler uygulamaları için.',chips:['Spiral Sarım','Serpantin','Paslanmaz']},
 ];
 const BORSAH_LIST=[
   {img:'boru',logo:'logo-borsah',tag:'BORŞAH BORU',h:'Paslanmaz Borular',en:'Stainless Steel Tubes',
@@ -283,10 +299,11 @@ const BRANDS={
   borsah:{name:'BORŞAH BORU',logo:'logo-borsah',list:BORSAH_LIST,doorX:8.1},
 };
 const GHOSTS={salmex:'EŞANJÖR',rezistans:'FLANŞ',izgara:'KONVEKSİYON',fritoz:'FRİTÖZ',bulasik:'BULAŞIK',makarna:'MAKARNA',beyaz:'KURUTMA',defrost:'DEFROST',firin:'FIRIN',kanal:'KANAL',mobil:'MOBİL',boykur:'BOYKUR',tren:'DEMİRYOLU',boru:'BORU',oval:'OVAL',kangal:'KANGAL',
-blast:'BLAST',baseboard:'KONVEKTÖR',fincoil:'FAN-COIL',panel:'AHU',railcar:'RAYLI ARAÇ',duct:'KANAL FANLI'};
+blast:'BLAST',baseboard:'KONVEKTÖR',fincoil:'FAN-COIL',panel:'AHU',railcar:'RAYLI ARAÇ',duct:'KANAL FANLI',
+gemi:'DONANMA',condhex:'YOĞUŞMALI',ehex:'ELEKTRİKLİ',bitermik:'KANATLI',kazan:'KAZAN',boyler:'BOYLER',helis:'HELİS',serpantin:'SERPANTİN'};
 
 // ================= SAHNE TEMELİ =================
-const HALLLEN=20;                                  // statik geometri en uzun hole göre
+const HALLLEN=22;                                  // statik geometri en uzun hole göre (ISIŞAH 19 ürün → TOT=21)
 const GAP=15, SIDEX=5.2, PH=2.4, EYE=3.0;
 let MODE='lobby';                                  // lobby | entering | hall
 let PRODUCTS=[], NP=0, TOT=2, items=[];
