@@ -94,13 +94,9 @@
   .hero .lead{color:var(--muted);font-size:1.12rem;max-width:520px;margin:22px 0 32px}
   .hero .cta{display:flex;gap:14px;flex-wrap:wrap}
   .hero-visual{position:relative;aspect-ratio:4/5;border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.08);
-    background:radial-gradient(circle at 50% 30%,#170f2e,#000 72%);
+    background:#000;
     box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 60px -18px var(--vio2)}
-  .hero-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;padding:9%;
-    filter:drop-shadow(0 0 26px color-mix(in srgb,var(--vio2) 65%,transparent)) drop-shadow(0 24px 40px #000c);
-    animation:heroBreathe 4.2s var(--ease-in-out) infinite}
-  @keyframes heroBreathe{0%,100%{filter:drop-shadow(0 0 22px color-mix(in srgb,var(--vio2) 55%,transparent)) drop-shadow(0 24px 40px #000c)}
-    50%{filter:drop-shadow(0 0 40px color-mix(in srgb,var(--vio1) 70%,transparent)) drop-shadow(0 24px 40px #000c)}}
+  .hero-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:76% center}
   .hero-visual .tag{position:absolute;left:16px;bottom:16px;z-index:2;font-family:var(--tech);font-size:.72rem;letter-spacing:.18em;
     text-transform:uppercase;color:#fff;background:#000c;backdrop-filter:blur(4px);padding:8px 14px;border-radius:8px}
   .hero-visual::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,#000,transparent 45%);z-index:1}
@@ -292,8 +288,8 @@
       </div>
     </div>
     <div class="hero-visual reveal in" data-d="2">
-      <img src="assets/products/rezistans.webp" alt="ISIŞAH ısıtıcı elemanlar" />
-      <span class="tag">Isıtıcı Elemanlar / Rezistanslar</span>
+      <img src="assets/img/bina-gece.webp" alt="ISIŞAH GROUP merkez binası" />
+      <span class="tag">ISIŞAH GROUP · DOSAB Bursa</span>
     </div>
   </div>
 </section>
