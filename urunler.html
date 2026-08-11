@@ -402,17 +402,24 @@ const BRANDS={
 // ISIŞAH alt kategorileri — kapıdan geçince önce bu gamlardan biri seçilir.
 // Her giriş sanal bir hol: buildHall/enterHall aynı mekanikle çalışır (SUBHALLS lookup).
 const byImg=(...keys)=>keys.map(k=>ISISAH_LIST.find(d=>d.img===k)).filter(Boolean);
+// Gamlar şirketin resmi ürün kataloğu kapağındaki sektör diyagramından (catalogue.pdf s.1):
+// Endüstriyel Mutfak · Beyaz Eşya ve Elektrikli Ev Aletleri · Ağır Sanayi · İklimlendirme (HVAC)
+// · Raylı Sistemler · Savunma Sanayi · Otomotiv  (Isıtma Soğutma gamı: ürünler diğer gamlarda)
 const ISISAH_CATS={
-  isisah_ev:{cat:'Elektrikli Ev Aletleri',icon:'🍳',desc:'Fırın, fritöz, bulaşık, kurutma, defrost',
-    name:'ISIŞAH · EV ALETLERİ',logo:'logo-isisah',doorX:-8.1,list:byImg('izgara','fritoz','bulasik','makarna','beyaz','defrost')},
-  isisah_sanayi:{cat:'Endüstriyel Isıtma',icon:'🏭',desc:'Rezistans, fırın, kanal ve ortam ısıtıcıları',
-    name:'ISIŞAH · ENDÜSTRİYEL',logo:'logo-isisah',doorX:-8.1,list:byImg('rezistans','firin','kanal','mobil','fincoil','panel','duct')},
-  isisah_boykur:{cat:'BOYKUR Boya Kurutma',icon:'🎨',desc:'Infrared oto boya kurutma — Tofaş Ar-Ge',
-    name:'ISIŞAH · BOYKUR',logo:'logo-isisah',doorX:-8.1,list:byImg('boykur')},
-  isisah_demiryolu:{cat:'Demiryolu',icon:'🚆',desc:'Raylı sistem iklimlendirme ve ısıtıcıları',
-    name:'ISIŞAH · DEMİRYOLU',logo:'logo-isisah',doorX:-8.1,list:byImg('tren','railcar')},
+  isisah_mutfak:{cat:'Endüstriyel Mutfak',icon:'🍳',desc:'Izgara, fritöz, bulaşık ve haşlama rezistansları',
+    name:'ISIŞAH · ENDÜSTRİYEL MUTFAK',logo:'logo-isisah',doorX:-8.1,list:byImg('izgara','fritoz','bulasik','makarna')},
+  isisah_beyaz:{cat:'Beyaz Eşya & Ev Aletleri',icon:'🔌',desc:'Kurutma makinesi ısıtıcıları ve defrost rezistansları',
+    name:'ISIŞAH · BEYAZ EŞYA',logo:'logo-isisah',doorX:-8.1,list:byImg('beyaz','defrost')},
+  isisah_agir:{cat:'Ağır Sanayi',icon:'🏭',desc:'Proses ısıtıcıları, endüstriyel fırın ve mobil ısıtıcılar',
+    name:'ISIŞAH · AĞIR SANAYİ',logo:'logo-isisah',doorX:-8.1,list:byImg('rezistans','firin','mobil')},
+  isisah_hvac:{cat:'İklimlendirme (HVAC)',icon:'❄️',desc:'Kanal tipi, fan-coil ve klima santrali ısıtıcıları',
+    name:'ISIŞAH · İKLİMLENDİRME',logo:'logo-isisah',doorX:-8.1,list:byImg('kanal','fincoil','panel','duct')},
+  isisah_rayli:{cat:'Raylı Sistemler',icon:'🚆',desc:'Demiryolu iklimlendirme ve araç ısıtıcıları',
+    name:'ISIŞAH · RAYLI SİSTEMLER',logo:'logo-isisah',doorX:-8.1,list:byImg('tren','railcar')},
   isisah_savunma:{cat:'Savunma Sanayi',icon:'⚓',desc:'Askeri gemi ısıtma ve iklimlendirme',
     name:'ISIŞAH · SAVUNMA',logo:'logo-isisah',doorX:-8.1,list:byImg('gemi','blast','baseboard')},
+  isisah_otomotiv:{cat:'Otomotiv',icon:'🚗',desc:'BOYKUR infrared oto boya kurutma — Tofaş Ar-Ge',
+    name:'ISIŞAH · OTOMOTİV',logo:'logo-isisah',doorX:-8.1,list:byImg('boykur')},
 };
 const SUBHALLS=ISISAH_CATS;
 const hallDef=(k)=>BRANDS[k]||SUBHALLS[k];
