@@ -367,6 +367,18 @@ const ISISAH_LIST=[
    p:'MİLGEM sınıfı gemiler ve savunma platformları için fanlı blast ısıtıcı; NBC uyumlu klima santrali entegrasyonu.',chips:['MİLGEM','Fanlı','Savunma Sanayi']},
   {img:'baseboard',logo:'logo-isisah',tag:'ISIŞAH · SAVUNMA',h:'Baseboard Konvektör Isıtıcı',en:'Baseboard Convector Heater',
    p:'Gemi ve savunma platformları için delikli kasalı süpürgelik tipi konvektör üniteler.',chips:['Gemi Tipi','Konvektör','Paslanmaz']},
+  {img:'ocak',logo:'logo-isisah',tag:'ISIŞAH · BEYAZ EŞYA',h:'Ocak Rezistansları (Spiral)',en:'Cooktop Heating Elements',
+   p:'Elektrikli ocaklar için spiral boru rezistanslar; ev tipi ve sanayi tipi formlarda.',chips:['Spiral','Ocak','Boru Tip']},
+  {img:'disk',logo:'logo-isisah',tag:'ISIŞAH · BEYAZ EŞYA',h:'Kahve & Çaydanlık Isıtıcıları',en:'Kettle & Coffee Disc Heaters',
+   p:'Kahve makinesi, çaydanlık ve bulaşık makineleri için paslanmaz disk ısıtıcılar.',chips:['Disk Tip','Paslanmaz','Ev Aletleri']},
+  {img:'firinrez',logo:'logo-isisah',tag:'ISIŞAH · BEYAZ EŞYA',h:'Fırın Rezistansları',en:'Oven Heating Elements',
+   p:'Ev tipi fırınlar için alt-üst ve turbo rezistanslar; farklı form ve güçlerde.',chips:['Fırın','Alt-Üst','Turbo']},
+  {img:'makas',logo:'logo-isisah',tag:'ISIŞAH · DEMİRYOLU',h:'Ray & Makas Isıtıcıları',en:'Rail & Switch Point Heaters',
+   p:'Karlı ve düşük sıcaklıkta makasların donmasını önler; olası kazaların önüne geçer. 1000 W / 230 V.',chips:['1000W / 230V','Makas','Dona Karşı']},
+  {img:'personel',logo:'logo-isisah',tag:'ISIŞAH · DEMİRYOLU',h:'Görevli Personel Isıtıcıları',en:'Railway Staff Heaters',
+   p:'Raylı araç personel kabinleri için finli paslanmaz ısıtıcı üniteler.',chips:['Finli','Paslanmaz','TÜVASAŞ']},
+  {img:'proses',logo:'logo-isisah',tag:'ISIŞAH ENDÜSTRİYEL',h:'Proses Isıtıcı Ünitesi',en:'Process Heater Unit',
+   p:'Endüstriyel proses hatları için flanşlı, kanal gövdeli ısıtıcı üniteler.',chips:['Proses','Flanşlı','Yüksek Kapasite']},
 ];
 const SALMEX_LIST=[
   {img:'salmex',logo:'logo-salmex',tag:'SALMEX',h:'Yoğuşmalı Isı Eşanjörü',en:'Condensing Heat Exchanger',
@@ -408,14 +420,14 @@ const byImg=(...keys)=>keys.map(k=>ISISAH_LIST.find(d=>d.img===k)).filter(Boolea
 const ISISAH_CATS={
   isisah_mutfak:{cat:'Endüstriyel Mutfak',icon:'🍳',desc:'Izgara, fritöz, bulaşık ve haşlama rezistansları',
     name:'ISIŞAH · ENDÜSTRİYEL MUTFAK',logo:'logo-isisah',doorX:-8.1,list:byImg('izgara','fritoz','bulasik','makarna')},
-  isisah_beyaz:{cat:'Beyaz Eşya & Ev Aletleri',icon:'🔌',desc:'Kurutma makinesi ısıtıcıları ve defrost rezistansları',
-    name:'ISIŞAH · BEYAZ EŞYA',logo:'logo-isisah',doorX:-8.1,list:byImg('beyaz','defrost')},
-  isisah_agir:{cat:'Ağır Sanayi',icon:'🏭',desc:'Proses ısıtıcıları, endüstriyel fırın ve mobil ısıtıcılar',
-    name:'ISIŞAH · AĞIR SANAYİ',logo:'logo-isisah',doorX:-8.1,list:byImg('rezistans','firin','mobil')},
+  isisah_beyaz:{cat:'Beyaz Eşya & Ev Aletleri',icon:'🔌',desc:'Kurutma, defrost, ocak, fırın ve disk ısıtıcıları',
+    name:'ISIŞAH · BEYAZ EŞYA',logo:'logo-isisah',doorX:-8.1,list:byImg('beyaz','defrost','ocak','disk','firinrez')},
+  isisah_agir:{cat:'Ağır Sanayi',icon:'🏭',desc:'Proses üniteleri, endüstriyel fırın ve mobil ısıtıcılar',
+    name:'ISIŞAH · AĞIR SANAYİ',logo:'logo-isisah',doorX:-8.1,list:byImg('rezistans','firin','mobil','proses')},
   isisah_hvac:{cat:'İklimlendirme (HVAC)',icon:'❄️',desc:'Kanal tipi, fan-coil ve klima santrali ısıtıcıları',
     name:'ISIŞAH · İKLİMLENDİRME',logo:'logo-isisah',doorX:-8.1,list:byImg('kanal','fincoil','panel','duct')},
-  isisah_rayli:{cat:'Raylı Sistemler',icon:'🚆',desc:'Demiryolu iklimlendirme ve araç ısıtıcıları',
-    name:'ISIŞAH · RAYLI SİSTEMLER',logo:'logo-isisah',doorX:-8.1,list:byImg('tren','railcar')},
+  isisah_rayli:{cat:'Raylı Sistemler',icon:'🚆',desc:'Araç, makas ve personel ısıtıcıları',
+    name:'ISIŞAH · RAYLI SİSTEMLER',logo:'logo-isisah',doorX:-8.1,list:byImg('tren','railcar','makas','personel')},
   isisah_savunma:{cat:'Savunma Sanayi',icon:'⚓',desc:'Askeri gemi ısıtma ve iklimlendirme',
     name:'ISIŞAH · SAVUNMA',logo:'logo-isisah',doorX:-8.1,list:byImg('gemi','blast','baseboard')},
   isisah_otomotiv:{cat:'Otomotiv',icon:'🚗',desc:'BOYKUR infrared oto boya kurutma — Tofaş Ar-Ge',
@@ -426,7 +438,7 @@ const hallDef=(k)=>BRANDS[k]||SUBHALLS[k];
 const brandRoot=(k)=>k.split('_')[0];
 const GHOSTS={salmex:'EŞANJÖR',rezistans:'FLANŞ',izgara:'KONVEKSİYON',fritoz:'FRİTÖZ',bulasik:'BULAŞIK',makarna:'MAKARNA',beyaz:'KURUTMA',defrost:'DEFROST',firin:'FIRIN',kanal:'KANAL',mobil:'MOBİL',boykur:'BOYKUR',tren:'DEMİRYOLU',boru:'BORU',oval:'OVAL',kangal:'KANGAL',
 blast:'BLAST',baseboard:'KONVEKTÖR',fincoil:'FAN-COIL',panel:'AHU',railcar:'RAYLI ARAÇ',duct:'KANAL FANLI',
-gemi:'DONANMA',condhex:'YOĞUŞMALI',ehex:'ELEKTRİKLİ',bitermik:'KANATLI',kazan:'KAZAN',boyler:'BOYLER',helis:'HELİS',serpantin:'SERPANTİN'};
+gemi:'DONANMA',ocak:'OCAK',disk:'DİSK',firinrez:'TURBO',makas:'MAKAS',personel:'PERSONEL',proses:'PROSES',condhex:'YOĞUŞMALI',ehex:'ELEKTRİKLİ',bitermik:'KANATLI',kazan:'KAZAN',boyler:'BOYLER',helis:'HELİS',serpantin:'SERPANTİN'};
 
 // ================= SAHNE TEMELİ =================
 const HALLLEN=22;                                  // statik geometri en uzun hole göre (ISIŞAH 19 ürün → TOT=21)
