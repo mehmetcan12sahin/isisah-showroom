@@ -1,0 +1,50 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-08-20T15:34:11.066Z",
+        "reason": "Kullanıcı talimatı: 'Tipografi: tek aile, tek ağırlık — bold grotesque (Inter)'"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "urunler.html"
+        ],
+        "createdAt": "2026-08-20T15:34:11.142Z",
+        "reason": "v5-neon tema: kullanıcı glow/bloom'u madde madde istedi"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-08-20T15:34:11.216Z",
+        "reason": "v5-neon tema: kullanıcı glow/bloom'u madde madde istedi"
+      },
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "urunler.html"
+        ],
+        "createdAt": "2026-08-20T15:34:11.291Z",
+        "reason": "Onaylı mevcut dil: gradient vurgu başlıkları (üç kapı. / ISIYA.)"
+      },
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-08-20T15:34:11.362Z",
+        "reason": "Onaylı mevcut dil: gradient vurgu başlıkları"
+      }
+    ]
+  }
+}
