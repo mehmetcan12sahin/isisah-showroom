@@ -51,7 +51,15 @@ Bursa/DOSAB merkezli **ISIŞAH GROUP** (1982; markalar: **ISIŞAH Endüstriyel**
 - **SES TEST PROTOKOLÜ (zorunlu):** showroom'da kapı tıklaması simüle etmeden ÖNCE `localStorage.setItem('swMuted','1')` çalıştır — yoksa müzik kullanıcının hoparlöründe çalar ve `new Audio()` DOM dışı olduğu için `querySelectorAll('audio')` ile durdurULAMAZ; tek kesin susturma sekmeyi başka sayfaya `navigate` etmek. (Bu hata iki kez yaşandı.)
 - python http.server byte-range vermez → videolar blob ile oynatılırdı (artık video yok).
 
+## v5.1 (council turu) notları
+- **Three.js vendorlandı:** `vendor/three.module.js` + addons (0.160.0), importmap yerel — unpkg bağımlılığı YOK artık.
+- **SEO:** robots.txt, sitemap.xml, canonical, JSON-LD (index: Organization; urunler: CollectionPage/Breadcrumb), og:/twitter meta + `assets/img/og-cover.jpg`. TÜM mutlak URL'ler github.io — ana domaine geçişte sitemap+canonical+og+robots toplu değişmeli.
+- **Künye teklif köprüsü:** setInfo() kartlara "Teklif İste" (mailto, ürün adlı konu) basıyor; `WHATSAPP` sabiti (905xxxxxxxxx) doldurulunca yeşil WhatsApp butonu da görünür — numara kullanıcıdan BEKLENİYOR.
+- index Markalar: 3 kart (SALMEX eklendi, "Üç uzmanlık").
+- impeccable hook'u gradient-text/dark-glow/Inter işaretler — v5 neon temasının bilinçli dili, false positive.
+
 ## Bekleyen / olası sonraki adımlar
 - Kullanıcı son istek: mobil entegrasyon (lobby dahil — v4.2.3'te yapıldı) ✓
-- Fikirler: özel alan adı (DNS gerekir), SALMEX holüne ürün çeşitlendirme (tek ürün), lobby_b varyantı denenmedi, ana sayfada lobi görselinin kullanımı, ürün açıklamalarında müşteri düzeltmeleri (kullanıcı söyledikçe)
+- KULLANICIDAN BEKLENEN: (1) WhatsApp GSM numarası → urunler.html `WHATSAPP` sabiti; (2) ana domain DNS bilgileri → CNAME + URL'lerin toplu değişimi + Search Console; (3) 14 yeni ürün kartının metin onayı (kullanıcı düzeltme verdikçe).
+- Fikirler: TV fuar modu (attract loop), EN sürüm (metin onayından SONRA), lobby görselinin violet varyantı, çerezsiz analytics
 - Kullanıcı Türkçe yazar; caveman modu aktif olabilir; onay gerektiren tek şey Higgsfield device login.
