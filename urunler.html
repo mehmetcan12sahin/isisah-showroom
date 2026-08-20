@@ -13,6 +13,16 @@
 <meta property="og:image" content="https://mehmetcan12sahin.github.io/isisah-showroom/assets/img/og-cover.jpg" />
 <meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
+<link rel="canonical" href="https://mehmetcan12sahin.github.io/isisah-showroom/urunler.html" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"CollectionPage","name":"ISIŞAH GROUP 3B Ürün Showroom",
+"url":"https://mehmetcan12sahin.github.io/isisah-showroom/urunler.html",
+"isPartOf":{"@type":"WebSite","name":"ISIŞAH GROUP","url":"https://mehmetcan12sahin.github.io/isisah-showroom/"},
+"about":[{"@type":"Brand","name":"ISIŞAH Endüstriyel"},{"@type":"Brand","name":"SALMEX"},{"@type":"Brand","name":"BORŞAH Boru"}],
+"breadcrumb":{"@type":"BreadcrumbList","itemListElement":[
+ {"@type":"ListItem","position":1,"name":"Ana Sayfa","item":"https://mehmetcan12sahin.github.io/isisah-showroom/"},
+ {"@type":"ListItem","position":2,"name":"3B Showroom","item":"https://mehmetcan12sahin.github.io/isisah-showroom/urunler.html"}]}}
+</script>
 <link rel="icon" href="assets/catalog/logo-group.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -182,6 +192,15 @@
   .info .chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
   .info .chips span{font-family:var(--tech);font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:#fff;border:1px solid color-mix(in srgb,var(--a1) 28%,#20222e);border-radius:40px;padding:3px 10px;background:#05050bcc;box-shadow:inset 0 1px 0 rgba(255,255,255,.09);opacity:0;transform:translateY(6px);animation:chipIn .38s var(--ease-out) forwards;animation-delay:calc(var(--i,0)*55ms)}
   @keyframes chipIn{to{opacity:1;transform:none}}
+  .info .acts{display:flex;gap:8px;justify-content:center;margin-top:9px}
+  .info .act{pointer-events:auto;font-family:var(--tech);font-weight:600;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:#fff;
+    border:1px solid color-mix(in srgb,var(--a1) 45%,transparent);border-radius:40px;padding:7px 14px;background:#05050bcc;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 18px -6px var(--a2);
+    transition:transform 140ms var(--ease-out),box-shadow 260ms var(--ease-io)}
+  .info .act:active{transform:scale(.96)}
+  @media(hover:hover){.info .act:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 0 30px -6px var(--a1)}}
+  .info .act.wa{border-color:color-mix(in srgb,#25D366 55%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 18px -6px #25D366}
+  @media(hover:hover){.info .act.wa:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 0 30px -6px #25D366}}
   @media (prefers-reduced-motion:reduce){.info .chips span{animation-duration:.01s}}
 
   .rail{position:fixed;right:max(22px,env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%);z-index:40;display:none;flex-direction:column;gap:12px}
@@ -674,10 +693,17 @@ let PORTRAIT=innerWidth/innerHeight<0.8;
 const FOVB=()=>PORTRAIT?66:52;
 
 let infoIdx=-1;
+// iletişim köprüleri — WHATSAPP boşsa buton gizlenir (905xxxxxxxxx formatında doldurulunca görünür)
+const WHATSAPP='';
+const QUOTE_MAIL='info@isisah.com.tr';
 function setInfo(i){ if(i===infoIdx)return; infoIdx=i; const d=PRODUCTS[i];
+  const q=encodeURIComponent(`Teklif Talebi — ${d.h}`);
+  const b=encodeURIComponent(`Merhaba, "${d.h}" ürünü için teklif almak istiyorum.`);
+  const wa=WHATSAPP?`<a class="act wa" target="_blank" rel="noopener" href="https://wa.me/${WHATSAPP}?text=${b}">WhatsApp</a>`:'';
   infoIn.innerHTML=`<img class="blogo" src="assets/catalog/${d.logo}.png" alt=""><div class="idx">${d.idx}</div>`
     +`<h2>${d.h}</h2><div class="en">${d.en}</div><p>${d.p}</p>`
-    +`<div class="chips">${d.chips.map((c,ci)=>`<span style="--i:${ci}">${c}</span>`).join('')}</div>`; }
+    +`<div class="chips">${d.chips.map((c,ci)=>`<span style="--i:${ci}">${c}</span>`).join('')}</div>`
+    +`<div class="acts"><a class="act" href="mailto:${QUOTE_MAIL}?subject=${q}&body=${b}">Teklif İste →</a>${wa}</div>`; }
 
 let inspect=null; const inspectbar=document.getElementById('inspectbar');
 const raycaster=new THREE.Raycaster(); const mouse=new THREE.Vector2(); let downXY=[0,0];
