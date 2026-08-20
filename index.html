@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>ISIŞAH ENDÜSTRİYEL — Çelikten ısıya, 1982'den bugüne</title>
 <meta name="description" content="ISIŞAH Endüstriyel: 1982'den bu yana Bursa DOSAB'da paslanmaz çelik boru (Borşah), sanayi tipi rezistans, endüstriyel fırın, kanal tipi ve mobil ısıtıcılar ile BOYKUR oto boya kurutma sistemleri. ISO 9001-2015." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ISIŞAH GROUP" />
+<meta property="og:title" content="ISIŞAH ENDÜSTRİYEL — Çelikten ısıya, 1982'den bugüne" />
+<meta property="og:description" content="Paslanmaz çelik borudan sanayi tipi rezistansa, endüstriyel fırından oto boya kurutmaya — Bursa DOSAB'dan ısıtma teknolojisi." />
+<meta property="og:url" content="https://mehmetcan12sahin.github.io/isisah-showroom/" />
+<meta property="og:image" content="https://mehmetcan12sahin.github.io/isisah-showroom/assets/img/og-cover.jpg" />
+<meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
 <link rel="icon" href="assets/img/logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -130,12 +138,13 @@
   .about .time .tx{color:var(--steel);font-size:.94rem}
 
   /* brands */
-  .brands{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .brands{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
   .brandcard{border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:38px;background:linear-gradient(165deg,rgba(16,16,24,.9),rgba(4,4,8,.95));position:relative;overflow:hidden;
     box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 44px -18px var(--bc,var(--vio2));
     transition:transform 220ms var(--ease-out),border-color 220ms var(--ease-out),box-shadow 320ms var(--ease-in-out)}
   .brandcard[data-b=borsah]{--bc:var(--mnt2);--bt:var(--mnt1)}
   .brandcard[data-b=isisah]{--bc:var(--emb2);--bt:var(--emb1)}
+  .brandcard[data-b=salmex]{--bc:var(--ele1);--bt:var(--ele2)}
   .brandcard::before{content:"";position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,var(--bc,var(--vio2)),transparent);
     box-shadow:0 0 16px var(--bc,var(--vio2));transform:scaleX(0);transform-origin:left;transition:transform 320ms var(--ease-out)}
   @media(hover:hover) and (pointer:fine){
@@ -338,8 +347,8 @@
 <section class="pad" id="markalar" style="padding-top:0">
   <div class="wrap">
     <div class="sec-head reveal">
-      <h2>İki uzmanlık,<br>tek çatı.</h2>
-      <p>ISIŞAH GROUP bünyesinde birbirini tamamlayan iki üretim gücü.</p>
+      <h2>Üç uzmanlık,<br>tek çatı.</h2>
+      <p>ISIŞAH GROUP bünyesinde birbirini tamamlayan üç üretim gücü.</p>
     </div>
     <div class="brands">
       <div class="brandcard reveal" data-b="borsah">
@@ -353,6 +362,12 @@
         <h3>ISIŞAH Endüstriyel</h3>
         <p>Sanayi tipi rezistans, endüstriyel fırın, kanal tipi ve mobil ısıtma üniteleri ile mühendislik projeleri. Elektrikli ev cihazlarından ağır sanayiye ısıtma çözümleri.</p>
         <ul><li>Rezistans</li><li>Fırın</li><li>Isıtma Sistemleri</li><li>Mühendislik</li></ul>
+      </div>
+      <div class="brandcard reveal" data-d="3" data-b="salmex">
+        <div class="bnum">03 / SALMEX</div>
+        <h3>Salmex Isı Eşanjörleri</h3>
+        <p>Yoğuşmalı, elektrikli ve konvansiyonel kombi ile kazan eşanjörleri. Paslanmaz spiral, helisel ve kanatlı eşanjör aileleriyle ısı transferi çözümleri.</p>
+        <ul><li>Yoğuşmalı Eşanjör</li><li>Kombi</li><li>Kazan</li><li>Paslanmaz</li></ul>
       </div>
     </div>
   </div>
