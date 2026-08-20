@@ -44,6 +44,24 @@
         ],
         "createdAt": "2026-08-20T15:34:11.362Z",
         "reason": "Onaylı mevcut dil: gradient vurgu başlıkları"
+      },
+      {
+        "rule": "codex-grid-background",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-08-20T15:35:23.159Z",
+        "reason": "HANDOFF bilinçli istisna: blueprint grid = sanayi kimliği (v2'de teyitli)"
+      },
+      {
+        "rule": "marquee",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-08-20T15:35:23.235Z",
+        "reason": "HANDOFF bilinçli istisna: yavaş marquee + hover-pause (v2'de teyitli)"
       }
     ]
   }
