@@ -9,9 +9,10 @@ Bursa/DOSAB merkezli **ISIŞAH GROUP** (1982; markalar: **ISIŞAH Endüstriyel**
 - `urunler.html` — **3B WebGL showroom**: 3 kapılı fotogerçekçi marka lobisi → kapıdan geçince o markanın holünde scroll ile uçuş; kaidelerde ürünler, marka başına asansör müziği
 
 ## Canlı & Deploy
-- **Canlı:** https://mehmetcan12sahin.github.io/isisah-showroom/ (+ `/urunler.html`)
+- **ANA CANLI: https://isisah.com.tr/showroom/** (+ `/urunler.html`) — Birhost Plesk `httpdocs/showroom/`, FTP deploy: `bash tools/deploy-ftp.sh` (kimlik `~/.isisah-ftp.netrc`, git DIŞINDA; kullanılan ~73 dosyayı yükler). Mevcut WP sitesine DOKUNMA — sadece showroom/ dizini bizim.
+- Yedek/ayna: https://mehmetcan12sahin.github.io/isisah-showroom/ (canonical'lar ana domaini gösterir)
 - GitHub Pages, public repo `mehmetcan12sahin/isisah-showroom`, branch `main`, `.nojekyll` var
-- **Deploy = `git push`** (bu klasörden; ~1 dk'da yayılır, CDN HTML'i ~10 dk cache'leyebilir → Cmd+Shift+R)
+- Deploy = **`git push` (github.io aynası) + `bash tools/deploy-ftp.sh` (ANA site)** — ikisini de çalıştır.
 - Yerel önizleme: LaunchAgent `com.isisah.preview` (kalıcı `python3 -m http.server 8080`, KeepAlive) → http://localhost:8080 . Kaldırmak: `launchctl unload ~/Library/LaunchAgents/com.isisah.preview.plist`
 
 ## Git sürüm geçmişi (geri dönüş noktaları)
@@ -63,6 +64,6 @@ Bursa/DOSAB merkezli **ISIŞAH GROUP** (1982; markalar: **ISIŞAH Endüstriyel**
 
 ## Bekleyen / olası sonraki adımlar
 - Kullanıcı son istek: mobil entegrasyon (lobby dahil — v4.2.3'te yapıldı) ✓
-- KULLANICIDAN BEKLENEN: (1) WhatsApp GSM numarası → urunler.html `WHATSAPP` sabiti; (2) ana domain DNS bilgileri → CNAME + URL'lerin toplu değişimi + Search Console; (3) 14 yeni ürün kartının metin onayı (kullanıcı düzeltme verdikçe).
+- KULLANICIDAN BEKLENEN: (1) WhatsApp GSM numarası → urunler.html `WHATSAPP` sabiti; (2) 14 yeni ürün kartının metin onayı; (3) violet lobi varyantı onayı (scratchpad'de üretildi, karşılaştırma sunuldu — beğenirse assets/img/lobby.webp değişir + iki hedefe deploy).
 - Fikirler: EN sürüm (metin onayından SONRA), lobby görselinin violet varyantı, çerezsiz analytics
 - Kullanıcı Türkçe yazar; caveman modu aktif olabilir; onay gerektiren tek şey Higgsfield device login.
