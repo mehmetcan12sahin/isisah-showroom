@@ -62,6 +62,11 @@ Bursa/DOSAB merkezli **ISIŞAH GROUP** (1982; markalar: **ISIŞAH Endüstriyel**
 ## TV fuar modu
 - `urunler.html?fuar` → attract loop (sergi salonu/fuar TV'si): kapı turu TOUR dizisi, hız SPEED (vh-orantılı), müdahale→dur, 60sn idle→devam. Parametresiz sıfır etki. TV kurulumunda tam ekran kiosk tarayıcıda bu URL açılır; ses istenirse TV'de bir kez 🔊 açılır (localStorage kalıcı).
 
+## Search Console (25 Ağu 2026, kullanıcının Chrome'u ile kuruldu)
+- Mülk: URL öneki `https://isisah.com.tr/` — HTML dosya doğrulaması: `httpdocs/googlebfb5098152a94f7b.html` (SİLME!)
+- sitemap.xml gönderildi (kök + showroom/urunler); kök ve showroom için "dizine eklenme" talebi verildi
+- Kök index.html artık yeni site (WP index.php'nin önünde); eski siteye dönüş = httpdocs/index.html'i sil
+
 ## Bekleyen / olası sonraki adımlar
 - Kullanıcı son istek: mobil entegrasyon (lobby dahil — v4.2.3'te yapıldı) ✓
 - KULLANICIDAN BEKLENEN: (1) WhatsApp GSM numarası → urunler.html `WHATSAPP` sabiti; (2) 14 yeni ürün kartının metin onayı; (3) violet lobi varyantı onayı (scratchpad'de üretildi, karşılaştırma sunuldu — beğenirse assets/img/lobby.webp değişir + iki hedefe deploy).
