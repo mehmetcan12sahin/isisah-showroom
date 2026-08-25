@@ -209,6 +209,7 @@
   .rail button.on{background:var(--a1);transform:scale(1.4);box-shadow:0 0 12px var(--a2)}
   .scrollhint{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;z-index:40;font-family:var(--tech);font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;pointer-events:none;transition:opacity .4s var(--ease-io);opacity:0;
     color:var(--a2);transform:translateX(-50%);animation:breatheText 2.6s var(--ease-io) infinite}
+  body.fair .scrollhint{display:none}  /* fuar TV modunda "kaydır" ipucu anlamsız */
 
   .inspectbar{position:fixed;left:50%;bottom:calc(26px + env(safe-area-inset-bottom,0px));z-index:30;display:flex;gap:12px;align-items:center;
     width:max-content;max-width:calc(100vw - 24px);
@@ -936,6 +937,38 @@ function finishLoad(){
 setTimeout(finishLoad,6000);
 addEventListener('resize',()=>{PORTRAIT=innerWidth/innerHeight<0.8;camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
 requestAnimationFrame(loop);
+
+// ================= FUAR MODU (?fuar — sergi salonu / fuar TV'si attract loop) =================
+// URL'de ?fuar yoksa bu blok hiçbir şey değiştirmez. TV'de urunler.html?fuar açılır:
+// lobide bekler → sıradaki kapıdan girer → holü yavaşça uçar → lobiye döner → sonraki kapı.
+// Herhangi bir dokunuş/scroll/tuş otomatiği durdurur; 60 sn hareketsizlikte kaldığı yerden sürer.
+const FAIR=new URLSearchParams(location.search).has('fuar');
+if(FAIR){
+  document.body.classList.add('fair');
+  const TOUR=['isisah_mutfak','salmex','isisah_agir','borsah','isisah_hvac','isisah_savunma','isisah_beyaz','isisah_rayli','isisah_otomotiv'];
+  let ti=0, auto=false, rafId=0, tmr=0, idleTmr=0;
+  const DWELL=6500, DONE_HOLD=3200, IDLE=60000;
+  const SPEED=()=>Math.max(1,innerHeight*0.0026);   // ~75 sn/hol, çözünürlükten bağımsız
+  function stopAuto(){auto=false;cancelAnimationFrame(rafId);clearTimeout(tmr);}
+  function schedule(){ if(!auto)return; clearTimeout(tmr);
+    if(MODE==='lobby'){ tmr=setTimeout(()=>{ if(!auto)return;
+        hideSublobby(); enterHall(TOUR[ti++%TOUR.length]);
+        tmr=setTimeout(()=>{rafId=requestAnimationFrame(drive);},2600); },DWELL); }
+    else if(MODE==='hall'){ tmr=setTimeout(()=>{rafId=requestAnimationFrame(drive);},1200); }
+    else { tmr=setTimeout(schedule,800); } }
+  function drive(){ if(!auto)return;
+    if(MODE!=='hall'){ schedule(); return; }
+    const max=scrollEl.offsetHeight-innerHeight;
+    if(max>0&&scrollY>=max-2){
+      tmr=setTimeout(()=>{ if(!auto)return; exitToLobby(); tmr=setTimeout(schedule,900); },DONE_HOLD);
+      return; }
+    scrollTo(0,scrollY+SPEED());
+    rafId=requestAnimationFrame(drive); }
+  function startAuto(){ if(auto)return; if(inspect)exitInspect(); auto=true; schedule(); }
+  const interrupt=()=>{ stopAuto(); clearTimeout(idleTmr); idleTmr=setTimeout(startAuto,IDLE); };
+  ['pointerdown','wheel','touchstart','keydown'].forEach(ev=>addEventListener(ev,interrupt,{passive:true}));
+  const boot=setInterval(()=>{ if(document.body.classList.contains('ready')){clearInterval(boot);startAuto();} },500);
+}
 </script>
 </body>
 </html>
