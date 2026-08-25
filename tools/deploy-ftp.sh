@@ -24,3 +24,13 @@ PY
 )
 echo "$LIST" | xargs -P 4 -I{} curl -s --netrc-file $NETRC --ftp-create-dirs -T "{}" "ftp://ftp.isisah.com.tr/httpdocs/showroom/{}"
 echo "deploy tamam: https://isisah.com.tr/showroom/"
+
+# kök ana sayfa: showroom index'inden türetilir ve httpdocs/index.html'e yazılır
+python3 - <<'PY'
+s=open('index.html').read()
+s=s.replace('src="assets/','src="/showroom/assets/').replace('href="assets/','href="/showroom/assets/')
+s=s.replace('href="urunler.html"','href="/showroom/urunler.html"')
+open('/tmp/root_index.html','w').write(s)
+PY
+curl -s --netrc-file $NETRC -T /tmp/root_index.html "ftp://ftp.isisah.com.tr/httpdocs/index.html" && rm /tmp/root_index.html
+echo "kok ana sayfa guncellendi: https://isisah.com.tr/"
