@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://mehmetcan12sahin.github.io/isisah-showroom/sitemap.xml
+Sitemap: https://isisah.com.tr/showroom/sitemap.xml
