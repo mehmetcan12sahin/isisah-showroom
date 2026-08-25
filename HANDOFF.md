@@ -58,8 +58,11 @@ Bursa/DOSAB merkezli **ISIŞAH GROUP** (1982; markalar: **ISIŞAH Endüstriyel**
 - index Markalar: 3 kart (SALMEX eklendi, "Üç uzmanlık").
 - impeccable hook'u gradient-text/dark-glow/Inter işaretler — v5 neon temasının bilinçli dili, false positive.
 
+## TV fuar modu
+- `urunler.html?fuar` → attract loop (sergi salonu/fuar TV'si): kapı turu TOUR dizisi, hız SPEED (vh-orantılı), müdahale→dur, 60sn idle→devam. Parametresiz sıfır etki. TV kurulumunda tam ekran kiosk tarayıcıda bu URL açılır; ses istenirse TV'de bir kez 🔊 açılır (localStorage kalıcı).
+
 ## Bekleyen / olası sonraki adımlar
 - Kullanıcı son istek: mobil entegrasyon (lobby dahil — v4.2.3'te yapıldı) ✓
 - KULLANICIDAN BEKLENEN: (1) WhatsApp GSM numarası → urunler.html `WHATSAPP` sabiti; (2) ana domain DNS bilgileri → CNAME + URL'lerin toplu değişimi + Search Console; (3) 14 yeni ürün kartının metin onayı (kullanıcı düzeltme verdikçe).
-- Fikirler: TV fuar modu (attract loop), EN sürüm (metin onayından SONRA), lobby görselinin violet varyantı, çerezsiz analytics
+- Fikirler: EN sürüm (metin onayından SONRA), lobby görselinin violet varyantı, çerezsiz analytics
 - Kullanıcı Türkçe yazar; caveman modu aktif olabilir; onay gerektiren tek şey Higgsfield device login.
