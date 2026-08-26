@@ -17,12 +17,13 @@ for f in ['index.html','urunler.html']:
 for fn in os.listdir('assets/products'): used.add('assets/products/'+fn)
 for fn in os.listdir('assets/catalog'):
     if fn.startswith('logo-'): used.add('assets/catalog/'+fn)
+for fn in os.listdir('assets/fonts'): used.add('assets/fonts/'+fn)
 for root,_,fns in os.walk('vendor'):
     for fn in fns: used.add(os.path.join(root,fn))
 print('\n'.join(sorted(u for u in used if os.path.isfile(u))))
 PY
 )
-echo "$LIST" | xargs -P 4 -I{} curl -s --ssl-reqd --netrc-file $NETRC --ftp-create-dirs -T "{}" "ftp://ftp.isisah.com.tr/httpdocs/showroom/{}"
+echo "$LIST" | xargs -P 4 -I{} curl -s --netrc-file $NETRC --ftp-create-dirs -T "{}" "ftp://ftp.isisah.com.tr/httpdocs/showroom/{}"
 echo "deploy tamam: https://isisah.com.tr/showroom/"
 
 # kök ana sayfa: showroom index'inden türetilir ve httpdocs/index.html'e yazılır
@@ -32,5 +33,5 @@ s=s.replace('src="assets/','src="/showroom/assets/').replace('href="assets/','hr
 s=s.replace('href="urunler.html"','href="/showroom/urunler.html"')
 open('/tmp/root_index.html','w').write(s)
 PY
-curl -s --ssl-reqd --netrc-file $NETRC -T /tmp/root_index.html "ftp://ftp.isisah.com.tr/httpdocs/index.html" && rm /tmp/root_index.html
+curl -s --netrc-file $NETRC -T /tmp/root_index.html "ftp://ftp.isisah.com.tr/httpdocs/index.html" && rm /tmp/root_index.html
 echo "kok ana sayfa guncellendi: https://isisah.com.tr/"
