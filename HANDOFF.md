@@ -67,6 +67,12 @@ Bursa/DOSAB merkezli **ISIŞAH GROUP** (1982; markalar: **ISIŞAH Endüstriyel**
 - sitemap.xml gönderildi (kök + showroom/urunler); kök ve showroom için "dizine eklenme" talebi verildi
 - Kök index.html artık yeni site (WP index.php'nin önünde); eski siteye dönüş = httpdocs/index.html'i sil
 
+## v6.2 (26 Ağu 2026 — ölçek/netlik düzeltmeleri)
+- **KÖK BUG:** showroom header+loader logo img'lerine verilen width/height ATTRIBUTE'ları CSS height:30/42px ile çakışıp logoyu 400x30 EZİYOR ve mobilde header sağ kontrollerini ekran dışına itiyordu — attr'lar kaldırıldı, CSS'e width:auto eklendi. DERS: CSS'i yalnız height yöneten img'lere width attribute VERME.
+- Tüm logolar + salmex fotoları yüksek kaliteyle YENİDEN üretildi (canvas imageSmoothingQuality:'high' + çok adımlı küçültme; önceki dönüşüm default 'low' ile bulanıktı). Logolar 160px, salmex-hat 1800w, salmex-robot 1400w. hqconvert.mjs deseni: her adım ≤%50 küçültme.
+- index header/footer logosu assets/img/logo.png (koyu metin, siyahta görünmez) → assets/catalog/logo-isisah.webp (beyaz metinli), height 38px.
+- SALMEX hat fotoğrafı Kurumsal'dan (ISIŞAH bağlamı — kullanıcı düzeltti) çıkarıldı → kendi bölümü `#salmex-hat` (.feature.salmex, electric accent), MARKALAR ile ÜRÜNLER arası. Kurumsal imgcol eski üçlüye döndü. salmex-robot.webp şu an SAYFADA KULLANILMIYOR (repoda duruyor).
+
 ## v6.1 (KULLANICI KARARI — 26 Ağu 2026): v6 redesign REDDEDİLDİ, seçmeli geri alım
 - Kullanıcı v6 antrasit/amber redesign'ı BEĞENMEDİ → index.html `v5.2-konsey` haline geri alındı (neon canlı kimliktir, tartışmaya kapalı say).
 - KORUNANLAR (kullanıcı beğendi/istedi): (1) `.bridge` 3B Showroom köprü kartı — v5.2 neon diliyle index'e yeniden eklendi (id=showroom, assets/img/showroom-preview.webp), CANLIDA; (2) tren ölçek sınırı (.rail-hero img max-width 540/420px); (3) tren.webp Higgsfield image_background_remover ile YENİDEN kesildi + alfa eşiği defringe (a<200→0, 200-255 rampa) — beyaz sis gitti (assets/products/tren.webp değişti, showroom da aynı dosyayı kullanır).

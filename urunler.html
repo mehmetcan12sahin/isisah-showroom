@@ -70,11 +70,11 @@
   .loader .bar{width:210px;height:2px;background:#14141c;border-radius:3px;overflow:hidden}
   .loader .bar i{display:block;height:100%;width:100%;background:var(--grad);transform:scaleX(.06);transform-origin:left;transition:transform .3s var(--ease-out)}
   .loader .lt{font-family:var(--tech);letter-spacing:.24em;text-transform:uppercase;font-size:.72rem;color:var(--muted)}
-  .loader img{height:42px;animation:breatheGlow 3.2s var(--ease-io) infinite}
+  .loader img{height:42px;width:auto;animation:breatheGlow 3.2s var(--ease-io) infinite}
 
   header{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;
     padding:16px max(28px,env(safe-area-inset-right,0px)) 16px max(28px,env(safe-area-inset-left,0px));background:linear-gradient(#000c,#0000)}
-  header .l{display:flex;align-items:center;gap:14px}header .l img{height:30px}
+  header .l{display:flex;align-items:center;gap:14px}header .l img{height:30px;width:auto}
   header .l .t{font-family:var(--disp);font-weight:700;font-size:.95rem;letter-spacing:.04em;border-left:1px solid var(--line);padding-left:14px}
   header .l .t small{display:block;font-family:var(--tech);font-weight:500;font-size:.58rem;letter-spacing:.3em;color:var(--muted)}
   header .r{display:flex;align-items:center;gap:18px}
@@ -275,7 +275,7 @@
 <body>
 
 <div class="loader" id="loader">
-  <img src="assets/catalog/logo-group.webp" alt="ISIŞAH GROUP" width="240" height="96">
+  <img src="assets/catalog/logo-group.webp" alt="ISIŞAH GROUP">
   <div class="lt">3B showroom hazırlanıyor</div>
   <div class="bar"><i id="lbar"></i></div>
 </div>
@@ -286,7 +286,7 @@
 <div id="fade"></div>
 
 <header>
-  <a class="l" href="index.html"><img src="assets/catalog/logo-group.webp" alt="ISIŞAH GROUP" width="240" height="96">
+  <a class="l" href="index.html"><img src="assets/catalog/logo-group.webp" alt="ISIŞAH GROUP">
     <span class="t">3B SHOWROOM<small id="hallName">MARKA LOBİSİ</small></span></a>
   <div class="r">
     <button class="lobbybtn" id="muteBtn" style="display:inline-flex">🔊</button>
