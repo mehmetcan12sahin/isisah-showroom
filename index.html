@@ -4,11 +4,12 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>ISIŞAH ENDÜSTRİYEL — Çelikten ısıya, 1982'den bugüne</title>
-<meta name="description" content="ISIŞAH Endüstriyel: 1982'den bu yana Bursa DOSAB'da paslanmaz çelik boru (Borşah), sanayi tipi rezistans, endüstriyel fırın, kanal tipi ve mobil ısıtıcılar ile BOYKUR oto boya kurutma sistemleri. ISO 9001-2015." />
+<meta name="description" content="ISIŞAH Endüstriyel: 1982'den bu yana Bursa DOSAB'da paslanmaz çelik boru (Borşah), sanayi tipi rezistans, endüstriyel fırın, kanal tipi ve mobil ısıtıcılar ile BOYKUR oto boya kurutma sistemleri. ISO 9001:2015." />
+<meta name="theme-color" content="#000000" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ISIŞAH GROUP" />
 <meta property="og:title" content="ISIŞAH ENDÜSTRİYEL — Çelikten ısıya, 1982'den bugüne" />
-<meta property="og:description" content="Paslanmaz çelik borudan sanayi tipi rezistansa, endüstriyel fırından oto boya kurutmaya — Bursa DOSAB'dan ısıtma teknolojisi." />
+<meta property="og:description" content="Paslanmaz çelik borudan sanayi tipi rezistansa, endüstriyel fırından oto boya kurutmaya: Bursa DOSAB'dan ısıtma teknolojisi." />
 <meta property="og:url" content="https://isisah.com.tr/" />
 <meta property="og:image" content="https://isisah.com.tr/showroom/assets/img/og-cover.jpg" />
 <meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
@@ -28,11 +29,14 @@
 "knowsAbout":["endüstriyel rezistans","ısı eşanjörü","paslanmaz çelik boru","demiryolu ısıtıcıları","oto boya kurutma"]}
 </script>
 <link rel="icon" href="assets/img/logo.png" />
+<link rel="preload" as="image" href="assets/img/bina-gece.webp" />
+<script>document.documentElement.classList.add('js')</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
+    color-scheme:dark;
     --bg:#000; --bg2:#050508; --panel:#0a0a10; --panel2:#0e0e16;
     --ink:#fff; --muted:#8f93a3; --line:#1b1c26; --steel:#c3c7d4;
     --vio1:#6b5bff;--vio2:#7a2bff;--vio3:#8b3bff;
@@ -70,7 +74,8 @@
   .eyebrow{font-family:var(--tech);font-weight:600;font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--vio1)}
   .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
     filter:drop-shadow(0 0 22px color-mix(in srgb,var(--vio2) 45%,transparent))}
-  @media (prefers-reduced-motion:reduce){*{animation-duration:.01s !important}}
+  @media (prefers-reduced-motion:reduce){*{animation-duration:.01s !important;animation-iteration-count:1 !important}html{scroll-behavior:auto}}
+  section[id]{scroll-margin-top:90px}
 
   /* header */
   header{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(12px);
@@ -210,21 +215,21 @@
   .rail-hero p{color:var(--muted);margin-top:16px}
   .railgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:64px}
   .railcard{border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:20px 22px;background:linear-gradient(165deg,rgba(12,14,22,.92),rgba(3,4,8,.96));
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 0 34px -16px var(--ele2)}
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 0 34px -16px var(--vio2)}
   .railcard h3{font-size:1.15rem;margin-bottom:6px}
   .railcard p{color:var(--muted);font-size:.86rem}
   .railtime{border-top:1px solid var(--line)}
   .railtime .row{display:grid;grid-template-columns:110px 1fr;gap:18px;padding:13px 0;border-bottom:1px solid var(--line)}
-  .railtime .yr{font-family:var(--disp);font-weight:700;color:var(--ele1);font-size:1.15rem;text-shadow:0 0 12px color-mix(in srgb,var(--ele1) 50%,transparent)}
+  .railtime .yr{font-family:var(--disp);font-weight:700;color:var(--vio1);font-size:1.15rem;text-shadow:0 0 12px color-mix(in srgb,var(--vio1) 50%,transparent)}
   .railtime .tx{color:var(--steel);font-size:.93rem}
   .railtime .tx b{color:var(--ink)}
   .railcols{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:56px}
   .railbox{border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:26px 28px;background:linear-gradient(165deg,rgba(12,14,22,.92),rgba(3,4,8,.96));
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 0 34px -16px var(--ele2)}
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 0 34px -16px var(--vio2)}
   .railbox h3{font-size:1.3rem;margin-bottom:14px}
   .railbox ul{list-style:none;display:flex;flex-direction:column;gap:8px}
   .railbox li{display:flex;gap:10px;color:var(--muted);font-size:.9rem}
-  .railbox li::before{content:"";flex:none;width:7px;height:7px;margin-top:7px;border-radius:2px;background:linear-gradient(100deg,var(--ele1),var(--ele2));box-shadow:0 0 8px var(--ele2)}
+  .railbox li::before{content:"";flex:none;width:7px;height:7px;margin-top:7px;border-radius:2px;background:linear-gradient(100deg,var(--vio1),var(--vio2));box-shadow:0 0 8px var(--vio2)}
   .railrefs{margin-top:34px;color:var(--muted);font-family:var(--tech);font-size:.8rem;letter-spacing:.06em;line-height:2;text-transform:uppercase}
   .railrefs b{color:var(--steel)}
   @media(max-width:960px){.rail-hero{grid-template-columns:1fr}.railgrid{grid-template-columns:1fr 1fr}.railcols{grid-template-columns:1fr}}
@@ -238,7 +243,8 @@
   .cline{display:flex;gap:16px;padding:16px 0;border-top:1px solid var(--line);align-items:flex-start}
   .cline:first-of-type{border-top:none}
   .cline .ic{width:40px;height:40px;flex:none;border-radius:10px;background:#0c0812;border:1px solid color-mix(in srgb,var(--mag1) 40%,transparent);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 18px -6px var(--mag1);display:grid;place-items:center;font-size:1.05rem}
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 18px -6px var(--mag1);display:grid;place-items:center;color:var(--mag1)}
+  .cline .ic svg{width:18px;height:18px}
   .cline .k{font-family:var(--tech);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
   .cline .v{color:var(--ink);font-weight:600;font-size:1rem}
   .cline a.v:hover{color:var(--mag2)}
@@ -252,9 +258,10 @@
   footer .fnav a:hover{color:var(--vio1)}
   footer .cp{color:var(--muted);font-size:.78rem;width:100%;border-top:1px solid var(--line);padding-top:20px;margin-top:8px}
 
-  /* reveal */
-  .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s var(--ease-out),transform .5s var(--ease-out)}
-  .reveal.in{opacity:1;transform:none}
+  /* reveal — JS yoksa (bot, önizleme, hata) içerik daima görünür: gizleme .js arkasında */
+  .reveal{transition:opacity .5s var(--ease-out),transform .5s var(--ease-out)}
+  .js .reveal{opacity:0;transform:translateY(14px)}
+  .js .reveal.in{opacity:1;transform:none}
   .reveal[data-d="1"]{transition-delay:.06s}.reveal[data-d="2"]{transition-delay:.12s}
   .reveal[data-d="3"]{transition-delay:.18s}.reveal[data-d="4"]{transition-delay:.24s}
   .reveal[data-d="5"]{transition-delay:.3s}.reveal[data-d="6"]{transition-delay:.36s}
@@ -263,7 +270,10 @@
   @media(max-width:960px){
     .wm{display:none}
     .glow{animation:none;opacity:.13;filter:blur(80px)}
-    .hero .wrap{grid-template-columns:1fr}.hero-visual{display:none}
+    .hero{min-height:auto;padding:120px 0 70px}
+    .hero .wrap{grid-template-columns:1fr}
+    .hero-visual{aspect-ratio:16/9;margin-top:8px}
+    .hero-visual img{object-position:76% 30%}
     .about{grid-template-columns:1fr}.brands{grid-template-columns:1fr}
     .grid{grid-template-columns:1fr 1fr}.feature{grid-template-columns:1fr}.feature .ph{min-height:280px}
     .contact{grid-template-columns:1fr}.stats .wrap{grid-template-columns:1fr 1fr}
@@ -271,7 +281,23 @@
     nav.links{display:none}.menu-btn{display:block}
     header.open nav.links{display:flex;position:absolute;top:74px;left:0;right:0;flex-direction:column;background:#0E1013f8;padding:20px 28px;border-bottom:1px solid var(--line);gap:16px}
   }
-  @media(max-width:560px){.grid{grid-template-columns:1fr}.pad{padding:70px 0}.feature .txt{padding:34px}.cbox{padding:28px}}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}.pad{padding:70px 0}.feature .txt{padding:34px}.cbox{padding:28px}
+    .hero .kick{font-size:.6rem;letter-spacing:.13em}}
+
+  /* mobil sabit iletişim çubuğu — sanayi müşterisinin "hemen ara" yolu */
+  .stickybar{display:none}
+  @media(max-width:960px){
+    .stickybar{position:fixed;left:0;right:0;bottom:0;z-index:48;display:flex;gap:1px;
+      background:var(--line);border-top:1px solid var(--line);
+      padding-bottom:env(safe-area-inset-bottom,0px)}
+    .stickybar a{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;
+      font-family:var(--tech);font-weight:600;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;
+      background:#050508f5;color:#fff;backdrop-filter:blur(10px)}
+    .stickybar a.call{color:var(--mnt1)}
+    .stickybar a.quote{color:var(--mag1)}
+    body{padding-bottom:calc(53px + env(safe-area-inset-bottom,0px))}
+    footer{padding-bottom:70px}
+  }
 </style>
 </head>
 <body>
@@ -293,7 +319,7 @@
       <a href="#iletisim">İletişim</a>
       <a class="btn" href="#iletisim">Teklif Al</a>
     </nav>
-    <button class="menu-btn" id="menuBtn" aria-label="Menü">☰</button>
+    <button class="menu-btn" id="menuBtn" aria-label="Menü" aria-controls="links" aria-expanded="false">☰</button>
   </div>
 </header>
 
@@ -302,16 +328,17 @@
 <section class="hero">
   <div class="wrap">
     <div class="reveal in">
-      <span class="kick">EST. <b>1982</b> · DOSAB BURSA · ISO 9001-2015</span>
+      <span class="kick">KURULUŞ <b>1982</b> · DOSAB BURSA · ISO 9001:2015</span>
       <h1>Çelikten<span class="l2 grad-text">ısıya.</span></h1>
-      <p class="lead">1982'den bu yana paslanmaz çelik borudan sanayi tipi rezistansa, endüstriyel fırından oto boya kurutma sistemlerine — ısıtma teknolojisinde Türkiye'nin köklü mühendislik gücü.</p>
+      <p class="lead">1982'den bu yana paslanmaz çelik borudan sanayi tipi rezistansa, endüstriyel fırından oto boya kurutma sistemlerine uzanan üretim: ısıtma teknolojisinde Türkiye'nin köklü mühendislik gücü.</p>
       <div class="cta">
         <a class="btn" href="urunler.html">Ürün Showroom'u Gez <span>→</span></a>
         <a class="btn ghost" href="#urunler">Ürünler</a>
+        <a class="btn ghost" href="tel:+902242610527">Ara: +90 224 261 05 27</a>
       </div>
     </div>
     <div class="hero-visual reveal in" data-d="2">
-      <img src="assets/img/bina-gece.webp" alt="ISIŞAH GROUP merkez binası" />
+      <img src="assets/img/bina-gece.webp" alt="ISIŞAH GROUP merkez binası" fetchpriority="high" / width="1600" height="905">
       <span class="tag">ISIŞAH GROUP · DOSAB Bursa</span>
     </div>
   </div>
@@ -322,8 +349,8 @@
   <div class="wrap">
     <div class="stat reveal"><div class="n grad-text">1982</div><div class="k">Kuruluş</div></div>
     <div class="stat reveal" data-d="1"><div class="n grad-text">40+</div><div class="k">Yıl Deneyim</div></div>
-    <div class="stat reveal" data-d="2"><div class="n grad-text">%90</div><div class="k">Defrost Sektör Payı</div></div>
-    <div class="stat reveal" data-d="3"><div class="n grad-text">ISO</div><div class="k">9001-2015 Kalite</div></div>
+    <div class="stat reveal" data-d="2"><div class="n grad-text">%90</div><div class="k">TR Defrost Rezistans Payı</div></div>
+    <div class="stat reveal" data-d="3"><div class="n grad-text">ISO</div><div class="k">9001:2015 Kalite</div></div>
   </div>
 </section>
 
@@ -341,7 +368,7 @@
     <div class="reveal">
       <h2 style="font-size:clamp(2.2rem,5vw,3.4rem)">Isıya biçim veren<br>köklü mühendislik.</h2>
       <p>ISIŞAH markası 1982 yılında çeşitli endüstri kolları için sanayi tipi rezistans üretmek üzere kuruldu. 1995'te entegre tesisiyle seri üretime geçti, 2011'de ISIŞAH GROUP çatısı altında yeniden yapılandı.</p>
-      <p>Bugün Bursa DOSAB'daki tesislerinde, ISO 9001-2015 kalite yönetim sistemiyle sektörünün Türkiye'deki en köklü firmalarından biri olarak ısıtma sistemleri üretiyor.</p>
+      <p>Bugün Bursa DOSAB'daki tesislerinde, ISO 9001:2015 kalite yönetim sistemiyle sektörünün Türkiye'deki en köklü firmalarından biri olarak ısıtma sistemleri üretiyor.</p>
       <div class="time">
         <div class="row"><span class="yr">1982</span><span class="tx">Sanayi tipi rezistans üretimi için kuruluş.</span></div>
         <div class="row"><span class="yr">1995</span><span class="tx">Entegre tesis; seri üretime geçiş.</span></div>
@@ -350,9 +377,9 @@
       </div>
     </div>
     <div class="imgcol reveal" data-d="2">
-      <img src="assets/img/paslanmaz-boru.jpg" alt="Paslanmaz çelik boru üretimi" />
-      <img src="assets/img/rezistanslar.jpg" alt="Rezistanslar" />
-      <img src="assets/img/firin.jpg" alt="Endüstriyel fırın" />
+      <img src="assets/img/paslanmaz-boru.jpg" alt="Paslanmaz çelik boru üretimi" / width="1400" height="933" loading="lazy" decoding="async">
+      <img src="assets/img/rezistanslar.jpg" alt="Rezistanslar" / width="800" height="600" loading="lazy" decoding="async">
+      <img src="assets/img/firin.jpg" alt="Endüstriyel fırın" / width="800" height="600" loading="lazy" decoding="async">
     </div>
   </div>
 </section>
@@ -366,19 +393,19 @@
     </div>
     <div class="brands">
       <div class="brandcard reveal" data-b="borsah">
-        <div class="bnum">01 / BORŞAH BORU</div>
+        <div class="bnum">PASLANMAZ ÇELİK BORU</div>
         <h3>Borşah Boru</h3>
         <p>Rezistans imalatı ve sanayi için yüksek standartlarda paslanmaz çelik boru üretimi. Soğuk şekillendirme (roll forming) ve TIG kaynağıyla Ø6–25 mm aralığında dikişli boru.</p>
         <ul><li>Paslanmaz Çelik</li><li>Ø6–25 mm</li><li>TIG Kaynak</li><li>Oval / Yuvarlak</li></ul>
       </div>
       <div class="brandcard reveal" data-d="2" data-b="isisah">
-        <div class="bnum">02 / ISIŞAH ENDÜSTRİYEL</div>
+        <div class="bnum">REZİSTANS &amp; ISITMA SİSTEMLERİ</div>
         <h3>ISIŞAH Endüstriyel</h3>
         <p>Sanayi tipi rezistans, endüstriyel fırın, kanal tipi ve mobil ısıtma üniteleri ile mühendislik projeleri. Elektrikli ev cihazlarından ağır sanayiye ısıtma çözümleri.</p>
         <ul><li>Rezistans</li><li>Fırın</li><li>Isıtma Sistemleri</li><li>Mühendislik</li></ul>
       </div>
       <div class="brandcard reveal" data-d="3" data-b="salmex">
-        <div class="bnum">03 / SALMEX</div>
+        <div class="bnum">ISI EŞANJÖRLERİ</div>
         <h3>Salmex Isı Eşanjörleri</h3>
         <p>Yoğuşmalı, elektrikli ve konvansiyonel kombi ile kazan eşanjörleri. Paslanmaz spiral, helisel ve kanatlı eşanjör aileleriyle ısı transferi çözümleri.</p>
         <ul><li>Yoğuşmalı Eşanjör</li><li>Kombi</li><li>Kazan</li><li>Paslanmaz</li></ul>
@@ -392,31 +419,31 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <h2>Üretim yelpazesi.</h2>
-      <p>Gerçek ürün gruplarımızdan bir seçki — hammadde borusundan bitmiş ısıtma sistemine.</p>
+      <p>Gerçek ürün gruplarımızdan bir seçki: hammadde borusundan bitmiş ısıtma sistemine.</p>
     </div>
     <div class="grid">
-      <article data-b="borsah" class="card reveal"><div class="ph"><img src="assets/img/paslanmaz-boru.jpg" alt="Paslanmaz Boru"></div>
+      <article data-b="borsah" class="card reveal"><div class="ph"><img src="assets/img/paslanmaz-boru.jpg" alt="Paslanmaz Boru" width="1400" height="933" loading="lazy" decoding="async"></div>
         <div class="body"><div class="cat">Borşah Boru</div><h3>Paslanmaz Boru</h3>
         <p>Ø6–25 mm, et kalınlığı 0.35–1.50 mm. Argon/hidrojen koruyucu gaz altında TIG kaynak.</p></div></article>
-      <article data-b="borsah" class="card reveal" data-d="1"><div class="ph"><img src="assets/img/kangal-boru.jpg" alt="Tavlı ve Kangal Boru"></div>
+      <article data-b="borsah" class="card reveal" data-d="1"><div class="ph"><img src="assets/img/kangal-boru.jpg" alt="Tavlı ve Kangal Boru" width="1400" height="933" loading="lazy" decoding="async"></div>
         <div class="body"><div class="cat">Borşah Boru</div><h3>Tavlı & Kangal Boru</h3>
         <p>Ø6–16 mm, 1040–1100°C tav. 100–400 m kangal boyu, 100 bar basınç testi.</p></div></article>
-      <article data-b="borsah" class="card reveal" data-d="2"><div class="ph"><img src="assets/img/oval-boru.jpg" alt="Oval Boru"></div>
+      <article data-b="borsah" class="card reveal" data-d="2"><div class="ph"><img src="assets/img/oval-boru.jpg" alt="Oval Boru" width="1400" height="933" loading="lazy" decoding="async"></div>
         <div class="body"><div class="cat">Borşah Boru</div><h3>Oval Boru</h3>
         <p>Rezistans imalatı, mobilya ve sanayi uygulamaları için oval kesitli boru profilleri.</p></div></article>
-      <article data-b="isisah" class="card reveal"><div class="ph"><img src="assets/img/rezistanslar.jpg" alt="Rezistanslar"></div>
+      <article data-b="isisah" class="card reveal"><div class="ph"><img src="assets/img/rezistanslar.jpg" alt="Rezistanslar" width="800" height="600" loading="lazy" decoding="async"></div>
         <div class="body"><div class="cat">ISIŞAH Endüstriyel</div><h3>Rezistanslar</h3>
         <p>Boru ve daldırma tipi ısıtıcı elemanlar. −60°C…250°C dayanım, tamamen yerli üretim.</p></div></article>
-      <article data-b="isisah" class="card reveal" data-d="1"><div class="ph"><img src="assets/img/firin.jpg" alt="Endüstriyel Fırın"></div>
+      <article data-b="isisah" class="card reveal" data-d="1"><div class="ph"><img src="assets/img/firin.jpg" alt="Endüstriyel Fırın" width="800" height="600" loading="lazy" decoding="async"></div>
         <div class="body"><div class="cat">ISIŞAH Endüstriyel</div><h3>Endüstriyel Fırın</h3>
         <p>Kontrol panelli sanayi tipi ısıl işlem ve kurutma fırınları; projeye özel üretim.</p></div></article>
-      <article data-b="isisah" class="card reveal" data-d="2"><div class="ph"><img src="assets/img/kanal-tipi.jpg" alt="Kanal Tipi Isıtıcı"></div>
+      <article data-b="isisah" class="card reveal" data-d="2"><div class="ph"><img src="assets/img/kanal-tipi.jpg" alt="Kanal Tipi Isıtıcı" width="800" height="600" loading="lazy" decoding="async"></div>
         <div class="body"><div class="cat">ISIŞAH Endüstriyel</div><h3>Kanal Tipi Isıtıcı</h3>
         <p>Kanatlı rezistanslı kanal tipi hava ısıtıcılar; havalandırma ve proses hatları için.</p></div></article>
-      <article data-b="isisah" class="card reveal"><div class="ph"><img src="assets/img/mobil-isitici.jpg" alt="Mobil Elektrikli Isıtıcı"></div>
+      <article data-b="isisah" class="card reveal"><div class="ph"><img src="assets/img/mobil-isitici.jpg" alt="Mobil Elektrikli Isıtıcı" width="800" height="600" loading="lazy" decoding="async"></div>
         <div class="body"><div class="cat">ISIŞAH Endüstriyel</div><h3>Mobil Elektrikli Isıtıcı</h3>
         <p>Uğur Böceği serisi taşınabilir fanlı ısıtıcılar; atölye ve saha ısıtması için.</p></div></article>
-      <article data-b="isisah" class="card reveal" data-d="1"><div class="ph"><img src="assets/img/boykur.jpg" alt="BOYKUR Oto Boya Kurutma"></div>
+      <article data-b="isisah" class="card reveal" data-d="1"><div class="ph"><img src="assets/img/boykur.jpg" alt="BOYKUR Oto Boya Kurutma" width="800" height="600" loading="lazy" decoding="async"></div>
         <div class="body"><div class="cat">ISIŞAH Endüstriyel</div><h3>BOYKUR Boya Kurutma</h3>
         <p>Infrared teknolojili, bilgisayar kontrollü mobil oto boya kurutma sistemi.</p></div></article>
     </div>
@@ -433,7 +460,7 @@
         <p>Hızlı, homojen ve enerji verimli kurutma; taşınabilir gövde, hassas sıcaklık kontrolü.</p>
         <span class="tofas">Tofaş firması ile birlikte yürütülen proje</span>
       </div>
-      <div class="ph"><img src="assets/img/banner-boykur.jpg" alt="BOYKUR infrared oto boya kurutma"></div>
+      <div class="ph"><img src="assets/img/boykur.jpg" alt="BOYKUR infrared oto boya kurutma" loading="lazy" decoding="async" width="800" height="600"></div>
     </div>
   </div>
 </section>
@@ -447,7 +474,7 @@
         <p>ISIŞAH ENDÜSTRİYEL, 80'li yılların sonundan bu yana yurt içi ve yurt dışındaki demiryolu sanayine klima ısıtıcıları, personel ve yolcu koltuk ısıtıcıları, TIJ kasaları, şasi ısıtıcıları ile ray ve makas ısıtıcıları üretiyor.</p>
         <p>Yüksek hızlı tren standartlarında 2500 V yüksek gerilime dayanıklı, şok ve titreşime hazır rezistanslar; GP03 ve mika izolasyonla kaçak akım gövdeye iletilmez. Her ısıtma ünitesinde çift kademeli termostat koruması bulunur.</p>
       </div>
-      <div class="reveal" data-d="2"><img src="assets/products/tren.webp" alt="Demiryolu iklimlendirme çözümleri" loading="lazy"></div>
+      <div class="reveal" data-d="2"><img src="assets/products/tren.webp" alt="Demiryolu iklimlendirme çözümleri" width="1171" height="758" loading="lazy" decoding="async"></div>
     </div>
 
     <div class="railgrid">
@@ -461,23 +488,23 @@
 
     <div class="sec-head reveal"><h2>Proje geçmişi.</h2><p>1986'dan bugüne demiryolu projelerimiz.</p></div>
     <div class="railtime reveal">
-      <div class="row"><span class="yr">1986</span><span class="tx"><b>TÜVASAŞ TIJ Projesi</b> — yolcu vagonları pencere altı ısıtma üniteleri.</span></div>
-      <div class="row"><span class="yr">1995</span><span class="tx"><b>TÜVASAŞ TVS 2000</b> — vagon altı (şasi) ısıtıcılar.</span></div>
-      <div class="row"><span class="yr">2009-10</span><span class="tx"><b>TÜLOMSAŞ Projesi</b> — lokomotif rezistans üniteleri.</span></div>
-      <div class="row"><span class="yr">2011-26</span><span class="tx"><b>Makas & Ray Isıtıcıları + Personel Isıtıcıları</b> — tamamı paslanmaz personel ısıtma üniteleri; termostatik aşırı ısınma emniyeti.</span></div>
-      <div class="row"><span class="yr">2014</span><span class="tx"><b>Ankara Metro</b> — koltuk ısıtıcıları (750 W / 1300 W – 380 V), HVAC ısıtma elemanları ve fren borusu projesi (Borşah paslanmaz borularıyla).</span></div>
-      <div class="row"><span class="yr">2015-16</span><span class="tx"><b>Tramvay Klima Isıtıcısı · TÜVASAŞ DMU · İstanbul Ulaşım Modernizasyon · YZK 850 İBB</b> — yüksek hızlı tren yolcu ısıtıcıları, 2500 V dayanım.</span></div>
-      <div class="row"><span class="yr">2016-17</span><span class="tx"><b>E-14000 / İstanbul Ulaşım</b> — tren klima ısıtıcıları (M1 hattı).</span></div>
-      <div class="row"><span class="yr">2018</span><span class="tx"><b>Samsun Projesi</b> — ray ve makas ısıtıcıları.</span></div>
-      <div class="row"><span class="yr">2018-21</span><span class="tx"><b>İzmir Tramvay Projesi</b> — klima rezistans üniteleri.</span></div>
-      <div class="row"><span class="yr">2018-19</span><span class="tx"><b>Durmazlar Alibeyköy</b> — koltuk altı ısıtıcılar (Eminönü–Alibeyköy hattı) ve <b>Yazkar</b> klima batarya ısıtıcısı.</span></div>
-      <div class="row"><span class="yr">2019-23</span><span class="tx"><b>MERAK Brüksel Projesi</b> — ihracat: fanlı ısıtma üniteleri.</span></div>
-      <div class="row"><span class="yr">2020</span><span class="tx"><b>TÜLOMSAŞ & TÜVASAŞ</b> — vagon mutfağı ısıtma plakaları (AC-DC), kOhm dirençler, çubuk rezistanslar.</span></div>
-      <div class="row"><span class="yr">2021-26</span><span class="tx"><b>Romanya Projesi</b> — Bükreş tramvayları için koltuk düzenine özel elektrikli ısıtıcılar.</span></div>
-      <div class="row"><span class="yr">2022-26</span><span class="tx"><b>Kayseri 5 UT</b> — Bozankaya üretimi; Prag–Belgrad–Kayseri hatları için ısıtıcılar.</span></div>
-      <div class="row"><span class="yr">2023-26</span><span class="tx"><b>TÜRASAŞ EMU 225</b> — yolcu, vestibül ve makinist ısıtıcıları.</span></div>
-      <div class="row"><span class="yr">2025-26</span><span class="tx"><b>İstanbul Metro</b> — klima ve koltuk altı ısıtıcıları.</span></div>
-      <div class="row"><span class="yr">2026</span><span class="tx"><b>Samsun Projesi</b> — tramvay koltuk düzenine özel elektrikli ısıtıcılar.</span></div>
+      <div class="row"><span class="yr">1986</span><span class="tx"><b>TÜVASAŞ TIJ Projesi:</b> yolcu vagonları pencere altı ısıtma üniteleri.</span></div>
+      <div class="row"><span class="yr">1995</span><span class="tx"><b>TÜVASAŞ TVS 2000:</b> vagon altı (şasi) ısıtıcılar.</span></div>
+      <div class="row"><span class="yr">2009-10</span><span class="tx"><b>TÜLOMSAŞ Projesi:</b> lokomotif rezistans üniteleri.</span></div>
+      <div class="row"><span class="yr">2011-26</span><span class="tx"><b>Makas & Ray Isıtıcıları + Personel Isıtıcıları:</b> tamamı paslanmaz personel ısıtma üniteleri; termostatik aşırı ısınma emniyeti.</span></div>
+      <div class="row"><span class="yr">2014</span><span class="tx"><b>Ankara Metro:</b> koltuk ısıtıcıları (750 W / 1300 W – 380 V), HVAC ısıtma elemanları ve fren borusu projesi (Borşah paslanmaz borularıyla).</span></div>
+      <div class="row"><span class="yr">2015-16</span><span class="tx"><b>Tramvay Klima Isıtıcısı · TÜVASAŞ DMU · İstanbul Ulaşım Modernizasyon · YZK 850 İBB:</b> yüksek hızlı tren yolcu ısıtıcıları, 2500 V dayanım.</span></div>
+      <div class="row"><span class="yr">2016-17</span><span class="tx"><b>E-14000 / İstanbul Ulaşım:</b> tren klima ısıtıcıları (M1 hattı).</span></div>
+      <div class="row"><span class="yr">2018</span><span class="tx"><b>Samsun Projesi:</b> ray ve makas ısıtıcıları.</span></div>
+      <div class="row"><span class="yr">2018-19</span><span class="tx"><b>Durmazlar Alibeyköy:</b> koltuk altı ısıtıcılar (Eminönü–Alibeyköy hattı) ve <b>Yazkar</b> klima batarya ısıtıcısı.</span></div>
+      <div class="row"><span class="yr">2018-21</span><span class="tx"><b>İzmir Tramvay Projesi:</b> klima rezistans üniteleri.</span></div>
+      <div class="row"><span class="yr">2019-23</span><span class="tx"><b>MERAK Brüksel Projesi:</b> ihracat: fanlı ısıtma üniteleri.</span></div>
+      <div class="row"><span class="yr">2020</span><span class="tx"><b>TÜLOMSAŞ & TÜVASAŞ:</b> vagon mutfağı ısıtma plakaları (AC-DC), kOhm dirençler, çubuk rezistanslar.</span></div>
+      <div class="row"><span class="yr">2021-26</span><span class="tx"><b>Romanya Projesi:</b> Bükreş tramvayları için koltuk düzenine özel elektrikli ısıtıcılar.</span></div>
+      <div class="row"><span class="yr">2022-26</span><span class="tx"><b>Kayseri 5 UT:</b> Bozankaya üretimi; Prag–Belgrad–Kayseri hatları için ısıtıcılar.</span></div>
+      <div class="row"><span class="yr">2023-26</span><span class="tx"><b>TÜRASAŞ EMU 225:</b> yolcu, vestibül ve makinist ısıtıcıları.</span></div>
+      <div class="row"><span class="yr">2025-26</span><span class="tx"><b>İstanbul Metro:</b> klima ve koltuk altı ısıtıcıları.</span></div>
+      <div class="row"><span class="yr">2026</span><span class="tx"><b>Samsun Projesi:</b> tramvay koltuk düzenine özel elektrikli ısıtıcılar.</span></div>
     </div>
 
     <div class="railcols">
@@ -517,15 +544,15 @@
     <div class="contact">
       <div class="cbox reveal">
         <h3>ISIŞAH Endüstriyel</h3>
-        <div class="cline"><div class="ic">📍</div><div><div class="k">Adres</div><div class="v">DOSAB Ali Osman Sönmez Cad. No:11<br>16369 Osmangazi / Bursa · Türkiye</div></div></div>
-        <div class="cline"><div class="ic">📞</div><div><div class="k">Telefon</div><a class="v" href="tel:+902242610527">+90 224 261 05 27</a><br><a class="v" href="tel:+902244436100">+90 224 443 61 00</a></div></div>
-        <div class="cline"><div class="ic">🖨️</div><div><div class="k">Faks</div><div class="v">+90 224 261 01 77</div></div></div>
-        <div class="cline"><div class="ic">✉️</div><div><div class="k">E-posta</div><a class="v" href="mailto:info@isisah.com.tr">info@isisah.com.tr</a></div></div>
-        <div class="cline"><div class="ic">◎</div><div><div class="k">Sosyal</div><a class="v" href="https://instagram.com/isisah_group" target="_blank" rel="noopener">instagram.com/isisah_group</a></div></div>
+        <div class="cline"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 1 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></div><div><div class="k">Adres</div><div class="v">DOSAB Ali Osman Sönmez Cad. No:11<br>16369 Osmangazi / Bursa · Türkiye</div></div></div>
+        <div class="cline"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.5 2.9.7a2 2 0 0 1 1.6 2z"/></svg></div><div><div class="k">Telefon</div><a class="v" href="tel:+902242610527">+90 224 261 05 27</a><br><a class="v" href="tel:+902244436100">+90 224 443 61 00</a></div></div>
+        <div class="cline"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="7"/></svg></div><div><div class="k">Faks</div><div class="v">+90 224 261 01 77</div></div></div>
+        <div class="cline"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></div><div><div class="k">E-posta</div><a class="v" href="mailto:info@isisah.com.tr">info@isisah.com.tr</a></div></div>
+        <div class="cline"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg></div><div><div class="k">Sosyal</div><a class="v" href="https://instagram.com/isisah_group" target="_blank" rel="noopener">instagram.com/isisah_group</a></div></div>
         <div style="margin-top:26px"><a class="btn" href="mailto:info@isisah.com.tr">Teklif İste <span>→</span></a></div>
       </div>
       <div class="map reveal" data-d="2">
-        <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        <iframe loading="lazy" title="ISIŞAH DOSAB Bursa konum haritası" referrerpolicy="no-referrer-when-downgrade"
           src="https://www.google.com/maps?q=DOSAB%20Ali%20Osman%20S%C3%B6nmez%20Cad.%20No:11%20Osmangazi%20Bursa&output=embed"></iframe>
       </div>
     </div>
@@ -538,19 +565,27 @@
     <nav class="fnav">
       <a href="#kurumsal">Kurumsal</a><a href="#markalar">Markalar</a><a href="#urunler">Ürünler</a>
       <a href="#boykur">BOYKUR</a><a href="#demiryolu">Demiryolu</a><a href="#iletisim">İletişim</a>
-      <a href="https://isisah.com.tr" target="_blank" rel="noopener">isisah.com.tr</a>
+      <a href="urunler.html">3B Showroom</a>
     </nav>
-    <div class="cp">© <span id="yr"></span> ISIŞAH Endüstriyel · DOSAB Osmangazi / Bursa · ISO 9001-2015 · Tüm hakları saklıdır.</div>
+    <div class="cp">© <span id="yr"></span> ISIŞAH Endüstriyel · DOSAB Osmangazi / Bursa · ISO 9001:2015 · Tüm hakları saklıdır.</div>
   </div>
 </footer>
+
+<nav class="stickybar" aria-label="Hızlı iletişim">
+  <a class="call" href="tel:+902242610527">Ara</a>
+  <a class="quote" href="mailto:info@isisah.com.tr?subject=Teklif%20Talebi">Teklif İste</a>
+</nav>
 
 <script>
   // header shrink
   const hdr=document.getElementById('hdr');
   addEventListener('scroll',()=>hdr.classList.toggle('small',scrollY>40),{passive:true});
   // mobile menu
-  document.getElementById('menuBtn').onclick=()=>hdr.classList.toggle('open');
-  document.querySelectorAll('#links a').forEach(a=>a.addEventListener('click',()=>hdr.classList.remove('open')));
+  const menuBtn=document.getElementById('menuBtn');
+  const syncMenu=()=>menuBtn.setAttribute('aria-expanded',hdr.classList.contains('open')?'true':'false');
+  menuBtn.onclick=()=>{hdr.classList.toggle('open');syncMenu();};
+  document.querySelectorAll('#links a').forEach(a=>a.addEventListener('click',()=>{hdr.classList.remove('open');syncMenu();}));
+  addEventListener('keydown',(e)=>{if(e.key==='Escape'&&hdr.classList.contains('open')){hdr.classList.remove('open');syncMenu();menuBtn.focus();}});
   // reveal — geometry-based (works no matter which element is the scroller);
   // interval safety net guarantees no section stays hidden after an anchor jump.
   const reveals=[...document.querySelectorAll('.reveal')];
@@ -565,6 +600,7 @@
   addEventListener('resize',kick,{passive:true});
   addEventListener('load',showReveals);
   const iv=setInterval(()=>{if(!showReveals())clearInterval(iv);},250);
+  setTimeout(()=>{reveals.forEach(el=>el.classList.add('in'));clearInterval(iv);},3000);
   showReveals();
   document.getElementById('yr').textContent=new Date().getFullYear();
 </script>
