@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>ISIŞAH ENDÜSTRİYEL — Çelikten ısıya, 1982'den bugüne</title>
 <meta name="description" content="ISIŞAH Endüstriyel: 1982'den bu yana Bursa DOSAB'da paslanmaz çelik boru (Borşah), sanayi tipi rezistans, endüstriyel fırın, kanal tipi ve mobil ısıtıcılar ile BOYKUR oto boya kurutma sistemleri. ISO 9001:2015." />
-<meta name="theme-color" content="#0d0f12" />
+<meta name="theme-color" content="#000000" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ISIŞAH GROUP" />
 <meta property="og:title" content="ISIŞAH ENDÜSTRİYEL — Çelikten ısıya, 1982'den bugüne" />
@@ -31,16 +31,21 @@
 <link rel="icon" href="assets/img/logo.png" />
 <link rel="preload" as="image" href="assets/img/bina-gece.webp" />
 <script>document.documentElement.classList.add('js')</script>
-<link rel="stylesheet" href="assets/fonts/inter.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     color-scheme:dark;
-    /* v6 gerçekçilik: antrasit zemin + logodan türeyen TEK amber accent.
-       Neon aileler yalnız .bridge (3B Showroom köprü kartı) içinde yaşar. */
-    --bg:#0d0f12; --bg2:#101318; --panel:#15181d; --panel2:#181c22;
-    --ink:#f2f3f5; --muted:#969ba8; --line:#262a31; --steel:#c3c7d4;
-    --a1:#ff8a2b;--a2:#f0641e;--a3:#ffd08a;          /* amber accent */
-    --vio1:#6b5bff;--vio2:#7a2bff;--vio3:#8b3bff;    /* sadece köprü kartı */
+    --bg:#000; --bg2:#050508; --panel:#0a0a10; --panel2:#0e0e16;
+    --ink:#fff; --muted:#8f93a3; --line:#1b1c26; --steel:#c3c7d4;
+    --vio1:#6b5bff;--vio2:#7a2bff;--vio3:#8b3bff;
+    --emb1:#ff8a2b;--emb2:#ff5c2b;--emb3:#ffd08a;
+    --ele1:#00d0ff;--ele2:#2f8bff;--ele3:#1f4cff;
+    --mnt1:#35ffa8;--mnt2:#00ffa8;--mnt3:#4ec8ff;
+    --mag1:#c04cff;--mag2:#ff2f7a;
+    --grad:linear-gradient(100deg,var(--vio1),var(--vio3));
+    --magrad:linear-gradient(100deg,var(--mag1),var(--mag2));
     --disp:'Inter',sans-serif; --body:'Inter',sans-serif; --tech:'Inter',sans-serif;
     --maxw:1240px;
     --ease-out:cubic-bezier(0.23,1,0.32,1);      /* strong ease-out (Emil) */
@@ -52,23 +57,30 @@
   a{color:inherit;text-decoration:none}
   img{max-width:100%;display:block}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
-  ::selection{background:var(--a2);color:#fff}
+  ::selection{background:var(--mag2);color:#fff}
 
   /* blueprint / atmosphere */
   body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
     background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:64px 64px;opacity:.07;mask-image:radial-gradient(circle at 50% 0,#000,transparent 75%)}
+    background-size:64px 64px;opacity:.11;mask-image:radial-gradient(circle at 50% 0,#000,transparent 75%)}
+  @keyframes glowDrift{0%,100%{opacity:.24;filter:blur(90px) hue-rotate(0deg)}50%{opacity:.34;filter:blur(100px) hue-rotate(14deg)}}
+  .glow{position:fixed;border-radius:50%;filter:blur(90px);opacity:.26;pointer-events:none;z-index:0;animation:glowDrift 5.5s var(--ease-in-out) infinite}
+  .glow.a{width:520px;height:520px;background:var(--vio2);top:-160px;right:-120px}
+  .glow.b{width:460px;height:460px;background:var(--vio1);top:40%;left:-160px;opacity:.14;animation-delay:2.7s}
+  .wm{position:fixed;top:86px;right:26px;z-index:49;pointer-events:none;user-select:none;
+    font-family:var(--disp);font-weight:700;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.3)}
 
   h1,h2,h3,.disp{font-family:var(--disp);font-weight:700;line-height:1.02;letter-spacing:-.02em;text-transform:uppercase}
-  .eyebrow{font-family:var(--tech);font-weight:600;font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--a1)}
-  .grad-text{color:var(--a1)}
+  .eyebrow{font-family:var(--tech);font-weight:600;font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--vio1)}
+  .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 0 22px color-mix(in srgb,var(--vio2) 45%,transparent))}
   @media (prefers-reduced-motion:reduce){*{animation-duration:.01s !important;animation-iteration-count:1 !important}html{scroll-behavior:auto}}
   section[id]{scroll-margin-top:90px}
 
   /* header */
   header{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(12px);
-    background:#0d0f12e6;border-bottom:1px solid var(--line);transition:background 200ms var(--ease-out)}
-  header.small{background:#0d0f12fa}
+    background:linear-gradient(#000000dd,#000000aa);border-bottom:1px solid var(--line);transition:background 200ms var(--ease-out)}
+  header.small{background:#000000f2}
   .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
   .brand{display:flex;align-items:center;gap:12px}
   .brand img{height:34px;width:auto;filter:drop-shadow(0 2px 8px #0008)}
@@ -76,16 +88,17 @@
   .brand .bt small{display:block;font-family:var(--tech);font-weight:500;font-size:.6rem;letter-spacing:.34em;color:var(--muted)}
   nav.links{display:flex;gap:30px;align-items:center}
   nav.links a{font-size:.83rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--steel);position:relative;padding:4px 0}
-  nav.links a::after{content:"";position:absolute;left:0;bottom:-2px;width:100%;height:2px;background:var(--a1);transform:scaleX(0);transform-origin:left;transition:transform 200ms var(--ease-out)}
+  nav.links a::after{content:"";position:absolute;left:0;bottom:-2px;width:100%;height:2px;background:var(--grad);box-shadow:0 0 8px var(--vio2);transform:scaleX(0);transform-origin:left;transition:transform 200ms var(--ease-out)}
   nav.links a:hover{color:#fff}
   nav.links a:hover::after{transform:scaleX(1)}
   .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--tech);font-weight:600;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;
-    padding:12px 22px;border-radius:8px;background:var(--a2);color:#160d06;cursor:pointer;border:1px solid var(--a2);
-    transition:transform 160ms var(--ease-out),background 160ms var(--ease-out),border-color 160ms var(--ease-out),color 160ms var(--ease-out);
-    box-shadow:0 6px 18px rgba(0,0,0,.35)}
+    padding:12px 22px;border-radius:10px;background:linear-gradient(165deg,rgba(24,16,28,.92),rgba(8,4,10,.95));color:#fff;cursor:pointer;
+    border:1px solid color-mix(in srgb,var(--mag1) 40%,transparent);
+    transition:transform 160ms var(--ease-out),box-shadow 300ms var(--ease-in-out),border-color 160ms var(--ease-out),color 160ms var(--ease-out);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 26px -8px var(--mag1),0 6px 20px rgba(0,0,0,.5)}
   @media(hover:hover) and (pointer:fine){
-    .btn:hover{transform:translateY(-2px);background:var(--a1);border-color:var(--a1)}
-    .btn.ghost:hover{border-color:var(--steel);color:#fff;background:transparent}
+    .btn:hover{transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 0 46px -8px var(--mag2),0 10px 28px rgba(0,0,0,.6)}
+    .btn.ghost:hover{border-color:var(--vio1);color:#fff}
   }
   .btn:active{transform:scale(0.97)}
   .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--steel);box-shadow:none}
@@ -101,34 +114,36 @@
   .hero{min-height:100vh;display:flex;align-items:center;padding-top:74px;overflow:hidden}
   .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;width:100%}
   .hero .kick{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:40px;padding:7px 16px;font-family:var(--tech);font-size:.72rem;letter-spacing:.2em;color:var(--steel);text-transform:uppercase;
-    background:var(--panel)}
-  .hero .kick b{color:var(--a1)}
+    background:#05050acc;box-shadow:inset 0 1px 0 rgba(255,255,255,.09)}
+  .hero .kick b{color:var(--vio1)}
   .hero h1{font-size:clamp(3rem,7.2vw,5.6rem);margin:22px 0 0}
   .hero h1 .l2{display:block}
   .hero .lead{color:var(--muted);font-size:1.12rem;max-width:520px;margin:22px 0 32px}
   .hero .cta{display:flex;gap:14px;flex-wrap:wrap}
-  .hero-visual{position:relative;aspect-ratio:4/5;border-radius:12px;overflow:hidden;border:1px solid var(--line);
-    background:#000;box-shadow:0 24px 48px -24px rgba(0,0,0,.7)}
+  .hero-visual{position:relative;aspect-ratio:4/5;border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.08);
+    background:#000;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 60px -18px var(--vio2)}
   .hero-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:76% center}
   .hero-visual .tag{position:absolute;left:16px;bottom:16px;z-index:2;font-family:var(--tech);font-size:.72rem;letter-spacing:.18em;
     text-transform:uppercase;color:#fff;background:#000c;backdrop-filter:blur(4px);padding:8px 14px;border-radius:8px}
   .hero-visual::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,#000,transparent 45%);z-index:1}
 
   /* stats strip */
-  .stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2)}
+  .stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#00000030}
   .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
   .stat{padding:34px 26px;border-right:1px solid var(--line)}
   .stat:last-child{border-right:none}
   .stat .n{font-family:var(--disp);font-weight:800;font-size:2.8rem;line-height:1}
   .stat .k{color:var(--muted);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;margin-top:6px;font-family:var(--tech)}
 
-  /* referans şeridi — hareket yok, kanıt var */
-  .refs{border-bottom:1px solid var(--line);background:var(--bg2)}
-  .refs .wrap{padding-top:22px;padding-bottom:22px;text-align:center}
-  .refs .rk{font-family:var(--tech);font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:10px}
-  .refs .rl{font-family:var(--tech);font-weight:600;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--steel);line-height:2.1}
-  .refs .rl span{white-space:nowrap}
-  .refs .rl i{font-style:normal;color:#3a3f48;margin:0 10px}
+  /* marquee — koyu cam bant, arkadan violet ışıma */
+  .marquee{overflow:hidden;border-top:1px solid color-mix(in srgb,var(--vio2) 30%,transparent);border-bottom:1px solid color-mix(in srgb,var(--vio2) 30%,transparent);
+    background:linear-gradient(180deg,rgba(14,10,24,.9),rgba(4,2,8,.95));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.07),inset 0 0 44px -12px var(--vio2)}
+  .marquee .track{display:flex;gap:48px;white-space:nowrap;padding:12px 0;animation:scrollx 42s linear infinite;font-family:var(--disp);font-weight:700;letter-spacing:.04em;color:#fff;text-transform:uppercase;font-size:1.05rem}
+  .marquee .track span{opacity:.88;text-shadow:0 0 14px color-mix(in srgb,var(--vio1) 55%,transparent)}
+  @media(hover:hover){.marquee:hover .track{animation-play-state:paused}}
+  @keyframes scrollx{to{transform:translateX(-50%)}}
 
   /* about */
   .about{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
@@ -138,20 +153,25 @@
   .about p{color:var(--muted);margin-top:18px}
   .about .time{margin-top:28px;display:flex;flex-direction:column;gap:0}
   .about .time .row{display:grid;grid-template-columns:74px 1fr;gap:18px;padding:14px 0;border-top:1px solid var(--line)}
-  .about .time .yr{font-family:var(--disp);font-weight:700;color:var(--a1);font-size:1.3rem}
+  .about .time .yr{font-family:var(--disp);font-weight:700;color:var(--vio1);font-size:1.3rem;text-shadow:0 0 12px color-mix(in srgb,var(--vio2) 50%,transparent)}
   .about .time .tx{color:var(--steel);font-size:.94rem}
 
   /* brands */
   .brands{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-  .brandcard{border:1px solid var(--line);border-radius:12px;padding:38px;background:var(--panel);position:relative;overflow:hidden;
+  .brandcard{border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:38px;background:linear-gradient(165deg,rgba(16,16,24,.9),rgba(4,4,8,.95));position:relative;overflow:hidden;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 44px -18px var(--bc,var(--vio2));
     transition:transform 220ms var(--ease-out),border-color 220ms var(--ease-out),box-shadow 320ms var(--ease-in-out)}
-  .brandcard::before{content:"";position:absolute;top:0;left:0;width:100%;height:3px;background:var(--a2);
-    transform:scaleX(0);transform-origin:left;transition:transform 320ms var(--ease-out)}
+  .brandcard[data-b=borsah]{--bc:var(--mnt2);--bt:var(--mnt1)}
+  .brandcard[data-b=isisah]{--bc:var(--emb2);--bt:var(--emb1)}
+  .brandcard[data-b=salmex]{--bc:var(--ele1);--bt:var(--ele2)}
+  .brandcard::before{content:"";position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,var(--bc,var(--vio2)),transparent);
+    box-shadow:0 0 16px var(--bc,var(--vio2));transform:scaleX(0);transform-origin:left;transition:transform 320ms var(--ease-out)}
   @media(hover:hover) and (pointer:fine){
-    .brandcard:hover{border-color:#343a44;transform:translateY(-4px);box-shadow:0 24px 48px -24px rgba(0,0,0,.7)}
+    .brandcard:hover{border-color:color-mix(in srgb,var(--bc,var(--vio2)) 40%,transparent);transform:translateY(-4px);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 0 64px -14px var(--bt,var(--vio1)),0 24px 48px -20px #000}
     .brandcard:hover::before{transform:scaleX(1)}
   }
-  .brandcard .bnum{font-family:var(--tech);color:var(--a1);letter-spacing:.2em;font-size:.75rem}
+  .brandcard .bnum{font-family:var(--tech);color:var(--bt,var(--vio1));letter-spacing:.2em;font-size:.75rem;text-shadow:0 0 10px color-mix(in srgb,var(--bt,var(--vio1)) 50%,transparent)}
   .brandcard h3{font-size:2rem;margin:14px 0 12px}
   .brandcard p{color:var(--muted);font-size:.98rem}
   .brandcard ul{list-style:none;margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
@@ -159,50 +179,58 @@
 
   /* products */
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-  .card{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel);position:relative;
+  .card{border:1px solid rgba(255,255,255,.06);border-radius:16px;overflow:hidden;background:linear-gradient(165deg,rgba(14,14,22,.92),rgba(4,4,8,.96));position:relative;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.1);
     transition:transform 220ms var(--ease-out),border-color 220ms var(--ease-out),box-shadow 320ms var(--ease-in-out)}
-  .card .ph{aspect-ratio:4/3;overflow:hidden;background:#101318}
+  .card[data-b=borsah]{--cc:var(--mnt2)}
+  .card[data-b=isisah]{--cc:var(--emb2)}
+  .card .ph{aspect-ratio:4/3;overflow:hidden;background:#0a0a12}
   .card .ph img{width:100%;height:100%;object-fit:cover;transition:transform 480ms var(--ease-out)}
   @media(hover:hover) and (pointer:fine){
-    .card:hover{transform:translateY(-4px);border-color:#343a44;box-shadow:0 20px 44px -22px rgba(0,0,0,.7)}
+    .card:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--cc,var(--vio2)) 38%,transparent);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 48px -14px var(--cc,var(--vio2)),0 20px 50px #000a}
     .card:hover .ph img{transform:scale(1.05)}
   }
   .card .body{padding:22px}
-  .card .cat{font-family:var(--tech);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--a1)}
+  .card .cat{font-family:var(--tech);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cc,var(--vio1));text-shadow:0 0 10px color-mix(in srgb,var(--cc,var(--vio1)) 50%,transparent)}
   .card h3{font-size:1.35rem;margin:8px 0 8px}
   .card p{color:var(--muted);font-size:.9rem}
 
   /* boykur feature */
-  .feature{border:1px solid var(--line);border-radius:12px;overflow:hidden;display:grid;grid-template-columns:1.1fr .9fr;
-    background:var(--panel);box-shadow:0 24px 48px -24px rgba(0,0,0,.6)}
+  .feature{border:1px solid rgba(255,255,255,.07);border-radius:18px;overflow:hidden;display:grid;grid-template-columns:1.1fr .9fr;
+    background:linear-gradient(120deg,#120a06,#050508);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 0 60px -20px var(--emb2)}
   .feature .txt{padding:56px}
   .feature .txt h2{font-size:clamp(2rem,4vw,3.2rem);margin:0 0 16px}
   .feature .txt p{color:var(--muted);margin-bottom:12px}
-  .feature .txt .tofas{display:inline-block;margin-top:10px;font-family:var(--tech);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--steel);border:1px solid var(--line);border-radius:6px;padding:8px 14px;background:var(--bg2)}
+  .feature .txt .tofas{display:inline-block;margin-top:10px;font-family:var(--tech);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--emb1);border:1px solid color-mix(in srgb,var(--emb2) 40%,transparent);border-radius:40px;padding:8px 16px;
+    text-shadow:0 0 10px color-mix(in srgb,var(--emb1) 55%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 22px -8px var(--emb2)}
   .feature .ph{position:relative;min-height:340px}
   .feature .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-  .feature .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--panel),transparent 26%)}
+  .feature .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#120a06,transparent 30%)}
 
   /* railway */
   .rail-hero{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;margin-bottom:56px}
-  .rail-hero .railvisual{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:28px}
-  .rail-hero img{width:100%}
+  .rail-hero img{width:100%;max-width:540px;margin:0 auto;display:block;filter:drop-shadow(0 26px 30px #000a)}
+  @media(max-width:960px){.rail-hero img{max-width:420px}}
   .rail-hero p{color:var(--muted);margin-top:16px}
   .railgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:64px}
-  .railcard{border:1px solid var(--line);border-radius:12px;padding:20px 22px;background:var(--panel)}
+  .railcard{border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:20px 22px;background:linear-gradient(165deg,rgba(12,14,22,.92),rgba(3,4,8,.96));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 0 34px -16px var(--vio2)}
   .railcard h3{font-size:1.15rem;margin-bottom:6px}
   .railcard p{color:var(--muted);font-size:.86rem}
   .railtime{border-top:1px solid var(--line)}
   .railtime .row{display:grid;grid-template-columns:110px 1fr;gap:18px;padding:13px 0;border-bottom:1px solid var(--line)}
-  .railtime .yr{font-family:var(--disp);font-weight:700;color:var(--a1);font-size:1.15rem}
+  .railtime .yr{font-family:var(--disp);font-weight:700;color:var(--vio1);font-size:1.15rem;text-shadow:0 0 12px color-mix(in srgb,var(--vio1) 50%,transparent)}
   .railtime .tx{color:var(--steel);font-size:.93rem}
   .railtime .tx b{color:var(--ink)}
   .railcols{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:56px}
-  .railbox{border:1px solid var(--line);border-radius:12px;padding:26px 28px;background:var(--panel)}
+  .railbox{border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:26px 28px;background:linear-gradient(165deg,rgba(12,14,22,.92),rgba(3,4,8,.96));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 0 34px -16px var(--vio2)}
   .railbox h3{font-size:1.3rem;margin-bottom:14px}
   .railbox ul{list-style:none;display:flex;flex-direction:column;gap:8px}
   .railbox li{display:flex;gap:10px;color:var(--muted);font-size:.9rem}
-  .railbox li::before{content:"";flex:none;width:7px;height:7px;margin-top:7px;border-radius:2px;background:var(--a2)}
+  .railbox li::before{content:"";flex:none;width:7px;height:7px;margin-top:7px;border-radius:2px;background:linear-gradient(100deg,var(--vio1),var(--vio2));box-shadow:0 0 8px var(--vio2)}
   .railrefs{margin-top:34px;color:var(--muted);font-family:var(--tech);font-size:.8rem;letter-spacing:.06em;line-height:2;text-transform:uppercase}
   .railrefs b{color:var(--steel)}
   @media(max-width:960px){.rail-hero{grid-template-columns:1fr}.railgrid{grid-template-columns:1fr 1fr}.railcols{grid-template-columns:1fr}}
@@ -210,24 +238,25 @@
 
   /* contact */
   .contact{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:stretch}
-  .cbox{border:1px solid var(--line);border-radius:12px;padding:40px;background:var(--panel)}
+  .cbox{border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:40px;background:linear-gradient(165deg,rgba(20,12,22,.92),rgba(6,3,8,.96));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.11),0 0 56px -18px var(--mag1)}
   .cbox h3{font-size:1.8rem;margin-bottom:24px}
   .cline{display:flex;gap:16px;padding:16px 0;border-top:1px solid var(--line);align-items:flex-start}
   .cline:first-of-type{border-top:none}
-  .cline .ic{width:40px;height:40px;flex:none;border-radius:8px;background:var(--bg2);border:1px solid var(--line);
-    display:grid;place-items:center;color:var(--a1)}
+  .cline .ic{width:40px;height:40px;flex:none;border-radius:10px;background:#0c0812;border:1px solid color-mix(in srgb,var(--mag1) 40%,transparent);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 18px -6px var(--mag1);display:grid;place-items:center;color:var(--mag1)}
   .cline .ic svg{width:18px;height:18px}
   .cline .k{font-family:var(--tech);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
   .cline .v{color:var(--ink);font-weight:600;font-size:1rem}
-  .cline a.v:hover{color:var(--a1)}
-  .map{border:1px solid var(--line);border-radius:12px;overflow:hidden;min-height:440px}
-  .map iframe{width:100%;height:100%;min-height:440px;border:0}
+  .cline a.v:hover{color:var(--mag2)}
+  .map{border:1px solid rgba(255,255,255,.07);border-radius:18px;overflow:hidden;min-height:440px;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}
+  .map iframe{width:100%;height:100%;min-height:440px;border:0;filter:grayscale(.55) invert(.92) hue-rotate(190deg) contrast(.95)}
 
-  footer{border-top:1px solid var(--line);padding:48px 0;background:var(--bg2);position:relative;z-index:1}
+  footer{border-top:1px solid var(--line);padding:48px 0;background:#00000040;position:relative;z-index:1}
   footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
   footer .brand img{height:30px}
   footer .fnav{display:flex;gap:24px;flex-wrap:wrap;font-size:.82rem;color:var(--muted)}
-  footer .fnav a:hover{color:var(--a1)}
+  footer .fnav a:hover{color:var(--vio1)}
   footer .cp{color:var(--muted);font-size:.78rem;width:100%;border-top:1px solid var(--line);padding-top:20px;margin-top:8px}
 
   /* reveal — JS yoksa (bot, önizleme, hata) içerik daima görünür: gizleme .js arkasında */
@@ -237,9 +266,11 @@
   .reveal[data-d="1"]{transition-delay:.06s}.reveal[data-d="2"]{transition-delay:.12s}
   .reveal[data-d="3"]{transition-delay:.18s}.reveal[data-d="4"]{transition-delay:.24s}
   .reveal[data-d="5"]{transition-delay:.3s}.reveal[data-d="6"]{transition-delay:.36s}
-  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.marquee .track{animation:none}}
 
   @media(max-width:960px){
+    .wm{display:none}
+    .glow{animation:none;opacity:.13;filter:blur(80px)}
     .hero{min-height:auto;padding:120px 0 70px}
     .hero .wrap{grid-template-columns:1fr}
     .hero-visual{aspect-ratio:16/9;margin-top:8px}
@@ -254,18 +285,17 @@
   @media(max-width:560px){.grid{grid-template-columns:1fr}.pad{padding:70px 0}.feature .txt{padding:34px}.cbox{padding:28px}
     .hero .kick{font-size:.6rem;letter-spacing:.13em}}
 
-  /* 3B Showroom köprü kartı — neon kimlik SADECE burada yaşar (urunler.html dili) */
-  .bridge{border:1px solid color-mix(in srgb,var(--vio2) 45%,transparent);border-radius:14px;overflow:hidden;
+  /* 3B Showroom köprü kartı — showroom'un canlı önizlemesi */
+  .bridge{border:1px solid color-mix(in srgb,var(--vio2) 45%,transparent);border-radius:18px;overflow:hidden;
     display:grid;grid-template-columns:1fr 1fr;background:#000;
-    box-shadow:0 0 44px -14px color-mix(in srgb,var(--vio2) 60%,transparent),0 24px 48px -24px rgba(0,0,0,.8)}
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 0 60px -16px var(--vio2),0 24px 48px -24px rgba(0,0,0,.8)}
   .bridge .shot{position:relative;min-height:300px}
   .bridge .shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
   .bridge .txt{padding:48px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:14px}
-  .bridge .bk{font-family:var(--tech);font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--vio1)}
+  .bridge .bk{font-family:var(--tech);font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--vio1);
+    text-shadow:0 0 10px color-mix(in srgb,var(--vio1) 50%,transparent)}
   .bridge h2{font-size:clamp(1.8rem,3.4vw,2.6rem);margin:0}
   .bridge p{color:var(--muted);font-size:.98rem}
-  .bridge .btn.bridgecta{background:linear-gradient(100deg,var(--vio1),var(--vio3));border-color:transparent;color:#fff}
-  @media(hover:hover) and (pointer:fine){.bridge .btn.bridgecta:hover{background:linear-gradient(100deg,var(--vio2),var(--vio3))}}
   @media(max-width:960px){.bridge{grid-template-columns:1fr}.bridge .txt{padding:32px}}
 
   /* mobil sabit iletişim çubuğu — sanayi müşterisinin "hemen ara" yolu */
@@ -276,15 +306,17 @@
       padding-bottom:env(safe-area-inset-bottom,0px)}
     .stickybar a{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;
       font-family:var(--tech);font-weight:600;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;
-      background:#101318f5;color:#fff;backdrop-filter:blur(10px)}
-    .stickybar a.call{color:var(--a1)}
-    .stickybar a.quote{color:var(--a3)}
+      background:#050508f5;color:#fff;backdrop-filter:blur(10px)}
+    .stickybar a.call{color:var(--mnt1)}
+    .stickybar a.quote{color:var(--mag1)}
     body{padding-bottom:calc(53px + env(safe-area-inset-bottom,0px))}
     footer{padding-bottom:70px}
   }
 </style>
 </head>
 <body>
+<div class="wm" aria-hidden="true">ISIŞAH GROUP</div>
+<div class="glow a"></div><div class="glow b"></div>
 
 <header id="hdr">
   <div class="wrap nav">
@@ -314,13 +346,13 @@
       <h1>Çelikten<span class="l2 grad-text">ısıya.</span></h1>
       <p class="lead">1982'den bu yana paslanmaz çelik borudan sanayi tipi rezistansa, endüstriyel fırından oto boya kurutma sistemlerine uzanan üretim: ısıtma teknolojisinde Türkiye'nin köklü mühendislik gücü.</p>
       <div class="cta">
-        <a class="btn" href="#iletisim">Teklif Al <span>→</span></a>
+        <a class="btn" href="urunler.html">Ürün Showroom'u Gez <span>→</span></a>
+        <a class="btn ghost" href="#urunler">Ürünler</a>
         <a class="btn ghost" href="tel:+902242610527">Ara: +90 224 261 05 27</a>
-        <a class="btn ghost" href="urunler.html">3B Showroom</a>
       </div>
     </div>
     <div class="hero-visual reveal in" data-d="2">
-      <img src="assets/img/bina-gece.webp" alt="ISIŞAH GROUP merkez binası" fetchpriority="high" / width="1600" height="905">
+      <img src="assets/img/bina-gece.webp" alt="ISIŞAH GROUP merkez binası" fetchpriority="high" width="1600" height="905">
       <span class="tag">ISIŞAH GROUP · DOSAB Bursa</span>
     </div>
   </div>
@@ -336,13 +368,11 @@
   </div>
 </section>
 
-<!-- REFERANSLAR -->
-<div class="refs">
-  <div class="wrap">
-    <span class="rk">Çalıştığımız kurum ve firmalardan</span>
-    <p class="rl">
-      <span>TÜVASAŞ</span><i>·</i><span>TOFAŞ</span><i>·</i><span>TÜLOMSAŞ</span><i>·</i><span>TÜRASAŞ</span><i>·</i><span>Ankara Metro</span><i>·</i><span>İBB</span><i>·</i><span>Durmazlar</span><i>·</i><span>Bozankaya</span><i>·</i><span>Erdemir</span><i>·</i><span>Arçelik</span><i>·</i><span>Vestel</span><i>·</i><span>Alfa Laval</span><i>·</i><span>Trakya Cam</span><i>·</i><span>Eti Maden</span>
-    </p>
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    <span>PASLANMAZ BORU</span><span>·</span><span>SANAYİ REZİSTANS</span><span>·</span><span>ENDÜSTRİYEL FIRIN</span><span>·</span><span>KANAL TİPİ ISITICI</span><span>·</span><span>OTO BOYA KURUTMA</span><span>·</span><span>MOBİL ISITICI</span><span>·</span>
+    <span>PASLANMAZ BORU</span><span>·</span><span>SANAYİ REZİSTANS</span><span>·</span><span>ENDÜSTRİYEL FIRIN</span><span>·</span><span>KANAL TİPİ ISITICI</span><span>·</span><span>OTO BOYA KURUTMA</span><span>·</span><span>MOBİL ISITICI</span><span>·</span>
   </div>
 </div>
 
@@ -361,9 +391,9 @@
       </div>
     </div>
     <div class="imgcol reveal" data-d="2">
-      <img src="assets/img/paslanmaz-boru.jpg" alt="Paslanmaz çelik boru üretimi" / width="1400" height="933" loading="lazy" decoding="async">
-      <img src="assets/img/rezistanslar.jpg" alt="Rezistanslar" / width="800" height="600" loading="lazy" decoding="async">
-      <img src="assets/img/firin.jpg" alt="Endüstriyel fırın" / width="800" height="600" loading="lazy" decoding="async">
+      <img src="assets/img/salmex-hat.webp" alt="SALMEX robotlu eşanjör üretim hattı — DOSAB Bursa" width="1600" height="900" loading="lazy" decoding="async">
+      <img src="assets/img/salmex-robot.webp" alt="Robotlu üretim hücresi" width="1200" height="675" loading="lazy" decoding="async">
+      <img src="assets/img/rezistanslar.jpg" alt="Rezistanslar" width="800" height="600" loading="lazy" decoding="async">
     </div>
   </div>
 </section>
@@ -392,7 +422,7 @@
         <div class="bnum">ISI EŞANJÖRLERİ</div>
         <h3>Salmex Isı Eşanjörleri</h3>
         <p>Yoğuşmalı, elektrikli ve konvansiyonel kombi ile kazan eşanjörleri. Paslanmaz spiral, helisel ve kanatlı eşanjör aileleriyle ısı transferi çözümleri.</p>
-        <ul><li>Yoğuşmalı Eşanjör</li><li>Kombi</li><li>Kazan</li><li>Paslanmaz</li></ul>
+        <ul><li>Yoğuşmalı Eşanjör</li><li>Kombi</li><li>Kazan</li><li>Robotlu Üretim Hattı</li></ul>
       </div>
     </div>
   </div>
@@ -443,7 +473,7 @@
         <span class="bk">İnteraktif Deneyim</span>
         <h2>36 ürünü 3B showroom'da gezin.</h2>
         <p>Üç marka, üç kapı: ISIŞAH, SALMEX ve BORŞAH ürünlerini kaidelerinde inceleyin, beğendiğinize tek tıkla teklif isteyin.</p>
-        <a class="btn bridgecta" href="urunler.html">Showroom'u Gez <span>→</span></a>
+        <a class="btn" href="urunler.html">Showroom'u Gez <span>→</span></a>
       </div>
     </div>
   </div>
@@ -473,7 +503,7 @@
         <p>ISIŞAH ENDÜSTRİYEL, 80'li yılların sonundan bu yana yurt içi ve yurt dışındaki demiryolu sanayine klima ısıtıcıları, personel ve yolcu koltuk ısıtıcıları, TIJ kasaları, şasi ısıtıcıları ile ray ve makas ısıtıcıları üretiyor.</p>
         <p>Yüksek hızlı tren standartlarında 2500 V yüksek gerilime dayanıklı, şok ve titreşime hazır rezistanslar; GP03 ve mika izolasyonla kaçak akım gövdeye iletilmez. Her ısıtma ünitesinde çift kademeli termostat koruması bulunur.</p>
       </div>
-      <div class="reveal railvisual" data-d="2"><img src="assets/products/tren.webp" alt="Demiryolu iklimlendirme çözümleri" width="1171" height="758" loading="lazy" decoding="async"></div>
+      <div class="reveal" data-d="2"><img src="assets/products/tren.webp" alt="Demiryolu iklimlendirme çözümleri" width="1171" height="758" loading="lazy" decoding="async"></div>
     </div>
 
     <div class="railgrid">

@@ -67,7 +67,13 @@ Bursa/DOSAB merkezli **ISIŞAH GROUP** (1982; markalar: **ISIŞAH Endüstriyel**
 - sitemap.xml gönderildi (kök + showroom/urunler); kök ve showroom için "dizine eklenme" talebi verildi
 - Kök index.html artık yeni site (WP index.php'nin önünde); eski siteye dönüş = httpdocs/index.html'i sil
 
-## v6 (gerçekçilik turu — 26 Ağu 2026, "ana sayfa AI duruyor" konseyi) — MİRROR'DA, CANLIYA ALINMADI
+## v6.1 (KULLANICI KARARI — 26 Ağu 2026): v6 redesign REDDEDİLDİ, seçmeli geri alım
+- Kullanıcı v6 antrasit/amber redesign'ı BEĞENMEDİ → index.html `v5.2-konsey` haline geri alındı (neon canlı kimliktir, tartışmaya kapalı say).
+- KORUNANLAR (kullanıcı beğendi/istedi): (1) `.bridge` 3B Showroom köprü kartı — v5.2 neon diliyle index'e yeniden eklendi (id=showroom, assets/img/showroom-preview.webp), CANLIDA; (2) tren ölçek sınırı (.rail-hero img max-width 540/420px); (3) tren.webp Higgsfield image_background_remover ile YENİDEN kesildi + alfa eşiği defringe (a<200→0, 200-255 rampa) — beyaz sis gitti (assets/products/tren.webp değişti, showroom da aynı dosyayı kullanır).
+- YENİ GERÇEK VARLIK: kullanıcının çektiği SALMEX robotlu üretim hattı fotoğrafları → assets/img/salmex-hat.webp (1600w, geniş plan) + salmex-robot.webp (1200w, robot hücresi). Kurumsal imgcol'a girdi (firin.jpg ve paslanmaz-boru.jpg imgcol'dan çıktı; dosyalar duruyor), SALMEX marka kartına 'Robotlu Üretim Hattı' çipi eklendi. Kaynak HEIC'ler: ~/Downloads/IMG_9711/9712.HEIC.
+- v6 tasarımı `v6-gercekcilik` tag'inde duruyor (geri dönülebilir); assets/fonts self-host Inter dosyaları repoda KALDI ama index yine Google Fonts kullanıyor (KVKK paketinde devreye alınabilir). v6'da silinen riskli görseller (vizyon/kurumsal/boru-stack/banner-boykur jpg) SİLİNMİŞ KALDI — hiçbiri v5.2 index'inde referanslı değil.
+
+## v6 (gerçekçilik turu — 26 Ağu 2026, "ana sayfa AI duruyor" konseyi) — REDDEDİLDİ (tag v6-gercekcilik'te yaşıyor)
 - Konsey oyları: Mimar A, Müşteri A, Şüpheci B, Güvenlik C → Hakem kararı **A-disiplinli**: index antrasit (#0d0f12) + logodan türeyen TEK amber accent (--a1/--a2/--a3); violet neon SADECE `.bridge` (3B Showroom köprü kartı) içinde yaşar. urunler.html'e DOKUNULMADI (neon kimliği canlıda, beğenildi).
 - SÖKÜLENLER: .glow blob'ları, .wm watermark, .grad-text gradyanı (düz amber oldu), tüm renkli box/text-shadow glow'lar, marka-başına kart haleleri (mnt/ele/emb aileleri index'ten kalktı), magenta CTA/ikonlar, marquee (yerine statik `.refs` referans isim şeridi: TÜVASAŞ·TOFAŞ·Ankara Metro·İBB·Arçelik...), Google Maps CSS filtresi (ToS + bozuk görünüm).
 - EKLENENLER: `.bridge` köprü bölümü (id=showroom; assets/img/showroom-preview.webp = showroom'un GERÇEK ekran görüntüsü — Güvenlik kuralı: index'e yeni AI 'fotoğraf' girmez, dürüst temsil); hero CTA sırası Teklif Al (amber solid) / Ara / 3B Showroom; tren.webp kirli alfa kenarı `.railvisual` panel karta alınarak gizlendi.
