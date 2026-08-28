@@ -110,8 +110,46 @@
   .sec-head h2{font-size:clamp(2.2rem,4.6vw,3.4rem);margin:0}
   .sec-head p{color:var(--muted);margin-top:16px;font-size:1.05rem}
 
+  /* duyuru bandı (Apple ribbon deseni) */
+  .ribbon{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
+    margin-top:74px;padding:12px 20px;text-align:center;
+    background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--vio2) 14%,transparent) 30%,color-mix(in srgb,var(--vio2) 14%,transparent) 70%,transparent);
+    border-bottom:1px solid color-mix(in srgb,var(--vio2) 25%,transparent);
+    transition:background 200ms var(--ease-out)}
+  .ribbon .rb-t{font-family:var(--disp);font-weight:700;font-size:.88rem;letter-spacing:.04em;text-transform:uppercase}
+  .ribbon .rb-s{color:var(--muted);font-size:.85rem}
+  .ribbon .rb-cta{font-family:var(--tech);font-weight:600;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--vio1);
+    text-shadow:0 0 10px color-mix(in srgb,var(--vio1) 55%,transparent)}
+  @media(hover:hover){.ribbon:hover .rb-cta{color:#fff}}
+  @media(max-width:640px){.ribbon .rb-s{display:none}}
+
+  /* kart içi ikincil CTA — Apple'ın "Learn more / Buy" ikilisi */
+  .card .go3d,.brandcard .go3d{display:inline-flex;align-items:center;gap:6px;margin-top:12px;
+    font-family:var(--tech);font-weight:600;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--cc,var(--bc,var(--vio1)));text-shadow:0 0 10px color-mix(in srgb,var(--cc,var(--bc,var(--vio1))) 50%,transparent)}
+  @media(hover:hover){.card .go3d:hover,.brandcard .go3d:hover{color:#fff}}
+
+  /* vitrin — yatay kaydırmalı ürün şeridi (Apple carousel deseni) */
+  .vitrin{display:flex;gap:16px;overflow-x:auto;padding:10px 28px 26px;scroll-snap-type:x mandatory;
+    scrollbar-width:thin;scrollbar-color:#2a2b3a transparent}
+  .vitrin::-webkit-scrollbar{height:6px}
+  .vitrin::-webkit-scrollbar-thumb{background:#2a2b3a;border-radius:3px}
+  .vcard{flex:0 0 220px;scroll-snap-align:start;border:1px solid rgba(255,255,255,.06);border-radius:16px;
+    background:linear-gradient(165deg,rgba(14,14,22,.92),rgba(4,4,8,.96));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.1);padding:18px 16px 16px;text-align:center;
+    display:flex;flex-direction:column;align-items:center;gap:10px;
+    transition:transform 200ms var(--ease-out),border-color 200ms var(--ease-out),box-shadow 320ms var(--ease-in-out)}
+  .vcard img{height:130px;width:100%;object-fit:contain;filter:drop-shadow(0 10px 18px #000c)}
+  .vcard .vn{font-family:var(--disp);font-weight:700;font-size:.86rem;letter-spacing:.01em;text-transform:uppercase;line-height:1.2}
+  .vcard .vb{font-family:var(--tech);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--vc,var(--vio1));
+    text-shadow:0 0 9px color-mix(in srgb,var(--vc,var(--vio1)) 50%,transparent)}
+  .vcard[data-c=ember]{--vc:var(--emb1)}.vcard[data-c=electric]{--vc:var(--ele1)}.vcard[data-c=mint]{--vc:var(--mnt1)}
+  @media(hover:hover) and (pointer:fine){
+    .vcard:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--vc,var(--vio2)) 38%,transparent);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 44px -14px var(--vc,var(--vio2)),0 18px 40px #000a}}
+
   /* HERO */
-  .hero{min-height:100vh;display:flex;align-items:center;padding-top:74px;overflow:hidden}
+  .hero{min-height:100vh;display:flex;align-items:center;padding-top:0;overflow:hidden}
   .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;width:100%}
   .hero .kick{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:40px;padding:7px 16px;font-family:var(--tech);font-size:.72rem;letter-spacing:.2em;color:var(--steel);text-transform:uppercase;
     background:#05050acc;box-shadow:inset 0 1px 0 rgba(255,255,255,.09)}
@@ -342,6 +380,12 @@
 </header>
 
 <a id="top"></a>
+<!-- DUYURU BANDI -->
+<a class="ribbon" href="urunler.html">
+  <span class="rb-t">3B Showroom yayında</span>
+  <span class="rb-s">Üç markanın ürünlerini kendi kaidelerinde, kaydırarak uçarak gezin</span>
+  <span class="rb-cta">Gez →</span>
+</a>
 <!-- HERO -->
 <section class="hero">
   <div class="wrap">
@@ -415,18 +459,21 @@
         <h3>Borşah Boru</h3>
         <p>Rezistans imalatı ve sanayi için yüksek standartlarda paslanmaz çelik boru üretimi. Soğuk şekillendirme (roll forming) ve TIG kaynağıyla Ø6–25 mm aralığında dikişli boru.</p>
         <ul><li>Paslanmaz Çelik</li><li>Ø6–25 mm</li><li>TIG Kaynak</li><li>Oval / Yuvarlak</li></ul>
+        <a class="go3d" href="urunler.html#hol=borsah">Showroom'da Gör →</a>
       </div>
       <div class="brandcard reveal" data-d="2" data-b="isisah">
         <div class="bnum">REZİSTANS &amp; ISITMA SİSTEMLERİ</div>
         <h3>ISIŞAH Endüstriyel</h3>
         <p>Sanayi tipi rezistans, endüstriyel fırın, kanal tipi ve mobil ısıtma üniteleri ile mühendislik projeleri. Elektrikli ev cihazlarından ağır sanayiye ısıtma çözümleri.</p>
         <ul><li>Rezistans</li><li>Fırın</li><li>Isıtma Sistemleri</li><li>Mühendislik</li></ul>
+        <a class="go3d" href="urunler.html">Showroom'da Gör →</a>
       </div>
       <div class="brandcard reveal" data-d="3" data-b="salmex">
         <div class="bnum">ISI EŞANJÖRLERİ</div>
         <h3>Salmex Isı Eşanjörleri</h3>
         <p>Yoğuşmalı, elektrikli ve konvansiyonel kombi ile kazan eşanjörleri. Paslanmaz spiral, helisel ve kanatlı eşanjör aileleriyle ısı transferi çözümleri.</p>
         <ul><li>Yoğuşmalı Eşanjör</li><li>Kombi</li><li>Kazan</li><li>Robotlu Üretim Hattı</li></ul>
+        <a class="go3d" href="urunler.html#hol=salmex">Showroom'da Gör →</a>
       </div>
     </div>
   </div>
@@ -457,28 +504,28 @@
     <div class="grid">
       <article data-b="borsah" class="card reveal"><div class="ph"><img src="assets/img/paslanmaz-boru.jpg" alt="Paslanmaz Boru" width="1400" height="933" loading="lazy" decoding="async"></div>
         <div class="body"><div class="cat">Borşah Boru</div><h3>Paslanmaz Boru</h3>
-        <p>Ø6–25 mm, et kalınlığı 0.35–1.50 mm. Argon/hidrojen koruyucu gaz altında TIG kaynak.</p></div></article>
+        <p>Ø6–25 mm, et kalınlığı 0.35–1.50 mm. Argon/hidrojen koruyucu gaz altında TIG kaynak.</p><a class="go3d" href="urunler.html#hol=borsah">Showroom'da Gör →</a></div></article>
       <article data-b="borsah" class="card reveal" data-d="1"><div class="ph"><img src="assets/img/kangal-boru.jpg" alt="Tavlı ve Kangal Boru" width="1400" height="933" loading="lazy" decoding="async"></div>
         <div class="body"><div class="cat">Borşah Boru</div><h3>Tavlı & Kangal Boru</h3>
-        <p>Ø6–16 mm, 1040–1100°C tav. 100–400 m kangal boyu, 100 bar basınç testi.</p></div></article>
+        <p>Ø6–16 mm, 1040–1100°C tav. 100–400 m kangal boyu, 100 bar basınç testi.</p><a class="go3d" href="urunler.html#hol=borsah">Showroom'da Gör →</a></div></article>
       <article data-b="borsah" class="card reveal" data-d="2"><div class="ph"><img src="assets/img/oval-boru.jpg" alt="Oval Boru" width="1400" height="933" loading="lazy" decoding="async"></div>
         <div class="body"><div class="cat">Borşah Boru</div><h3>Oval Boru</h3>
-        <p>Rezistans imalatı, mobilya ve sanayi uygulamaları için oval kesitli boru profilleri.</p></div></article>
+        <p>Rezistans imalatı, mobilya ve sanayi uygulamaları için oval kesitli boru profilleri.</p><a class="go3d" href="urunler.html#hol=borsah">Showroom'da Gör →</a></div></article>
       <article data-b="isisah" class="card reveal"><div class="ph"><img src="assets/img/rezistanslar.jpg" alt="Rezistanslar" width="800" height="600" loading="lazy" decoding="async"></div>
         <div class="body"><div class="cat">ISIŞAH Endüstriyel</div><h3>Rezistanslar</h3>
-        <p>Boru ve daldırma tipi ısıtıcı elemanlar. −60°C…250°C dayanım, tamamen yerli üretim.</p></div></article>
+        <p>Boru ve daldırma tipi ısıtıcı elemanlar. −60°C…250°C dayanım, tamamen yerli üretim.</p><a class="go3d" href="urunler.html#hol=isisah_agir">Showroom'da Gör →</a></div></article>
       <article data-b="isisah" class="card reveal" data-d="1"><div class="ph"><img src="assets/img/firin.jpg" alt="Endüstriyel Fırın" width="800" height="600" loading="lazy" decoding="async"></div>
         <div class="body"><div class="cat">ISIŞAH Endüstriyel</div><h3>Endüstriyel Fırın</h3>
-        <p>Kontrol panelli sanayi tipi ısıl işlem ve kurutma fırınları; projeye özel üretim.</p></div></article>
+        <p>Kontrol panelli sanayi tipi ısıl işlem ve kurutma fırınları; projeye özel üretim.</p><a class="go3d" href="urunler.html#hol=isisah_agir">Showroom'da Gör →</a></div></article>
       <article data-b="isisah" class="card reveal" data-d="2"><div class="ph"><img src="assets/img/kanal-tipi.jpg" alt="Kanal Tipi Isıtıcı" width="800" height="600" loading="lazy" decoding="async"></div>
         <div class="body"><div class="cat">ISIŞAH Endüstriyel</div><h3>Kanal Tipi Isıtıcı</h3>
-        <p>Kanatlı rezistanslı kanal tipi hava ısıtıcılar; havalandırma ve proses hatları için.</p></div></article>
+        <p>Kanatlı rezistanslı kanal tipi hava ısıtıcılar; havalandırma ve proses hatları için.</p><a class="go3d" href="urunler.html#hol=isisah_hvac">Showroom'da Gör →</a></div></article>
       <article data-b="isisah" class="card reveal"><div class="ph"><img src="assets/img/mobil-isitici.jpg" alt="Mobil Elektrikli Isıtıcı" width="800" height="600" loading="lazy" decoding="async"></div>
         <div class="body"><div class="cat">ISIŞAH Endüstriyel</div><h3>Mobil Elektrikli Isıtıcı</h3>
-        <p>Uğur Böceği serisi taşınabilir fanlı ısıtıcılar; atölye ve saha ısıtması için.</p></div></article>
+        <p>Uğur Böceği serisi taşınabilir fanlı ısıtıcılar; atölye ve saha ısıtması için.</p><a class="go3d" href="urunler.html#hol=isisah_agir">Showroom'da Gör →</a></div></article>
       <article data-b="isisah" class="card reveal" data-d="1"><div class="ph"><img src="assets/img/boykur.jpg" alt="BOYKUR Oto Boya Kurutma" width="800" height="600" loading="lazy" decoding="async"></div>
         <div class="body"><div class="cat">ISIŞAH Endüstriyel</div><h3>BOYKUR Boya Kurutma</h3>
-        <p>Infrared teknolojili, bilgisayar kontrollü mobil oto boya kurutma sistemi.</p></div></article>
+        <p>Infrared teknolojili, bilgisayar kontrollü mobil oto boya kurutma sistemi.</p><a class="go3d" href="urunler.html#hol=isisah_otomotiv">Showroom'da Gör →</a></div></article>
     </div>
   </div>
 </section>
@@ -579,6 +626,28 @@
     </div>
 
     <p class="railrefs reveal">Referanslar: <b>TÜVASAŞ · TÜLOMSAŞ · TÜRASAŞ · Durmazlar · Bozankaya · MERAK · Safkar · Yazkar · Elite KL · Eltesan · CSR MNG · Air Trade Centre · Heinen & Hopman · Hispacold · Alfa Laval · Bronswerk · Erdemir · Eti Maden · Componenta · Mimsan Grup · Akkim · Elsitel · Alp Enerji · Calorflex · Revenga · Trakya Cam · TPI</b></p>
+  </div>
+</section>
+
+<!-- VITRIN (yatay kaydırmalı) -->
+<section class="pad" id="vitrin" style="padding-top:0">
+  <div class="wrap"><div class="sec-head reveal">
+    <h2>Vitrinden seçmeler.</h2>
+    <p>Kaydırın; beğendiğiniz ürünün 3B holüne geçin.</p>
+  </div></div>
+  <div class="vitrin reveal">
+    <a class="vcard" data-c="ember" href="urunler.html#hol=isisah_savunma"><img src="assets/products/gemi.webp" alt="TCG Anadolu" loading="lazy"><span class="vn">Askeri Gemi Çözümleri</span><span class="vb">Savunma holü →</span></a>
+    <a class="vcard" data-c="ember" href="urunler.html#hol=isisah_rayli"><img src="assets/products/tren.webp" alt="Demiryolu" loading="lazy"><span class="vn">Demiryolu İklimlendirme</span><span class="vb">Raylı sistemler holü →</span></a>
+    <a class="vcard" data-c="electric" href="urunler.html#hol=salmex"><img src="assets/products/kazan.webp" alt="Kazan eşanjörü" loading="lazy"><span class="vn">Kazan Eşanjörü</span><span class="vb">SALMEX holü →</span></a>
+    <a class="vcard" data-c="ember" href="urunler.html#hol=isisah_otomotiv"><img src="assets/products/boykur.webp" alt="BOYKUR" loading="lazy"><span class="vn">BOYKUR Boya Kurutma</span><span class="vb">Otomotiv holü →</span></a>
+    <a class="vcard" data-c="mint" href="urunler.html#hol=borsah"><img src="assets/products/boru.webp" alt="Paslanmaz boru" loading="lazy"><span class="vn">Paslanmaz Borular</span><span class="vb">BORŞAH holü →</span></a>
+    <a class="vcard" data-c="electric" href="urunler.html#hol=salmex"><img src="assets/products/condhex.webp" alt="Yoğuşmalı eşanjör" loading="lazy"><span class="vn">Yoğuşmalı Kombi Eşanjörü</span><span class="vb">SALMEX holü →</span></a>
+    <a class="vcard" data-c="ember" href="urunler.html#hol=isisah_agir"><img src="assets/products/rezistans.webp" alt="Rezistanslar" loading="lazy"><span class="vn">Flanş Rezistansları</span><span class="vb">Ağır sanayi holü →</span></a>
+    <a class="vcard" data-c="ember" href="urunler.html#hol=isisah_savunma"><img src="assets/products/blast.webp" alt="Blast heater" loading="lazy"><span class="vn">Savunma Tipi Blast Heater</span><span class="vb">Savunma holü →</span></a>
+    <a class="vcard" data-c="ember" href="urunler.html#hol=isisah_beyaz"><img src="assets/products/firinrez.webp" alt="Fırın rezistansı" loading="lazy"><span class="vn">Fırın Rezistansları</span><span class="vb">Beyaz eşya holü →</span></a>
+    <a class="vcard" data-c="electric" href="urunler.html#hol=salmex"><img src="assets/products/helis.webp" alt="Helisel eşanjör" loading="lazy"><span class="vn">Helisel Boru Eşanjörü</span><span class="vb">SALMEX holü →</span></a>
+    <a class="vcard" data-c="ember" href="urunler.html#hol=isisah_agir"><img src="assets/products/mobil.webp" alt="Mobil ısıtıcı" loading="lazy"><span class="vn">Mobil Isıtıcılar</span><span class="vb">Ağır sanayi holü →</span></a>
+    <a class="vcard" data-c="ember" href="urunler.html#hol=isisah_rayli"><img src="assets/products/makas.webp" alt="Makas ısıtıcısı" loading="lazy"><span class="vn">Ray & Makas Isıtıcıları</span><span class="vb">Raylı sistemler holü →</span></a>
   </div>
 </section>
 

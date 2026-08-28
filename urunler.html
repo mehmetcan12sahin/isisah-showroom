@@ -500,6 +500,19 @@ let MODE='lobby';                                  // lobby | entering | hall
 let PRODUCTS=[], NP=0, TOT=2, items=[];
 
 // Fuar TV modu bayrağı (aşağıdaki fuar bloğu da bunu kullanır)
+// ================= DERİN BAĞLANTI (#hol=<anahtar>) =================
+// index'teki kartlar doğrudan bir marka/gam holüne açar: urunler.html#hol=salmex, #hol=isisah_hvac ...
+// Hash yoksa davranış değişmez. Kapı user-gesture olmadan açıldığı için müzik tarayıcıca
+// bloklanabilir — playTrack zaten catch'li, sessiz başlar.
+{
+  const m=location.hash.match(/^#hol=([a-z_]+)$/);
+  if(m&&hallDef(m[1])){
+    const key=m[1];
+    const w=setInterval(()=>{ if(document.body.classList.contains('ready')){
+      clearInterval(w); setTimeout(()=>{ if(MODE==='lobby'){hideSublobby(); enterHall(key);} },600); } },300);
+  }
+}
+
 const FAIR=new URLSearchParams(location.search).has('fuar');
 
 const canvas=document.getElementById('c');
