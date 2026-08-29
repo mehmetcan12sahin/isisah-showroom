@@ -70,6 +70,7 @@
   .loader .bar{width:210px;height:2px;background:#14141c;border-radius:3px;overflow:hidden}
   .loader .bar i{display:block;height:100%;width:100%;background:var(--grad);transform:scaleX(.06);transform-origin:left;transition:transform .3s var(--ease-out)}
   .loader .lt{font-family:var(--tech);letter-spacing:.24em;text-transform:uppercase;font-size:.72rem;color:var(--muted)}
+  .loader .lt #lpct,.loader #lpct{color:var(--a1);text-shadow:0 0 10px color-mix(in srgb,var(--a1) 50%,transparent)}
   .loader img{height:42px;width:auto;animation:breatheGlow 3.2s var(--ease-io) infinite}
 
   header{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;
@@ -276,7 +277,7 @@
 
 <div class="loader" id="loader">
   <img src="assets/catalog/logo-group.webp" alt="ISIŞAH GROUP">
-  <div class="lt">3B showroom hazırlanıyor</div>
+  <div class="lt">3B showroom hazırlanıyor <span id="lpct">%0</span></div>
   <div class="bar"><i id="lbar"></i></div>
 </div>
 
@@ -1002,10 +1003,13 @@ function loop(){ frame(); requestAnimationFrame(loop); }
 const ALLIMGS=[...ISISAH_LIST,...SALMEX_LIST,...BORSAH_LIST].map(d=>[d.img,d.h]);
 let warmed=0;
 ALLIMGS.forEach(([img,h])=>loadProductTex(img,h,()=>{warmed++;
-  document.getElementById('lbar').style.transform='scaleX('+Math.min(1,0.1+warmed/ALLIMGS.length*0.9).toFixed(2)+')';
+  const p=Math.min(1,0.1+warmed/ALLIMGS.length*0.9);
+  document.getElementById('lbar').style.transform='scaleX('+p.toFixed(2)+')';
+  document.getElementById('lpct').textContent='%'+Math.round(p*100);
   if(warmed>=ALLIMGS.length){finishLoad();}}));
 function finishLoad(){
   document.getElementById('lbar').style.transform='scaleX(1)';
+  const lp=document.getElementById('lpct'); if(lp)lp.textContent='%100';
   setTimeout(()=>{document.getElementById('loader').classList.add('hide');document.body.classList.add('ready');},250);
 }
 setTimeout(finishLoad,6000);

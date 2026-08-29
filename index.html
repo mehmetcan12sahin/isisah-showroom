@@ -192,7 +192,7 @@
   .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
   .stat{padding:34px 26px;border-right:1px solid var(--line)}
   .stat:last-child{border-right:none}
-  .stat .n{font-family:var(--disp);font-weight:800;font-size:2.8rem;line-height:1}
+  .stat .n{font-family:var(--disp);font-weight:700;font-size:clamp(2.6rem,4.6vw,4.2rem);line-height:1;font-variant-numeric:tabular-nums}
   .stat .k{color:var(--muted);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;margin-top:6px;font-family:var(--tech)}
 
   /* marquee — koyu cam bant, arkadan violet ışıma */
@@ -430,10 +430,10 @@
 <!-- STATS -->
 <section class="stats">
   <div class="wrap">
-    <div class="stat reveal"><div class="n grad-text">1982</div><div class="k">Kuruluş</div></div>
-    <div class="stat reveal" data-d="1"><div class="n grad-text">40+</div><div class="k">Yıl Deneyim</div></div>
-    <div class="stat reveal" data-d="2"><div class="n grad-text">%90</div><div class="k">TR Defrost Rezistans Payı</div></div>
-    <div class="stat reveal" data-d="3"><div class="n grad-text">ISO</div><div class="k">9001:2015 Kalite</div></div>
+    <div class="stat reveal"><div class="n grad-text" data-count="44" data-suffix=" yıl">0 yıl</div><div class="k">Kesintisiz Üretim</div></div>
+    <div class="stat reveal" data-d="1"><div class="n grad-text" data-count="90" data-prefix="%">%0</div><div class="k">Defrost Sektör Payı</div></div>
+    <div class="stat reveal" data-d="2"><div class="n grad-text" data-count="2500" data-suffix=" V">0 V</div><div class="k">Test Gerilimi</div></div>
+    <div class="stat reveal" data-d="3"><div class="n grad-text" data-count="36" data-suffix=" ürün">0 ürün</div><div class="k">3B Showroom'da</div></div>
   </div>
 </section>
 
@@ -764,6 +764,19 @@
   const iv=setInterval(()=>{if(!showReveals())clearInterval(iv);},250);
   setTimeout(()=>{reveals.forEach(el=>el.classList.add('in'));clearInterval(iv);},3000);
   showReveals();
+  // istatistik sayaçları (görünüme girince 0'dan dolar; reduced-motion'da anında)
+  const counters=[...document.querySelectorAll('[data-count]')];
+  const redM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fmt=(el,v)=>{el.textContent=(el.dataset.prefix||'')+v.toLocaleString('tr-TR')+(el.dataset.suffix||'');};
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(!e.isIntersecting)return; io.unobserve(e.target);
+    const el=e.target,end=+el.dataset.count;
+    if(redM){fmt(el,end);return;}
+    const t0=performance.now(),D=1400;
+    (function tick(t){const k=Math.min(1,(t-t0)/D),ease=1-Math.pow(1-k,3);
+      fmt(el,Math.round(end*ease)); if(k<1)requestAnimationFrame(tick);})(t0);
+  }),{threshold:0.4});
+  counters.forEach(el=>io.observe(el));
   document.getElementById('yr').textContent=new Date().getFullYear();
 </script>
 </body>
