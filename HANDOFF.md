@@ -100,6 +100,14 @@ Bursa/DOSAB merkezli **ISIŞAH GROUP** (1982; markalar: **ISIŞAH Endüstriyel**
 - **Bilinçli istisna:** fuar drive() ikinci hafif rAF zinciri kurar — çalışıyor, refactor edilmedi.
 - **loadProductTex png dalı:** ürün PNG'leri silindiği için webp başarısız olursa .png 404 → fallbackTex'e düşer (davranış korunur, fazladan tek istek).
 
+## Fabrika Turu (fabrika.html)
+- Scroll-scrub gerçek video: scroll ilerlemesi `film.currentTime`'ı sürer (lerp 0.14); sanal yükseklik = süre×150px.
+- `assets/img/fabrika-scrub.mp4`: 52sn 7-plan kurgu (DSCF8901.mp4 kaynağından), 1440px, GOP 12 (akıcı seek şart), 15.7MB. Kaynakta 97-104sn arası ESKİ ÇALIŞAN görünür — o bölge hiçbir kesitte KULLANILMAZ.
+- Video BLOB ile ön-yüklenir (yüzdeli loader) — python http.server range vermediği için lokalde şart, canlıda da tüm dosya zaten gerekli.
+- 7 sahne başlığı `.cap[data-a][data-b]` scroll yüzdeleriyle; sonda .fin CTA overlay.
+- Girişler: index SALMEX marka kartındaki `.tourbox` köprü kutusu + Robotlu Hat bölümü videosu (`uretim-robot.mp4` döngü). Sitemap'te kayıtlı.
+- Video işleri notu: Higgsfield --image JPG upload'ı S3 imza hatası veriyor → PNG referans şart. İnsan içerebilecek her kurguda yayına almadan tam-fps kare taraması yap (1fps yetmez — concat yuvarlaması kaynak plan sonundan kare sızdırabilir).
+
 ## Bekleyen / olası sonraki adımlar
 - Kullanıcı son istek: mobil entegrasyon (lobby dahil — v4.2.3'te yapıldı) ✓
 - KULLANICIDAN BEKLENEN: (1) WhatsApp numarası → urunler.html `WHATSAPP` sabiti (Güvenlik üyesi: kişisel GSM değil WhatsApp Business şirket hattı olmalı); (2) 14 yeni ürün kartının metin onayı; (3) violet lobi varyantı onayı; (4) **BORŞAH çap teyidi**: index 'Ø6–25' vs showroom 'Ø4–25' çelişkisi katalogdan doğrulanacak (bilerek DÜZELTİLMEDİ); (5) KVKK sayfaları için ticaret unvanı + MERSİS/vergi bilgisi.
