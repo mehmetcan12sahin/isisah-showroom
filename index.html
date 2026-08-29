@@ -140,6 +140,7 @@
     display:flex;flex-direction:column;align-items:center;gap:10px;
     transition:transform 200ms var(--ease-out),border-color 200ms var(--ease-out),box-shadow 320ms var(--ease-in-out)}
   .vcard img{height:130px;width:100%;object-fit:contain;filter:drop-shadow(0 10px 18px #000c)}
+  .vcard video{height:130px;width:100%;object-fit:cover;border-radius:10px}
   .vcard .vn{font-family:var(--disp);font-weight:700;font-size:.86rem;letter-spacing:.01em;text-transform:uppercase;line-height:1.2}
   .vcard .vb{font-family:var(--tech);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--vc,var(--vio1));
     text-shadow:0 0 9px color-mix(in srgb,var(--vc,var(--vio1)) 50%,transparent)}
@@ -168,6 +169,10 @@
     .wcard:hover img,.wcard:hover video{transform:scale(1.045)}
     .wcard:hover .wgo{color:#fff}}
   @media(max-width:960px){.world{grid-template-columns:1fr}.wcard{aspect-ratio:16/10}}
+
+  .film{border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.07);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 0 60px -18px var(--ele2)}
+  .film video{display:block;width:100%;height:auto}
 
   /* HERO */
   .hero{min-height:100vh;display:flex;align-items:center;padding-top:0;overflow:hidden}
@@ -594,6 +599,19 @@
   </div>
 </section>
 
+<!-- ÜRETİM FİLMİ -->
+<section class="pad" id="uretim" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Üretim gücü.</h2>
+      <p>Presten robotlu paketlemeye — SALMEX eşanjör hattı, kendi tesisimizden.</p>
+    </div>
+    <div class="film reveal">
+      <video autoplay muted loop playsinline preload="metadata" poster="assets/img/uretim-film-poster.webp" aria-label="SALMEX üretim hattı filmi"><source src="assets/img/uretim-film.mp4" type="video/mp4"></video>
+    </div>
+  </div>
+</section>
+
 <!-- BOYKUR FEATURE -->
 <section class="pad" id="boykur" style="padding-top:0">
   <div class="wrap">
@@ -685,6 +703,7 @@
     <p>Kaydırın; beğendiğiniz ürünün 3B holüne geçin.</p>
   </div></div>
   <div class="vitrin reveal">
+    <a class="vcard" data-c="electric" href="urunler.html#hol=salmex"><video autoplay muted loop playsinline preload="metadata" poster="assets/img/uretim-robot-poster.webp" aria-label="SALMEX robotlu üretim hattı"><source src="assets/img/uretim-robot.mp4" type="video/mp4"></video><span class="vn">Robotlu Üretim Hattı</span><span class="vb">SALMEX holü →</span></a>
     <a class="vcard" data-c="ember" href="urunler.html#hol=isisah_savunma"><img src="assets/products/gemi.webp" alt="TCG Anadolu" loading="lazy"><span class="vn">Askeri Gemi Çözümleri</span><span class="vb">Savunma holü →</span></a>
     <a class="vcard" data-c="ember" href="urunler.html#hol=isisah_rayli"><img src="assets/products/tren.webp" alt="Demiryolu" loading="lazy"><span class="vn">Demiryolu İklimlendirme</span><span class="vb">Raylı sistemler holü →</span></a>
     <a class="vcard" data-c="electric" href="urunler.html#hol=salmex"><img src="assets/products/kazan.webp" alt="Kazan eşanjörü" loading="lazy"><span class="vn">Kazan Eşanjörü</span><span class="vb">SALMEX holü →</span></a>
@@ -783,7 +802,7 @@
   counters.forEach(el=>io.observe(el));
   // hareket azaltma tercihi: kart videosunu durdur
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)
-    document.querySelectorAll('.wcard video').forEach(v=>{v.removeAttribute('autoplay');v.pause();});
+    document.querySelectorAll('video').forEach(v=>{v.removeAttribute('autoplay');v.pause();});
   document.getElementById('yr').textContent=new Date().getFullYear();
 </script>
 </body>

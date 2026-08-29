@@ -172,6 +172,8 @@
 
   .outro{position:fixed;inset:0;z-index:16;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:16px;padding:0 24px;pointer-events:none;opacity:0;
     background:radial-gradient(ellipse 62% 50% at 50% 58%,color-mix(in srgb,var(--mag2) 9%,transparent),transparent 72%)}
+  .outro .bumper{width:min(400px,68vw);border-radius:14px;border:1px solid rgba(255,255,255,.08);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 0 44px -12px var(--mag1)}
   .outro .big{font-size:clamp(2.2rem,5.6vw,3.8rem);font-weight:700}
   .outro p{color:var(--muted);max-width:540px}
   .outro .cta{display:flex;gap:14px;margin-top:10px;flex-wrap:wrap;justify-content:center}
@@ -340,6 +342,7 @@
 <div class="info" id="info" aria-live="polite"><div class="in" id="infoIn"></div></div>
 
 <div class="outro" id="outro">
+  <video class="bumper" autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="assets/img/marka-bumper.mp4" type="video/mp4"></video>
   <h2 class="big">Yolun sonu,<br>çözümün başı.</h2>
   <p>Tüm ürün ailesi için DOSAB Bursa'daki merkezimizden teklif ve teknik destek alın.</p>
   <div class="cta">
@@ -760,6 +763,7 @@ const info=document.getElementById('info'), infoIn=document.getElementById('info
 let dots=[];
 const clamp=(x)=>x<0?0:x>1?1:x, lerp=(a,b,t)=>a+(b-a)*t, seg=(p,a,b)=>clamp((p-a)/(b-a));
 const REDUCED=matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(REDUCED)document.querySelectorAll('video').forEach(v=>{v.removeAttribute('autoplay');v.pause();});
 let PORTRAIT=innerWidth/innerHeight<0.8;
 const FOVB=()=>PORTRAIT?66:52;
 
