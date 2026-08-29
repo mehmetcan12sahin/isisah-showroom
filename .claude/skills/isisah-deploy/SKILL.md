@@ -25,6 +25,7 @@ Repo: `~/isisah-scroll-world`. İKİ hedef var, ikisi de güncellenmeli:
    Yeni sayfa/yol türü eklersen bu kural setine (script + bu skill) da ekle.
 
 ## Canlı doğrulama (yayın bitmeden kapatma)
+- `bash tools/smoke-test.sh` — deploy scripti sonunda OTOMATİK koşar; elle de çalıştırılabilir. curl katmanı (HTTP/içerik/Range) + Playwright katmanı (3 sayfa, konsol hataları; bağımlılık `~/.isisah-smoke/node_modules/playwright`, yoksa `npm i --prefix ~/.isisah-smoke playwright`). "DUMAN TESTİ TEMİZ" görmeden işi kapatma.
 - Değişen sayfa: `curl -s "https://isisah.com.tr/...?v=$(date +%s)" | grep <yeni içerik>` (≥1).
 - Yeni statik dosya: HTTP 200; **video ise ayrıca `-H "Range: bytes=0-1023"` → 206** (Safari şartı).
 - github.io tarafı: Pages build ~1-2dk; `gh api repos/mehmetcan12sahin/isisah-showroom/pages/builds/latest --jq .status`.

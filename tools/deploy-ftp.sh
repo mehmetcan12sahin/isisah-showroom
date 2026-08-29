@@ -37,3 +37,6 @@ open('/tmp/root_index.html','w').write(s)
 PY
 curl -s --netrc-file $NETRC -T /tmp/root_index.html "ftp://ftp.isisah.com.tr/httpdocs/index.html" && rm /tmp/root_index.html
 echo "kok ana sayfa guncellendi: https://isisah.com.tr/"
+
+# yayın sonrası otomatik duman testi
+bash "$(dirname "$0")/smoke-test.sh" || echo "!! DUMAN TESTİNDE SORUN VAR — çıktıyı incele"
