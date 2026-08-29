@@ -451,6 +451,10 @@ const SALMEX_LIST=[
    p:'Paslanmaz borudan helisel sarım eşanjör; kompakt hacimde yüksek ısı transfer yüzeyi.',chips:['Helisel Sarım','Paslanmaz Boru','Kompakt']},
   {img:'serpantin',logo:'logo-salmex',tag:'SALMEX',h:'Spiral Serpantin',en:'Flat Spiral Coil',
    p:'Yassı spiral sarımlı paslanmaz serpantin; kazan ve boyler uygulamaları için.',chips:['Spiral Sarım','Serpantin','Paslanmaz']},
+  {img:'hucre',logo:'logo-salmex',tag:'SALMEX',h:'Premix Yoğuşmalı Eşanjör Hücresi',en:'Premix Condensing Heat Cell',
+   p:'Kompozit gövdeli, alüminyum brülör kapaklı premix yoğuşmalı eşanjör hücresi; ateşleme elektrotu montajlı.',chips:['Premix','Yoğuşmalı','Kompozit Gövde']},
+  {img:'emodul',logo:'logo-salmex',tag:'SALMEX',h:'Elektrikli Isıtma Modülü',en:'Electric Heating Module',
+   p:'Paslanmaz plakalı gövde, kırmızı/mavi döküm kolektörlü kompakt elektrikli ısıtma modülü.',chips:['Elektrikli','Plakalı','Kompakt']},
 ];
 const BORSAH_LIST=[
   {img:'boru',logo:'logo-borsah',tag:'BORŞAH BORU',h:'Paslanmaz Borular',en:'Stainless Steel Tubes',
@@ -492,7 +496,7 @@ const hallDef=(k)=>BRANDS[k]||SUBHALLS[k];
 const brandRoot=(k)=>k.split('_')[0];
 const GHOSTS={salmex:'EŞANJÖR',rezistans:'FLANŞ',izgara:'KONVEKSİYON',fritoz:'FRİTÖZ',bulasik:'BULAŞIK',makarna:'MAKARNA',beyaz:'KURUTMA',defrost:'DEFROST',firin:'FIRIN',kanal:'KANAL',mobil:'MOBİL',boykur:'BOYKUR',tren:'DEMİRYOLU',boru:'BORU',oval:'OVAL',kangal:'KANGAL',
 blast:'BLAST',baseboard:'KONVEKTÖR',fincoil:'FAN-COIL',panel:'AHU',railcar:'RAYLI ARAÇ',duct:'KANAL FANLI',
-gemi:'DONANMA',ocak:'OCAK',disk:'DİSK',firinrez:'TURBO',makas:'MAKAS',personel:'PERSONEL',proses:'PROSES',condhex:'YOĞUŞMALI',ehex:'ELEKTRİKLİ',bitermik:'KANATLI',kazan:'KAZAN',boyler:'BOYLER',helis:'HELİS',serpantin:'SERPANTİN'};
+gemi:'DONANMA',ocak:'OCAK',disk:'DİSK',firinrez:'TURBO',makas:'MAKAS',personel:'PERSONEL',proses:'PROSES',condhex:'YOĞUŞMALI',ehex:'ELEKTRİKLİ',bitermik:'KANATLI',kazan:'KAZAN',boyler:'BOYLER',helis:'HELİS',serpantin:'SERPANTİN',hucre:'PREMIX',emodul:'E-MODÜL'};
 
 // ================= SAHNE TEMELİ =================
 const HALLLEN=22;                                  // statik geometri en uzun hole göre (ISIŞAH 19 ürün → TOT=21)
