@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Fabrika Turu — ISIŞAH GROUP</title>
+<meta name="description" content="Kaydırın; SALMEX eşanjör üretim hattında presten robotlu paketlemeye uçun. Scroll'un sürdüğü gerçek fabrika filmi." />
+<meta name="robots" content="noindex" />
+<link rel="icon" href="assets/catalog/logo-group.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#fff;--muted:#8f93a3;--line:#1d1e2a;
+    --ele1:#00d0ff;--ele2:#2f8bff;--vio1:#6b5bff;--vio2:#7a2bff;--mag1:#c04cff;--mag2:#ff2f7a;
+    --emb1:#ff8a2b;--emb2:#ff5c2b;
+    --tech:'Inter',sans-serif;--disp:'Inter',sans-serif;
+    --ease-out:cubic-bezier(0.23,1,0.32,1);--ease-io:cubic-bezier(0.45,0,0.55,1);}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#000;color:var(--ink);font-family:var(--tech);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+
+  /* sabit tam ekran film */
+  .stage{position:fixed;inset:0;z-index:0;background:#000}
+  .stage video{width:100%;height:100%;object-fit:cover;display:block}
+  .vig{position:fixed;inset:0;z-index:1;pointer-events:none;box-shadow:inset 0 0 260px 60px #000d}
+
+  header{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;
+    padding:14px max(24px,env(safe-area-inset-right,0px)) 14px max(24px,env(safe-area-inset-left,0px));
+    background:linear-gradient(#000c,#0000)}
+  header .l{display:flex;align-items:center;gap:12px}
+  header .l img{height:28px}
+  header .t{font-weight:700;font-size:.9rem;letter-spacing:.04em;text-transform:uppercase;border-left:1px solid var(--line);padding-left:12px}
+  header .t small{display:block;font-weight:400;font-size:.56rem;letter-spacing:.3em;color:var(--muted)}
+  header .r{display:flex;gap:10px;align-items:center}
+  .hbtn{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#fff;
+    border:1px solid var(--line);border-radius:40px;padding:8px 14px;background:#05050acc;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.1);transition:border-color 160ms var(--ease-out),box-shadow 260ms var(--ease-io)}
+  @media(hover:hover){.hbtn:hover{border-color:color-mix(in srgb,var(--ele1) 55%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 22px -6px var(--ele2)}}
+
+  .pbar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(100deg,var(--ele1),var(--ele2));width:0;z-index:45;
+    box-shadow:0 0 12px var(--ele2),0 0 3px var(--ele1)}
+
+  /* yükleme */
+  .loader{position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:#000;transition:opacity .5s var(--ease-out)}
+  .loader.hide{opacity:0;pointer-events:none}
+  .loader img{height:40px;animation:lg 3.2s var(--ease-io) infinite}
+  @keyframes lg{0%,100%{filter:drop-shadow(0 0 10px var(--ele2)) drop-shadow(0 0 26px color-mix(in srgb,var(--ele2) 45%,transparent))}
+    50%{filter:drop-shadow(0 0 16px var(--ele1)) drop-shadow(0 0 44px color-mix(in srgb,var(--ele1) 60%,transparent))}}
+  .loader .lt{letter-spacing:.24em;text-transform:uppercase;font-size:.7rem;color:var(--muted)}
+  .loader .lt b{color:var(--ele1);text-shadow:0 0 10px color-mix(in srgb,var(--ele1) 50%,transparent)}
+  .loader .bar{width:220px;height:2px;background:#14141c;border-radius:3px;overflow:hidden}
+  .loader .bar i{display:block;height:100%;width:100%;background:linear-gradient(100deg,var(--ele1),var(--ele2));transform:scaleX(0);transform-origin:left;transition:transform .25s var(--ease-out)}
+
+  /* sahne başlıkları */
+  .cap{position:fixed;left:50%;top:38%;transform:translate(-50%,-50%);z-index:20;text-align:center;pointer-events:none;
+    opacity:0;filter:blur(10px);transition:opacity .6s var(--ease-io),filter .6s var(--ease-io),letter-spacing .8s var(--ease-io);
+    letter-spacing:.06em;width:min(92vw,900px)}
+  .cap.on{opacity:1;filter:blur(0);letter-spacing:.14em}
+  .cap h2{font-weight:700;text-transform:uppercase;font-size:clamp(1.7rem,5.4vw,3.6rem);line-height:1.05;
+    text-shadow:0 2px 30px #000c,0 0 60px color-mix(in srgb,var(--cc,var(--ele2)) 35%,transparent)}
+  .cap p{margin-top:10px;color:#d5d8e2;font-size:clamp(.82rem,1.6vw,1.02rem);letter-spacing:.04em;text-shadow:0 1px 14px #000}
+  .cap .k{display:inline-block;margin-bottom:10px;font-size:.64rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;
+    color:var(--cc,var(--ele1));text-shadow:0 0 12px color-mix(in srgb,var(--cc,var(--ele1)) 60%,transparent)}
+
+  /* final CTA */
+  .fin{position:fixed;inset:0;z-index:25;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;
+    padding:0 24px;opacity:0;pointer-events:none;transition:opacity .5s var(--ease-io);
+    background:radial-gradient(ellipse 60% 50% at 50% 58%,color-mix(in srgb,var(--mag2) 10%,transparent),transparent 72%)}
+  .fin.on{opacity:1;pointer-events:auto}
+  .fin h2{font-weight:700;text-transform:uppercase;font-size:clamp(1.9rem,5.6vw,3.6rem);text-shadow:0 2px 30px #000c}
+  .fin p{color:var(--muted);max-width:520px}
+  .fin .cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;
+    padding:13px 24px;border-radius:10px;background:linear-gradient(165deg,rgba(24,16,28,.92),rgba(8,4,10,.95));color:#fff;cursor:pointer;
+    border:1px solid color-mix(in srgb,var(--mag1) 40%,transparent);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 30px -8px var(--mag1),0 8px 24px rgba(0,0,0,.5);
+    transition:transform 160ms var(--ease-out),box-shadow 300ms var(--ease-io)}
+  @media(hover:hover){.btn:hover{transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 0 52px -8px var(--mag2),0 10px 28px rgba(0,0,0,.6)}}
+  .btn:active{transform:scale(.97)}
+  .btn.g{background:transparent;border:1px solid var(--line);box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+
+  .shint{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);z-index:40;
+    font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ele1);pointer-events:none;
+    text-shadow:0 0 12px color-mix(in srgb,var(--ele1) 55%,transparent);transition:opacity .4s var(--ease-io)}
+
+  #scroll{position:relative;z-index:5}
+  @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms !important;animation-iteration-count:1 !important}}
+</style>
+</head>
+<body>
+
+<div class="loader" id="loader">
+  <img src="assets/catalog/logo-group.png" alt="ISIŞAH GROUP">
+  <div class="lt">Fabrika turu hazırlanıyor <b id="lpct">%0</b></div>
+  <div class="bar"><i id="lbar"></i></div>
+</div>
+
+<div class="stage"><video id="film" muted playsinline preload="auto"></video></div>
+<div class="vig"></div>
+<div class="pbar" id="pbar"></div>
+
+<header>
+  <a class="l" href="index.html"><img src="assets/catalog/logo-group.png" alt="ISIŞAH GROUP">
+    <span class="t">Fabrika Turu<small>SALMEX ÜRETİM HATTI</small></span></a>
+  <div class="r">
+    <a class="hbtn" href="urunler.html">3B Showroom</a>
+    <a class="hbtn" href="index.html">← Ana Sayfa</a>
+  </div>
+</header>
+
+<!-- sahne başlıkları: [başlangıç,bitiş] scroll yüzdeleri data ile -->
+<div class="cap" data-a="0.02" data-b="0.13" style="--cc:var(--emb1)"><span class="k">01 · Pres</span><h2>Çelik biçim alır</h2><p>Her ünite tek parça sacdan, kendi presimizde doğar.</p></div>
+<div class="cap" data-a="0.15" data-b="0.27" style="--cc:var(--ele1)"><span class="k">02 · Üretim Hattı</span><h2>Kesintisiz akış</h2><p>Hammaddeden bitmiş gövdeye — tek çatı altında.</p></div>
+<div class="cap" data-a="0.29" data-b="0.40" style="--cc:var(--ele1)"><span class="k">03 · Şekillendirme</span><h2>Milimetrik hassasiyet</h2><p>Boru ve kanat formları CNC kontrolünde şekillenir.</p></div>
+<div class="cap" data-a="0.42" data-b="0.55" style="--cc:var(--ele1)"><span class="k">04 · Spiral Sarım</span><h2>SALMEX imzası</h2><p>Eşanjör spirali, saniyeler içinde kanat kanat sarılır.</p></div>
+<div class="cap" data-a="0.57" data-b="0.69" style="--cc:var(--emb1)"><span class="k">05 · Isıl İşlem</span><h2>Ateşle sınanır</h2><p>Gövdeler fırında dayanımını kazanır.</p></div>
+<div class="cap" data-a="0.71" data-b="0.83" style="--cc:var(--ele1)"><span class="k">06 · Robotlu Üretim</span><h2>İnsan hatasına yer yok</h2><p>Robot hücreleri taşır, işler, paketler.</p></div>
+<div class="cap" data-a="0.85" data-b="0.93" style="--cc:var(--mnt1,#35ffa8)"><span class="k">07 · Test</span><h2>Her ünite sınanır</h2><p>Sızdırmazlık ve güç testi olmadan hiçbir ürün çıkmaz.</p></div>
+
+<div class="fin" id="fin">
+  <h2>Gördüğünüz hat,<br>ürettiğimiz güven.</h2>
+  <p>Şimdi ürünleri kendi kaidelerinde gezin ya da doğrudan teklif isteyin.</p>
+  <div class="cta">
+    <a class="btn" href="urunler.html">3B Showroom'u Gez →</a>
+    <a class="btn g" href="mailto:info@isisah.com.tr?subject=Teklif%20Talebi">Teklif İste</a>
+  </div>
+</div>
+
+<div class="shint" id="shint">uçmak için kaydır ↓</div>
+<div id="scroll"></div>
+
+<script>
+// ================= SCROLL-SCRUB FİLM =================
+// scroll ilerlemesi videonun zamanını sürer; geri kaydırmak filmi geri sarar.
+const film=document.getElementById('film');
+const scrollEl=document.getElementById('scroll');
+const pbar=document.getElementById('pbar');
+const shint=document.getElementById('shint');
+const fin=document.getElementById('fin');
+const caps=[...document.querySelectorAll('.cap')];
+const REDUCED=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const PX_PER_SEC=150;                                  // sahne hızı: saniye başına sanal piksel
+
+// python http.server byte-range vermez -> videoyu blob olarak indirip src yapıyoruz.
+// Canlıda da işe yarar: scrub zaten tüm dosyayı ister; yüzde göstergeli ön yükleme.
+const SRC='assets/img/fabrika-scrub.mp4';
+fetch(SRC).then(async r=>{
+  const total=+r.headers.get('Content-Length')||0;
+  const reader=r.body.getReader(); const chunks=[]; let got=0;
+  for(;;){ const {done,value}=await reader.read(); if(done)break;
+    chunks.push(value); got+=value.length;
+    const p=total?got/total:0.5;
+    document.getElementById('lbar').style.transform='scaleX('+p.toFixed(3)+')';
+    document.getElementById('lpct').textContent='%'+Math.round(p*100); }
+  const blob=new Blob(chunks,{type:'video/mp4'});
+  film.src=URL.createObjectURL(blob);
+}).catch(()=>{ film.src=SRC; });                        // fetch olmadıysa düz kaynak
+
+film.addEventListener('loadedmetadata',()=>{
+  scrollEl.style.height=Math.round(film.duration*PX_PER_SEC+innerHeight)+'px';
+  document.getElementById('lpct').textContent='%100';
+  document.getElementById('lbar').style.transform='scaleX(1)';
+  setTimeout(()=>{document.getElementById('loader').classList.add('hide');},250);
+});
+
+const clamp=x=>x<0?0:x>1?1:x;
+function progress(){ const total=scrollEl.offsetHeight-innerHeight;
+  return total>0?clamp(scrollY/total):0; }
+
+let sp=0, shown=-2;
+function frame(){
+  const p=progress();
+  sp+=(p-sp)*(REDUCED?1:0.14);                         // yumuşatılmış scrub
+  if(film.duration){ const t=sp*film.duration;
+    if(Math.abs((film.currentTime||0)-t)>0.033) film.currentTime=t; }
+  pbar.style.width=(p*100)+'%';
+  shint.style.opacity=p>0.02?0:1;
+  caps.forEach(c=>{const a=+c.dataset.a,b=+c.dataset.b;c.classList.toggle('on',p>=a&&p<=b);});
+  fin.classList.toggle('on',p>0.945);
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+addEventListener('resize',()=>{ if(film.duration)
+  scrollEl.style.height=Math.round(film.duration*PX_PER_SEC+innerHeight)+'px'; });
+</script>
+</body>
+</html>
