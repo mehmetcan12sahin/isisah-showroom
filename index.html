@@ -235,6 +235,17 @@
       box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 0 64px -14px var(--bt,var(--vio1)),0 24px 48px -20px #000}
     .brandcard:hover::before{transform:scaleX(1)}
   }
+  .tourbox{display:flex;align-items:center;gap:14px;margin-top:20px;border:1px solid color-mix(in srgb,var(--ele1) 32%,transparent);
+    border-radius:14px;padding:10px 14px 10px 10px;background:#05070acc;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 0 30px -12px var(--ele2);
+    transition:transform 180ms var(--ease-out),border-color 180ms var(--ease-out),box-shadow 300ms var(--ease-in-out)}
+  .tourbox video{width:118px;height:66px;object-fit:cover;border-radius:9px;flex:none}
+  .tourbox .tb-t b{display:block;font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:.92rem;letter-spacing:.02em}
+  .tourbox .tb-t small{color:var(--muted);font-size:.72rem;letter-spacing:.04em}
+  @media(hover:hover) and (pointer:fine){
+    .tourbox:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--ele1) 55%,transparent);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 48px -10px var(--ele1)}}
+  .tourbox:active{transform:scale(.98)}
   .brandcard .bnum{font-family:var(--tech);color:var(--bt,var(--vio1));letter-spacing:.2em;font-size:.75rem;text-shadow:0 0 10px color-mix(in srgb,var(--bt,var(--vio1)) 50%,transparent)}
   .brandcard h3{font-size:2rem;margin:14px 0 12px}
   .brandcard p{color:var(--muted);font-size:.98rem}
@@ -500,6 +511,10 @@
         <p>Yoğuşmalı, elektrikli ve konvansiyonel kombi ile kazan eşanjörleri. Paslanmaz spiral, helisel ve kanatlı eşanjör aileleriyle ısı transferi çözümleri.</p>
         <ul><li>Yoğuşmalı Eşanjör</li><li>Kombi</li><li>Kazan</li><li>Robotlu Üretim Hattı</li></ul>
         <a class="go3d" href="urunler.html#hol=salmex">Showroom'da Gör →</a>
+        <a class="tourbox" href="fabrika.html">
+          <video autoplay muted loop playsinline preload="metadata" poster="assets/img/uretim-poster.webp" aria-hidden="true"><source src="assets/img/uretim-salmex.mp4" type="video/mp4"></video>
+          <span class="tb-t"><b>Fabrika Turu</b><small>Kaydır; üretim hattında uç →</small></span>
+        </a>
       </div>
     </div>
   </div>
