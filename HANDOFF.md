@@ -108,6 +108,9 @@ Bursa/DOSAB merkezli **ISIŞAH GROUP** (1982; markalar: **ISIŞAH Endüstriyel**
 - Girişler: index SALMEX marka kartındaki `.tourbox` köprü kutusu + Robotlu Hat bölümü videosu (`uretim-robot.mp4` döngü). Sitemap'te kayıtlı.
 - Video işleri notu: Higgsfield --image JPG upload'ı S3 imza hatası veriyor → PNG referans şart. İnsan içerebilecek her kurguda yayına almadan tam-fps kare taraması yap (1fps yetmez — concat yuvarlaması kaynak plan sonundan kare sızdırabilir).
 
+## Proje skill'leri (30 Ağu 2026)
+- `isisah-urun-ekle` ve `isisah-deploy` — hem `~/.claude/skills/` (aktif) hem repo `.claude/skills/` (yedek). Ürün ekleme hattı ve çift-hedef yayın protokolü artık skill olarak; HANDOFF'un o bölümleri değişirse SKILL.md'leri de güncelle.
+
 ## Bekleyen / olası sonraki adımlar
 - Kullanıcı son istek: mobil entegrasyon (lobby dahil — v4.2.3'te yapıldı) ✓
 - KULLANICIDAN BEKLENEN: (1) WhatsApp numarası → urunler.html `WHATSAPP` sabiti (Güvenlik üyesi: kişisel GSM değil WhatsApp Business şirket hattı olmalı); (2) 14 yeni ürün kartının metin onayı; (3) violet lobi varyantı onayı; (4) **BORŞAH çap teyidi**: index 'Ø6–25' vs showroom 'Ø4–25' çelişkisi katalogdan doğrulanacak (bilerek DÜZELTİLMEDİ); (5) KVKK sayfaları için ticaret unvanı + MERSİS/vergi bilgisi.
