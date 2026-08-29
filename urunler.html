@@ -153,7 +153,11 @@
   .catcard:active{transform:scale(.97)}
   .catcard>span{display:block}
   .catcard .cn,.catcard .cd{display:block}
-  .catcard .ico{display:block;font-size:1.7rem;filter:drop-shadow(0 0 12px color-mix(in srgb,var(--emb1) 70%,transparent))}
+  .catcard .ico{display:flex;color:var(--emb1);filter:drop-shadow(0 0 12px color-mix(in srgb,var(--emb1) 70%,transparent))}
+  .catcard .ico svg{width:30px;height:30px}
+  .catcard .ico :is(path,circle,line,rect){stroke-dasharray:1;stroke-dashoffset:0}
+  @keyframes icoDraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+  @media(hover:hover){.catcard:hover .ico :is(path,circle,line,rect){animation:icoDraw .8s var(--ease-io) both}}
   .catcard .cn{font-family:var(--disp);font-weight:700;font-size:1.02rem;letter-spacing:.01em;text-transform:uppercase}
   .catcard .cd{font-family:var(--tech);font-size:.68rem;letter-spacing:.05em;color:var(--muted)}
   .catcard .cnt{font-family:var(--tech);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--emb1);margin-top:2px;
@@ -165,7 +169,8 @@
   @media(max-width:820px){
     .catdoors{flex-direction:column;gap:10px;width:100%;max-width:420px}
     .catcard{width:100%;min-width:0;flex-direction:row;justify-content:flex-start;text-align:left;padding:12px 16px;gap:12px}
-    .catcard .ico{font-size:1.3rem;flex:none}
+    .catcard .ico{flex:none}
+    .catcard .ico svg{width:22px;height:22px}
     .catcard .cd{display:none}
     .catcard .cnt{margin:0 0 0 auto;flex:none}
   }
@@ -479,19 +484,19 @@ const byImg=(...keys)=>keys.map(k=>ISISAH_LIST.find(d=>d.img===k)).filter(Boolea
 // Endüstriyel Mutfak · Beyaz Eşya ve Elektrikli Ev Aletleri · Ağır Sanayi · İklimlendirme (HVAC)
 // · Raylı Sistemler · Savunma Sanayi · Otomotiv  (Isıtma Soğutma gamı: ürünler diğer gamlarda)
 const ISISAH_CATS={
-  isisah_mutfak:{cat:'Endüstriyel Mutfak',icon:'🍳',desc:'Izgara, fritöz, bulaşık ve haşlama rezistansları',
+  isisah_mutfak:{cat:'Endüstriyel Mutfak',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path pathLength="1" d="M17 21a1 1 0 0 0 1-1v-5.35c0-.457.316-.844.727-1.041a4 4 0 0 0-2.134-7.589 5 5 0 0 0-9.186 0 4 4 0 0 0-2.134 7.588c.411.198.727.585.727 1.041V20a1 1 0 0 0 1 1Z"/><path pathLength="1" d="M6 17h12"/></svg>',desc:'Izgara, fritöz, bulaşık ve haşlama rezistansları',
     name:'ISIŞAH · ENDÜSTRİYEL MUTFAK',logo:'logo-isisah',doorX:-8.1,list:byImg('izgara','fritoz','bulasik','makarna')},
-  isisah_beyaz:{cat:'Beyaz Eşya & Ev Aletleri',icon:'🔌',desc:'Kurutma, defrost, ocak, fırın ve disk ısıtıcıları',
+  isisah_beyaz:{cat:'Beyaz Eşya & Ev Aletleri',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path pathLength="1" d="M12 22v-5"/><path pathLength="1" d="M9 8V2"/><path pathLength="1" d="M15 8V2"/><path pathLength="1" d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></svg>',desc:'Kurutma, defrost, ocak, fırın ve disk ısıtıcıları',
     name:'ISIŞAH · BEYAZ EŞYA',logo:'logo-isisah',doorX:-8.1,list:byImg('beyaz','defrost','ocak','disk','firinrez')},
-  isisah_agir:{cat:'Ağır Sanayi',icon:'🏭',desc:'Proses üniteleri, endüstriyel fırın ve mobil ısıtıcılar',
+  isisah_agir:{cat:'Ağır Sanayi',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path pathLength="1" d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path pathLength="1" d="M17 18h1"/><path pathLength="1" d="M12 18h1"/><path pathLength="1" d="M7 18h1"/></svg>',desc:'Proses üniteleri, endüstriyel fırın ve mobil ısıtıcılar',
     name:'ISIŞAH · AĞIR SANAYİ',logo:'logo-isisah',doorX:-8.1,list:byImg('rezistans','firin','mobil','proses')},
-  isisah_hvac:{cat:'İklimlendirme (HVAC)',icon:'❄️',desc:'Kanal tipi, fan-coil ve klima santrali ısıtıcıları',
+  isisah_hvac:{cat:'İklimlendirme (HVAC)',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path pathLength="1" d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path pathLength="1" d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path pathLength="1" d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg>',desc:'Kanal tipi, fan-coil ve klima santrali ısıtıcıları',
     name:'ISIŞAH · İKLİMLENDİRME',logo:'logo-isisah',doorX:-8.1,list:byImg('kanal','fincoil','panel','duct')},
-  isisah_rayli:{cat:'Raylı Sistemler',icon:'🚆',desc:'Araç, makas ve personel ısıtıcıları',
+  isisah_rayli:{cat:'Raylı Sistemler',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path pathLength="1" d="M8 3.1V7a4 4 0 0 0 8 0V3.1"/><path pathLength="1" d="m9 15-1-1"/><path pathLength="1" d="m15 15 1-1"/><path pathLength="1" d="M9 19c-2.8 0-5-2.2-5-5v-4a8 8 0 0 1 16 0v4c0 2.8-2.2 5-5 5Z"/><path pathLength="1" d="m8 19-2 3"/><path pathLength="1" d="m16 19 2 3"/></svg>',desc:'Araç, makas ve personel ısıtıcıları',
     name:'ISIŞAH · RAYLI SİSTEMLER',logo:'logo-isisah',doorX:-8.1,list:byImg('tren','railcar','makas','personel')},
-  isisah_savunma:{cat:'Savunma Sanayi',icon:'⚓',desc:'Askeri gemi ısıtma ve iklimlendirme',
+  isisah_savunma:{cat:'Savunma Sanayi',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path pathLength="1" d="M12 22V8"/><path pathLength="1" d="M5 12H2a10 10 0 0 0 20 0h-3"/><circle pathLength="1" cx="12" cy="5" r="3"/></svg>',desc:'Askeri gemi ısıtma ve iklimlendirme',
     name:'ISIŞAH · SAVUNMA',logo:'logo-isisah',doorX:-8.1,list:byImg('gemi','blast','baseboard')},
-  isisah_otomotiv:{cat:'Otomotiv',icon:'🚗',desc:'BOYKUR infrared oto boya kurutma — Tofaş Ar-Ge',
+  isisah_otomotiv:{cat:'Otomotiv',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path pathLength="1" d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle pathLength="1" cx="7" cy="17" r="2"/><path pathLength="1" d="M9 17h6"/><circle pathLength="1" cx="17" cy="17" r="2"/></svg>',desc:'BOYKUR infrared oto boya kurutma — Tofaş Ar-Ge',
     name:'ISIŞAH · OTOMOTİV',logo:'logo-isisah',doorX:-8.1,list:byImg('boykur')},
 };
 const SUBHALLS=ISISAH_CATS;
