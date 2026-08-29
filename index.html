@@ -153,7 +153,7 @@
   .wcard{position:relative;display:block;border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.07);
     aspect-ratio:4/5;background:#050508;box-shadow:inset 0 1px 0 rgba(255,255,255,.1);
     transition:transform 220ms var(--ease-out),border-color 220ms var(--ease-out),box-shadow 320ms var(--ease-in-out)}
-  .wcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 600ms var(--ease-out)}
+  .wcard img,.wcard video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 600ms var(--ease-out)}
   .wcard.contain img{object-fit:contain;padding:12% 10% 28%}
   .wcard::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,#000f 8%,#0006 34%,transparent 60%)}
   .wcard .wtx{position:absolute;left:22px;right:22px;bottom:20px;z-index:2}
@@ -165,7 +165,7 @@
   @media(hover:hover) and (pointer:fine){
     .wcard:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--wc,var(--vio2)) 40%,transparent);
       box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 56px -14px var(--wc,var(--vio2)),0 24px 48px -18px #000}
-    .wcard:hover img{transform:scale(1.045)}
+    .wcard:hover img,.wcard:hover video{transform:scale(1.045)}
     .wcard:hover .wgo{color:#fff}}
   @media(max-width:960px){.world{grid-template-columns:1fr}.wcard{aspect-ratio:16/10}}
 
@@ -583,7 +583,7 @@
         <div class="wtx"><div class="wk">Savunma Sanayi</div><h3>Milli platformlarda</h3><span class="wgo">Savunma holünü gez →</span></div>
       </a>
       <a class="wcard reveal" data-c="electric" data-d="2" href="urunler.html#hol=salmex">
-        <img src="assets/img/uretim-salmex.webp" alt="SALMEX eşanjör spirali üretim hattı" loading="lazy">
+        <video autoplay muted loop playsinline preload="metadata" poster="assets/img/uretim-poster.webp" aria-label="SALMEX eşanjör spirali üretim hattı"><source src="assets/img/uretim-salmex.mp4" type="video/mp4"></video>
         <div class="wtx"><div class="wk">Üretim</div><h3>Kendi hattımızdan</h3><span class="wgo">SALMEX holünü gez →</span></div>
       </a>
       <a class="wcard contain reveal" data-c="electric" data-d="3" href="#demiryolu">
@@ -781,6 +781,9 @@
       fmt(el,Math.round(end*ease)); if(k<1)requestAnimationFrame(tick);})(t0);
   }),{threshold:0.4});
   counters.forEach(el=>io.observe(el));
+  // hareket azaltma tercihi: kart videosunu durdur
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)
+    document.querySelectorAll('.wcard video').forEach(v=>{v.removeAttribute('autoplay');v.pause();});
   document.getElementById('yr').textContent=new Date().getFullYear();
 </script>
 </body>
