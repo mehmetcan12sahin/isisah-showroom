@@ -103,6 +103,12 @@
   .btn:active{transform:scale(0.97)}
   .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--steel);box-shadow:none}
   .menu-btn{display:none;background:none;border:1px solid var(--line);color:#fff;padding:8px 12px;border-radius:2px;font-size:1.1rem}
+  @media(max-width:1320px){nav.links{gap:20px}nav.links a{font-size:.78rem;letter-spacing:.04em}}
+  @media(max-width:1120px){
+    nav.links{display:none}.menu-btn{display:block}
+    header.open nav.links{display:flex;position:absolute;top:74px;left:0;right:0;flex-direction:column;background:#0E1013f8;padding:20px 28px;border-bottom:1px solid var(--line);gap:16px}
+    header.open nav.links a{font-size:.9rem}
+  }
 
   section{position:relative;z-index:1}
   .pad{padding:110px 0}
@@ -199,8 +205,10 @@
   .hero-visual .tag{position:absolute;left:16px;bottom:16px;z-index:2;font-family:var(--tech);font-size:.72rem;letter-spacing:.18em;
     text-transform:uppercase;color:#fff;background:#000c;backdrop-filter:blur(4px);padding:8px 14px;border-radius:8px}
   .hero-visual::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,#000,transparent 45%);z-index:1}
-  .hero-visual .bstack{display:flex;flex-direction:column;gap:7px;padding:12px 18px 12px 16px;border-left:2px solid var(--vio1);border-radius:0 8px 8px 0;font-size:.78rem;letter-spacing:.24em}
-  .hero-visual .bstack b{font-weight:600}
+  .hero .bchips{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:26px;font-family:var(--tech)}
+  .hero .bchips span{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+  .hero .bchips b{font-weight:600;font-size:.74rem;letter-spacing:.14em;border:1px solid var(--line);border-radius:40px;padding:7px 14px;color:var(--steel);cursor:pointer;transition:border-color 160ms var(--ease-out),color 160ms var(--ease-out)}
+  .hero .bchips b[data-b=isisah]:hover{border-color:var(--emb1);color:#fff}.hero .bchips b[data-b=borsah]:hover{border-color:var(--mnt1);color:#fff}.hero .bchips b[data-b=salmex]:hover{border-color:var(--ele1);color:#fff}
 
   /* stats strip */
   .stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#00000030}
@@ -270,8 +278,6 @@
   .brandcard.sel::before{transform:scaleX(1)}
   .brandcard .bhint{display:inline-flex;align-items:center;gap:6px;margin:12px 0 0 18px;font-family:var(--tech);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
   .brandcard.sel .bhint{color:var(--bt,var(--vio1))}
-  .hero-visual .bstack b{cursor:pointer}
-  @media(hover:hover){.hero-visual .bstack b:hover{color:var(--vio1)}}
 
   /* products */
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -433,7 +439,8 @@
       <img src="assets/catalog/logo-isisah.webp" alt="ISIŞAH Endüstriyel" />
     </a>
     <nav class="links" id="links">
-      <a href="#kurumsal">Kurumsal</a>
+      <a href="hakkimizda.html">Hakkımızda</a>
+      <a href="vizyon-misyon.html">Vizyon &amp; Misyon</a>
       <a href="#markalar">Markalar</a>
       <a href="#urunler">Ürünler</a>
       <a href="urunler.html">Showroom</a>
@@ -464,10 +471,10 @@
         <a class="btn ghost" href="#urunler">Ürünler</a>
         <a class="btn ghost" href="tel:+902242610527">Ara: +90 224 261 05 27</a>
       </div>
+      <div class="bchips" aria-label="Grup markaları"><span>Markalar</span><b data-b="isisah">ISIŞAH</b><b data-b="borsah">BORŞAH</b><b data-b="salmex">SALMEX</b></div>
     </div>
     <div class="hero-visual reveal in" data-d="2">
       <img src="assets/img/bina-gece.webp" alt="ISIŞAH GROUP merkez binası" fetchpriority="high" width="1600" height="905">
-      <span class="tag bstack" aria-label="Grup markaları"><b>ISIŞAH</b><b>BORŞAH</b><b>SALMEX</b></span>
     </div>
   </div>
 </section>
@@ -916,7 +923,7 @@
     });
     document.querySelectorAll('.bfilter button').forEach(x=>x.addEventListener('click',()=>apply(x.dataset.b||'',false)));
     const MAP={'ISIŞAH':'isisah','BORŞAH':'borsah','SALMEX':'salmex'};
-    document.querySelectorAll('.hero-visual .bstack b').forEach(x=>{ x.setAttribute('role','button'); x.tabIndex=0; x.dataset.b=MAP[x.textContent.trim()]||'';
+    document.querySelectorAll('.hero .bchips b').forEach(x=>{ x.setAttribute('role','button'); x.tabIndex=0; x.dataset.b=x.dataset.b||MAP[x.textContent.trim()]||'';
       x.addEventListener('click',()=>apply(x.dataset.b,true)); });
     const rd=()=>{ const m=location.hash.match(/^#marka=([a-z]+)$/); return m?m[1]:null; };
     if(rd()) apply(rd(),false);

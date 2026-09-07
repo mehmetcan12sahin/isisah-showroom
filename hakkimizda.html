@@ -89,6 +89,12 @@
   .btn:active{transform:scale(0.97)}
   .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--steel);box-shadow:none}
   .menu-btn{display:none;background:none;border:1px solid var(--line);color:#fff;padding:8px 12px;border-radius:2px;font-size:1.1rem}
+  @media(max-width:1320px){nav.links{gap:20px}nav.links a{font-size:.78rem;letter-spacing:.04em}}
+  @media(max-width:1120px){
+    nav.links{display:none}.menu-btn{display:block}
+    header.open nav.links{display:flex;position:absolute;top:74px;left:0;right:0;flex-direction:column;background:#0E1013f8;padding:20px 28px;border-bottom:1px solid var(--line);gap:16px}
+    header.open nav.links a{font-size:.9rem}
+  }
 
   section{position:relative;z-index:1}
   .pad{padding:110px 0}
@@ -185,8 +191,10 @@
   .hero-visual .tag{position:absolute;left:16px;bottom:16px;z-index:2;font-family:var(--tech);font-size:.72rem;letter-spacing:.18em;
     text-transform:uppercase;color:#fff;background:#000c;backdrop-filter:blur(4px);padding:8px 14px;border-radius:8px}
   .hero-visual::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,#000,transparent 45%);z-index:1}
-  .hero-visual .bstack{display:flex;flex-direction:column;gap:7px;padding:12px 18px 12px 16px;border-left:2px solid var(--vio1);border-radius:0 8px 8px 0;font-size:.78rem;letter-spacing:.24em}
-  .hero-visual .bstack b{font-weight:600}
+  .hero .bchips{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:26px;font-family:var(--tech)}
+  .hero .bchips span{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+  .hero .bchips b{font-weight:600;font-size:.74rem;letter-spacing:.14em;border:1px solid var(--line);border-radius:40px;padding:7px 14px;color:var(--steel);cursor:pointer;transition:border-color 160ms var(--ease-out),color 160ms var(--ease-out)}
+  .hero .bchips b[data-b=isisah]:hover{border-color:var(--emb1);color:#fff}.hero .bchips b[data-b=borsah]:hover{border-color:var(--mnt1);color:#fff}.hero .bchips b[data-b=salmex]:hover{border-color:var(--ele1);color:#fff}
 
   /* stats strip */
   .stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#00000030}
@@ -256,8 +264,6 @@
   .brandcard.sel::before{transform:scaleX(1)}
   .brandcard .bhint{display:inline-flex;align-items:center;gap:6px;margin:12px 0 0 18px;font-family:var(--tech);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
   .brandcard.sel .bhint{color:var(--bt,var(--vio1))}
-  .hero-visual .bstack b{cursor:pointer}
-  @media(hover:hover){.hero-visual .bstack b:hover{color:var(--vio1)}}
 
   /* products */
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -408,7 +414,22 @@
     footer{padding-bottom:70px}
   }
 
-  .pg{padding:150px 0 40px}
+  .pg{padding:150px 0 40px;position:relative;z-index:1}
+  .pg .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center}
+  .pg .hero-visual{aspect-ratio:16/11}
+  .pg .hero-visual .tag{position:absolute;left:16px;bottom:16px;z-index:2}
+  .kareler{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+  .kareler figure{position:relative;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.07);aspect-ratio:16/10;background:#0a0a12}
+  .kareler img{width:100%;height:100%;object-fit:cover;transition:transform 600ms var(--ease-out)}
+  .kareler figcaption{position:absolute;left:14px;bottom:12px;z-index:2;font-family:var(--tech);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:#fff;background:#000b;backdrop-filter:blur(4px);padding:6px 10px;border-radius:8px}
+  @media(hover:hover){.kareler figure:hover img{transform:scale(1.04)}}
+  .logorow{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+  .logorow a{display:flex;flex-direction:column;align-items:center;gap:14px;padding:30px 22px;border:1px solid rgba(255,255,255,.07);border-radius:16px;background:linear-gradient(165deg,rgba(16,16,24,.9),rgba(4,4,8,.95));transition:transform 200ms var(--ease-out),border-color 200ms var(--ease-out)}
+  .logorow a img{height:54px;width:auto}
+  .logorow a span{font-family:var(--tech);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .logorow a[data-b=isisah]:hover{border-color:var(--emb1)}.logorow a[data-b=borsah]:hover{border-color:var(--mnt1)}.logorow a[data-b=salmex]:hover{border-color:var(--ele1)}
+  @media(hover:hover){.logorow a:hover{transform:translateY(-4px)}}
+  @media(max-width:960px){.pg{padding:120px 0 30px}.pg .wrap{grid-template-columns:1fr}.pg .hero-visual{aspect-ratio:16/9}.kareler{grid-template-columns:1fr}.logorow{grid-template-columns:1fr}}
   .pg .kick{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:40px;padding:7px 16px;font-family:var(--tech);font-size:.72rem;letter-spacing:.2em;color:var(--steel);text-transform:uppercase;background:#05050acc}
   .pg h1{font-size:clamp(2.6rem,6vw,4.6rem);margin:22px 0 0;line-height:1.02}
   .pg .lead{color:var(--muted);font-size:1.12rem;max-width:760px;margin-top:22px}
@@ -437,13 +458,16 @@
 </head>
 <body>
 <a id="top"></a>
+<div class="wm" aria-hidden="true">ISIŞAH GROUP</div>
+<div class="glow a"></div><div class="glow b"></div>
 <header id="hdr">
   <div class="wrap nav">
     <a class="brand" href="index.html">
       <img src="assets/catalog/logo-isisah.webp" alt="ISIŞAH Endüstriyel" />
     </a>
     <nav class="links" id="links">
-      <a href="index.html#kurumsal">Kurumsal</a>
+      <a href="hakkimizda.html" aria-current="page">Hakkımızda</a>
+      <a href="vizyon-misyon.html">Vizyon &amp; Misyon</a>
       <a href="index.html#markalar">Markalar</a>
       <a href="index.html#urunler">Ürünler</a>
       <a href="urunler.html">Showroom</a>
@@ -457,14 +481,26 @@
 
 <main>
 <section class="pg">
-  <div class="wrap reveal in">
-    <span class="kick">ISIŞAH GROUP · 1982'den bugüne</span>
-    <h1>Hakkımızda.</h1>
-    <p class="lead">Bursa DOSAB'da sanayi tipi rezistanstan paslanmaz çelik boruya ve ısı eşanjörlerine uzanan üç marka, tek çatı: 44 yıllık mühendislik birikimi.</p>
+  <div class="wrap">
+    <div class="reveal in">
+      <span class="kick">ISIŞAH GROUP · 1982'den bugüne</span>
+      <h1>Hakkımızda.</h1>
+      <p class="lead">Bursa DOSAB'da sanayi tipi rezistanstan paslanmaz çelik boruya ve ısı eşanjörlerine uzanan üç marka, tek çatı: 44 yıllık mühendislik birikimi.</p>
+    </div>
+    <div class="hero-visual reveal in" data-d="2"><img src="assets/img/bina-gece.webp" alt="ISIŞAH GROUP merkez binası — DOSAB Bursa" width="1600" height="905" fetchpriority="high"><span class="tag">ISIŞAH GROUP · DOSAB Bursa</span></div>
   </div>
 </section>
 
-<section class="pad" style="padding-top:40px">
+<section class="stats" style="margin-top:30px">
+  <div class="wrap">
+    <div class="stat reveal"><div class="n grad-text" data-count="44" data-suffix=" yıl">0 yıl</div><div class="k">Kesintisiz Üretim</div></div>
+    <div class="stat reveal" data-d="1"><div class="n grad-text" data-count="3" data-suffix=" marka">0 marka</div><div class="k">Tek Çatı Altında</div></div>
+    <div class="stat reveal" data-d="2"><div class="n grad-text" data-count="8">0</div><div class="k">Ürün Gamı · Mutfaktan Savunmaya</div></div>
+    <div class="stat reveal" data-d="3"><div class="n grad-text" data-count="100" data-prefix="%">%0</div><div class="k">Yerli Üretim</div></div>
+  </div>
+</section>
+
+<section class="pad" style="padding-top:90px">
   <div class="wrap two">
     <div class="prose reveal">
       <h2>Kuruluş ve gelişim</h2>
@@ -489,6 +525,18 @@
         <div class="row"><span class="yr">2011</span><span class="tx">ISIŞAH GROUP çatısı altında yeniden yapılanma.</span></div>
       </div></div>
     </div>
+  </div>
+</section>
+
+<section class="pad" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Üretimden kareler.</h2><p>DOSAB Bursa tesislerimizden — robotlu eşanjör hattı, profil hattı ve test istasyonu.</p></div>
+    <div class="kareler reveal">
+      <figure><img src="assets/img/uretim-k1.webp" alt="Robotlu üretim hücresi" loading="lazy" decoding="async"><figcaption>Robotlu Hat</figcaption></figure>
+      <figure><img src="assets/img/uretim-k2.webp" alt="Profil şekillendirme hattı" loading="lazy" decoding="async"><figcaption>Şekillendirme</figcaption></figure>
+      <figure><img src="assets/img/uretim-k3.webp" alt="Sızdırmazlık test istasyonu" loading="lazy" decoding="async"><figcaption>Test İstasyonu</figcaption></figure>
+    </div>
+    <div class="pgcta reveal" style="margin-top:22px"><a class="btn ghost" href="fabrika.html">Fabrika turuna çık <span>→</span></a></div>
   </div>
 </section>
 
@@ -578,6 +626,18 @@
   const iv=setInterval(()=>{if(!showReveals())clearInterval(iv);},250);
   setTimeout(()=>{reveals.forEach(el=>el.classList.add('in'));clearInterval(iv);},3000);
   showReveals();
+  const counters=[...document.querySelectorAll('[data-count]')];
+  const redM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fmt=(el,v)=>{el.textContent=(el.dataset.prefix||'')+v.toLocaleString('tr-TR')+(el.dataset.suffix||'');};
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(!e.isIntersecting)return; io.unobserve(e.target);
+    const el=e.target,end=+el.dataset.count;
+    if(redM){fmt(el,end);return;}
+    const t0=performance.now(),D=1400;
+    (function tick(t){const k=Math.min(1,(t-t0)/D),ease=1-Math.pow(1-k,3);
+      fmt(el,Math.round(end*ease)); if(k<1)requestAnimationFrame(tick);})(t0);
+  }),{threshold:0.4});
+  counters.forEach(el=>io.observe(el));
   document.getElementById('yr').textContent=new Date().getFullYear();
 </script>
 </body>

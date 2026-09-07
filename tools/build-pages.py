@@ -15,7 +15,22 @@ def sub(html, cur):
     return html
 
 EXTRA_CSS = '''
-  .pg{padding:150px 0 40px}
+  .pg{padding:150px 0 40px;position:relative;z-index:1}
+  .pg .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center}
+  .pg .hero-visual{aspect-ratio:16/11}
+  .pg .hero-visual .tag{position:absolute;left:16px;bottom:16px;z-index:2}
+  .kareler{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+  .kareler figure{position:relative;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.07);aspect-ratio:16/10;background:#0a0a12}
+  .kareler img{width:100%;height:100%;object-fit:cover;transition:transform 600ms var(--ease-out)}
+  .kareler figcaption{position:absolute;left:14px;bottom:12px;z-index:2;font-family:var(--tech);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:#fff;background:#000b;backdrop-filter:blur(4px);padding:6px 10px;border-radius:8px}
+  @media(hover:hover){.kareler figure:hover img{transform:scale(1.04)}}
+  .logorow{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+  .logorow a{display:flex;flex-direction:column;align-items:center;gap:14px;padding:30px 22px;border:1px solid rgba(255,255,255,.07);border-radius:16px;background:linear-gradient(165deg,rgba(16,16,24,.9),rgba(4,4,8,.95));transition:transform 200ms var(--ease-out),border-color 200ms var(--ease-out)}
+  .logorow a img{height:54px;width:auto}
+  .logorow a span{font-family:var(--tech);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .logorow a[data-b=isisah]:hover{border-color:var(--emb1)}.logorow a[data-b=borsah]:hover{border-color:var(--mnt1)}.logorow a[data-b=salmex]:hover{border-color:var(--ele1)}
+  @media(hover:hover){.logorow a:hover{transform:translateY(-4px)}}
+  @media(max-width:960px){.pg{padding:120px 0 30px}.pg .wrap{grid-template-columns:1fr}.pg .hero-visual{aspect-ratio:16/9}.kareler{grid-template-columns:1fr}.logorow{grid-template-columns:1fr}}
   .pg .kick{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:40px;padding:7px 16px;font-family:var(--tech);font-size:.72rem;letter-spacing:.2em;color:var(--steel);text-transform:uppercase;background:#05050acc}
   .pg h1{font-size:clamp(2.6rem,6vw,4.6rem);margin:22px 0 0;line-height:1.02}
   .pg .lead{color:var(--muted);font-size:1.12rem;max-width:760px;margin-top:22px}
@@ -63,10 +78,22 @@ CORE_JS = '''<script>
   const iv=setInterval(()=>{if(!showReveals())clearInterval(iv);},250);
   setTimeout(()=>{reveals.forEach(el=>el.classList.add('in'));clearInterval(iv);},3000);
   showReveals();
+  const counters=[...document.querySelectorAll('[data-count]')];
+  const redM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fmt=(el,v)=>{el.textContent=(el.dataset.prefix||'')+v.toLocaleString('tr-TR')+(el.dataset.suffix||'');};
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(!e.isIntersecting)return; io.unobserve(e.target);
+    const el=e.target,end=+el.dataset.count;
+    if(redM){fmt(el,end);return;}
+    const t0=performance.now(),D=1400;
+    (function tick(t){const k=Math.min(1,(t-t0)/D),ease=1-Math.pow(1-k,3);
+      fmt(el,Math.round(end*ease)); if(k<1)requestAnimationFrame(tick);})(t0);
+  }),{threshold:0.4});
+  counters.forEach(el=>io.observe(el));
   document.getElementById('yr').textContent=new Date().getFullYear();
 </script>'''
 
-def page(fn, title, desc, kick, h1, lead, body, ld):
+def page(fn, title, desc, kick, h1, lead, body, ld, vis):
     url = f'https://isisah.com.tr/{fn}'
     return f'''<!doctype html>
 <html lang="tr">
@@ -94,14 +121,19 @@ def page(fn, title, desc, kick, h1, lead, body, ld):
 </head>
 <body>
 <a id="top"></a>
+<div class="wm" aria-hidden="true">ISIŞAH GROUP</div>
+<div class="glow a"></div><div class="glow b"></div>
 {sub(header, fn)}
 
 <main>
 <section class="pg">
-  <div class="wrap reveal in">
-    <span class="kick">{kick}</span>
-    <h1>{h1}</h1>
-    <p class="lead">{lead}</p>
+  <div class="wrap">
+    <div class="reveal in">
+      <span class="kick">{kick}</span>
+      <h1>{h1}</h1>
+      <p class="lead">{lead}</p>
+    </div>
+    <div class="hero-visual reveal in" data-d="2">{vis}</div>
   </div>
 </section>
 {body}
@@ -117,7 +149,16 @@ ORG = '{"@context":"https://schema.org","@type":"Organization","name":"ISIŞAH G
 
 # ---------------- HAKKIMIZDA ----------------
 hak_body = '''
-<section class="pad" style="padding-top:40px">
+<section class="stats" style="margin-top:30px">
+  <div class="wrap">
+    <div class="stat reveal"><div class="n grad-text" data-count="44" data-suffix=" yıl">0 yıl</div><div class="k">Kesintisiz Üretim</div></div>
+    <div class="stat reveal" data-d="1"><div class="n grad-text" data-count="3" data-suffix=" marka">0 marka</div><div class="k">Tek Çatı Altında</div></div>
+    <div class="stat reveal" data-d="2"><div class="n grad-text" data-count="8">0</div><div class="k">Ürün Gamı · Mutfaktan Savunmaya</div></div>
+    <div class="stat reveal" data-d="3"><div class="n grad-text" data-count="100" data-prefix="%">%0</div><div class="k">Yerli Üretim</div></div>
+  </div>
+</section>
+
+<section class="pad" style="padding-top:90px">
   <div class="wrap two">
     <div class="prose reveal">
       <h2>Kuruluş ve gelişim</h2>
@@ -142,6 +183,18 @@ hak_body = '''
         <div class="row"><span class="yr">2011</span><span class="tx">ISIŞAH GROUP çatısı altında yeniden yapılanma.</span></div>
       </div></div>
     </div>
+  </div>
+</section>
+
+<section class="pad" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Üretimden kareler.</h2><p>DOSAB Bursa tesislerimizden — robotlu eşanjör hattı, profil hattı ve test istasyonu.</p></div>
+    <div class="kareler reveal">
+      <figure><img src="assets/img/uretim-k1.webp" alt="Robotlu üretim hücresi" loading="lazy" decoding="async"><figcaption>Robotlu Hat</figcaption></figure>
+      <figure><img src="assets/img/uretim-k2.webp" alt="Profil şekillendirme hattı" loading="lazy" decoding="async"><figcaption>Şekillendirme</figcaption></figure>
+      <figure><img src="assets/img/uretim-k3.webp" alt="Sızdırmazlık test istasyonu" loading="lazy" decoding="async"><figcaption>Test İstasyonu</figcaption></figure>
+    </div>
+    <div class="pgcta reveal" style="margin-top:22px"><a class="btn ghost" href="fabrika.html">Fabrika turuna çık <span>→</span></a></div>
   </div>
 </section>
 
@@ -203,7 +256,8 @@ hak_ld = '{"@context":"https://schema.org","@type":"AboutPage","name":"Hakkımı
     'ISIŞAH GROUP hakkında: 1982 kuruluş, entegre tesisler, ISIŞAH ENDÜSTRİYEL · BORŞAH BORU · SALMEX markaları, tarihçe, yönetim, Ar-Ge ve kalite belgeleri.',
     'ISIŞAH GROUP · 1982\'den bugüne', 'Hakkımızda.',
     'Bursa DOSAB\'da sanayi tipi rezistanstan paslanmaz çelik boruya ve ısı eşanjörlerine uzanan üç marka, tek çatı: 44 yıllık mühendislik birikimi.',
-    hak_body, hak_ld), encoding='utf-8')
+    hak_body, hak_ld,
+    '<img src="assets/img/bina-gece.webp" alt="ISIŞAH GROUP merkez binası — DOSAB Bursa" width="1600" height="905" fetchpriority="high"><span class="tag">ISIŞAH GROUP · DOSAB Bursa</span>'), encoding='utf-8')
 
 # ---------------- VİZYON & MİSYON ----------------
 viz_body = '''
@@ -218,6 +272,17 @@ viz_body = '''
       <span class="k">Misyonumuz</span>
       <h2>Müşterimize ortağımız gibi.</h2>
       <p>Türkiye'de sektörünün en büyük firmalarından biri olarak ISIŞAH, 44 yılın verdiği güç ve tecrübeyle elektrikli ev aletlerine yönelik ve çeşitli endüstri grupları için ısıtma sistemlerinin ISO 9001 kalite standardında üretimini kendine prensip edinmiştir. Müşterilerimize şirket ortağımız gibi davranmak ve kıymetli müşterilerimiz için değer yaratmak misyonumuzdur.</p>
+    </div>
+  </div>
+</section>
+
+<section class="pad" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Üç marka, tek vizyon.</h2><p>Aynı çatı, aynı kalite disiplini.</p></div>
+    <div class="logorow reveal">
+      <a data-b="isisah" href="index.html#marka=isisah"><img src="assets/catalog/logo-isisah.webp" alt="ISIŞAH ENDÜSTRİYEL"><span>Rezistans &amp; Isıtma Sistemleri</span></a>
+      <a data-b="borsah" href="index.html#marka=borsah"><img src="assets/catalog/logo-borsah.webp" alt="BORŞAH BORU"><span>Paslanmaz Çelik Boru</span></a>
+      <a data-b="salmex" href="index.html#marka=salmex"><img src="assets/catalog/logo-salmex.webp" alt="SALMEX"><span>Isı Eşanjörleri</span></a>
     </div>
   </div>
 </section>
@@ -255,5 +320,6 @@ viz_ld = '{"@context":"https://schema.org","@type":"WebPage","name":"Vizyonumuz 
     'ISIŞAH GROUP vizyonu, misyonu ve Kalite-İSG-Çevre politikası: kaliteden ödün vermeden güvenilir, lider global şirket olmak; müşterilerimize şirket ortağımız gibi davranmak.',
     'ISIŞAH GROUP · Kurumsal', 'Vizyonumuz &amp;<br>Misyonumuz.',
     'Kaliteden ödün vermeden, müşterimize şirket ortağımız gibi davranarak.',
-    viz_body, viz_ld), encoding='utf-8')
+    viz_body, viz_ld,
+    '<img src="assets/img/salmex-hat.webp" alt="SALMEX robotlu eşanjör üretim hattı" loading="eager"><span class="tag">DOSAB Bursa · Robotlu Hat</span>'), encoding='utf-8')
 print('hakkimizda.html', (ROOT/'hakkimizda.html').stat().st_size//1024, 'KB |', 'vizyon-misyon.html', (ROOT/'vizyon-misyon.html').stat().st_size//1024, 'KB')
