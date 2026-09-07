@@ -145,7 +145,7 @@ def page(fn, title, desc, kick, h1, lead, body, ld, vis):
 </html>
 '''
 
-ORG = '{"@context":"https://schema.org","@type":"Organization","name":"ISIŞAH GROUP","legalName":"ISIŞAH Endüstriyel","url":"https://isisah.com.tr/","foundingDate":"1982","address":{"@type":"PostalAddress","streetAddress":"DOSAB Ali Osman Sönmez Cad. No:11","addressLocality":"Osmangazi","addressRegion":"Bursa","postalCode":"16369","addressCountry":"TR"},"telephone":"+90 224 261 05 27","email":"info@isisah.com.tr","brand":[{"@type":"Brand","name":"ISIŞAH ENDÜSTRİYEL"},{"@type":"Brand","name":"BORŞAH BORU"},{"@type":"Brand","name":"SALMEX"}]}'
+ORG = '{"@context":"https://schema.org","@type":"Organization","name":"ISIŞAH GROUP","legalName":"ISIŞAH Endüstriyel","url":"https://isisah.com.tr/","foundingDate":"1982","address":{"@type":"PostalAddress","streetAddress":"DOSAB Ali Osman Sönmez Cad. No:11","addressLocality":"Osmangazi","addressRegion":"Bursa","postalCode":"16369","addressCountry":"TR"},"telephone":"+90 224 261 05 27","email":"info@isisah.com.tr","sameAs":["https://www.instagram.com/isisah_group","https://www.linkedin.com/in/isi%C5%9Fah-group-9b45aa125/"],"brand":[{"@type":"Brand","name":"ISIŞAH ENDÜSTRİYEL"},{"@type":"Brand","name":"BORŞAH BORU"},{"@type":"Brand","name":"SALMEX"}]}'
 
 # ---------------- HAKKIMIZDA ----------------
 hak_body = '''
