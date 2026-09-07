@@ -62,6 +62,114 @@
         ],
         "createdAt": "2026-08-20T15:35:23.235Z",
         "reason": "HANDOFF bilinçli istisna: yavaş marquee + hover-pause (v2'de teyitli)"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "hakkimizda.html"
+        ],
+        "createdAt": "2026-09-07T10:26:20.288Z",
+        "reason": "index.html'den tools/build-pages.py ile üretilen kurumsal alt sayfa — onaylı v5-neon tema CSS'i miras (index ile aynı istisna)"
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "hakkimizda.html"
+        ],
+        "createdAt": "2026-09-07T10:26:20.355Z",
+        "reason": "index.html'den tools/build-pages.py ile üretilen kurumsal alt sayfa — onaylı v5-neon tema CSS'i miras (index ile aynı istisna)"
+      },
+      {
+        "rule": "gpt-thin-border-wide-shadow",
+        "value": "*",
+        "files": [
+          "hakkimizda.html"
+        ],
+        "createdAt": "2026-09-07T10:26:20.425Z",
+        "reason": "index.html'den tools/build-pages.py ile üretilen kurumsal alt sayfa — onaylı v5-neon tema CSS'i miras (index ile aynı istisna)"
+      },
+      {
+        "rule": "marquee",
+        "value": "*",
+        "files": [
+          "hakkimizda.html"
+        ],
+        "createdAt": "2026-09-07T10:26:20.492Z",
+        "reason": "index.html'den tools/build-pages.py ile üretilen kurumsal alt sayfa — onaylı v5-neon tema CSS'i miras (index ile aynı istisna)"
+      },
+      {
+        "rule": "hero-eyebrow-chip",
+        "value": "*",
+        "files": [
+          "hakkimizda.html"
+        ],
+        "createdAt": "2026-09-07T10:26:20.562Z",
+        "reason": "index.html'den tools/build-pages.py ile üretilen kurumsal alt sayfa — onaylı v5-neon tema CSS'i miras (index ile aynı istisna)"
+      },
+      {
+        "rule": "codex-grid-background",
+        "value": "*",
+        "files": [
+          "hakkimizda.html"
+        ],
+        "createdAt": "2026-09-07T10:26:20.630Z",
+        "reason": "index.html'den tools/build-pages.py ile üretilen kurumsal alt sayfa — onaylı v5-neon tema CSS'i miras (index ile aynı istisna)"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "vizyon-misyon.html"
+        ],
+        "createdAt": "2026-09-07T10:26:20.698Z",
+        "reason": "index.html'den tools/build-pages.py ile üretilen kurumsal alt sayfa — onaylı v5-neon tema CSS'i miras (index ile aynı istisna)"
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "vizyon-misyon.html"
+        ],
+        "createdAt": "2026-09-07T10:26:20.766Z",
+        "reason": "index.html'den tools/build-pages.py ile üretilen kurumsal alt sayfa — onaylı v5-neon tema CSS'i miras (index ile aynı istisna)"
+      },
+      {
+        "rule": "gpt-thin-border-wide-shadow",
+        "value": "*",
+        "files": [
+          "vizyon-misyon.html"
+        ],
+        "createdAt": "2026-09-07T10:26:20.833Z",
+        "reason": "index.html'den tools/build-pages.py ile üretilen kurumsal alt sayfa — onaylı v5-neon tema CSS'i miras (index ile aynı istisna)"
+      },
+      {
+        "rule": "marquee",
+        "value": "*",
+        "files": [
+          "vizyon-misyon.html"
+        ],
+        "createdAt": "2026-09-07T10:26:20.901Z",
+        "reason": "index.html'den tools/build-pages.py ile üretilen kurumsal alt sayfa — onaylı v5-neon tema CSS'i miras (index ile aynı istisna)"
+      },
+      {
+        "rule": "hero-eyebrow-chip",
+        "value": "*",
+        "files": [
+          "vizyon-misyon.html"
+        ],
+        "createdAt": "2026-09-07T10:26:20.970Z",
+        "reason": "index.html'den tools/build-pages.py ile üretilen kurumsal alt sayfa — onaylı v5-neon tema CSS'i miras (index ile aynı istisna)"
+      },
+      {
+        "rule": "codex-grid-background",
+        "value": "*",
+        "files": [
+          "vizyon-misyon.html"
+        ],
+        "createdAt": "2026-09-07T10:26:21.039Z",
+        "reason": "index.html'den tools/build-pages.py ile üretilen kurumsal alt sayfa — onaylı v5-neon tema CSS'i miras (index ile aynı istisna)"
       }
     ]
   }

@@ -16,6 +16,9 @@ has(){ curl -s -m 25 "$1" | grep -qc "$2"; }
 [ "$(http "$BASE/?$bust")" = "200" ] && say OK "kök 200" || say FAIL "kök HTTP"
 [ "$(http "$BASE/showroom/urunler.html?$bust")" = "200" ] && say OK "showroom 200" || say FAIL "showroom HTTP"
 [ "$(http "$BASE/showroom/fabrika.html?$bust")" = "200" ] && say OK "fabrika 200" || say FAIL "fabrika HTTP"
+[ "$(http "$BASE/hakkimizda.html?$bust")" = "200" ] && say OK "hakkımızda 200" || say FAIL "hakkımızda HTTP"
+[ "$(http "$BASE/vizyon-misyon.html?$bust")" = "200" ] && say OK "vizyon-misyon 200" || say FAIL "vizyon-misyon HTTP"
+has "$BASE/hakkimizda.html?$bust" "/showroom/assets/" && say OK "hakkımızda: yollar çevrili" || say FAIL "hakkımızda: yol çevirisi bozuk"
 [ "$(http "$BASE/sitemap.xml")" = "200" ] && say OK "sitemap 200" || say FAIL "sitemap HTTP"
 [ "$(http "$BASE/googlebfb5098152a94f7b.html")" = "200" ] && say OK "search-console dosyası duruyor" || say FAIL "search-console dosyası KAYIP"
 

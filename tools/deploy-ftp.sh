@@ -6,8 +6,8 @@ cd "$(dirname "$0")/.."
 NETRC=~/.isisah-ftp.netrc
 LIST=$(python3 - <<'PY'
 import re,os
-used=set(['index.html','urunler.html','sitemap.xml'])
-for f in ['index.html','urunler.html']:
+used=set(['index.html','urunler.html','fabrika.html','hakkimizda.html','vizyon-misyon.html','sitemap.xml'])
+for f in ['index.html','urunler.html','fabrika.html','hakkimizda.html','vizyon-misyon.html']:
     s=open(f).read()
     for m in re.findall(r'(?:src|href)="(assets/[^"]+)"',s): used.add(m)
     for m in re.findall(r"envTex\('(assets/[^']+)'|load\('(assets/[^']+)'",s):
@@ -26,17 +26,22 @@ PY
 echo "$LIST" | xargs -P 4 -I{} curl -s --netrc-file $NETRC --ftp-create-dirs -T "{}" "ftp://ftp.isisah.com.tr/httpdocs/showroom/{}"
 echo "deploy tamam: https://isisah.com.tr/showroom/"
 
-# kök ana sayfa: showroom index'inden türetilir ve httpdocs/index.html'e yazılır
+# kök sayfalar: index + kurumsal alt sayfalar showroom kopyasından türetilir, httpdocs/ köküne yazılır
 python3 - <<'PY'
-s=open('index.html').read()
-s=s.replace('src="assets/','src="/showroom/assets/').replace('href="assets/','href="/showroom/assets/')
-s=s.replace('href="urunler.html','href="/showroom/urunler.html')
-s=s.replace('poster="assets/img/','poster="/showroom/assets/img/')
-s=s.replace('href="fabrika.html"','href="/showroom/fabrika.html"')
-open('/tmp/root_index.html','w').write(s)
+import os
+for f in ['index.html','hakkimizda.html','vizyon-misyon.html']:
+    s=open(f).read()
+    s=s.replace('src="assets/','src="/showroom/assets/').replace('href="assets/','href="/showroom/assets/')
+    s=s.replace('href="urunler.html','href="/showroom/urunler.html')
+    s=s.replace('poster="assets/img/','poster="/showroom/assets/img/')
+    s=s.replace('href="fabrika.html"','href="/showroom/fabrika.html"')
+    open('/tmp/root_'+f,'w').write(s)
 PY
-curl -s --netrc-file $NETRC -T /tmp/root_index.html "ftp://ftp.isisah.com.tr/httpdocs/index.html" && rm /tmp/root_index.html
-echo "kok ana sayfa guncellendi: https://isisah.com.tr/"
+for f in index.html hakkimizda.html vizyon-misyon.html; do
+  curl -s --netrc-file $NETRC -T /tmp/root_$f "ftp://ftp.isisah.com.tr/httpdocs/$f" && rm /tmp/root_$f
+done
+curl -s --netrc-file $NETRC -T sitemap.xml "ftp://ftp.isisah.com.tr/httpdocs/sitemap.xml"
+echo "kok sayfalar guncellendi: https://isisah.com.tr/ + /hakkimizda.html + /vizyon-misyon.html"
 
 # yayın sonrası otomatik duman testi
 bash "$(dirname "$0")/smoke-test.sh" || echo "!! DUMAN TESTİNDE SORUN VAR — çıktıyı incele"

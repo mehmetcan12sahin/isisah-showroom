@@ -9,7 +9,7 @@ Repo: `~/isisah-scroll-world`. İKİ hedef var, ikisi de güncellenmeli:
 
 | Hedef | Ne | Nasıl |
 |---|---|---|
-| **ANA CANLI** | https://isisah.com.tr/ (kök ana sayfa) + /showroom/* | `bash tools/deploy-ftp.sh` |
+| **ANA CANLI** | https://isisah.com.tr/ (kök ana sayfa) + /hakkimizda.html + /vizyon-misyon.html + /showroom/* | `bash tools/deploy-ftp.sh` |
 | Ayna | https://mehmetcan12sahin.github.io/isisah-showroom/ | `git push origin main` |
 
 ## Sıra
@@ -22,6 +22,7 @@ Repo: `~/isisah-scroll-world`. İKİ hedef var, ikisi de güncellenmeli:
    `src="assets/` → `src="/showroom/assets/`, `href="assets/` → `href="/showroom/assets/`,
    `href="urunler.html` → `href="/showroom/urunler.html`, `poster="assets/img/` → `poster="/showroom/assets/img/`,
    `href="fabrika.html"` → `href="/showroom/fabrika.html"` → `httpdocs/index.html`e yükle.
+   Aynı türetim `hakkimizda.html` ve `vizyon-misyon.html` için de yapılır (kök kopya); showroom/ altına ham kopya da gider. Bu iki sayfa `tools/build-pages.py` ile index'in stil/header/footer'ından ÜRETİLİR — index CSS'i değişince `python3 tools/build-pages.py` çalıştır, elle düzenleme.
    Yeni sayfa/yol türü eklersen bu kural setine (script + bu skill) da ekle.
 
 ## Canlı doğrulama (yayın bitmeden kapatma)
