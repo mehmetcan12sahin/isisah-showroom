@@ -265,6 +265,13 @@
   .brandcard p{color:var(--muted);font-size:.98rem}
   .brandcard ul{list-style:none;margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
   .brandcard li{font-family:var(--tech);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--steel);border:1px solid var(--line);border-radius:40px;padding:6px 13px}
+  .brandcard{cursor:pointer}
+  .brandcard.sel{border-color:color-mix(in srgb,var(--bc,var(--vio2)) 65%,transparent);box-shadow:0 0 0 1px color-mix(in srgb,var(--bc,var(--vio2)) 30%,transparent),0 30px 70px -34px var(--bc,var(--vio2))}
+  .brandcard.sel::before{transform:scaleX(1)}
+  .brandcard .bhint{display:inline-flex;align-items:center;gap:6px;margin:12px 0 0 18px;font-family:var(--tech);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .brandcard.sel .bhint{color:var(--bt,var(--vio1))}
+  .hero-visual .bstack b{cursor:pointer}
+  @media(hover:hover){.hero-visual .bstack b:hover{color:var(--vio1)}}
 
   /* products */
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -275,6 +282,15 @@
   .card[data-b=isisah]{--cc:var(--emb2)}
   .card .ph{aspect-ratio:4/3;overflow:hidden;background:#0a0a12}
   .card .ph img{width:100%;height:100%;object-fit:cover;transition:transform 480ms var(--ease-out)}
+  .card[data-b=salmex]{--cc:var(--ele1)}
+  .card.cut .ph{display:grid;place-items:center;background:radial-gradient(ellipse at 50% 62%,#151a2a,#07070c 72%)}
+  .card.cut .ph img{width:76%;height:76%;object-fit:contain;filter:drop-shadow(0 18px 24px #000c)}
+  .card.off,.vcard.off{display:none}
+  .bfilter{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:-28px 0 34px}
+  .bfilter button{font-family:var(--tech);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--steel);background:transparent;border:1px solid var(--line);border-radius:40px;padding:8px 16px;cursor:pointer;transition:border-color 160ms var(--ease-out),background 160ms var(--ease-out),color 160ms var(--ease-out)}
+  .bfilter button[data-b=borsah]{--bc2:var(--mnt1)}.bfilter button[data-b=isisah]{--bc2:var(--emb1)}.bfilter button[data-b=salmex]{--bc2:var(--ele1)}
+  .bfilter button[aria-selected=true]{color:#fff;border-color:var(--bc2,var(--vio1));background:color-mix(in srgb,var(--bc2,var(--vio1)) 18%,transparent)}
+  @media(hover:hover){.bfilter button:hover{color:#fff;border-color:var(--bc2,var(--vio1))}}
   @media(hover:hover) and (pointer:fine){
     .card:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--cc,var(--vio2)) 38%,transparent);
       box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 48px -14px var(--cc,var(--vio2)),0 20px 50px #000a}
@@ -456,6 +472,109 @@
   </div>
 </section>
 
+<!-- MARKALAR -->
+<section class="pad" id="markalar">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Üç uzmanlık,<br>tek çatı.</h2>
+      <p>ISIŞAH GROUP bünyesinde birbirini tamamlayan üç üretim gücü.</p>
+    </div>
+    <div class="brands">
+      <div class="brandcard reveal" data-b="borsah">
+        <div class="bnum">PASLANMAZ ÇELİK BORU</div>
+        <h3>Borşah Boru</h3>
+        <p>Rezistans imalatı ve sanayi için yüksek standartlarda paslanmaz çelik boru üretimi. Soğuk şekillendirme (roll forming) ve TIG kaynağıyla Ø6–42 mm çap, 0,35–2 mm et kalınlığında dikişli boru; tavlı ve kangal olarak da üretilir.</p>
+        <ul><li>Paslanmaz Çelik</li><li>Ø6–42 mm</li><li>TIG Kaynak</li><li>Tavlı / Kangal</li><li>Oval / Yuvarlak</li></ul>
+        <a class="go3d" href="urunler.html#hol=borsah">Showroom'da Gör →</a>
+      </div>
+      <div class="brandcard reveal" data-d="2" data-b="isisah">
+        <div class="bnum">REZİSTANS &amp; ISITMA SİSTEMLERİ</div>
+        <h3>ISIŞAH Endüstriyel</h3>
+        <p>Sanayi tipi rezistans, endüstriyel fırın, kanal tipi ve mobil ısıtma üniteleri ile mühendislik projeleri. Elektrikli ev cihazlarından ağır sanayiye ısıtma çözümleri.</p>
+        <ul><li>Rezistans</li><li>Fırın</li><li>Isıtma Sistemleri</li><li>Mühendislik</li></ul>
+        <a class="go3d" href="urunler.html">Showroom'da Gör →</a>
+      </div>
+      <div class="brandcard reveal" data-d="3" data-b="salmex">
+        <div class="bnum">ISI EŞANJÖRLERİ</div>
+        <h3>Salmex Isı Eşanjörleri</h3>
+        <p>Yoğuşmalı, elektrikli ve konvansiyonel kombi ile kazan eşanjörleri. Paslanmaz sarmal eşanjör boruları, helisel ve kanatlı eşanjör aileleriyle ısı transferi çözümleri.</p>
+        <ul><li>Yoğuşmalı Eşanjör</li><li>Kombi</li><li>Kazan</li><li>Robotlu Üretim Hattı</li></ul>
+        <a class="go3d" href="urunler.html#hol=salmex">Showroom'da Gör →</a>
+        <a class="tourbox" href="fabrika.html">
+          <video autoplay muted loop playsinline preload="metadata" poster="assets/img/uretim-poster.webp" aria-hidden="true"><source src="assets/img/uretim-salmex.mp4" type="video/mp4"></video>
+          <span class="tb-t"><b>Fabrika Turu</b><small>Kaydır; üretim hattında uç →</small></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- URUNLER -->
+<section class="pad" id="urunler" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2 id="urH">Üretim yelpazesi.</h2>
+      <p id="urP">Gerçek ürün gruplarımızdan bir seçki: hammadde borusundan bitmiş ısıtma sistemine.</p>
+    </div>
+    <div class="bfilter reveal" role="tablist" aria-label="Marka filtresi">
+      <button type="button" role="tab" data-b="" aria-selected="true">Tümü</button>
+      <button type="button" role="tab" data-b="isisah" aria-selected="false">ISIŞAH</button>
+      <button type="button" role="tab" data-b="borsah" aria-selected="false">BORŞAH</button>
+      <button type="button" role="tab" data-b="salmex" aria-selected="false">SALMEX</button>
+    </div>
+    <div class="grid">
+      <article data-b="borsah" class="card reveal"><div class="ph"><img src="assets/img/paslanmaz-boru.jpg" alt="Paslanmaz Boru" width="1400" height="933" loading="lazy" decoding="async"></div>
+        <div class="body"><div class="cat">Borşah Boru</div><h3>Paslanmaz Boru</h3>
+        <p>Ø6–42 mm, et kalınlığı 0,35–2 mm. Argon/hidrojen koruyucu gaz altında TIG kaynak.</p><a class="go3d" href="urunler.html#hol=borsah">Showroom'da Gör →</a></div></article>
+      <article data-b="borsah" class="card reveal" data-d="1"><div class="ph"><img src="assets/img/kangal-boru.jpg" alt="Tavlı ve Kangal Boru" width="1400" height="933" loading="lazy" decoding="async"></div>
+        <div class="body"><div class="cat">Borşah Boru</div><h3>Tavlı & Kangal Boru</h3>
+        <p>Ø6–42 mm aralığında tavlı ve kangal boru; 100–400 m kangal boyu, 100 bar basınç testi.</p><a class="go3d" href="urunler.html#hol=borsah">Showroom'da Gör →</a></div></article>
+      <article data-b="borsah" class="card reveal" data-d="2"><div class="ph"><img src="assets/img/oval-boru.jpg" alt="Oval Boru" width="1400" height="933" loading="lazy" decoding="async"></div>
+        <div class="body"><div class="cat">Borşah Boru</div><h3>Oval Boru</h3>
+        <p>Rezistans imalatı, mobilya ve sanayi uygulamaları için oval kesitli boru profilleri.</p><a class="go3d" href="urunler.html#hol=borsah">Showroom'da Gör →</a></div></article>
+      <article data-b="isisah" class="card reveal"><div class="ph"><img src="assets/img/rezistanslar.jpg" alt="Rezistanslar" width="800" height="600" loading="lazy" decoding="async"></div>
+        <div class="body"><div class="cat">ISIŞAH Endüstriyel</div><h3>Rezistanslar</h3>
+        <p>Boru ve daldırma tipi ısıtıcı elemanlar. Yüksek sıcaklığa dayanıklı, tamamen yerli üretim.</p><a class="go3d" href="urunler.html#hol=isisah_rezistans">Showroom'da Gör →</a></div></article>
+      <article data-b="isisah" class="card reveal" data-d="1"><div class="ph"><img src="assets/img/firin.jpg" alt="Endüstriyel Fırın" width="800" height="600" loading="lazy" decoding="async"></div>
+        <div class="body"><div class="cat">ISIŞAH Endüstriyel</div><h3>Endüstriyel Fırın</h3>
+        <p>Kontrol panelli sanayi tipi ısıl işlem ve kurutma fırınları; projeye özel üretim.</p><a class="go3d" href="urunler.html#hol=isisah_agir">Showroom'da Gör →</a></div></article>
+      <article data-b="isisah" class="card reveal" data-d="2"><div class="ph"><img src="assets/img/kanal-tipi.jpg" alt="Kanal Tipi Isıtıcı" width="800" height="600" loading="lazy" decoding="async"></div>
+        <div class="body"><div class="cat">ISIŞAH Endüstriyel</div><h3>Kanal Tipi Isıtıcı</h3>
+        <p>Kanatlı rezistanslı kanal tipi hava ısıtıcılar; havalandırma ve proses hatları için.</p><a class="go3d" href="urunler.html#hol=isisah_hvac">Showroom'da Gör →</a></div></article>
+      <article data-b="isisah" class="card reveal"><div class="ph"><img src="assets/img/mobil-isitici.jpg" alt="Mobil Elektrikli Isıtıcı" width="800" height="600" loading="lazy" decoding="async"></div>
+        <div class="body"><div class="cat">ISIŞAH Endüstriyel</div><h3>Mobil Elektrikli Isıtıcı</h3>
+        <p>Uğur Böceği serisi taşınabilir fanlı ısıtıcılar; atölye ve saha ısıtması için.</p><a class="go3d" href="urunler.html#hol=isisah_agir">Showroom'da Gör →</a></div></article>
+      <article data-b="isisah" class="card reveal" data-d="1"><div class="ph"><img src="assets/img/boykur.jpg" alt="BOYKUR Oto Boya Kurutma" width="800" height="600" loading="lazy" decoding="async"></div>
+        <div class="body"><div class="cat">ISIŞAH Endüstriyel</div><h3>BOYKUR Boya Kurutma</h3>
+        <p>Infrared teknolojili, bilgisayar kontrollü mobil oto boya kurutma sistemi.</p><a class="go3d" href="urunler.html#hol=isisah_otomotiv">Showroom'da Gör →</a></div></article>
+      <article data-b="salmex" class="card cut reveal"><div class="ph"><img src="assets/products/salmex.webp" alt="Yoğuşmalı Isı Eşanjörü" loading="lazy" decoding="async"></div>
+        <div class="body"><div class="cat">SALMEX</div><h3>Yoğuşmalı Isı Eşanjörü</h3>
+        <p>Paslanmaz çelik sarmal eşanjör borusu; yüksek verimli, farklı kapasitelerde yoğuşmalı tasarım.</p><a class="go3d" href="urunler.html#hol=salmex">Showroom'da Gör →</a></div></article>
+      <article data-b="salmex" class="card cut reveal" data-d="1"><div class="ph"><img src="assets/products/helis.webp" alt="Helisel Boru Eşanjörü" loading="lazy" decoding="async"></div>
+        <div class="body"><div class="cat">SALMEX</div><h3>Helisel Boru Eşanjörü</h3>
+        <p>Paslanmaz borudan helisel sarım eşanjör; kompakt hacimde yüksek ısı transfer yüzeyi.</p><a class="go3d" href="urunler.html#hol=salmex">Showroom'da Gör →</a></div></article>
+      <article data-b="salmex" class="card cut reveal" data-d="2"><div class="ph"><img src="assets/products/kazan.webp" alt="Kazan Tipi Yoğuşmalı Eşanjör" loading="lazy" decoding="async"></div>
+        <div class="body"><div class="cat">SALMEX</div><h3>Kazan Tipi Yoğuşmalı Eşanjör</h3>
+        <p>Yüksek kapasiteli kazanlar için paslanmaz gövdeli, alüminyum döküm flanşlı yoğuşmalı eşanjör.</p><a class="go3d" href="urunler.html#hol=salmex">Showroom'da Gör →</a></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- 3B SHOWROOM KÖPRÜSÜ -->
+<section class="pad" id="showroom" style="padding-top:0">
+  <div class="wrap">
+    <div class="bridge reveal">
+      <div class="shot"><img src="assets/img/showroom-preview.webp" alt="ISIŞAH 3B ürün showroom'u — üç marka, üç kapı" width="1200" height="750" loading="lazy" decoding="async"></div>
+      <div class="txt">
+        <span class="bk">İnteraktif Deneyim</span>
+        <h2>Ürün gamını 3B showroom'da gezin.</h2>
+        <p>Üç marka, üç kapı: ISIŞAH, SALMEX ve BORŞAH ürünlerini kaidelerinde inceleyin, beğendiğinize tek tıkla teklif isteyin.</p>
+        <a class="btn" href="urunler.html">Showroom'u Gez <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- STATS -->
 <section class="stats">
   <div class="wrap">
@@ -500,42 +619,6 @@
   </div>
 </section>
 
-<!-- MARKALAR -->
-<section class="pad" id="markalar" style="padding-top:0">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <h2>Üç uzmanlık,<br>tek çatı.</h2>
-      <p>ISIŞAH GROUP bünyesinde birbirini tamamlayan üç üretim gücü.</p>
-    </div>
-    <div class="brands">
-      <div class="brandcard reveal" data-b="borsah">
-        <div class="bnum">PASLANMAZ ÇELİK BORU</div>
-        <h3>Borşah Boru</h3>
-        <p>Rezistans imalatı ve sanayi için yüksek standartlarda paslanmaz çelik boru üretimi. Soğuk şekillendirme (roll forming) ve TIG kaynağıyla Ø6–42 mm çap, 0,35–2 mm et kalınlığında dikişli boru; tavlı ve kangal olarak da üretilir.</p>
-        <ul><li>Paslanmaz Çelik</li><li>Ø6–42 mm</li><li>TIG Kaynak</li><li>Tavlı / Kangal</li><li>Oval / Yuvarlak</li></ul>
-        <a class="go3d" href="urunler.html#hol=borsah">Showroom'da Gör →</a>
-      </div>
-      <div class="brandcard reveal" data-d="2" data-b="isisah">
-        <div class="bnum">REZİSTANS &amp; ISITMA SİSTEMLERİ</div>
-        <h3>ISIŞAH Endüstriyel</h3>
-        <p>Sanayi tipi rezistans, endüstriyel fırın, kanal tipi ve mobil ısıtma üniteleri ile mühendislik projeleri. Elektrikli ev cihazlarından ağır sanayiye ısıtma çözümleri.</p>
-        <ul><li>Rezistans</li><li>Fırın</li><li>Isıtma Sistemleri</li><li>Mühendislik</li></ul>
-        <a class="go3d" href="urunler.html">Showroom'da Gör →</a>
-      </div>
-      <div class="brandcard reveal" data-d="3" data-b="salmex">
-        <div class="bnum">ISI EŞANJÖRLERİ</div>
-        <h3>Salmex Isı Eşanjörleri</h3>
-        <p>Yoğuşmalı, elektrikli ve konvansiyonel kombi ile kazan eşanjörleri. Paslanmaz sarmal eşanjör boruları, helisel ve kanatlı eşanjör aileleriyle ısı transferi çözümleri.</p>
-        <ul><li>Yoğuşmalı Eşanjör</li><li>Kombi</li><li>Kazan</li><li>Robotlu Üretim Hattı</li></ul>
-        <a class="go3d" href="urunler.html#hol=salmex">Showroom'da Gör →</a>
-        <a class="tourbox" href="fabrika.html">
-          <video autoplay muted loop playsinline preload="metadata" poster="assets/img/uretim-poster.webp" aria-hidden="true"><source src="assets/img/uretim-salmex.mp4" type="video/mp4"></video>
-          <span class="tb-t"><b>Fabrika Turu</b><small>Kaydır; üretim hattında uç →</small></span>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- SALMEX ROBOTLU HAT -->
 <section class="pad" id="salmex-hat" style="padding-top:0">
@@ -552,56 +635,7 @@
   </div>
 </section>
 
-<!-- URUNLER -->
-<section class="pad" id="urunler" style="padding-top:0">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <h2>Üretim yelpazesi.</h2>
-      <p>Gerçek ürün gruplarımızdan bir seçki: hammadde borusundan bitmiş ısıtma sistemine.</p>
-    </div>
-    <div class="grid">
-      <article data-b="borsah" class="card reveal"><div class="ph"><img src="assets/img/paslanmaz-boru.jpg" alt="Paslanmaz Boru" width="1400" height="933" loading="lazy" decoding="async"></div>
-        <div class="body"><div class="cat">Borşah Boru</div><h3>Paslanmaz Boru</h3>
-        <p>Ø6–42 mm, et kalınlığı 0,35–2 mm. Argon/hidrojen koruyucu gaz altında TIG kaynak.</p><a class="go3d" href="urunler.html#hol=borsah">Showroom'da Gör →</a></div></article>
-      <article data-b="borsah" class="card reveal" data-d="1"><div class="ph"><img src="assets/img/kangal-boru.jpg" alt="Tavlı ve Kangal Boru" width="1400" height="933" loading="lazy" decoding="async"></div>
-        <div class="body"><div class="cat">Borşah Boru</div><h3>Tavlı & Kangal Boru</h3>
-        <p>Ø6–42 mm aralığında tavlı ve kangal boru; 100–400 m kangal boyu, 100 bar basınç testi.</p><a class="go3d" href="urunler.html#hol=borsah">Showroom'da Gör →</a></div></article>
-      <article data-b="borsah" class="card reveal" data-d="2"><div class="ph"><img src="assets/img/oval-boru.jpg" alt="Oval Boru" width="1400" height="933" loading="lazy" decoding="async"></div>
-        <div class="body"><div class="cat">Borşah Boru</div><h3>Oval Boru</h3>
-        <p>Rezistans imalatı, mobilya ve sanayi uygulamaları için oval kesitli boru profilleri.</p><a class="go3d" href="urunler.html#hol=borsah">Showroom'da Gör →</a></div></article>
-      <article data-b="isisah" class="card reveal"><div class="ph"><img src="assets/img/rezistanslar.jpg" alt="Rezistanslar" width="800" height="600" loading="lazy" decoding="async"></div>
-        <div class="body"><div class="cat">ISIŞAH Endüstriyel</div><h3>Rezistanslar</h3>
-        <p>Boru ve daldırma tipi ısıtıcı elemanlar. Yüksek sıcaklığa dayanıklı, tamamen yerli üretim.</p><a class="go3d" href="urunler.html#hol=isisah_rezistans">Showroom'da Gör →</a></div></article>
-      <article data-b="isisah" class="card reveal" data-d="1"><div class="ph"><img src="assets/img/firin.jpg" alt="Endüstriyel Fırın" width="800" height="600" loading="lazy" decoding="async"></div>
-        <div class="body"><div class="cat">ISIŞAH Endüstriyel</div><h3>Endüstriyel Fırın</h3>
-        <p>Kontrol panelli sanayi tipi ısıl işlem ve kurutma fırınları; projeye özel üretim.</p><a class="go3d" href="urunler.html#hol=isisah_agir">Showroom'da Gör →</a></div></article>
-      <article data-b="isisah" class="card reveal" data-d="2"><div class="ph"><img src="assets/img/kanal-tipi.jpg" alt="Kanal Tipi Isıtıcı" width="800" height="600" loading="lazy" decoding="async"></div>
-        <div class="body"><div class="cat">ISIŞAH Endüstriyel</div><h3>Kanal Tipi Isıtıcı</h3>
-        <p>Kanatlı rezistanslı kanal tipi hava ısıtıcılar; havalandırma ve proses hatları için.</p><a class="go3d" href="urunler.html#hol=isisah_hvac">Showroom'da Gör →</a></div></article>
-      <article data-b="isisah" class="card reveal"><div class="ph"><img src="assets/img/mobil-isitici.jpg" alt="Mobil Elektrikli Isıtıcı" width="800" height="600" loading="lazy" decoding="async"></div>
-        <div class="body"><div class="cat">ISIŞAH Endüstriyel</div><h3>Mobil Elektrikli Isıtıcı</h3>
-        <p>Uğur Böceği serisi taşınabilir fanlı ısıtıcılar; atölye ve saha ısıtması için.</p><a class="go3d" href="urunler.html#hol=isisah_agir">Showroom'da Gör →</a></div></article>
-      <article data-b="isisah" class="card reveal" data-d="1"><div class="ph"><img src="assets/img/boykur.jpg" alt="BOYKUR Oto Boya Kurutma" width="800" height="600" loading="lazy" decoding="async"></div>
-        <div class="body"><div class="cat">ISIŞAH Endüstriyel</div><h3>BOYKUR Boya Kurutma</h3>
-        <p>Infrared teknolojili, bilgisayar kontrollü mobil oto boya kurutma sistemi.</p><a class="go3d" href="urunler.html#hol=isisah_otomotiv">Showroom'da Gör →</a></div></article>
-    </div>
-  </div>
-</section>
 
-<!-- 3B SHOWROOM KÖPRÜSÜ -->
-<section class="pad" id="showroom" style="padding-top:0">
-  <div class="wrap">
-    <div class="bridge reveal">
-      <div class="shot"><img src="assets/img/showroom-preview.webp" alt="ISIŞAH 3B ürün showroom'u — üç marka, üç kapı" width="1200" height="750" loading="lazy" decoding="async"></div>
-      <div class="txt">
-        <span class="bk">İnteraktif Deneyim</span>
-        <h2>Ürün gamını 3B showroom'da gezin.</h2>
-        <p>Üç marka, üç kapı: ISIŞAH, SALMEX ve BORŞAH ürünlerini kaidelerinde inceleyin, beğendiğinize tek tıkla teklif isteyin.</p>
-        <a class="btn" href="urunler.html">Showroom'u Gez <span>→</span></a>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ISIŞAH DÜNYASI (hikaye kartları) -->
 <section class="pad" id="dunya" style="padding-top:0">
@@ -849,6 +883,41 @@
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)
     document.querySelectorAll('video').forEach(v=>{v.removeAttribute('autoplay');v.pause();});
   document.getElementById('yr').textContent=new Date().getFullYear();
+
+  // marka seçimi: kart/hero/filtre → Ürünler + Vitrin o markaya süzülür; #marka=<b> derin bağlantı
+  (()=>{
+    const BR={borsah:{h:'BORŞAH BORU ürünleri.',p:'Paslanmaz çelik boru: dikişli, tavlı, kangal ve oval profiller.'},
+              isisah:{h:'ISIŞAH ENDÜSTRİYEL ürünleri.',p:'Sanayi tipi rezistanstan endüstriyel fırına, kanal tipi ve mobil ısıtıcılara.'},
+              salmex:{h:'SALMEX ürünleri.',p:'Yoğuşmalı kombi ve kazanlar için sarmal eşanjör boruları ve eşanjör aileleri.'}};
+    const DEF={h:'Üretim yelpazesi.',p:'Gerçek ürün gruplarımızdan bir seçki: hammadde borusundan bitmiş ısıtma sistemine.'};
+    const cards=[...document.querySelectorAll('#urunler .card')],vcards=[...document.querySelectorAll('.vcard')];
+    const H=document.getElementById('urH'),Pp=document.getElementById('urP');
+    const brandOf=a=>{const m=(a.getAttribute('href')||'').match(/#hol=([a-z]+)/);return m?m[1]:''};
+    function apply(b,scroll){
+      b=BR[b]?b:'';
+      document.documentElement.dataset.marka=b;
+      document.querySelectorAll('.brandcard').forEach(c=>c.classList.toggle('sel',c.dataset.b===b));
+      document.querySelectorAll('.bfilter button').forEach(x=>x.setAttribute('aria-selected',String((x.dataset.b||'')===b)));
+      cards.forEach(c=>c.classList.toggle('off',!!b&&c.dataset.b!==b));
+      vcards.forEach(v=>v.classList.toggle('off',!!b&&brandOf(v)!==b));
+      const t=b?BR[b]:DEF; H.textContent=t.h; Pp.textContent=t.p;
+      if(b) history.replaceState(null,'','#marka='+b); else if(location.hash.startsWith('#marka=')) history.replaceState(null,'',location.pathname);
+      if(scroll) document.getElementById('urunler').scrollIntoView({behavior:'smooth',block:'start'});
+    }
+    document.querySelectorAll('.brandcard').forEach(c=>{
+      c.setAttribute('role','button'); c.tabIndex=0; c.setAttribute('aria-label',c.querySelector('h3').textContent+' ürünlerini göster');
+      const hint=document.createElement('span'); hint.className='bhint'; hint.textContent='Ürünleri gör ↓'; c.appendChild(hint);
+      c.addEventListener('click',e=>{ if(e.target.closest('a')) return; apply(c.dataset.b,true); });
+      c.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); apply(c.dataset.b,true); } });
+    });
+    document.querySelectorAll('.bfilter button').forEach(x=>x.addEventListener('click',()=>apply(x.dataset.b||'',false)));
+    const MAP={'ISIŞAH':'isisah','BORŞAH':'borsah','SALMEX':'salmex'};
+    document.querySelectorAll('.hero-visual .bstack b').forEach(x=>{ x.setAttribute('role','button'); x.tabIndex=0; x.dataset.b=MAP[x.textContent.trim()]||'';
+      x.addEventListener('click',()=>apply(x.dataset.b,true)); });
+    const rd=()=>{ const m=location.hash.match(/^#marka=([a-z]+)$/); return m?m[1]:null; };
+    if(rd()) apply(rd(),false);
+    addEventListener('hashchange',()=>{ const b=rd(); if(b) apply(b,true); });
+  })();
 </script>
 </body>
 </html>
