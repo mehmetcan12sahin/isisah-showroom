@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>ISIŞAH ENDÜSTRİYEL — Çelikten ısıya, 1982'den bugüne</title>
+<title>ISIŞAH ENDÜSTRİYEL — Isının gücü, teknolojinin hassasiyeti · 1982'den bugüne</title>
 <meta name="description" content="ISIŞAH Endüstriyel: 1982'den bu yana Bursa DOSAB'da paslanmaz çelik boru (Borşah), sanayi tipi rezistans, endüstriyel fırın, kanal tipi ve mobil ısıtıcılar ile BOYKUR oto boya kurutma sistemleri. ISO 9001:2015." />
 <meta name="theme-color" content="#000000" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ISIŞAH GROUP" />
-<meta property="og:title" content="ISIŞAH ENDÜSTRİYEL — Çelikten ısıya, 1982'den bugüne" />
+<meta property="og:title" content="ISIŞAH ENDÜSTRİYEL — Isının gücü, teknolojinin hassasiyeti · 1982'den bugüne" />
 <meta property="og:description" content="Paslanmaz çelik borudan sanayi tipi rezistansa, endüstriyel fırından oto boya kurutmaya: Bursa DOSAB'dan ısıtma teknolojisi." />
 <meta property="og:url" content="https://isisah.com.tr/" />
 <meta property="og:image" content="https://isisah.com.tr/showroom/assets/img/og-cover.jpg" />
@@ -128,6 +128,14 @@
     font-family:var(--tech);font-weight:600;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
     color:var(--cc,var(--bc,var(--vio1)));text-shadow:0 0 10px color-mix(in srgb,var(--cc,var(--bc,var(--vio1))) 50%,transparent)}
   @media(hover:hover){.card .go3d:hover,.brandcard .go3d:hover{color:#fff}}
+  .news{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .newscard{border:1px solid var(--line);border-radius:12px;padding:24px;background:var(--panel)}
+  .newscard time{display:block;font-family:var(--tech);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--vio1)}
+  .newscard h3{margin:10px 0 8px;font-size:1.12rem;line-height:1.3}
+  .newscard p{color:var(--muted);font-size:.93rem;margin:0}
+  .newscard .go3d{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-family:var(--tech);font-weight:600;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--steel)}
+  @media(hover:hover){.newscard .go3d:hover{color:#fff}}
+  @media(max-width:900px){.news{grid-template-columns:1fr}}
 
   /* vitrin — yatay kaydırmalı ürün şeridi (Apple carousel deseni) */
   .vitrin{display:flex;gap:16px;overflow-x:auto;padding:10px 28px 26px;scroll-snap-type:x mandatory;
@@ -180,7 +188,7 @@
   .hero .kick{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:40px;padding:7px 16px;font-family:var(--tech);font-size:.72rem;letter-spacing:.2em;color:var(--steel);text-transform:uppercase;
     background:#05050acc;box-shadow:inset 0 1px 0 rgba(255,255,255,.09)}
   .hero .kick b{color:var(--vio1)}
-  .hero h1{font-size:clamp(3rem,7.2vw,5.6rem);margin:22px 0 0}
+  .hero h1{font-size:clamp(2.6rem,6vw,4.6rem);margin:22px 0 0}
   .hero h1 .l2{display:block}
   .hero .lead{color:var(--muted);font-size:1.12rem;max-width:520px;margin:22px 0 32px}
   .hero .cta{display:flex;gap:14px;flex-wrap:wrap}
@@ -191,6 +199,8 @@
   .hero-visual .tag{position:absolute;left:16px;bottom:16px;z-index:2;font-family:var(--tech);font-size:.72rem;letter-spacing:.18em;
     text-transform:uppercase;color:#fff;background:#000c;backdrop-filter:blur(4px);padding:8px 14px;border-radius:8px}
   .hero-visual::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,#000,transparent 45%);z-index:1}
+  .hero-visual .bstack{display:flex;flex-direction:column;gap:7px;padding:12px 18px 12px 16px;border-left:2px solid var(--vio1);border-radius:0 8px 8px 0;font-size:.78rem;letter-spacing:.24em}
+  .hero-visual .bstack b{font-weight:600}
 
   /* stats strip */
   .stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#00000030}
@@ -219,6 +229,10 @@
   .about .time .row{display:grid;grid-template-columns:74px 1fr;gap:18px;padding:14px 0;border-top:1px solid var(--line)}
   .about .time .yr{font-family:var(--disp);font-weight:700;color:var(--vio1);font-size:1.3rem;text-shadow:0 0 12px color-mix(in srgb,var(--vio2) 50%,transparent)}
   .about .time .tx{color:var(--steel);font-size:.94rem}
+  .about .vm{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:30px;padding-top:26px;border-top:1px solid var(--line)}
+  .about .vm h3{margin:0 0 8px;font-family:var(--tech);font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--vio1)}
+  .about .vm p{margin:0;font-size:.92rem;color:var(--steel)}
+  @media(max-width:640px){.about .vm{grid-template-columns:1fr}}
 
   /* brands */
   .brands{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
@@ -290,8 +304,8 @@
 
   /* railway */
   .rail-hero{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;margin-bottom:56px}
-  .rail-hero img{width:100%;max-width:540px;margin:0 auto;display:block;filter:drop-shadow(0 26px 30px #000a)}
-  @media(max-width:960px){.rail-hero img{max-width:420px}}
+  .rail-hero img{width:100%;max-width:440px;margin:0 auto;display:block;filter:drop-shadow(0 26px 30px #000a)}
+  @media(max-width:960px){.rail-hero img{max-width:340px}}
   .rail-hero p{color:var(--muted);margin-top:16px}
   .railgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:64px}
   .railcard{border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:20px 22px;background:linear-gradient(165deg,rgba(12,14,22,.92),rgba(3,4,8,.96));
@@ -407,8 +421,7 @@
       <a href="#markalar">Markalar</a>
       <a href="#urunler">Ürünler</a>
       <a href="urunler.html">Showroom</a>
-      <a href="#boykur">BOYKUR</a>
-      <a href="#demiryolu">Demiryolu</a>
+      <a href="#haberler">Haberler</a>
       <a href="#iletisim">İletişim</a>
       <a class="btn" href="#iletisim">Teklif Al</a>
     </nav>
@@ -428,8 +441,8 @@
   <div class="wrap">
     <div class="reveal in">
       <span class="kick">KURULUŞ <b>1982</b> · DOSAB BURSA · ISO 9001:2015</span>
-      <h1>Çelikten<span class="l2 grad-text">ısıya.</span></h1>
-      <p class="lead">1982'den bu yana paslanmaz çelik borudan sanayi tipi rezistansa, endüstriyel fırından oto boya kurutma sistemlerine uzanan üretim: ısıtma teknolojisinde Türkiye'nin köklü mühendislik gücü.</p>
+      <h1>Isının gücü,<span class="l2 grad-text">teknolojinin hassasiyeti.</span></h1>
+      <p class="lead">1982'den bu yana paslanmaz çelik borudan sanayi tipi rezistansa, doğalgazlı yoğuşmalı kombi eşanjörlerinden oto boya kurutma sistemlerine uzanan üretim: ısıtma teknolojisinde Türkiye'nin köklü mühendislik gücü.</p>
       <div class="cta">
         <a class="btn" href="urunler.html">Ürün Showroom'u Gez <span>→</span></a>
         <a class="btn ghost" href="#urunler">Ürünler</a>
@@ -438,7 +451,7 @@
     </div>
     <div class="hero-visual reveal in" data-d="2">
       <img src="assets/img/bina-gece.webp" alt="ISIŞAH GROUP merkez binası" fetchpriority="high" width="1600" height="905">
-      <span class="tag">ISIŞAH GROUP · DOSAB Bursa</span>
+      <span class="tag bstack" aria-label="Grup markaları"><b>ISIŞAH</b><b>BORŞAH</b><b>SALMEX</b></span>
     </div>
   </div>
 </section>
@@ -447,9 +460,9 @@
 <section class="stats">
   <div class="wrap">
     <div class="stat reveal"><div class="n grad-text" data-count="44" data-suffix=" yıl">0 yıl</div><div class="k">Kesintisiz Üretim</div></div>
-    <div class="stat reveal" data-d="1"><div class="n grad-text" data-count="90" data-prefix="%">%0</div><div class="k">Defrost Sektör Payı</div></div>
-    <div class="stat reveal" data-d="2"><div class="n grad-text" data-count="2500" data-suffix=" V">0 V</div><div class="k">Test Gerilimi</div></div>
-    <div class="stat reveal" data-d="3"><div class="n grad-text" data-count="36" data-suffix=" ürün">0 ürün</div><div class="k">3B Showroom'da</div></div>
+    <div class="stat reveal" data-d="1"><div class="n grad-text" data-count="3" data-suffix=" marka">0 marka</div><div class="k">Tek Çatı Altında</div></div>
+    <div class="stat reveal" data-d="2"><div class="n grad-text" data-count="8">0</div><div class="k">Ürün Gamı · Mutfaktan Savunmaya</div></div>
+    <div class="stat reveal" data-d="3"><div class="n grad-text" data-count="100" data-prefix="%">%0</div><div class="k">Yerli Üretim</div></div>
   </div>
 </section>
 
@@ -465,7 +478,7 @@
 <section class="pad" id="kurumsal">
   <div class="wrap about">
     <div class="reveal">
-      <h2 style="font-size:clamp(2.2rem,5vw,3.4rem)">Isıya biçim veren<br>köklü mühendislik.</h2>
+      <h2 style="font-size:clamp(2.2rem,5vw,3.4rem)">Hakkımızda.</h2>
       <p>ISIŞAH markası 1982 yılında çeşitli endüstri kolları için sanayi tipi rezistans üretmek üzere kuruldu. 1995'te entegre tesisiyle seri üretime geçti, 2011'de ISIŞAH GROUP çatısı altında yeniden yapılandı.</p>
       <p>Bugün Bursa DOSAB'daki tesislerinde, ISO 9001:2015 kalite yönetim sistemiyle sektörünün Türkiye'deki en köklü firmalarından biri olarak ısıtma sistemleri üretiyor.</p>
       <div class="time">
@@ -474,9 +487,13 @@
         <div class="row"><span class="yr">2003</span><span class="tx">Sanayi tipi üretim için ayrı tesis.</span></div>
         <div class="row"><span class="yr">2011</span><span class="tx">ISIŞAH GROUP çatısı altında yeniden yapılanma.</span></div>
       </div>
+      <div class="vm">
+        <div><h3>Vizyonumuz</h3><p>Müşterilerimizi, çalışanlarımızı ve bayilerimizi her daim memnun ve mutluluğa ulaştıran; kaliteden ödün vermeden zirvede, güvenilir ve lider global şirket olmak.</p></div>
+        <div><h3>Misyonumuz</h3><p>Müşterilerimize şirket ortağımız gibi davranmak ve kıymetli müşterilerimiz için değer yaratmak.</p></div>
+      </div>
     </div>
     <div class="imgcol reveal" data-d="2">
-      <img src="assets/img/paslanmaz-boru.jpg" alt="Paslanmaz çelik boru üretimi" width="1400" height="933" loading="lazy" decoding="async">
+      <img src="assets/img/fabrika-genel.webp" alt="ISIŞAH üretim tesisi — DOSAB Bursa" width="1400" height="788" loading="lazy" decoding="async">
       <img src="assets/img/rezistanslar.jpg" alt="Rezistanslar" width="800" height="600" loading="lazy" decoding="async">
       <img src="assets/img/firin.jpg" alt="Endüstriyel fırın" width="800" height="600" loading="lazy" decoding="async">
     </div>
@@ -494,8 +511,8 @@
       <div class="brandcard reveal" data-b="borsah">
         <div class="bnum">PASLANMAZ ÇELİK BORU</div>
         <h3>Borşah Boru</h3>
-        <p>Rezistans imalatı ve sanayi için yüksek standartlarda paslanmaz çelik boru üretimi. Soğuk şekillendirme (roll forming) ve TIG kaynağıyla Ø6–25 mm aralığında dikişli boru.</p>
-        <ul><li>Paslanmaz Çelik</li><li>Ø6–25 mm</li><li>TIG Kaynak</li><li>Oval / Yuvarlak</li></ul>
+        <p>Rezistans imalatı ve sanayi için yüksek standartlarda paslanmaz çelik boru üretimi. Soğuk şekillendirme (roll forming) ve TIG kaynağıyla Ø6–42 mm çap, 0,35–2 mm et kalınlığında dikişli boru; tavlı ve kangal olarak da üretilir.</p>
+        <ul><li>Paslanmaz Çelik</li><li>Ø6–42 mm</li><li>TIG Kaynak</li><li>Tavlı / Kangal</li><li>Oval / Yuvarlak</li></ul>
         <a class="go3d" href="urunler.html#hol=borsah">Showroom'da Gör →</a>
       </div>
       <div class="brandcard reveal" data-d="2" data-b="isisah">
@@ -508,7 +525,7 @@
       <div class="brandcard reveal" data-d="3" data-b="salmex">
         <div class="bnum">ISI EŞANJÖRLERİ</div>
         <h3>Salmex Isı Eşanjörleri</h3>
-        <p>Yoğuşmalı, elektrikli ve konvansiyonel kombi ile kazan eşanjörleri. Paslanmaz spiral, helisel ve kanatlı eşanjör aileleriyle ısı transferi çözümleri.</p>
+        <p>Yoğuşmalı, elektrikli ve konvansiyonel kombi ile kazan eşanjörleri. Paslanmaz sarmal eşanjör boruları, helisel ve kanatlı eşanjör aileleriyle ısı transferi çözümleri.</p>
         <ul><li>Yoğuşmalı Eşanjör</li><li>Kombi</li><li>Kazan</li><li>Robotlu Üretim Hattı</li></ul>
         <a class="go3d" href="urunler.html#hol=salmex">Showroom'da Gör →</a>
         <a class="tourbox" href="fabrika.html">
@@ -526,7 +543,7 @@
     <div class="feature salmex reveal">
       <div class="txt">
         <h2>SALMEX<br>Robotlu Eşanjör Hattı</h2>
-        <p>SALMEX ısı eşanjörleri artık DOSAB'daki yeni robotlu üretim hattında üretiliyor: spiral eşanjör bobinleri robotik hücrede işleniyor, hat çıkışında kalite kontrolden geçiyor.</p>
+        <p>SALMEX ısı eşanjörleri artık DOSAB'daki yeni robotlu üretim hattında üretiliyor: sarmal eşanjör boruları robotik hücrede işleniyor, hat çıkışında kalite kontrolden geçiyor.</p>
         <p>Yeni yatırımla artan kapasite; seri üretimde tutarlı kaynak ve form kalitesi.</p>
         <span class="tofas">Yeni yatırım · Robotlu üretim hücresi</span>
       </div>
@@ -545,16 +562,16 @@
     <div class="grid">
       <article data-b="borsah" class="card reveal"><div class="ph"><img src="assets/img/paslanmaz-boru.jpg" alt="Paslanmaz Boru" width="1400" height="933" loading="lazy" decoding="async"></div>
         <div class="body"><div class="cat">Borşah Boru</div><h3>Paslanmaz Boru</h3>
-        <p>Ø6–25 mm, et kalınlığı 0.35–1.50 mm. Argon/hidrojen koruyucu gaz altında TIG kaynak.</p><a class="go3d" href="urunler.html#hol=borsah">Showroom'da Gör →</a></div></article>
+        <p>Ø6–42 mm, et kalınlığı 0,35–2 mm. Argon/hidrojen koruyucu gaz altında TIG kaynak.</p><a class="go3d" href="urunler.html#hol=borsah">Showroom'da Gör →</a></div></article>
       <article data-b="borsah" class="card reveal" data-d="1"><div class="ph"><img src="assets/img/kangal-boru.jpg" alt="Tavlı ve Kangal Boru" width="1400" height="933" loading="lazy" decoding="async"></div>
         <div class="body"><div class="cat">Borşah Boru</div><h3>Tavlı & Kangal Boru</h3>
-        <p>Ø6–16 mm, 1040–1100°C tav. 100–400 m kangal boyu, 100 bar basınç testi.</p><a class="go3d" href="urunler.html#hol=borsah">Showroom'da Gör →</a></div></article>
+        <p>Ø6–42 mm aralığında tavlı ve kangal boru; 100–400 m kangal boyu, 100 bar basınç testi.</p><a class="go3d" href="urunler.html#hol=borsah">Showroom'da Gör →</a></div></article>
       <article data-b="borsah" class="card reveal" data-d="2"><div class="ph"><img src="assets/img/oval-boru.jpg" alt="Oval Boru" width="1400" height="933" loading="lazy" decoding="async"></div>
         <div class="body"><div class="cat">Borşah Boru</div><h3>Oval Boru</h3>
         <p>Rezistans imalatı, mobilya ve sanayi uygulamaları için oval kesitli boru profilleri.</p><a class="go3d" href="urunler.html#hol=borsah">Showroom'da Gör →</a></div></article>
       <article data-b="isisah" class="card reveal"><div class="ph"><img src="assets/img/rezistanslar.jpg" alt="Rezistanslar" width="800" height="600" loading="lazy" decoding="async"></div>
         <div class="body"><div class="cat">ISIŞAH Endüstriyel</div><h3>Rezistanslar</h3>
-        <p>Boru ve daldırma tipi ısıtıcı elemanlar. −60°C…250°C dayanım, tamamen yerli üretim.</p><a class="go3d" href="urunler.html#hol=isisah_agir">Showroom'da Gör →</a></div></article>
+        <p>Boru ve daldırma tipi ısıtıcı elemanlar. Yüksek sıcaklığa dayanıklı, tamamen yerli üretim.</p><a class="go3d" href="urunler.html#hol=isisah_rezistans">Showroom'da Gör →</a></div></article>
       <article data-b="isisah" class="card reveal" data-d="1"><div class="ph"><img src="assets/img/firin.jpg" alt="Endüstriyel Fırın" width="800" height="600" loading="lazy" decoding="async"></div>
         <div class="body"><div class="cat">ISIŞAH Endüstriyel</div><h3>Endüstriyel Fırın</h3>
         <p>Kontrol panelli sanayi tipi ısıl işlem ve kurutma fırınları; projeye özel üretim.</p><a class="go3d" href="urunler.html#hol=isisah_agir">Showroom'da Gör →</a></div></article>
@@ -578,7 +595,7 @@
       <div class="shot"><img src="assets/img/showroom-preview.webp" alt="ISIŞAH 3B ürün showroom'u — üç marka, üç kapı" width="1200" height="750" loading="lazy" decoding="async"></div>
       <div class="txt">
         <span class="bk">İnteraktif Deneyim</span>
-        <h2>36 ürünü 3B showroom'da gezin.</h2>
+        <h2>Ürün gamını 3B showroom'da gezin.</h2>
         <p>Üç marka, üç kapı: ISIŞAH, SALMEX ve BORŞAH ürünlerini kaidelerinde inceleyin, beğendiğinize tek tıkla teklif isteyin.</p>
         <a class="btn" href="urunler.html">Showroom'u Gez <span>→</span></a>
       </div>
@@ -603,7 +620,7 @@
         <div class="wtx"><div class="wk">Savunma Sanayi</div><h3>Milli platformlarda</h3><span class="wgo">Savunma holünü gez →</span></div>
       </a>
       <a class="wcard reveal" data-c="electric" data-d="2" href="urunler.html#hol=salmex">
-        <video autoplay muted loop playsinline preload="metadata" poster="assets/img/uretim-poster.webp" aria-label="SALMEX eşanjör spirali üretim hattı"><source src="assets/img/uretim-salmex.mp4" type="video/mp4"></video>
+        <video autoplay muted loop playsinline preload="metadata" poster="assets/img/uretim-poster.webp" aria-label="SALMEX sarmal eşanjör borusu üretim hattı"><source src="assets/img/uretim-salmex.mp4" type="video/mp4"></video>
         <div class="wtx"><div class="wk">Üretim</div><h3>Kendi hattımızdan</h3><span class="wgo">SALMEX holünü gez →</span></div>
       </a>
       <a class="wcard contain reveal" data-c="electric" data-d="3" href="#demiryolu">
@@ -649,7 +666,7 @@
       <div class="reveal">
         <h2 style="font-size:clamp(2.2rem,5vw,3.4rem)">Demiryolu<br>İklimlendirme.</h2>
         <p>ISIŞAH ENDÜSTRİYEL, 80'li yılların sonundan bu yana yurt içi ve yurt dışındaki demiryolu sanayine klima ısıtıcıları, personel ve yolcu koltuk ısıtıcıları, TIJ kasaları, şasi ısıtıcıları ile ray ve makas ısıtıcıları üretiyor.</p>
-        <p>Yüksek hızlı tren standartlarında 2500 V yüksek gerilime dayanıklı, şok ve titreşime hazır rezistanslar; GP03 ve mika izolasyonla kaçak akım gövdeye iletilmez. Her ısıtma ünitesinde çift kademeli termostat koruması bulunur.</p>
+        <p>Yüksek hızlı tren standartlarında yüksek gerilime dayanıklı, şok ve vibrasyon testlerinden geçen rezistanslar; GP03 ve mika izolasyonla kaçak akım gövdeye iletilmez. Her ısıtma ünitesinde çift kademeli termostat koruması bulunur.</p>
       </div>
       <div class="reveal" data-d="2"><img src="assets/products/tren.webp" alt="Demiryolu iklimlendirme çözümleri" width="1171" height="758" loading="lazy" decoding="async"></div>
     </div>
@@ -670,7 +687,7 @@
       <div class="row"><span class="yr">2009-10</span><span class="tx"><b>TÜLOMSAŞ Projesi:</b> lokomotif rezistans üniteleri.</span></div>
       <div class="row"><span class="yr">2011-26</span><span class="tx"><b>Makas & Ray Isıtıcıları + Personel Isıtıcıları:</b> tamamı paslanmaz personel ısıtma üniteleri; termostatik aşırı ısınma emniyeti.</span></div>
       <div class="row"><span class="yr">2014</span><span class="tx"><b>Ankara Metro:</b> koltuk ısıtıcıları (750 W / 1300 W – 380 V), HVAC ısıtma elemanları ve fren borusu projesi (Borşah paslanmaz borularıyla).</span></div>
-      <div class="row"><span class="yr">2015-16</span><span class="tx"><b>Tramvay Klima Isıtıcısı · TÜVASAŞ DMU · İstanbul Ulaşım Modernizasyon · YZK 850 İBB:</b> yüksek hızlı tren yolcu ısıtıcıları, 2500 V dayanım.</span></div>
+      <div class="row"><span class="yr">2015-16</span><span class="tx"><b>Tramvay Klima Isıtıcısı · TÜVASAŞ DMU · İstanbul Ulaşım Modernizasyon · YZK 850 İBB:</b> yüksek hızlı tren yolcu ısıtıcıları, yüksek gerilim dayanımı.</span></div>
       <div class="row"><span class="yr">2016-17</span><span class="tx"><b>E-14000 / İstanbul Ulaşım:</b> tren klima ısıtıcıları (M1 hattı).</span></div>
       <div class="row"><span class="yr">2018</span><span class="tx"><b>Samsun Projesi:</b> ray ve makas ısıtıcıları.</span></div>
       <div class="row"><span class="yr">2018-19</span><span class="tx"><b>Durmazlar Alibeyköy:</b> koltuk altı ısıtıcılar (Eminönü–Alibeyköy hattı) ve <b>Yazkar</b> klima batarya ısıtıcısı.</span></div>
@@ -682,6 +699,7 @@
       <div class="row"><span class="yr">2023-26</span><span class="tx"><b>TÜRASAŞ EMU 225:</b> yolcu, vestibül ve makinist ısıtıcıları.</span></div>
       <div class="row"><span class="yr">2025-26</span><span class="tx"><b>İstanbul Metro:</b> klima ve koltuk altı ısıtıcıları.</span></div>
       <div class="row"><span class="yr">2026</span><span class="tx"><b>Samsun Projesi:</b> tramvay koltuk düzenine özel elektrikli ısıtıcılar.</span></div>
+      <div class="row"><span class="yr">—</span><span class="tx"><b>Havalimanı Treni Projesi:</b> raylı araç ısıtıcı üniteleri.</span></div>
     </div>
 
     <div class="railcols">
@@ -689,10 +707,10 @@
         <h3>Standart Testler</h3>
         <ul>
           <li>Güç testi ve izolasyon direnci testi</li>
-          <li>2500 V yüksek gerilimde kaçak akım (dielektrik) testi</li>
-          <li>Şok & titreşim ve yangına dayanım testleri</li>
+          <li>Yüksek gerilimde kaçak akım (dielektrik) testi</li>
+          <li>Şok ve vibrasyon testleri (demiryolu standartlarına uygun); yangına dayanım</li>
           <li>Boyut kontrolleri, çekme testi, topraklama direnci</li>
-          <li>Yüzey/ısıtıcı sıcaklık, fan gürültü seviyesi, IP seviye testi</li>
+          <li>Yüzey/ısıtıcı sıcaklık ve IP seviye testleri; fan gürültü seviyesi (desibel) ölçümü</li>
         </ul>
       </div>
       <div class="railbox reveal" data-d="2">
@@ -735,6 +753,18 @@
 </section>
 
 <!-- ILETISIM -->
+<!-- HABERLER -->
+<section class="pad" id="haberler" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Haberler.</h2><p>ISIŞAH GROUP'tan gelişmeler.</p></div>
+    <div class="news">
+      <article class="newscard reveal"><time>Ağustos 2026</time><h3>3B ürün showroom'u yayında</h3><p>Üç markanın ürünleri kendi hollerinde; kaydırarak uçulan interaktif 3B showroom isisah.com.tr'de açıldı.</p><a class="go3d" href="urunler.html">Showroom'u gez →</a></article>
+      <article class="newscard reveal" data-d="1"><time>2026</time><h3>SALMEX robotlu eşanjör hattı devrede</h3><p>Sarmal eşanjör boruları DOSAB'daki robotlu üretim hattında işleniyor; her ünite hat çıkışında sızdırmazlık testinden geçiyor.</p><a class="go3d" href="#salmex-hat">Hattı incele →</a></article>
+      <article class="newscard reveal" data-d="2"><time>2026</time><h3>Fabrika turu: üretimi kaydırarak gezin</h3><p>Presten test istasyonuna kesintisiz üretim filmi, sizin kaydırma hızınızda akıyor.</p><a class="go3d" href="fabrika.html">Tura çık →</a></article>
+    </div>
+  </div>
+</section>
+
 <section class="pad" id="iletisim" style="padding-top:0">
   <div class="wrap">
     <div class="sec-head reveal">

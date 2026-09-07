@@ -112,7 +112,7 @@
 <div class="cap" data-a="0.02" data-b="0.13" style="--cc:var(--emb1)"><span class="k">01 · Pres</span><h2>Çelik biçim alır</h2><p>Her ünite tek parça sacdan, kendi presimizde doğar.</p></div>
 <div class="cap" data-a="0.15" data-b="0.27" style="--cc:var(--ele1)"><span class="k">02 · Üretim Hattı</span><h2>Kesintisiz akış</h2><p>Hammaddeden bitmiş gövdeye — tek çatı altında.</p></div>
 <div class="cap" data-a="0.29" data-b="0.40" style="--cc:var(--ele1)"><span class="k">03 · Şekillendirme</span><h2>Milimetrik hassasiyet</h2><p>Boru ve kanat formları CNC kontrolünde şekillenir.</p></div>
-<div class="cap" data-a="0.42" data-b="0.55" style="--cc:var(--ele1)"><span class="k">04 · Spiral Sarım</span><h2>SALMEX imzası</h2><p>Eşanjör spirali, saniyeler içinde kanat kanat sarılır.</p></div>
+<div class="cap" data-a="0.42" data-b="0.55" style="--cc:var(--ele1)"><span class="k">04 · Sarmal Sarım</span><h2>SALMEX imzası</h2><p>Sarmal eşanjör borusu, saniyeler içinde kanat kanat sarılır.</p></div>
 <div class="cap" data-a="0.57" data-b="0.69" style="--cc:var(--emb1)"><span class="k">05 · Isıl İşlem</span><h2>Ateşle sınanır</h2><p>Gövdeler fırında dayanımını kazanır.</p></div>
 <div class="cap" data-a="0.71" data-b="0.83" style="--cc:var(--ele1)"><span class="k">06 · Robotlu Üretim</span><h2>İnsan hatasına yer yok</h2><p>Robot hücreleri taşır, işler, paketler.</p></div>
 <div class="cap" data-a="0.85" data-b="0.93" style="--cc:var(--mnt1,#35ffa8)"><span class="k">07 · Test</span><h2>Her ünite sınanır</h2><p>Sızdırmazlık ve güç testi olmadan hiçbir ürün çıkmaz.</p></div>
@@ -143,7 +143,7 @@ const PX_PER_SEC=150;                                  // sahne hızı: saniye b
 
 // python http.server byte-range vermez -> videoyu blob olarak indirip src yapıyoruz.
 // Canlıda da işe yarar: scrub zaten tüm dosyayı ister; yüzde göstergeli ön yükleme.
-const SRC='assets/img/fabrika-scrub.mp4';
+const SRC='assets/img/fabrika-scrub.mp4?v=2';
 fetch(SRC).then(async r=>{
   const total=+r.headers.get('Content-Length')||0;
   const reader=r.body.getReader(); const chunks=[]; let got=0;
