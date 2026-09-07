@@ -6,7 +6,7 @@ cd "$(dirname "$0")/.."
 NETRC=~/.isisah-ftp.netrc
 LIST=$(python3 - <<'PY'
 import re,os
-used=set(['index.html','urunler.html','fabrika.html','hakkimizda.html','vizyon-misyon.html','sitemap.xml'])
+used=set(['index.html','urunler.html','fabrika.html','hakkimizda.html','vizyon-misyon.html','sitemap.xml','assets/img/og-cover.jpg'])  # og-cover: mutlak URL ile referanslı, regex yakalamaz
 for f in ['index.html','urunler.html','fabrika.html','hakkimizda.html','vizyon-misyon.html']:
     s=open(f).read()
     for m in re.findall(r'(?:src|href)="(assets/[^"]+)"',s): used.add(m)
