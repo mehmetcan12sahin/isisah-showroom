@@ -14,6 +14,8 @@ for f in ['index.html','urunler.html','fabrika.html','hakkimizda.html','vizyon-m
         for g in m:
             if g: used.add(g)
     for m in re.findall(r"'(assets/audio/[^']+)'",s): used.add(m)
+    # JS içinde tek tırnaklı varlık yolları (fabrika SRC vb.) — ?v= cache-buster'ı at
+    for m in re.findall(r"'(assets/[^'?]+)(?:\?[^']*)?'",s): used.add(m)
 for fn in os.listdir('assets/products'): used.add('assets/products/'+fn)
 for fn in os.listdir('assets/catalog'):
     if fn.startswith('logo-'): used.add('assets/catalog/'+fn)

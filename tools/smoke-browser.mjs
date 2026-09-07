@@ -56,7 +56,8 @@ await check('/showroom/fabrika.html', 'fabrika turu', async p => {
   }, { timeout: 60000 });
   const dur = await p.evaluate(() => document.getElementById('film').duration.toFixed(1));
   const caps = await p.locator('.cap').count();
-  return (+dur > 20 && caps === 7) ? `film=${dur}sn başlık=7` : `FAIL film=${dur} başlık=${caps}`;
+  // 52.08 sn = kırpılmış film (52.17 = eski, son 2 karede eski çalışan) — üst sınır bilinçli
+  return (+dur > 20 && +dur < 52.15 && caps === 7) ? `film=${dur}sn başlık=7` : `FAIL film=${dur} (beklenen ≤52.1) başlık=${caps}`;
 });
 
 await browser.close();
