@@ -257,7 +257,7 @@ hak_ld = '{"@context":"https://schema.org","@type":"AboutPage","name":"Hakkımı
     'ISIŞAH GROUP · 1982\'den bugüne', 'Hakkımızda.',
     'Bursa DOSAB\'da sanayi tipi rezistanstan paslanmaz çelik boruya ve ısı eşanjörlerine uzanan üç marka, tek çatı: 44 yıllık mühendislik birikimi.',
     hak_body, hak_ld,
-    '<img src="assets/img/bina-gece.webp" alt="ISIŞAH GROUP merkez binası — DOSAB Bursa" width="1600" height="905" fetchpriority="high"><span class="tag">ISIŞAH GROUP · DOSAB Bursa</span>'), encoding='utf-8')
+    '<img src="assets/img/bina-gece-3marka.webp" alt="ISIŞAH GROUP merkez binası — üç marka, DOSAB Bursa" width="1600" height="905" fetchpriority="high"><span class="tag">ISIŞAH GROUP · DOSAB Bursa</span>'), encoding='utf-8')
 
 # ---------------- VİZYON & MİSYON ----------------
 viz_body = '''
