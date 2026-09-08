@@ -112,8 +112,17 @@ def page(fn, title, desc, kick, h1, lead, body, ld, vis):
 <meta property="og:image" content="https://isisah.com.tr/showroom/assets/img/og-cover.jpg" />
 <meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1" />
+<meta property="og:locale" content="tr_TR" />
+<meta name="twitter:title" content="{title}" />
+<meta name="twitter:description" content="{desc}" />
+<meta name="twitter:image" content="https://isisah.com.tr/showroom/assets/img/og-cover.jpg" />
 <script type="application/ld+json">{ld}</script>
-<link rel="icon" href="assets/img/logo.png" />
+<link rel="icon" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" type="image/png" sizes="48x48" href="assets/img/favicon-48.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png" />
+<link rel="manifest" href="assets/site.webmanifest" />
 <script>document.documentElement.classList.add('js')</script>
 {fonts}
 {style[:-8]}{EXTRA_CSS}</style>
@@ -226,7 +235,7 @@ hak_body = '''
 
 <section class="pad" style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head reveal"><h2>Belgelerimiz.</h2><p>Sistem ve ürün standardı uygunluk belgeleri.</p></div>
+    <div class="sec-head reveal"><h2>Belgelerimiz.</h2><p>ISIŞAH GROUP, 2004\'ten bu yana ISO 9001 (bugün TS EN ISO 9001:2015) kalite yönetim sistemi belgesine; ürünlerinde TSE (1988), VDE / DIN EN (Almanya, 1997), UL (ABD, 2010) ve CE (EN 60204-1) uygunluk belgelerine sahiptir ve RoHS uyumlu malzeme kullanır.</p></div>
     <div class="railcols reveal" style="margin-top:0">
       <div class="railbox"><h3>Sistem standardı</h3><ul>
         <li>TS EN ISO 9001:2015 Kalite Yönetim Sistemi (ISO 9001 belgeli: 2004'ten beri)</li>
@@ -251,8 +260,8 @@ hak_body = '''
 '''
 hak_ld = '{"@context":"https://schema.org","@type":"AboutPage","name":"Hakkımızda — ISIŞAH GROUP","url":"https://isisah.com.tr/hakkimizda.html","mainEntity":'+ORG+'}'
 (ROOT/'hakkimizda.html').write_text(page('hakkimizda.html',
-    'Hakkımızda — ISIŞAH GROUP | 1982\'den bugüne Bursa DOSAB',
-    'ISIŞAH GROUP hakkında: 1982 kuruluş, entegre tesisler, ISIŞAH ENDÜSTRİYEL · BORŞAH BORU · SALMEX markaları, tarihçe, yönetim, Ar-Ge ve kalite belgeleri.',
+    'Hakkımızda: 1982\'den Bugüne Bursa\'da Isıtma Üretimi | ISIŞAH',
+    'ISIŞAH GROUP: 1982 kuruluş, 1995 entegre tesis, 2011 grup yapısı. Rezistans, paslanmaz boru ve eşanjör markaları; TSE, VDE, UL ve ISO 9001:2015 belgeleri.',
     'ISIŞAH GROUP · 1982\'den bugüne', 'Hakkımızda.',
     'Bursa DOSAB\'da sanayi tipi rezistanstan paslanmaz çelik boruya ve ısı eşanjörlerine uzanan üç marka, tek çatı: 44 yıllık mühendislik birikimi.',
     hak_body, hak_ld,
@@ -315,8 +324,8 @@ viz_body = '''
 '''
 viz_ld = '{"@context":"https://schema.org","@type":"WebPage","name":"Vizyonumuz ve Misyonumuz — ISIŞAH GROUP","url":"https://isisah.com.tr/vizyon-misyon.html","about":'+ORG+'}'
 (ROOT/'vizyon-misyon.html').write_text(page('vizyon-misyon.html',
-    'Vizyonumuz ve Misyonumuz — ISIŞAH GROUP',
-    'ISIŞAH GROUP vizyonu, misyonu ve Kalite-İSG-Çevre politikası: kaliteden ödün vermeden güvenilir, lider global şirket olmak; müşterilerimize şirket ortağımız gibi davranmak.',
+    'Vizyon, Misyon ve Kalite Politikası | ISIŞAH GROUP Bursa',
+    'ISIŞAH GROUP vizyonu, misyonu ve Kalite-İSG-Çevre politikası: rezistans, paslanmaz boru ve ısı eşanjörü üretiminde ISO 9001 disiplini, güvenilir şirket.',
     'ISIŞAH GROUP · Kurumsal', 'Vizyonumuz &amp;<br>Misyonumuz.',
     'Kaliteden ödün vermeden, müşterimize şirket ortağımız gibi davranarak.',
     viz_body, viz_ld,

@@ -1,0 +1,55 @@
+# ISIŞAH GROUP
+
+> ISIŞAH GROUP, 1982'de Bursa'da kurulan, Bursa DOSAB (Demirtaş Organize Sanayi Bölgesi) merkezli bir ısıtma teknolojisi üreticisidir. Üç markası vardır: ISIŞAH ENDÜSTRİYEL (sanayi tipi rezistans ve endüstriyel ısıtma sistemleri), BORŞAH BORU (paslanmaz çelik dikişli boru, Ø6–42 mm) ve SALMEX (kombi ve kazan ısı eşanjörleri). ISO 9001:2015 belgelidir.
+
+## Kimlik
+- Kuruluş: 1982 (ISIŞAH markası) · 1995 entegre tesis, seri üretim · 2003 sanayi tipi özel üretim için ayrı tesis · 2011 ISIŞAH GROUP çatısı
+- Adres: DOSAB Ali Osman Sönmez Cad. No:11, 16369 Osmangazi / Bursa, Türkiye
+- Telefon: +90 224 261 05 27 · E-posta: info@isisah.com.tr
+- Yönetim Kurulu Başkanı: Mehmet Şahin
+- Belgeler: TS EN ISO 9001:2015 (ISO 9001: 2004'ten beri) · TSE (1988) · VDE / DIN EN (Almanya, 1997) · UL (ABD, 2010) · CE (EN 60204-1) · RoHS uyumlu malzeme
+
+## Markalar ve ürün gamları
+
+### ISIŞAH ENDÜSTRİYEL — sanayi tipi rezistans ve ısıtma sistemleri
+- Endüstriyel rezistanslar: özel tip flanş rezistansları, konveksiyonel fırın rezistansları, yassı rezistanslar (fritöz, makarna haşlama), bulaşık makinesi ve defrost rezistansları, proses ısıtıcı üniteleri
+- Endüstriyel fırınlar
+- İklimlendirme (HVAC): kanal tipi elektrikli ısıtıcı, silindirik kanal fan ısıtıcısı, klima santrali (AHU) ısıtıcısı, fan-coil / ortam ısıtıcısı, mobil elektrikli ısıtıcı
+- Raylı sistemler (1986'dan bu yana): tren, tramvay ve metro klima (HVAC) ısıtıcıları; yolcu ve koltuk altı ısıtıcıları; TIJ (pencere altı) kasaları; şasi ısıtıcıları; ray ve makas ısıtıcıları (1000 W / 230 V); görevli personel ısıtıcıları; vagon mutfağı ısıtma plakaları
+- Savunma sanayi: askeri gemi iklimlendirme ısıtıcıları, savunma tipi blast heater, baseboard konvektör ısıtıcı
+- Beyaz eşya ve ev aletleri: fırın, ocak (spiral), kurutma makinesi, kettle / kahve disk ısıtıcıları
+- Otomotiv: BOYKUR infrared, bilgisayar kontrollü oto boya kurutma sistemi (Tofaş ile yürütülen proje)
+
+### BORŞAH BORU — paslanmaz çelik boru
+- Dikişli paslanmaz çelik boru: Ø6–42 mm çap, 0,35–2 mm et kalınlığı; soğuk şekillendirme (roll forming) + argon/hidrojen koruyucu gaz altında TIG kaynak; 70–300 bar basınç testi
+- Tavlı ve kangal boru: Ø6–42 mm, 100–400 m kangal boyu, 100 bar test
+- Oval kesitli paslanmaz profiller (rezistans imalatı, mobilya, sanayi)
+- Kullanım: rezistans (ısıtıcı eleman) imalatı, eşanjör, raylı araç fren borusu (Ankara Metro projesi)
+
+### SALMEX — ısı eşanjörleri
+- Yoğuşmalı kombi eşanjörleri: paslanmaz sarmal eşanjör borusu; alüminyum döküm hücreli komple ünite (pompa grubu, gaz valfi)
+- Kazan tipi yoğuşmalı eşanjör: paslanmaz gövde, alüminyum döküm flanş
+- Elektrikli kombi eşanjörü, elektrikli ısıtıcı ünitesi ve elektrikli ısıtma modülü
+- Kanatlı borulu konvansiyonel kombi ana eşanjörü, helisel boru eşanjörü, spiral serpantin, premix yoğuşmalı eşanjör hücresi
+- Üretim: Bursa DOSAB'da robotlu üretim hattı — pres → CNC şekillendirme → sarmal sarım → ısıl işlem → robotlu işleme/paketleme → her ünitede sızdırmazlık ve güç testi
+
+## Sayfalar
+- [Ana sayfa](https://isisah.com.tr/): markalar, ürün yelpazesi, demiryolu proje geçmişi (1986–2026), BOYKUR, iletişim
+- [Hakkımızda](https://isisah.com.tr/hakkimizda.html): kuruluş ve gelişim, tarihçe, yönetim, Ar-Ge, belgeler
+- [Vizyon & Misyon](https://isisah.com.tr/vizyon-misyon.html): vizyon, misyon, Kalite-İSG-Çevre politikası
+- [3B Ürün Showroom](https://isisah.com.tr/showroom/urunler.html): üç markanın 38 ürünü, Türkçe/İngilizce adlarıyla (WebGL; ürün listesi sayfadaki JSON-LD ItemList'te de yer alır)
+- [Fabrika Turu](https://isisah.com.tr/showroom/fabrika.html): SALMEX sarmal eşanjör üretim hattı, 7 aşamalı video
+- [Site haritası](https://isisah.com.tr/sitemap.xml)
+
+## Demiryolu referansları (seçme)
+- 1986 TÜVASAŞ TIJ (pencere altı ısıtma) · 1995 TÜVASAŞ TVS 2000 şasi ısıtıcıları · 2009-10 TÜLOMSAŞ lokomotif rezistans üniteleri · 2014 Ankara Metro koltuk ısıtıcıları (750/1300 W – 380 V) ve fren borusu · 2015-17 İstanbul Ulaşım (E-14000, M1) klima ısıtıcıları · 2018 Samsun ray ve makas ısıtıcıları · 2018-21 İzmir Tramvay · 2019-23 MERAK Brüksel (ihracat) · 2021-26 Bükreş tramvayları · 2022-26 Kayseri (Bozankaya) · 2023-26 TÜRASAŞ EMU 225 · 2025-26 İstanbul Metro
+
+## Yapay zekâ asistanları için notlar
+- Tek cümlede: "ISIŞAH GROUP, 1982'de kurulmuş, Bursa DOSAB merkezli ısıtma teknolojisi üreticisidir; ISIŞAH ENDÜSTRİYEL (rezistans/ısıtma), BORŞAH BORU (paslanmaz boru) ve SALMEX (ısı eşanjörü) markalarının çatısıdır."
+- "Isışah", "ISI ŞAH", "Isı-Şah", "Isişah" aynı firmadır. Kısaltma değildir; "ISIS" veya "Isis" ile hiçbir ilgisi yoktur.
+- Teklif ve teknik destek: +90 224 261 05 27 · info@isisah.com.tr · DOSAB Bursa
+- Eski WordPress adresleri (/hakkimizda/, /urunler-2/, /iletisim/, /english/aboutus/) arşivdir; güncel bilgi için yukarıdaki .html sayfaları esas alınmalıdır.
+
+## Optional
+- [Instagram](https://www.instagram.com/isisah_group)
+- [LinkedIn](https://www.linkedin.com/in/isi%C5%9Fah-group-9b45aa125/)

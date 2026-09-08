@@ -8,7 +8,7 @@ LIST=$(python3 - <<'PY'
 import re,os
 import glob
 PAGES=sorted(glob.glob('*.html'))  # kökteki tüm sayfalar otomatik (yeni sayfa eklenince listeye elle girmeye gerek yok)
-used=set(PAGES+['sitemap.xml','robots.txt','assets/img/og-cover.jpg'])  # og-cover: mutlak URL ile referanslı, regex yakalamaz
+used=set(PAGES+['sitemap.xml','robots.txt','llms.txt','favicon.ico','assets/img/og-cover.jpg','assets/site.webmanifest'])  # og-cover: mutlak URL ile referanslı, regex yakalamaz
 for f in PAGES:
     s=open(f).read()
     for m in re.findall(r'(?:src|href|data-src)="(assets/[^"?]+)',s): used.add(m)
@@ -27,14 +27,25 @@ for root,_,fns in os.walk('vendor'):
 print('\n'.join(sorted(u for u in used if os.path.isfile(u))))
 PY
 )
-echo "$LIST" | xargs -P 4 -I{} curl -s --netrc-file $NETRC --ftp-create-dirs -T "{}" "ftp://ftp.isisah.com.tr/httpdocs/showroom/{}"
+# bağlantı ön testi — sunucu bu IP'yi engelliyorsa sessiz düşme yerine anlaşılır dur
+curl -s -m 20 --netrc-file $NETRC -l "ftp://ftp.isisah.com.tr/httpdocs/" > /dev/null || { echo "!! FTP'ye bağlanılamadı (timeout/engel). Deploy yapılmadı. Bkz. HANDOFF: IP engeli / Birhost whitelist."; exit 1; }
+echo "$LIST" | grep -vE '^(urunler|fabrika)\.html$' | xargs -P 4 -I{} curl -s --netrc-file $NETRC --ftp-create-dirs -T "{}" "ftp://ftp.isisah.com.tr/httpdocs/showroom/{}"
+# showroom sayfaları: göreli ana sayfa/kurumsal linkleri köke çevrilerek yüklenir (kopya /showroom/index.html'e link vermesin)
+python3 - <<'PY'
+for f in ('urunler.html','fabrika.html'):
+    s=open(f).read()
+    s=s.replace('href="index.html#','href="/#').replace('href="index.html"','href="/"')
+    s=s.replace('href="hakkimizda.html"','href="/hakkimizda.html"').replace('href="vizyon-misyon.html"','href="/vizyon-misyon.html"')
+    open('/tmp/sr_'+f,'w').write(s)
+PY
+for f in urunler.html fabrika.html; do curl -s --netrc-file $NETRC -T /tmp/sr_$f "ftp://ftp.isisah.com.tr/httpdocs/showroom/$f" && rm /tmp/sr_$f; done
 echo "deploy tamam: https://isisah.com.tr/showroom/"
 
 # kök sayfalar: index + kurumsal alt sayfalar showroom kopyasından türetilir, httpdocs/ köküne yazılır
 python3 - <<'PY'
 import os
 import glob
-ROOT_PAGES=[f for f in sorted(glob.glob('*.html')) if f not in ('urunler.html','fabrika.html')]  # showroom-only sayfalar hariç, kalan her sayfa köke türetilir
+ROOT_PAGES=[f for f in sorted(glob.glob('*.html')) if f not in ('urunler.html','fabrika.html','404.html')]  # showroom-only sayfalar hariç, kalan her sayfa köke türetilir
 open('/tmp/root_pages.txt','w').write(' '.join(ROOT_PAGES))
 for f in ROOT_PAGES:
     s=open(f).read()
@@ -50,6 +61,7 @@ done
 rm -f /tmp/root_pages.txt
 curl -s --netrc-file $NETRC -T sitemap.xml "ftp://ftp.isisah.com.tr/httpdocs/sitemap.xml"
 curl -s --netrc-file $NETRC -T robots.txt "ftp://ftp.isisah.com.tr/httpdocs/robots.txt"
+for f in llms.txt favicon.ico 404.html; do curl -s --netrc-file $NETRC -T $f "ftp://ftp.isisah.com.tr/httpdocs/$f"; done
 echo "kok sayfalar guncellendi: https://isisah.com.tr/ + /hakkimizda.html + /vizyon-misyon.html"
 
 # yayın sonrası otomatik duman testi
