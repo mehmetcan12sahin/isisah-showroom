@@ -37,3 +37,10 @@ Vitrin vaka çalışması için başlangıç noktası. Kaynak: Google Search Con
 | /showroom/fabrika.html | 80 | 100 | 100 | 3,5 s | — | 15,8 MB |
 CrUX saha verisi: yok (trafik eşiği altı). Teknik sağlık (7 Eyl canlı): robots.txt Sitemap satırı YOK · http→https 301 YOK · www DNS YOK · HSTS YOK · statik Cache-Control YOK · kopya URL 200: 5 · WP self-canonical kopya: 2 · Google Fonts dış kaynak: 5 sayfa · ölçüm altyapısı (analytics): 0.
 Rakip indekslenebilir URL sayısı (sitemap <loc>): isielektrik 888 · isierrezistans 685 · safirezistans 493 · serrezistans 409 · bursarezistans 318 · baykalrezistans 142 · **isisah.com.tr 5**.
+
+## 8 Eyl 2026 ekleri
+- GSC Bağlantılar raporu: "Veri işleniyor, birkaç gün içinde tekrar kontrol edin" (mülk yeni) → backlink baseline henüz yok; ilk okuma 15 Eyl'de.
+- GSC Performans toplam tıklama (24 Ağu–7 Eyl): 201.
+- 8 Eyl: /showroom/fabrika.html için de "dizine eklenmesini iste" gönderildi → 5/5 URL istendi.
+- Sprint-1 yayına alındı (commit cd3b9b9): title'lar, self-host font, robots.txt Sitemap, lazy video, VideoObject. Sonraki Lighthouse ölçümü: 15 Eyl (aynı makine, mobil, 3 koşu medyan).
+- Not: 8 Eyl'de ofis IP'si (85.97.200.122) sunucu tarafında 443'te engellendi (dünkü yoğun tarama); dünya 200. Ölçümler dış kaynaktan (check-host, Jina reader) doğrulandı.
