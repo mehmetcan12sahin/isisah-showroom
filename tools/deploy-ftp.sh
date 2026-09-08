@@ -1,9 +1,10 @@
 #!/bin/bash
 # isisah.com.tr/showroom FTP deploy — şifre ~/.isisah-ftp.netrc'de (git'e girmez)
 # Kullanım: bash tools/deploy-ftp.sh   (repo kökünden; sadece kullanılan varlıkları yükler)
+# Uzaktan: gh workflow run deploy-ftp.yml  (GitHub Actions; ofis IP'si engelliyken tek yol)
 set -e
 cd "$(dirname "$0")/.."
-NETRC=~/.isisah-ftp.netrc
+NETRC="${NETRC:-$HOME/.isisah-ftp.netrc}"   # CI: secrets'tan yazılan geçici dosya (bkz. .github/workflows/deploy-ftp.yml)
 LIST=$(python3 - <<'PY'
 import re,os
 import glob
@@ -29,7 +30,7 @@ PY
 )
 # bağlantı ön testi — sunucu bu IP'yi engelliyorsa sessiz düşme yerine anlaşılır dur
 curl -s -m 20 --netrc-file $NETRC -l "ftp://ftp.isisah.com.tr/httpdocs/" > /dev/null || { echo "!! FTP'ye bağlanılamadı (timeout/engel). Deploy yapılmadı. Bkz. HANDOFF: IP engeli / Birhost whitelist."; exit 1; }
-echo "$LIST" | grep -vE '^(urunler|fabrika)\.html$' | xargs -P 4 -I{} curl -s --netrc-file $NETRC --ftp-create-dirs -T "{}" "ftp://ftp.isisah.com.tr/httpdocs/showroom/{}"
+echo "$LIST" | grep -vE '^(urunler|fabrika)\.html$' | xargs -P 4 -I{} curl -sS --netrc-file $NETRC --ftp-create-dirs -T "{}" "ftp://ftp.isisah.com.tr/httpdocs/showroom/{}"
 # showroom sayfaları: göreli ana sayfa/kurumsal linkleri köke çevrilerek yüklenir (kopya /showroom/index.html'e link vermesin)
 python3 - <<'PY'
 for f in ('urunler.html','fabrika.html'):
@@ -38,7 +39,7 @@ for f in ('urunler.html','fabrika.html'):
     s=s.replace('href="hakkimizda.html"','href="/hakkimizda.html"').replace('href="vizyon-misyon.html"','href="/vizyon-misyon.html"')
     open('/tmp/sr_'+f,'w').write(s)
 PY
-for f in urunler.html fabrika.html; do curl -s --netrc-file $NETRC -T /tmp/sr_$f "ftp://ftp.isisah.com.tr/httpdocs/showroom/$f" && rm /tmp/sr_$f; done
+for f in urunler.html fabrika.html; do curl -sS --netrc-file $NETRC -T /tmp/sr_$f "ftp://ftp.isisah.com.tr/httpdocs/showroom/$f" && rm /tmp/sr_$f; done
 echo "deploy tamam: https://isisah.com.tr/showroom/"
 
 # kök sayfalar: index + kurumsal alt sayfalar showroom kopyasından türetilir, httpdocs/ köküne yazılır
@@ -56,13 +57,15 @@ for f in ROOT_PAGES:
     open('/tmp/root_'+f,'w').write(s)
 PY
 for f in $(cat /tmp/root_pages.txt); do
-  curl -s --netrc-file $NETRC -T /tmp/root_$f "ftp://ftp.isisah.com.tr/httpdocs/$f" && rm /tmp/root_$f
+  curl -sS --netrc-file $NETRC -T /tmp/root_$f "ftp://ftp.isisah.com.tr/httpdocs/$f" && rm /tmp/root_$f
 done
 rm -f /tmp/root_pages.txt
-curl -s --netrc-file $NETRC -T sitemap.xml "ftp://ftp.isisah.com.tr/httpdocs/sitemap.xml"
-curl -s --netrc-file $NETRC -T robots.txt "ftp://ftp.isisah.com.tr/httpdocs/robots.txt"
-for f in llms.txt favicon.ico 404.html; do curl -s --netrc-file $NETRC -T $f "ftp://ftp.isisah.com.tr/httpdocs/$f"; done
+curl -sS --netrc-file $NETRC -T sitemap.xml "ftp://ftp.isisah.com.tr/httpdocs/sitemap.xml"
+curl -sS --netrc-file $NETRC -T robots.txt "ftp://ftp.isisah.com.tr/httpdocs/robots.txt"
+for f in llms.txt favicon.ico 404.html; do curl -sS --netrc-file $NETRC -T $f "ftp://ftp.isisah.com.tr/httpdocs/$f"; done
 echo "kok sayfalar guncellendi: https://isisah.com.tr/ + /hakkimizda.html + /vizyon-misyon.html"
 
-# yayın sonrası otomatik duman testi
-bash "$(dirname "$0")/smoke-test.sh" || echo "!! DUMAN TESTİNDE SORUN VAR — çıktıyı incele"
+# yayın sonrası otomatik duman testi (SMOKE=0 → atla; CI ayrı adımda koşar ve sonucu iş durumuna yansıtır)
+if [ "${SMOKE:-1}" != "0" ]; then
+  bash "$(dirname "$0")/smoke-test.sh" || echo "!! DUMAN TESTİNDE SORUN VAR — çıktıyı incele"
+fi

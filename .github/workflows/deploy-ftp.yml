@@ -1,0 +1,53 @@
+# isisah.com.tr yayını — GitHub Actions üzerinden FTP (ofis IP'si sunucuda engelliyken tek yol)
+# Tetik: elle (Actions sekmesi "Run workflow" ya da `gh workflow run deploy-ftp.yml`).
+# Push'ta OTOMATİK ÇALIŞMAZ: tasarım değişiklikleri kullanıcı onayı olmadan canlıya çıkmasın.
+# Kimlik: repo secrets FTP_USER / FTP_PASS (değerler ~/.isisah-ftp.netrc ile aynı; git'e girmez).
+name: Deploy isisah.com.tr (FTP)
+
+on:
+  workflow_dispatch:
+    inputs:
+      smoke:
+        description: "Yayın sonrası duman testi (curl + Playwright)"
+        type: boolean
+        default: true
+
+concurrency:
+  group: ftp-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: FTP kimliği (secrets → geçici netrc)
+        env:
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASS: ${{ secrets.FTP_PASS }}
+        run: |
+          if [ -z "$FTP_USER" ] || [ -z "$FTP_PASS" ]; then echo "FTP_USER / FTP_PASS secret eksik"; exit 1; fi
+          umask 077
+          printf 'machine ftp.isisah.com.tr\nlogin %s\npassword %s\n' "$FTP_USER" "$FTP_PASS" > "$RUNNER_TEMP/netrc"
+
+      - name: Yayın (tools/deploy-ftp.sh)
+        env:
+          NETRC: ${{ runner.temp }}/netrc
+          SMOKE: "0"
+        run: bash tools/deploy-ftp.sh
+
+      - name: Playwright kur (duman testi 2. katman)
+        if: ${{ inputs.smoke }}
+        run: |
+          npm i --prefix "$HOME/.isisah-smoke" playwright@1.62.1 --silent
+          "$HOME/.isisah-smoke/node_modules/.bin/playwright" install --with-deps chromium
+
+      - name: Duman testi (canlı)
+        if: ${{ inputs.smoke }}
+        run: bash tools/smoke-test.sh https://isisah.com.tr
+
+      - name: Kimliği sil
+        if: always()
+        run: rm -f "$RUNNER_TEMP/netrc"
