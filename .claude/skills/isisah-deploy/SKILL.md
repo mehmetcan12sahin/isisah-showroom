@@ -10,12 +10,14 @@ Repo: `~/isisah-scroll-world`. İKİ hedef var, ikisi de güncellenmeli:
 | Hedef | Ne | Nasıl |
 |---|---|---|
 | **ANA CANLI** | https://isisah.com.tr/ (kök ana sayfa) + /hakkimizda.html + /vizyon-misyon.html + /showroom/* | `bash tools/deploy-ftp.sh` |
+| **ANA CANLI — uzaktan** | aynı hedef, GitHub Actions runner'ından FTP (ofis IP'si sunucuda engelliyken tek yol) | `gh workflow run deploy-ftp.yml -R mehmetcan12sahin/isisah-showroom -f smoke=true` → `gh run list --workflow=deploy-ftp.yml -L1` → `gh run watch <id> --exit-status` |
 | Ayna | https://mehmetcan12sahin.github.io/isisah-showroom/ | `git push origin main` |
 
 ## Sıra
 1. Commit (Türkçe mesaj, ne değiştiyse özetle) → `git push origin main`.
 2. `bash tools/deploy-ftp.sh` — showroom dosyalarını FTP'ler VE kök `httpdocs/index.html`'i türetip yükler.
    - Kimlik: `~/.isisah-ftp.netrc` (git DIŞINDA, repoya girmez).
+   - **Ofis IP'si engelliyse** (`!! FTP'ye bağlanılamadı` / curl 28 / https 000 ama check-host 200): önce `git push`, sonra `gh workflow run deploy-ftp.yml -R mehmetcan12sahin/isisah-showroom -f smoke=true` (workflow repo HEAD'ini yayınlar — commit edilmemiş değişiklik ÇIKMAZ). ~3 dk; `gh run watch <id> --exit-status`; sonunda "DUMAN TESTİ TEMİZ" aranır. Kimlik: repo secrets `FTP_USER`/`FTP_PASS` (`gh secret set … < netrc alanı`; şifre değişirse ikisini de yenile). Log'da `isisah` `***` görünür — kullanıcı adı secret olduğu için maskeleniyor, normal. Push'ta OTOMATİK çalışmaz (tasarım onaysız canlıya çıkmasın); yalnız elle tetik. Ofisten canlı doğrulama IP engeli yüzünden FAIL verirse `curl https://r.jina.ai/https://isisah.com.tr/` vekiliyle bak.
    - Bash timeout'unu uzun tut (600000); yine de kesilirse eksikleri tek tek yükle:
      `curl -s --netrc-file ~/.isisah-ftp.netrc -T <dosya> "ftp://ftp.isisah.com.tr/httpdocs/showroom/<dosya>"`
 3. Kök türetimi (script yapar; elle gerekirse aynı kuralları uygula): repo `index.html` üzerinde
