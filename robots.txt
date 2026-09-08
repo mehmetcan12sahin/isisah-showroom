@@ -1,3 +1,5 @@
 User-agent: *
-Allow: /
-Sitemap: https://isisah.com.tr/showroom/sitemap.xml
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
+
+Sitemap: https://isisah.com.tr/sitemap.xml

@@ -19,6 +19,12 @@ has(){ curl -s -m 25 "$1" | grep -qc "$2"; }
 [ "$(http "$BASE/hakkimizda.html?$bust")" = "200" ] && say OK "hakkımızda 200" || say FAIL "hakkımızda HTTP"
 [ "$(http "$BASE/vizyon-misyon.html?$bust")" = "200" ] && say OK "vizyon-misyon 200" || say FAIL "vizyon-misyon HTTP"
 has "$BASE/hakkimizda.html?$bust" "/showroom/assets/" && say OK "hakkımızda: yollar çevrili" || say FAIL "hakkımızda: yol çevirisi bozuk"
+has "$BASE/robots.txt?$bust" "Sitemap: https://isisah.com.tr/sitemap.xml" && say OK "robots.txt: Sitemap satırı" || say FAIL "robots.txt: Sitemap satırı yok"
+has "$BASE/robots.txt?$bust" "Disallow: /wp-admin/" && say OK "robots.txt: WP kuralı korunmuş" || say FAIL "robots.txt: WP kuralı kaybolmuş"
+has "$BASE/?$bust" "assets/fonts/inter.css" && say OK "kök: fontlar self-host" || say FAIL "kök: Google Fonts geri gelmiş"
+# Plesk/DNS tarafı — kullanıcı/Birhost yapınca yeşile döner (FAIL saymaz)
+hc=$(curl -s -o /dev/null -m 15 -w "%{http_code}" "http://isisah.com.tr/"); [ "$hc" = "301" ] && say OK "http→https 301" || say UYARI "http→https 301 yok (Plesk: SEO-safe redirect) — kod $hc"
+wc=$(curl -s -o /dev/null -m 15 -w "%{http_code}" "https://www.isisah.com.tr/" 2>/dev/null); [ "$wc" = "301" ] && say OK "www → 301" || say UYARI "www.isisah.com.tr çözülmüyor/301 yok (DNS www CNAME) — kod ${wc:-0}"
 [ "$(http "$BASE/showroom/assets/img/og-cover.jpg")" = "200" ] && say OK "og-cover 200" || say FAIL "og-cover.jpg yok (sosyal önizleme kırık)"
 [ "$(http "$BASE/sitemap.xml")" = "200" ] && say OK "sitemap 200" || say FAIL "sitemap HTTP"
 [ "$(http "$BASE/googlebfb5098152a94f7b.html")" = "200" ] && say OK "search-console dosyası duruyor" || say FAIL "search-console dosyası KAYIP"

@@ -18,14 +18,13 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"Hakkımızda — ISIŞAH GROUP","url":"https://isisah.com.tr/hakkimizda.html","mainEntity":{"@context":"https://schema.org","@type":"Organization","name":"ISIŞAH GROUP","legalName":"ISIŞAH Endüstriyel","url":"https://isisah.com.tr/","foundingDate":"1982","address":{"@type":"PostalAddress","streetAddress":"DOSAB Ali Osman Sönmez Cad. No:11","addressLocality":"Osmangazi","addressRegion":"Bursa","postalCode":"16369","addressCountry":"TR"},"telephone":"+90 224 261 05 27","email":"info@isisah.com.tr","sameAs":["https://www.instagram.com/isisah_group","https://www.linkedin.com/in/isi%C5%9Fah-group-9b45aa125/"],"brand":[{"@type":"Brand","name":"ISIŞAH ENDÜSTRİYEL"},{"@type":"Brand","name":"BORŞAH BORU"},{"@type":"Brand","name":"SALMEX"}]}}</script>
 <link rel="icon" href="assets/img/logo.png" />
 <script>document.documentElement.classList.add('js')</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/fonts/inter.css">
 <style>
   :root{
     color-scheme:dark;
     --bg:#000; --bg2:#050508; --panel:#0a0a10; --panel2:#0e0e16;
     --ink:#fff; --muted:#8f93a3; --line:#1b1c26; --steel:#c3c7d4;
-    --vio1:#6b5bff;--vio2:#7a2bff;--vio3:#8b3bff;
+    --vio1:#6b5bff;--vio2:#7a2bff;--vio3:#8b3bff; --vio-text:#9d94ff;
     --emb1:#ff8a2b;--emb2:#ff5c2b;--emb3:#ffd08a;
     --ele1:#00d0ff;--ele2:#2f8bff;--ele3:#1f4cff;
     --mnt1:#35ffa8;--mnt2:#00ffa8;--mnt3:#4ec8ff;
@@ -57,7 +56,7 @@
     font-family:var(--disp);font-weight:700;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.3)}
 
   h1,h2,h3,.disp{font-family:var(--disp);font-weight:700;line-height:1.02;letter-spacing:-.02em;text-transform:uppercase}
-  .eyebrow{font-family:var(--tech);font-weight:600;font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--vio1)}
+  .eyebrow{font-family:var(--tech);font-weight:600;font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--vio-text)}
   .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
     filter:drop-shadow(0 0 22px color-mix(in srgb,var(--vio2) 45%,transparent))}
   @media (prefers-reduced-motion:reduce){*{animation-duration:.01s !important;animation-iteration-count:1 !important}html{scroll-behavior:auto}}
@@ -110,19 +109,19 @@
     transition:background 200ms var(--ease-out)}
   .ribbon .rb-t{font-family:var(--disp);font-weight:700;font-size:.88rem;letter-spacing:.04em;text-transform:uppercase}
   .ribbon .rb-s{color:var(--muted);font-size:.85rem}
-  .ribbon .rb-cta{font-family:var(--tech);font-weight:600;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--vio1);
+  .ribbon .rb-cta{font-family:var(--tech);font-weight:600;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--vio-text);
     text-shadow:0 0 10px color-mix(in srgb,var(--vio1) 55%,transparent)}
   @media(hover:hover){.ribbon:hover .rb-cta{color:#fff}}
   @media(max-width:640px){.ribbon .rb-s{display:none}}
 
   /* kart içi ikincil CTA — Apple'ın "Learn more / Buy" ikilisi */
-  .card .go3d,.brandcard .go3d{display:inline-flex;align-items:center;gap:6px;margin-top:12px;
+  .card .go3d,.brandcard .go3d{display:inline-flex;align-items:center;gap:6px;margin-top:12px;min-height:24px;padding:4px 0;
     font-family:var(--tech);font-weight:600;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
     color:var(--cc,var(--bc,var(--vio1)));text-shadow:0 0 10px color-mix(in srgb,var(--cc,var(--bc,var(--vio1))) 50%,transparent)}
   @media(hover:hover){.card .go3d:hover,.brandcard .go3d:hover{color:#fff}}
   .news{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
   .newscard{border:1px solid var(--line);border-radius:12px;padding:24px;background:var(--panel)}
-  .newscard time{display:block;font-family:var(--tech);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--vio1)}
+  .newscard time{display:block;font-family:var(--tech);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--vio-text)}
   .newscard h3{margin:10px 0 8px;font-size:1.12rem;line-height:1.3}
   .newscard p{color:var(--muted);font-size:.93rem;margin:0}
   .newscard .go3d{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-family:var(--tech);font-weight:600;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--steel)}
@@ -179,7 +178,7 @@
   .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;width:100%}
   .hero .kick{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:40px;padding:7px 16px;font-family:var(--tech);font-size:.72rem;letter-spacing:.2em;color:var(--steel);text-transform:uppercase;
     background:#05050acc;box-shadow:inset 0 1px 0 rgba(255,255,255,.09)}
-  .hero .kick b{color:var(--vio1)}
+  .hero .kick b{color:var(--vio-text)}
   .hero h1{font-size:clamp(2.6rem,6vw,4.6rem);margin:22px 0 0}
   .hero h1 .l2{display:block}
   .hero .lead{color:var(--muted);font-size:1.12rem;max-width:520px;margin:22px 0 32px}
@@ -221,10 +220,10 @@
   .about p{color:var(--muted);margin-top:18px}
   .about .time{margin-top:28px;display:flex;flex-direction:column;gap:0}
   .about .time .row{display:grid;grid-template-columns:74px 1fr;gap:18px;padding:14px 0;border-top:1px solid var(--line)}
-  .about .time .yr{font-family:var(--disp);font-weight:700;color:var(--vio1);font-size:1.3rem;text-shadow:0 0 12px color-mix(in srgb,var(--vio2) 50%,transparent)}
+  .about .time .yr{font-family:var(--disp);font-weight:700;color:var(--vio-text);font-size:1.3rem;text-shadow:0 0 12px color-mix(in srgb,var(--vio2) 50%,transparent)}
   .about .time .tx{color:var(--steel);font-size:.94rem}
   .about .vm{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:30px;padding-top:26px;border-top:1px solid var(--line)}
-  .about .vm h3{margin:0 0 8px;font-family:var(--tech);font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--vio1)}
+  .about .vm h3{margin:0 0 8px;font-family:var(--tech);font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--vio-text)}
   .about .vm p{margin:0;font-size:.92rem;color:var(--steel)}
   @media(max-width:640px){.about .vm{grid-template-columns:1fr}}
 
@@ -322,7 +321,7 @@
   .railcard p{color:var(--muted);font-size:.86rem}
   .railtime{border-top:1px solid var(--line)}
   .railtime .row{display:grid;grid-template-columns:110px 1fr;gap:18px;padding:13px 0;border-bottom:1px solid var(--line)}
-  .railtime .yr{font-family:var(--disp);font-weight:700;color:var(--vio1);font-size:1.15rem;text-shadow:0 0 12px color-mix(in srgb,var(--vio1) 50%,transparent)}
+  .railtime .yr{font-family:var(--disp);font-weight:700;color:var(--vio-text);font-size:1.15rem;text-shadow:0 0 12px color-mix(in srgb,var(--vio1) 50%,transparent)}
   .railtime .tx{color:var(--steel);font-size:.93rem}
   .railtime .tx b{color:var(--ink)}
   .railcols{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:56px}
@@ -393,7 +392,7 @@
   .bridge .shot{position:relative;min-height:300px}
   .bridge .shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
   .bridge .txt{padding:48px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:14px}
-  .bridge .bk{font-family:var(--tech);font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--vio1);
+  .bridge .bk{font-family:var(--tech);font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--vio-text);
     text-shadow:0 0 10px color-mix(in srgb,var(--vio1) 50%,transparent)}
   .bridge h2{font-size:clamp(1.8rem,3.4vw,2.6rem);margin:0}
   .bridge p{color:var(--muted);font-size:.98rem}

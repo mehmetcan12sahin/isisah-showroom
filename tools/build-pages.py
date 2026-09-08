@@ -5,7 +5,7 @@ import re, pathlib
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 idx = (ROOT/'index.html').read_text(encoding='utf-8')
 style  = re.search(r'<style>.*?</style>', idx, re.S).group(0)
-fonts  = re.search(r'<link href="https://fonts\.googleapis\.com[^>]+>', idx).group(0)
+fonts  = re.search(r'<link rel="stylesheet" href="assets/fonts/inter\.css">', idx).group(0)
 header = re.search(r'<header id="hdr">.*?</header>', idx, re.S).group(0)
 footer = re.search(r'<footer>.*?</footer>', idx, re.S).group(0)
 def sub(html, cur):
@@ -115,7 +115,6 @@ def page(fn, title, desc, kick, h1, lead, body, ld, vis):
 <script type="application/ld+json">{ld}</script>
 <link rel="icon" href="assets/img/logo.png" />
 <script>document.documentElement.classList.add('js')</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 {fonts}
 {style[:-8]}{EXTRA_CSS}</style>
 </head>

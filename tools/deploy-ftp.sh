@@ -6,10 +6,12 @@ cd "$(dirname "$0")/.."
 NETRC=~/.isisah-ftp.netrc
 LIST=$(python3 - <<'PY'
 import re,os
-used=set(['index.html','urunler.html','fabrika.html','hakkimizda.html','vizyon-misyon.html','sitemap.xml','assets/img/og-cover.jpg'])  # og-cover: mutlak URL ile referanslı, regex yakalamaz
-for f in ['index.html','urunler.html','fabrika.html','hakkimizda.html','vizyon-misyon.html']:
+import glob
+PAGES=sorted(glob.glob('*.html'))  # kökteki tüm sayfalar otomatik (yeni sayfa eklenince listeye elle girmeye gerek yok)
+used=set(PAGES+['sitemap.xml','robots.txt','assets/img/og-cover.jpg'])  # og-cover: mutlak URL ile referanslı, regex yakalamaz
+for f in PAGES:
     s=open(f).read()
-    for m in re.findall(r'(?:src|href)="(assets/[^"]+)"',s): used.add(m)
+    for m in re.findall(r'(?:src|href|data-src)="(assets/[^"?]+)',s): used.add(m)
     for m in re.findall(r"envTex\('(assets/[^']+)'|load\('(assets/[^']+)'",s):
         for g in m:
             if g: used.add(g)
@@ -31,18 +33,23 @@ echo "deploy tamam: https://isisah.com.tr/showroom/"
 # kök sayfalar: index + kurumsal alt sayfalar showroom kopyasından türetilir, httpdocs/ köküne yazılır
 python3 - <<'PY'
 import os
-for f in ['index.html','hakkimizda.html','vizyon-misyon.html']:
+import glob
+ROOT_PAGES=[f for f in sorted(glob.glob('*.html')) if f not in ('urunler.html','fabrika.html')]  # showroom-only sayfalar hariç, kalan her sayfa köke türetilir
+open('/tmp/root_pages.txt','w').write(' '.join(ROOT_PAGES))
+for f in ROOT_PAGES:
     s=open(f).read()
-    s=s.replace('src="assets/','src="/showroom/assets/').replace('href="assets/','href="/showroom/assets/')
+    s=s.replace('src="assets/','src="/showroom/assets/').replace('href="assets/','href="/showroom/assets/').replace('data-src="assets/','data-src="/showroom/assets/')
     s=s.replace('href="urunler.html','href="/showroom/urunler.html')
     s=s.replace('poster="assets/img/','poster="/showroom/assets/img/')
     s=s.replace('href="fabrika.html"','href="/showroom/fabrika.html"')
     open('/tmp/root_'+f,'w').write(s)
 PY
-for f in index.html hakkimizda.html vizyon-misyon.html; do
+for f in $(cat /tmp/root_pages.txt); do
   curl -s --netrc-file $NETRC -T /tmp/root_$f "ftp://ftp.isisah.com.tr/httpdocs/$f" && rm /tmp/root_$f
 done
+rm -f /tmp/root_pages.txt
 curl -s --netrc-file $NETRC -T sitemap.xml "ftp://ftp.isisah.com.tr/httpdocs/sitemap.xml"
+curl -s --netrc-file $NETRC -T robots.txt "ftp://ftp.isisah.com.tr/httpdocs/robots.txt"
 echo "kok sayfalar guncellendi: https://isisah.com.tr/ + /hakkimizda.html + /vizyon-misyon.html"
 
 # yayın sonrası otomatik duman testi

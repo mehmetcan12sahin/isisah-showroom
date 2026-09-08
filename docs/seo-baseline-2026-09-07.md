@@ -28,3 +28,12 @@ Vitrin vaka çalışması için başlangıç noktası. Kaynak: Google Search Con
 - Hedef kelime sıraları (manuel/GSC): "bursa rezistans", "sanayi tipi rezistans üreticisi", "paslanmaz çelik boru üreticisi bursa", "kombi eşanjörü üreticisi" → ilk 20
 - CWV: ana sayfa LCP/CLS (PageSpeed Insights) baseline bir sonraki ölçümde eklenecek
 - AI alıntı testi: "Bursa'da sanayi tipi rezistans üreticisi kim?" (ChatGPT/Perplexity/Google AI) — baseline: ölçülmedi, 30 günde tekrar
+
+## Lighthouse 12 (mobil, simulated 4G, yerel Chrome, 7 Eyl 2026 — JSON: docs/lighthouse-2026-09-07/)
+| Sayfa | Perf | A11y | SEO | LCP | TBT | Toplam |
+|---|---|---|---|---|---|---|
+| / | 77 | 93 | 100 | 4,1 s | 0 ms | 5,4 MB |
+| /showroom/urunler.html | 30 | 100 | 100 | 14,3 s | 5.860 ms | 4,3 MB |
+| /showroom/fabrika.html | 80 | 100 | 100 | 3,5 s | — | 15,8 MB |
+CrUX saha verisi: yok (trafik eşiği altı). Teknik sağlık (7 Eyl canlı): robots.txt Sitemap satırı YOK · http→https 301 YOK · www DNS YOK · HSTS YOK · statik Cache-Control YOK · kopya URL 200: 5 · WP self-canonical kopya: 2 · Google Fonts dış kaynak: 5 sayfa · ölçüm altyapısı (analytics): 0.
+Rakip indekslenebilir URL sayısı (sitemap <loc>): isielektrik 888 · isierrezistans 685 · safirezistans 493 · serrezistans 409 · bursarezistans 318 · baykalrezistans 142 · **isisah.com.tr 5**.
