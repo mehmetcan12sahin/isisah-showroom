@@ -122,7 +122,7 @@ def cat_body(name, holkey, brandhub, brandhubname, intro_p, src, keys, extra_cta
 def build_cat(slug, holkey, title, desc, kick, h1, lead, intro_p, src, keys, brandhub, brandhubname, vis_img, vis_alt):
     url = f'https://isisah.com.tr/{slug}'
     items = [src[k] for k in keys]
-    ld = collection_ld(h1.replace('<br>',' '), url, desc, items) + breadcrumb_ld(h1.replace('<br>',' '), url)
+    ld = '[' + collection_ld(h1.replace('<br>',' '), url, desc, items) + ',' + breadcrumb_ld(h1.replace('<br>',' '), url) + ']'
     body = cat_body(h1, holkey, brandhub, brandhubname, intro_p, src, keys)
     vis = f'<img src="{vis_img}" alt="{vis_alt}" loading="eager" width="1200" height="800"><span class="tag">{brandhubname}</span>'
     (ROOT/slug).write_text(page(slug, title, desc, kick, h1, lead, body, ld, vis), encoding='utf-8')
@@ -159,8 +159,8 @@ def build_hub(slug, title, desc, kick, h1, lead, intro_p, spokes, doorkey, logo,
   </div>
 </section>
 '''
-    ld = ('{"@context":"https://schema.org","@type":"CollectionPage","name":"'+h1+'","url":"'+url+'","description":"'+desc+'",'
-          '"isPartOf":{"@type":"WebSite","name":"ISIŞAH GROUP","url":"https://isisah.com.tr/"}}') + breadcrumb_ld(h1, url)
+    ld = '[' + ('{"@context":"https://schema.org","@type":"CollectionPage","name":"'+h1+'","url":"'+url+'","description":"'+desc+'",'
+          '"isPartOf":{"@type":"WebSite","name":"ISIŞAH GROUP","url":"https://isisah.com.tr/"}}') + ',' + breadcrumb_ld(h1, url) + ']'
     vis = f'<img src="{vis_img}" alt="{vis_alt}" loading="eager" width="1200" height="800"><span class="tag">{h1}</span>'
     (ROOT/slug).write_text(page(slug, title, desc, kick, h1, lead, body, ld, vis), encoding='utf-8')
     return len(title), len(desc)
