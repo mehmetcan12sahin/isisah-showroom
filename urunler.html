@@ -1080,20 +1080,15 @@ function frame(){
 function loop(){ frame(); requestAnimationFrame(loop); }
 
 // ================= AÇILIŞ =================
-// tüm ürün görsellerini önden ısıt (hole girince anında)
-const ALLIMGS=[...ISISAH_LIST,...SALMEX_LIST,...BORSAH_LIST].map(d=>[d.img,d.h]);
-let warmed=0;
-ALLIMGS.forEach(([img,h])=>loadProductTex(img,h,()=>{warmed++;
-  const p=Math.min(1,0.1+warmed/ALLIMGS.length*0.9);
-  document.getElementById('lbar').style.transform='scaleX('+p.toFixed(2)+')';
-  document.getElementById('lpct').textContent='%'+Math.round(p*100);
-  if(warmed>=ALLIMGS.length){finishLoad();}}));
+// Lobi hiçbir ürün texture'ı gerektirmez (kapılar prosedürel geometri + DOM logo <img>).
+// Her hol kendi ürün görsellerini buildHall() içinde girişte yükler (loadProductTex,
+// TEXCACHE ile önbellekli) — tüm kataloğu (38 ürün) önceden ısıtmaya gerek yok.
+document.getElementById('lbar').style.transform='scaleX(1)';
+const lp0=document.getElementById('lpct'); if(lp0)lp0.textContent='%100';
+finishLoad();
 function finishLoad(){
-  document.getElementById('lbar').style.transform='scaleX(1)';
-  const lp=document.getElementById('lpct'); if(lp)lp.textContent='%100';
   setTimeout(()=>{document.getElementById('loader').classList.add('hide');document.body.classList.add('ready');},250);
 }
-setTimeout(finishLoad,6000);
 addEventListener('resize',()=>{PORTRAIT=innerWidth/innerHeight<0.8;camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
 requestAnimationFrame(loop);
 
