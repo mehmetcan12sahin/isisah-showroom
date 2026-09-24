@@ -30,7 +30,8 @@ PY
 )
 # bağlantı ön testi — sunucu bu IP'yi engelliyorsa sessiz düşme yerine anlaşılır dur
 curl -s -m 20 --netrc-file $NETRC -l "ftp://ftp.isisah.com.tr/httpdocs/" > /dev/null || { echo "!! FTP'ye bağlanılamadı (timeout/engel). Deploy yapılmadı. Bkz. HANDOFF: IP engeli / Birhost whitelist."; exit 1; }
-echo "$LIST" | grep -vE '^(urunler|fabrika)\.html$' | xargs -P 4 -I{} curl -sS --netrc-file $NETRC --ftp-create-dirs -T "{}" "ftp://ftp.isisah.com.tr/httpdocs/showroom/{}"
+# .html hariç: kök sayfalar sadece httpdocs/ köküne gider (aşağıda), showroom'a ham kopyaları gereksiz.
+echo "$LIST" | grep -v '\.html$' | xargs -P 4 -I{} curl -sS --netrc-file $NETRC --ftp-create-dirs -T "{}" "ftp://ftp.isisah.com.tr/httpdocs/showroom/{}"
 # showroom sayfaları: göreli ana sayfa/kurumsal linkleri köke çevrilerek yüklenir (kopya /showroom/index.html'e link vermesin)
 python3 - <<'PY'
 for f in ('urunler.html','fabrika.html'):
