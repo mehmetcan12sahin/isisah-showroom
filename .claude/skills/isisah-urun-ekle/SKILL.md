@@ -6,6 +6,8 @@ description: ISIŞAH GROUP 3B showroom'una (urunler.html) yeni ürün ekler. Kul
 # ISIŞAH Showroom'a Ürün Ekleme Hattı
 
 Repo: `~/isisah-scroll-world` · Sayfa: `urunler.html` · Görseller: `assets/products/*.webp`
+Ürün verisinin TEK KAYNAĞI: `assets/data/products.json` (`tools/build-products.py` buradan urunler.html'in
+JS dizilerini/JSON-LD'sini/katalog listesini üretir — o bloklara elle yazma, sonraki çalıştırmada silinir).
 Tam bağlam için önce `~/isisah-scroll-world/HANDOFF.md` oku (özellikle sürüm/mimari değiştiyse).
 
 ## 0. Kaynak fotoğraf
@@ -36,15 +38,27 @@ im.save(out, 'WEBP', quality=88, method=6)
 ```
 Hedef 40-200KB.
 
-## 4. urunler.html kartı
-- Kart şablonu (ilgili listeye — `SALMEX_LIST`, `BORSAH_LIST` veya `ISISAH_LIST`):
-```js
-{img:'<anahtar>',logo:'logo-<marka>',tag:'<MARKA/GAM ETİKETİ>',h:'Türkçe Başlık',en:'English Title',
- p:'Tek cümle açıklama (müşteri sonradan düzeltir).',chips:['3','Kısa','Çip']},
-```
-- ISIŞAH ürünü ise ayrıca `ISISAH_CATS` içindeki doğru gamın `byImg(...)` listesine anahtarı ekle (gamlar resmi katalog sektörleri).
-- `GHOSTS` map'ine hayalet kelime ekle (`anahtar:'KELİME'`).
-- Teknik iddiaları uydurma; katalog/kullanıcı verisinden al, emin değilsen nötr yaz ve kullanıcıya "metin onayı bekliyor" de.
+## 4. Ürün verisi — TEK KAYNAK akışı
+1. **`assets/data/products.json`** içindeki `products` dizisine tek nesne ekle (ilgili markanın grubunun —
+   isisah / salmex / borsah sırasıyla — sonuna; mevcut sıralamayı bozma):
+   ```json
+   {"img":"<anahtar>","brand":"<isisah|salmex|borsah>","gams":["<isisah_ ile başlayan gam anahtarı>"],
+    "tag":"<MARKA/GAM ETİKETİ>","h":"Türkçe Başlık","en":"English Title",
+    "p":"Tek cümle açıklama (müşteri sonradan düzeltir).","chips":["3","Kısa","Çip"]}
+   ```
+   `gams` yalnızca `brand:"isisah"` için anlamlı (bilgi amaçlı alan); `salmex`/`borsah` için `["salmex"]`/`["borsah"]` yazılabilir ya da boş bırakılabilir — 3B holü hâlâ adım 2'deki `ISISAH_CATS`'ten okur, bu alanı değiştirmez.
+   Teknik iddiaları uydurma; katalog/kullanıcı verisinden al, emin değilsen nötr yaz ve kullanıcıya "metin onayı bekliyor" de.
+2. **`python3 tools/build-products.py`** çalıştır — `urunler.html`'in `@products`/`@jsonld`/`@katalog`/`@products:count`
+   marker bloklarını (JS dizileri, JSON-LD ItemList, katalog `<details>` listesi, "N ürün" sayaçları) bu JSON'dan
+   yeniden üretir. Bu marker'ların İÇİNE elle yazma — bir sonraki çalıştırmada silinir.
+3. ISIŞAH ürünüyse, urunler.html'de HÂLÂ elle tutulan 2 yeri güncelle (bunlar products.json'da yok, marker dışı):
+   - `ISISAH_CATS` içindeki doğru gamın `byImg(...)` çağrısına anahtarı ekle — 3B holünde hangi rafta çıkacağını belirler.
+   - `GHOSTS` map'ine hayalet kelime ekle (`anahtar:'KELİME'`).
+4. `tools/build-category-pages.py` içinde ilgili `build_cat(...)` çağrısının `keys` listesine anahtarı ekle
+   (hangi kategori sayfasında kart olarak çıkacağını belirler — bu liste de products.json'da yok, elle kalır).
+5. **`python3 tools/build-category-pages.py`** çalıştır — 11 kategori/hub sayfasını products.json'dan yeniden üretir.
+6. **`python3 tools/build-teklif.py`** çalıştır — `teklif.html`'in `?urun=` bağlam haritasını günceller.
+7. **`python3 tools/check-site.py`** çalıştır — deep-link/görsel/SEO regresyonu olmadığını doğrula.
 
 ## 5. Test (ZORUNLU protokol)
 - Önizleme: http://localhost:8080 (LaunchAgent'lı python server — kapalıysa `launchctl load ~/Library/LaunchAgents/com.isisah.preview.plist`).

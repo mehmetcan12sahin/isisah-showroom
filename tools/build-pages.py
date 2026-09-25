@@ -8,10 +8,10 @@ from pagegen import ROOT, page, ORG
 hak_body = '''
 <section class="stats" style="margin-top:30px">
   <div class="wrap">
-    <div class="stat reveal"><div class="n grad-text" data-count="44" data-suffix=" yıl">0 yıl</div><div class="k">Kesintisiz Üretim</div></div>
-    <div class="stat reveal" data-d="1"><div class="n grad-text" data-count="3" data-suffix=" marka">0 marka</div><div class="k">Tek Çatı Altında</div></div>
-    <div class="stat reveal" data-d="2"><div class="n grad-text" data-count="8">0</div><div class="k">Ürün Gamı · Mutfaktan Savunmaya</div></div>
-    <div class="stat reveal" data-d="3"><div class="n grad-text" data-count="100" data-prefix="%">%0</div><div class="k">Yerli Üretim</div></div>
+    <div class="stat reveal"><div class="n grad-text" data-count="44" data-suffix=" yıl">44 yıl</div><div class="k">Kesintisiz Üretim</div></div>
+    <div class="stat reveal" data-d="1"><div class="n grad-text" data-count="3" data-suffix=" marka">3 marka</div><div class="k">Tek Çatı Altında</div></div>
+    <div class="stat reveal" data-d="2"><div class="n grad-text" data-count="8">8</div><div class="k">Ürün Gamı · Mutfaktan Savunmaya</div></div>
+    <div class="stat reveal" data-d="3"><div class="n grad-text" data-count="100" data-prefix="%">%100</div><div class="k">Yerli Üretim</div></div>
   </div>
 </section>
 
@@ -47,9 +47,9 @@ hak_body = '''
   <div class="wrap">
     <div class="sec-head reveal"><h2>Üretimden kareler.</h2><p>DOSAB Bursa tesislerimizden — robotlu eşanjör hattı, profil hattı ve test istasyonu.</p></div>
     <div class="kareler reveal">
-      <figure><img src="assets/img/uretim-k1.webp" alt="Robotlu üretim hücresi" loading="lazy" decoding="async"><figcaption>Robotlu Hat</figcaption></figure>
-      <figure><img src="assets/img/uretim-k2.webp" alt="Profil şekillendirme hattı" loading="lazy" decoding="async"><figcaption>Şekillendirme</figcaption></figure>
-      <figure><img src="assets/img/uretim-k3.webp" alt="Sızdırmazlık test istasyonu" loading="lazy" decoding="async"><figcaption>Test İstasyonu</figcaption></figure>
+      <figure><img src="assets/img/uretim-k1.webp" alt="Robotlu üretim hücresi" loading="lazy" decoding="async" width="1200" height="675"><figcaption>Robotlu Hat</figcaption></figure>
+      <figure><img src="assets/img/uretim-k2.webp" alt="Profil şekillendirme hattı" loading="lazy" decoding="async" width="1200" height="675"><figcaption>Şekillendirme</figcaption></figure>
+      <figure><img src="assets/img/uretim-k3.webp" alt="Sızdırmazlık test istasyonu" loading="lazy" decoding="async" width="1200" height="675"><figcaption>Test İstasyonu</figcaption></figure>
     </div>
     <div class="pgcta reveal" style="margin-top:22px"><a class="btn ghost" href="fabrika.html">Fabrika turuna çık <span>→</span></a></div>
   </div>
@@ -178,5 +178,5 @@ viz_ld = '{"@context":"https://schema.org","@type":"WebPage","name":"Vizyonumuz 
     'ISIŞAH GROUP · Kurumsal', 'Vizyonumuz &amp;<br>Misyonumuz.',
     'Kaliteden ödün vermeden, müşterimize şirket ortağımız gibi davranarak.',
     viz_body, viz_ld,
-    '<img src="assets/img/salmex-hat.webp" alt="SALMEX robotlu eşanjör üretim hattı" loading="eager"><span class="tag">DOSAB Bursa · Robotlu Hat</span>'), encoding='utf-8')
+    '<img src="assets/img/salmex-hat.webp" alt="SALMEX robotlu eşanjör üretim hattı" loading="eager" width="1800" height="1013"><span class="tag">DOSAB Bursa · Robotlu Hat</span>'), encoding='utf-8')
 print('hakkimizda.html', (ROOT/'hakkimizda.html').stat().st_size//1024, 'KB |', 'vizyon-misyon.html', (ROOT/'vizyon-misyon.html').stat().st_size//1024, 'KB')

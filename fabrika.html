@@ -30,7 +30,7 @@
 <link rel="manifest" href="assets/site.webmanifest" />
 <link rel="stylesheet" href="assets/fonts/inter.css">
 <style>
-  :root{--ink:#fff;--muted:#8f93a3;--line:#1d1e2a;
+  :root{--ink:#fff;--muted:#8f93a3;--line:#1b1c26;
     --ele1:#00d0ff;--ele2:#2f8bff;--vio1:#6b5bff;--vio2:#7a2bff;--mag1:#c04cff;--mag2:#ff2f7a;
     --emb1:#ff8a2b;--emb2:#ff5c2b;
     --tech:'Inter',sans-serif;--disp:'Inter',sans-serif;
@@ -38,6 +38,12 @@
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:#000;color:var(--ink);font-family:var(--tech);-webkit-font-smoothing:antialiased;overflow-x:hidden}
   a{color:inherit;text-decoration:none}
+  :focus-visible{outline:2px solid var(--ele1);outline-offset:3px;border-radius:4px}
+
+  /* skip link */
+  .skip{position:fixed;top:-60px;left:12px;z-index:100;background:#0b0b12;color:#fff;padding:10px 16px;
+    border-radius:8px;border:1px solid var(--line);transition:top .2s var(--ease-out);font-size:.8rem}
+  .skip:focus-visible{top:12px;outline-offset:2px}
 
   /* sabit tam ekran film */
   .stage{position:fixed;inset:0;z-index:0;background:#000}
@@ -48,109 +54,198 @@
     padding:14px max(24px,env(safe-area-inset-right,0px)) 14px max(24px,env(safe-area-inset-left,0px));
     background:linear-gradient(#000c,#0000)}
   header .l{display:flex;align-items:center;gap:12px}
-  header .l img{height:28px}
-  header .t{font-weight:700;font-size:.9rem;letter-spacing:.04em;text-transform:uppercase;border-left:1px solid var(--line);padding-left:12px}
-  header .t small{display:block;font-weight:400;font-size:.56rem;letter-spacing:.3em;color:var(--muted)}
+  header .l img{height:28px;width:auto}
+  header .t{font-weight:700;font-size:.9rem;letter-spacing:.04em;border-left:1px solid var(--line);padding-left:12px}
+  header .t small{display:block;font-weight:400;font-size:.7rem;letter-spacing:.06em;text-transform:none;color:var(--muted)}
   header .r{display:flex;gap:10px;align-items:center}
-  .hbtn{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#fff;
+  .hbtn{font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#fff;
     border:1px solid var(--line);border-radius:40px;padding:8px 14px;background:#05050acc;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.1);transition:border-color 160ms var(--ease-out),box-shadow 260ms var(--ease-io)}
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.1);transition:border-color 160ms var(--ease-out),box-shadow 260ms var(--ease-io);
+    display:inline-flex;align-items:center;min-height:44px}
   @media(hover:hover){.hbtn:hover{border-color:color-mix(in srgb,var(--ele1) 55%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 22px -6px var(--ele2)}}
+  @media(max-width:480px){
+    header{flex-wrap:wrap;row-gap:10px}
+    header .t small{display:none}
+    header .r{width:100%;justify-content:flex-start}
+  }
 
   .pbar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(100deg,var(--ele1),var(--ele2));width:0;z-index:45;
     box-shadow:0 0 12px var(--ele2),0 0 3px var(--ele1)}
 
-  /* yükleme */
-  .loader{position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:#000;transition:opacity .5s var(--ease-out)}
-  .loader.hide{opacity:0;pointer-events:none}
-  .loader img{height:40px;animation:lg 3.2s var(--ease-io) infinite}
+  /* video yüklenme göstergesi: küçük, köşede, tıklamayı asla yutmaz */
+  .vprog{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50;
+    display:none;align-items:center;gap:10px;pointer-events:none;
+    background:#05050ad9;border:1px solid var(--line);border-radius:40px;padding:7px 16px 7px 7px;
+    opacity:1;transition:opacity .4s var(--ease-io)}
+  .vprog.hide{opacity:0}
+  .vprog img{height:22px;animation:lg 3.2s var(--ease-io) infinite}
   @keyframes lg{0%,100%{filter:drop-shadow(0 0 10px var(--ele2)) drop-shadow(0 0 26px color-mix(in srgb,var(--ele2) 45%,transparent))}
     50%{filter:drop-shadow(0 0 16px var(--ele1)) drop-shadow(0 0 44px color-mix(in srgb,var(--ele1) 60%,transparent))}}
-  .loader .lt{letter-spacing:.24em;text-transform:uppercase;font-size:.7rem;color:var(--muted)}
-  .loader .lt b{color:var(--ele1);text-shadow:0 0 10px color-mix(in srgb,var(--ele1) 50%,transparent)}
-  .loader .bar{width:220px;height:2px;background:#14141c;border-radius:3px;overflow:hidden}
-  .loader .bar i{display:block;height:100%;width:100%;background:linear-gradient(100deg,var(--ele1),var(--ele2));transform:scaleX(0);transform-origin:left;transition:transform .25s var(--ease-out)}
+  .vprog .vt{font-size:.75rem;letter-spacing:.03em;color:var(--muted);white-space:nowrap}
+  .vprog .vt b{color:var(--ele1)}
+  .vprog .vb{width:56px;height:2px;background:#14141c;border-radius:3px;overflow:hidden;flex:0 0 auto}
+  .vprog .vb i{display:block;height:100%;width:100%;background:linear-gradient(100deg,var(--ele1),var(--ele2));transform:scaleX(0);transform-origin:left;transition:transform .25s var(--ease-out)}
+  /* dar ekranda alt-orta kaydırma ipucu/oynatıcı düğmesiyle çakışmasın diye simge-only küçük rozet */
+  @media(max-width:480px){
+    .vprog{padding:6px}
+    .vprog .vt,.vprog .vb{display:none}
+  }
 
-  /* sahne başlıkları */
+  /* sahne başlıkları: metin okunurluğu için sade koyu zemin (parlak kare üstünde de kontrast) */
   .cap{position:fixed;left:50%;top:38%;transform:translate(-50%,-50%);z-index:20;text-align:center;pointer-events:none;
     opacity:0;filter:blur(10px);transition:opacity .6s var(--ease-io),filter .6s var(--ease-io),letter-spacing .8s var(--ease-io);
-    letter-spacing:.06em;width:min(92vw,900px)}
+    letter-spacing:.06em;width:min(92vw,900px);max-width:calc(100vw - 32px);
+    background:rgba(4,4,8,.72);border-radius:20px;padding:22px clamp(18px,4vw,34px)}
   .cap.on{opacity:1;filter:blur(0);letter-spacing:.14em}
-  .cap h2{font-weight:700;text-transform:uppercase;font-size:clamp(1.7rem,5.4vw,3.6rem);line-height:1.05;
-    text-shadow:0 2px 30px #000c,0 0 60px color-mix(in srgb,var(--cc,var(--ele2)) 35%,transparent)}
-  .cap p{margin-top:10px;color:#d5d8e2;font-size:clamp(.82rem,1.6vw,1.02rem);letter-spacing:.04em;text-shadow:0 1px 14px #000}
-  .cap .k{display:inline-block;margin-bottom:10px;font-size:.64rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;
+  .cap h2{font-weight:700;text-transform:uppercase;font-size:clamp(1.5rem,5.4vw,3.6rem);line-height:1.15;
+    text-shadow:0 2px 20px #000}
+  .cap p{margin-top:10px;color:#e6e8f0;font-size:clamp(.85rem,1.6vw,1.02rem);letter-spacing:.02em;line-height:1.5}
+  .cap .k{display:inline-block;margin-bottom:10px;font-size:.75rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;
     color:var(--cc,var(--ele1));text-shadow:0 0 12px color-mix(in srgb,var(--cc,var(--ele1)) 60%,transparent)}
 
   /* final CTA */
   .fin{position:fixed;inset:0;z-index:25;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;
-    padding:0 24px;opacity:0;pointer-events:none;transition:opacity .5s var(--ease-io);
+    padding:0 24px;opacity:0;pointer-events:none;visibility:hidden;transition:opacity .5s var(--ease-io),visibility 0s linear .5s;
     background:radial-gradient(ellipse 60% 50% at 50% 58%,color-mix(in srgb,var(--mag2) 10%,transparent),transparent 72%)}
-  .fin.on{opacity:1;pointer-events:auto}
-  .fin h2{font-weight:700;text-transform:uppercase;font-size:clamp(1.9rem,5.6vw,3.6rem);text-shadow:0 2px 30px #000c}
-  .fin p{color:var(--muted);max-width:520px}
+  .fin.on{opacity:1;pointer-events:auto;visibility:visible;transition:opacity .5s var(--ease-io),visibility 0s}
+  .fin .fintext{background:rgba(4,4,8,.72);border-radius:20px;padding:22px clamp(18px,4vw,34px);max-width:min(92vw,640px)}
+  .fin h2{font-weight:700;text-transform:uppercase;font-size:clamp(1.7rem,5.6vw,3.6rem);text-shadow:0 2px 20px #000;line-height:1.2}
+  .fin p{color:#e6e8f0;max-width:520px;line-height:1.5;margin-top:8px}
   .fin .cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px}
-  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;
     padding:13px 24px;border-radius:10px;background:linear-gradient(165deg,rgba(24,16,28,.92),rgba(8,4,10,.95));color:#fff;cursor:pointer;
-    border:1px solid color-mix(in srgb,var(--mag1) 40%,transparent);
+    border:1px solid color-mix(in srgb,var(--mag1) 40%,transparent);min-height:44px;
     box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 30px -8px var(--mag1),0 8px 24px rgba(0,0,0,.5);
     transition:transform 160ms var(--ease-out),box-shadow 300ms var(--ease-io)}
   @media(hover:hover){.btn:hover{transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 0 52px -8px var(--mag2),0 10px 28px rgba(0,0,0,.6)}}
   .btn:active{transform:scale(.97)}
   .btn.g{background:transparent;border:1px solid var(--line);box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+  .fin .alt{margin-top:2px;font-size:.78rem;color:#fff;letter-spacing:.02em;
+    background:rgba(4,4,8,.72);padding:8px 16px;border-radius:30px;display:inline-block}
+  .fin .alt a{text-decoration:underline;text-underline-offset:2px;color:#fff}
+  .fin .alt a:hover{color:var(--ele1)}
 
-  .shint{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);z-index:40;
-    font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ele1);pointer-events:none;
+  /* kaydırma ipucu + oynatıcı geçişi (alt-orta, dikey yığın) */
+  .scrollhint{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);z-index:40;
+    display:flex;flex-direction:column;align-items:center;gap:10px}
+  .shint{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ele1);pointer-events:none;
     text-shadow:0 0 12px color-mix(in srgb,var(--ele1) 55%,transparent);transition:opacity .4s var(--ease-io)}
+  .playToggle{font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#fff;
+    border:1px solid var(--line);border-radius:40px;padding:11px 18px;background:#05050acc;cursor:pointer;
+    min-height:44px;box-shadow:inset 0 1px 0 rgba(255,255,255,.1);
+    transition:border-color 160ms var(--ease-out),box-shadow 260ms var(--ease-io)}
+  @media(hover:hover){.playToggle:hover{border-color:color-mix(in srgb,var(--ele1) 55%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 22px -6px var(--ele2)}}
+
+  /* azaltılmış hareket bildirimi — sadece prefers-reduced-motion:reduce'ta görünür, CSS ile (JS'e bağlı değil) */
+  /* üst bildirim yığını: rnotice + sıradan-oynatıcı CTA şeridi aynı sütunda, çakışmadan alt alta dizilir */
+  .topnotice{position:fixed;top:calc(64px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);z-index:41;
+    display:flex;flex-direction:column;align-items:center;gap:10px;width:max-content;max-width:min(92vw,560px)}
+  @media(max-width:480px){.topnotice{top:calc(112px + env(safe-area-inset-top,0px))}}
+  .rnotice{display:none;text-align:center;background:#0b0b12ee;border:1px solid var(--line);border-radius:12px;
+    padding:12px 18px;font-size:.8rem;color:#d5d8e2;line-height:1.5;max-width:min(90vw,520px)}
+  /* sıradan oynatıcı modunda kaydırmaya bağlı olmayan, her zaman ulaşılabilir teklif/iletişim şeridi */
+  .plainCta{display:none;text-align:center;background:#0b0b12ee;border:1px solid var(--line);border-radius:12px;
+    padding:10px 16px;font-size:.78rem;color:#d5d8e2;line-height:1.5}
+  .plainCta a{text-decoration:underline;text-underline-offset:2px;color:#fff}
+  .plainCta a:hover{color:var(--ele1)}
+  body.plain .plainCta{display:block}
 
   #scroll{position:relative;z-index:5}
-  @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms !important;animation-iteration-count:1 !important}}
-  .fh1{position:fixed;left:24px;bottom:22px;z-index:6;margin:0;font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted,#8f93a3);pointer-events:none}
+  .fh1{position:fixed;left:24px;bottom:22px;z-index:6;margin:0;font-size:.82rem;font-weight:600;letter-spacing:.03em;color:#c9ccd8;text-shadow:0 1px 8px #000;pointer-events:none}
   @media(max-width:640px){.fh1{display:none}}
+
+  /* JS kapalıyken görünen sade oynatıcı */
+  .ns{padding:88px 20px 40px;text-align:center;position:relative;z-index:10}
+  .ns video{width:100%;max-width:960px;height:auto;border-radius:12px;display:inline-block;background:#000}
+  .ns p{margin-top:8px;color:var(--muted);font-size:.85rem}
+  .ns .nslinks{margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+    .rnotice{display:block}
+    .playToggle{background:linear-gradient(165deg,rgba(24,16,28,.95),rgba(8,4,10,.98));
+      border-color:color-mix(in srgb,var(--ele1) 55%,transparent);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 26px -6px var(--ele2);padding:13px 22px;font-size:.82rem}
+  }
+
+  /* sıradan oynatıcı modu: kaydırma-kilitli katmanlar gizlenir, native kontrol görünür */
+  body.plain .cap,body.plain .pbar,body.plain .vig,body.plain .shint{display:none}
+  body.plain .stage video{cursor:auto}
+  /* native kontrol şeridi alt kenarda render olur: üstte kalan öğeleri o şeritten yukarı taşı */
+  body.plain .fh1{bottom:calc(80px + env(safe-area-inset-bottom,0px))}
+  body.plain .scrollhint{bottom:calc(80px + env(safe-area-inset-bottom,0px))}
 </style>
 </head>
 <body>
 
-<div class="loader" id="loader">
-  <img src="assets/catalog/logo-group.png" alt="ISIŞAH GROUP">
-  <div class="lt">Fabrika turu hazırlanıyor <b id="lpct">%0</b></div>
-  <div class="bar"><i id="lbar"></i></div>
-</div>
+<a class="skip" href="#main">İçeriğe geç</a>
 
-<h1 class="fh1">SALMEX sarmal eşanjör üretim hattı — fabrika turu</h1>
-<div class="stage"><video id="film" muted playsinline preload="auto"></video></div>
-<div class="vig"></div>
-<div class="pbar" id="pbar"></div>
+<div class="vprog" id="vprog" aria-hidden="true">
+  <img src="assets/catalog/logo-group.png" alt="">
+  <div class="vt">Video hazırlanıyor <b id="lpct"></b></div>
+  <div class="vb"><i id="lbar"></i></div>
+</div>
+<script>document.getElementById('vprog').style.display='flex';</script>
 
 <header>
-  <a class="l" href="index.html"><img src="assets/catalog/logo-group.png" alt="ISIŞAH GROUP">
-    <span class="t">Fabrika Turu<small>SALMEX ÜRETİM HATTI</small></span></a>
+  <a class="l" href="index.html"><img src="assets/catalog/logo-group.png" alt="ISIŞAH GROUP" width="70" height="28">
+    <span class="t">Fabrika Turu<small>SALMEX üretim hattı</small></span></a>
   <div class="r">
     <a class="hbtn" href="urunler.html">3B Showroom</a>
     <a class="hbtn" href="index.html">← Ana Sayfa</a>
   </div>
 </header>
 
-<!-- sahne başlıkları: [başlangıç,bitiş] scroll yüzdeleri data ile -->
-<div class="cap" data-a="0.02" data-b="0.13" style="--cc:var(--emb1)"><span class="k">01 · Pres</span><h2>Çelik biçim alır</h2><p>Her ünite tek parça sacdan, kendi presimizde doğar.</p></div>
-<div class="cap" data-a="0.15" data-b="0.27" style="--cc:var(--ele1)"><span class="k">02 · Üretim Hattı</span><h2>Kesintisiz akış</h2><p>Hammaddeden bitmiş gövdeye — tek çatı altında.</p></div>
-<div class="cap" data-a="0.29" data-b="0.40" style="--cc:var(--ele1)"><span class="k">03 · Şekillendirme</span><h2>Milimetrik hassasiyet</h2><p>Boru ve kanat formları CNC kontrolünde şekillenir.</p></div>
-<div class="cap" data-a="0.42" data-b="0.55" style="--cc:var(--ele1)"><span class="k">04 · Sarmal Sarım</span><h2>SALMEX imzası</h2><p>Sarmal eşanjör borusu, saniyeler içinde kanat kanat sarılır.</p></div>
-<div class="cap" data-a="0.57" data-b="0.69" style="--cc:var(--emb1)"><span class="k">05 · Isıl İşlem</span><h2>Ateşle sınanır</h2><p>Gövdeler fırında dayanımını kazanır.</p></div>
-<div class="cap" data-a="0.71" data-b="0.83" style="--cc:var(--ele1)"><span class="k">06 · Robotlu Üretim</span><h2>İnsan hatasına yer yok</h2><p>Robot hücreleri taşır, işler, paketler.</p></div>
-<div class="cap" data-a="0.85" data-b="0.93" style="--cc:var(--mnt1,#35ffa8)"><span class="k">07 · Test</span><h2>Her ünite sınanır</h2><p>Sızdırmazlık ve güç testi olmadan hiçbir ürün çıkmaz.</p></div>
-
-<div class="fin" id="fin">
-  <h2>Gördüğünüz hat,<br>ürettiğimiz güven.</h2>
-  <p>Şimdi ürünleri kendi kaidelerinde gezin ya da doğrudan teklif isteyin.</p>
-  <div class="cta">
-    <a class="btn" href="urunler.html">3B Showroom'u Gez →</a>
-    <a class="btn g" href="mailto:info@isisah.com.tr?subject=Teklif%20Talebi">Teklif İste</a>
-  </div>
+<div class="topnotice">
+  <div class="rnotice" id="rnotice">Azaltılmış hareket tercihi algılandı — film, kaydırmaya bağlı olmadan normal oynatıcıyla gösteriliyor. Kaydırarak izlemek isterseniz aşağıdaki düğmeyi kullanabilirsiniz.</div>
+  <div class="plainCta" id="plainCta">Kaydırmadan da: <a href="teklif.html?konu=fabrika-turu">Teklif İste</a> · <a href="urunler.html">3B Showroom'u Gez</a> · <a href="mailto:info@isisah.com.tr?subject=Fabrika%20Turu%20Teklif%20Talebi">e-posta gönderin</a> · <a href="tel:+902242610527">+90 224 261 05 27</a></div>
 </div>
 
-<div class="shint" id="shint">uçmak için kaydır ↓</div>
-<div id="scroll"></div>
+<main id="main" tabindex="-1">
+  <h1 class="fh1">SALMEX sarmal eşanjör üretim hattı — fabrika turu</h1>
+  <div class="stage"><video id="film" muted playsinline preload="auto" poster="assets/img/fabrika-poster.webp" width="1440" height="810" src="assets/img/fabrika-scrub.mp4?v=2"></video></div>
+  <div class="vig"></div>
+  <div class="pbar" id="pbar"></div>
+
+  <noscript>
+    <div class="ns">
+      <video controls playsinline poster="assets/img/fabrika-poster.webp" width="1440" height="810" src="assets/img/fabrika-scrub.mp4?v=2"></video>
+      <p>Kaydırmalı deneyim için JavaScript gerekir — yukarıdaki oynatıcıyla filmi normal şekilde izleyebilirsiniz.</p>
+      <div class="nslinks">
+        <a class="hbtn" href="index.html">Ana Sayfa</a>
+        <a class="hbtn" href="urunler.html">3B Showroom</a>
+      </div>
+    </div>
+  </noscript>
+
+  <!-- sahne başlıkları: [başlangıç,bitiş] scroll yüzdeleri data ile -->
+  <div class="cap" data-a="0.02" data-b="0.13" style="--cc:var(--emb1)"><span class="k">01 · Pres</span><h2>Çelik biçim alır</h2><p>Her ünite tek parça sacdan, kendi presimizde doğar.</p></div>
+  <div class="cap" data-a="0.15" data-b="0.27" style="--cc:var(--ele1)"><span class="k">02 · Üretim Hattı</span><h2>Kesintisiz akış</h2><p>Hammaddeden bitmiş gövdeye — tek çatı altında.</p></div>
+  <div class="cap" data-a="0.29" data-b="0.40" style="--cc:var(--ele1)"><span class="k">03 · Şekillendirme</span><h2>Milimetrik hassasiyet</h2><p>Boru ve kanat formları CNC kontrolünde şekillenir.</p></div>
+  <div class="cap" data-a="0.42" data-b="0.55" style="--cc:var(--ele1)"><span class="k">04 · Sarmal Sarım</span><h2>SALMEX imzası</h2><p>Sarmal eşanjör borusu, saniyeler içinde kanat kanat sarılır.</p></div>
+  <div class="cap" data-a="0.57" data-b="0.69" style="--cc:var(--emb1)"><span class="k">05 · Isıl İşlem</span><h2>Ateşle sınanır</h2><p>Gövdeler fırında dayanımını kazanır.</p></div>
+  <div class="cap" data-a="0.71" data-b="0.83" style="--cc:var(--ele1)"><span class="k">06 · Robotlu Üretim</span><h2>İnsan hatasına yer yok</h2><p>Robot hücreleri taşır, işler, paketler.</p></div>
+  <div class="cap" data-a="0.85" data-b="0.93" style="--cc:var(--mnt1,#35ffa8)"><span class="k">07 · Test</span><h2>Her ünite sınanır</h2><p>Sızdırmazlık ve güç testi olmadan hiçbir ürün çıkmaz.</p></div>
+
+  <div class="fin" id="fin">
+    <div class="fintext">
+      <h2>Gördüğünüz hat,<br>ürettiğimiz güven.</h2>
+      <p>Şimdi ürünleri kendi kaidelerinde gezin ya da doğrudan teklif isteyin.</p>
+    </div>
+    <div class="cta">
+      <a class="btn" href="urunler.html">3B Showroom'u Gez →</a>
+      <a class="btn g" href="teklif.html?konu=fabrika-turu">Teklif İste</a>
+    </div>
+    <p class="alt">Ya da <a href="mailto:info@isisah.com.tr?subject=Fabrika%20Turu%20Teklif%20Talebi">e-posta gönderin</a> · <a href="tel:+902242610527">+90 224 261 05 27</a></p>
+  </div>
+
+  <div class="scrollhint" id="scrollhint">
+    <button type="button" class="playToggle" id="playToggle" aria-pressed="false">Normal oynatıcıyla izle</button>
+    <div class="shint" id="shint">uçmak için kaydır ↓</div>
+  </div>
+
+  <div id="scroll"></div>
+</main>
 
 <script>
 // ================= SCROLL-SCRUB FİLM =================
@@ -161,50 +256,126 @@ const pbar=document.getElementById('pbar');
 const shint=document.getElementById('shint');
 const fin=document.getElementById('fin');
 const caps=[...document.querySelectorAll('.cap')];
+const vprog=document.getElementById('vprog');
+const lbar=document.getElementById('lbar');
+const lpct=document.getElementById('lpct');
+const playToggle=document.getElementById('playToggle');
 const REDUCED=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const PX_PER_SEC=150;                                  // sahne hızı: saniye başına sanal piksel
 
-// python http.server byte-range vermez -> videoyu blob olarak indirip src yapıyoruz.
-// Canlıda da işe yarar: scrub zaten tüm dosyayı ister; yüzde göstergeli ön yükleme.
+// film.src doğrudan dosyaya atanmış durumda (bkz. <video src>) — sunucu byte-range
+// destekliyorsa (canlı, ve bu turun test sunucusu :8095) tarayıcı aşamalı/parçalı
+// indirir, tam dosya inmeden de seek edebilir. Range desteklemeyen sunucularda
+// (yerel python http.server) loadedmetadata sonrası seekable aralığı dar kalır —
+// o durumda aşağıdaki fetch→Blob yoluna geçilir (yalnız o zaman gerekli).
 const SRC='assets/img/fabrika-scrub.mp4?v=2';
-fetch(SRC).then(async r=>{
-  const total=+r.headers.get('Content-Length')||0;
-  const reader=r.body.getReader(); const chunks=[]; let got=0;
-  for(;;){ const {done,value}=await reader.read(); if(done)break;
-    chunks.push(value); got+=value.length;
-    const p=total?got/total:0.5;
-    document.getElementById('lbar').style.transform='scaleX('+p.toFixed(3)+')';
-    document.getElementById('lpct').textContent='%'+Math.round(p*100); }
-  const blob=new Blob(chunks,{type:'video/mp4'});
-  film.src=URL.createObjectURL(blob);
-}).catch(()=>{ film.src=SRC; });                        // fetch olmadıysa düz kaynak
+let seekReady=false;
+let plainMode=false;
+
+function hideProg(){ vprog.classList.add('hide'); }
+
+function isSeekable(){
+  if(!film.seekable || film.seekable.length===0) return false;
+  const end=film.seekable.end(film.seekable.length-1);
+  return isFinite(film.duration) && end>=(film.duration-0.5);
+}
+
+function startBlobFallback(){
+  const resumeAt=film.currentTime||0;
+  // <video src> zaten aynı URL'ye kendi isteğini açmış durumda; onu önce sonlandır
+  // (removeAttribute+load ile), yoksa tarayıcı fetch() ile açılan ikinci isteği
+  // ilkinin arkasına kuyruğa alıp ~20s bekletebiliyor (bkz. F2).
+  film.removeAttribute('src');
+  film.load();
+  fetch(SRC).then(async r=>{
+    const total=+r.headers.get('Content-Length')||0;
+    const reader=r.body.getReader(); const chunks=[]; let got=0;
+    for(;;){ const {done,value}=await reader.read(); if(done)break;
+      chunks.push(value); got+=value.length;
+      const p=total?got/total:0.5;
+      lbar.style.transform='scaleX('+p.toFixed(3)+')';
+      lpct.textContent='%'+Math.round(p*100);
+    }
+    const blob=new Blob(chunks,{type:'video/mp4'});
+    film.addEventListener('loadedmetadata',()=>{
+      seekReady=true; hideProg();
+      try{ film.currentTime=resumeAt; }catch(e){}
+      // plainMode'da play() src-swap'tan önce çağrılmış olabilir (bkz. F1) —
+      // swap tamamlandığında oynatmayı burada yeniden tetikle.
+      if(plainMode){ film.play().catch(()=>{}); }
+    },{once:true});
+    film.src=URL.createObjectURL(blob);
+  }).catch(()=>{ seekReady=true; hideProg(); }); // ağ hatasında da sayfa kilitli kalmasın
+}
 
 film.addEventListener('loadedmetadata',()=>{
   scrollEl.style.height=Math.round(film.duration*PX_PER_SEC+innerHeight)+'px';
-  document.getElementById('lpct').textContent='%100';
-  document.getElementById('lbar').style.transform='scaleX(1)';
-  setTimeout(()=>{document.getElementById('loader').classList.add('hide');},250);
-});
+  if(isSeekable()){
+    seekReady=true;
+    hideProg();
+  } else {
+    lpct.textContent='%0';
+    startBlobFallback();
+  }
+},{once:true});
+film.addEventListener('error',hideProg);
 
 const clamp=x=>x<0?0:x>1?1:x;
 function progress(){ const total=scrollEl.offsetHeight-innerHeight;
   return total>0?clamp(scrollY/total):0; }
 
-let sp=0, shown=-2;
+let sp=0;
 function frame(){
-  const p=progress();
-  sp+=(p-sp)*(REDUCED?1:0.14);                         // yumuşatılmış scrub
-  if(film.duration){ const t=sp*film.duration;
-    if(Math.abs((film.currentTime||0)-t)>0.033) film.currentTime=t; }
-  pbar.style.width=(p*100)+'%';
-  shint.style.opacity=p>0.02?0:1;
-  caps.forEach(c=>{const a=+c.dataset.a,b=+c.dataset.b;c.classList.toggle('on',p>=a&&p<=b);});
-  fin.classList.toggle('on',p>0.945);
+  if(!plainMode){
+    const p=progress();
+    sp+=(p-sp)*(REDUCED?1:0.14);                         // yumuşatılmış scrub (reduced-motion'da anlık)
+    if(seekReady && film.duration){ const t=sp*film.duration;
+      if(Math.abs((film.currentTime||0)-t)>0.033) film.currentTime=t; }
+    pbar.style.width=(p*100)+'%';
+    shint.style.opacity=p>0.02?0:1;
+    caps.forEach(c=>{const a=+c.dataset.a,b=+c.dataset.b;c.classList.toggle('on',p>=a&&p<=b);});
+    fin.classList.toggle('on',p>0.945);
+  }
   requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
-addEventListener('resize',()=>{ if(film.duration)
+addEventListener('resize',()=>{ if(!plainMode && film.duration)
   scrollEl.style.height=Math.round(film.duration*PX_PER_SEC+innerHeight)+'px'; });
+
+// ================= SIRADAN OYNATICI GEÇİŞİ =================
+function enterPlain(){
+  plainMode=true;
+  document.body.classList.add('plain');
+  film.controls=true;
+  film.play().catch(()=>{});
+  scrollEl.style.height='1px';
+  scrollTo(0,0);
+  playToggle.textContent='Kaydırarak izle';
+  playToggle.setAttribute('aria-pressed','true');
+}
+function exitPlain(){
+  plainMode=false;
+  document.body.classList.remove('plain');
+  film.controls=false;
+  film.pause();
+  if(film.duration) scrollEl.style.height=Math.round(film.duration*PX_PER_SEC+innerHeight)+'px';
+  scrollTo(0,0);
+  sp=0;
+  playToggle.textContent='Normal oynatıcıyla izle';
+  playToggle.setAttribute('aria-pressed','false');
+}
+playToggle.addEventListener('click',()=>{ plainMode?exitPlain():enterPlain(); });
+
+// sıradan oynatıcıda film doğal sonuna ulaştığında teklif/showroom CTA'sını göster
+// (kaydırmaya bağlı fin.on geçişi plainMode'da çalışmaz, bkz. F4).
+film.addEventListener('ended',()=>{ if(plainMode) fin.classList.add('on'); });
+
+// azaltılmış hareket: kaydırmaya bağlı otomatik sahne animasyonunu başlatma,
+// öntanımlı olarak sıradan oynatıcıyı kullan (kaydırma isteğe bağlı kalır).
+if(REDUCED){
+  if(film.readyState>=1) enterPlain();
+  else film.addEventListener('loadedmetadata',enterPlain,{once:true});
+}
 </script>
 </body>
 </html>

@@ -1,0 +1,632 @@
+{
+  "_meta": {
+    "note": "ISIŞAH GROUP 3B showroom + kategori sayfaları + teklif.html ürün verisi — TEK KAYNAK. Bu dosyayı düzenleyip tools/build-products.py, ardından tools/build-category-pages.py ve tools/build-teklif.py çalıştırın (bkz. .claude/skills/isisah-urun-ekle/SKILL.md). urunler.html içindeki JS dizileri/JSON-LD/katalog listesi ve kategori/teklif sayfaları bu dosyadan üretilir; oradaki kopyaları elle düzenlemeyin.",
+    "image_pattern": "assets/products/{img}.webp",
+    "logo_pattern": "logo-{brand}",
+    "brands": {
+      "isisah": "ISIŞAH ENDÜSTRİYEL",
+      "salmex": "SALMEX",
+      "borsah": "BORŞAH BORU"
+    },
+    "gams_note": "gams: urunler.html ISISAH_CATS alt-gam anahtarlarından türetildi (betimleyici alan; showroom 3B holü hâlâ urunler.html ISISAH_CATS üzerinden çalışır, bu alan onu değiştirmez)."
+  },
+  "products": [
+    {
+      "img": "rezistans",
+      "brand": "isisah",
+      "gams": [
+        "isisah_rezistans",
+        "isisah_agir"
+      ],
+      "tag": "ISIŞAH ENDÜSTRİYEL",
+      "h": "Özel Tip Flanş Rezistansları",
+      "en": "Custom Flanged Heating Elements",
+      "p": "Daldırma ve boru tipi ısıtıcı elemanlar; sanayi ve proses uygulamaları için.",
+      "chips": [
+        "Daldırma Tip",
+        "Boru Tip",
+        "Yerli Üretim"
+      ]
+    },
+    {
+      "img": "izgara",
+      "brand": "isisah",
+      "gams": [
+        "isisah_rezistans",
+        "isisah_mutfak"
+      ],
+      "tag": "ISIŞAH ENDÜSTRİYEL",
+      "h": "Konveksiyonel Fırın Rezistansları",
+      "en": "Convection Oven Heating Elements",
+      "p": "Konveksiyonel fırınlar için dairesel ısıtıcı elemanlar.",
+      "chips": [
+        "Konveksiyon",
+        "Fırın",
+        "Paslanmaz"
+      ]
+    },
+    {
+      "img": "fritoz",
+      "brand": "isisah",
+      "gams": [
+        "isisah_rezistans",
+        "isisah_mutfak"
+      ],
+      "tag": "ISIŞAH ENDÜSTRİYEL",
+      "h": "Fritöz Rezistansları (Yassı Rezistans)",
+      "en": "Fryer Heating Elements",
+      "p": "Endüstriyel fritözler için daldırma tip ısıtıcı raflar; hızlı ve homojen ısıtma.",
+      "chips": [
+        "Fritöz",
+        "Daldırma Tip",
+        "Hızlı Isıtma"
+      ]
+    },
+    {
+      "img": "bulasik",
+      "brand": "isisah",
+      "gams": [
+        "isisah_rezistans",
+        "isisah_mutfak"
+      ],
+      "tag": "ISIŞAH ENDÜSTRİYEL",
+      "h": "Bulaşık Makinesi Rezistansları",
+      "en": "Dishwasher Heating Elements",
+      "p": "Sanayi tipi bulaşık makineleri için boyler ve tank ısıtıcı elemanları.",
+      "chips": [
+        "Boyler Tip",
+        "Tank Isıtıcı",
+        "Sanayi Tipi"
+      ]
+    },
+    {
+      "img": "makarna",
+      "brand": "isisah",
+      "gams": [
+        "isisah_rezistans",
+        "isisah_mutfak"
+      ],
+      "tag": "ISIŞAH ENDÜSTRİYEL",
+      "h": "Makarna Haşlama Rezistansları (Yassı Rezistans)",
+      "en": "Pasta Cooking Elements",
+      "p": "Makarna haşlama üniteleri için daldırma tip ısıtıcı elemanlar.",
+      "chips": [
+        "Haşlama",
+        "Daldırma Tip",
+        "Mutfak"
+      ]
+    },
+    {
+      "img": "beyaz",
+      "brand": "isisah",
+      "gams": [
+        "isisah_beyaz"
+      ],
+      "tag": "ISIŞAH ENDÜSTRİYEL",
+      "h": "Arçelik & Vestel Kurutma Makinesi Isıtıcıları",
+      "en": "Tumble Dryer Heating Elements",
+      "p": "Arçelik ve Vestel kurutma makineleri için ısıtıcı üniteler.",
+      "chips": [
+        "Arçelik",
+        "Vestel",
+        "Kurutma"
+      ]
+    },
+    {
+      "img": "defrost",
+      "brand": "isisah",
+      "gams": [
+        "isisah_rezistans",
+        "isisah_beyaz"
+      ],
+      "tag": "ISIŞAH ENDÜSTRİYEL",
+      "h": "Defrost Rezistansları",
+      "en": "Defrost Heating Elements",
+      "p": "Soğutma sistemleri için defrost elemanları; Ø6,5–11,2 mm, yüksek sıcaklığa dayanıklı.",
+      "chips": [
+        "Ø6,5–11,2 mm",
+        "Yüksek Sıcaklık",
+        "Paslanmaz"
+      ]
+    },
+    {
+      "img": "firin",
+      "brand": "isisah",
+      "gams": [
+        "isisah_agir"
+      ],
+      "tag": "ISIŞAH ENDÜSTRİYEL",
+      "h": "Endüstriyel Fırın",
+      "en": "Industrial Furnace",
+      "p": "Kontrol panelli sanayi tipi ısıl işlem ve kurutma fırınları; projeye özel.",
+      "chips": [
+        "PLC Kontrol",
+        "Isıl İşlem",
+        "Projeye Özel"
+      ]
+    },
+    {
+      "img": "kanal",
+      "brand": "isisah",
+      "gams": [
+        "isisah_hvac"
+      ],
+      "tag": "ISIŞAH ENDÜSTRİYEL",
+      "h": "Kanal Tipi Isıtıcı",
+      "en": "Duct Type Electric Heater",
+      "p": "Kanatlı rezistanslı santral, dikdörtgen ve yuvarlak kanal ısıtıcıları.",
+      "chips": [
+        "Santral",
+        "Dikdörtgen",
+        "Yuvarlak"
+      ]
+    },
+    {
+      "img": "mobil",
+      "brand": "isisah",
+      "gams": [
+        "isisah_agir"
+      ],
+      "tag": "ISIŞAH ENDÜSTRİYEL",
+      "h": "Mobil Elektrikli Isıtıcı",
+      "en": "Mobile Electric Heater",
+      "p": "Uğur Böceği serisi taşınabilir fanlı ısıtıcılar; atölye ve saha için.",
+      "chips": [
+        "Taşınabilir",
+        "Fanlı",
+        "3 Boy"
+      ]
+    },
+    {
+      "img": "fincoil",
+      "brand": "isisah",
+      "gams": [
+        "isisah_hvac"
+      ],
+      "tag": "ISIŞAH ENDÜSTRİYEL",
+      "h": "Fan-Coil & Ortam Isıtıcısı",
+      "en": "Fan Coil / Space Heater",
+      "p": "Fan-coil üniteleri ve ortam ısıtması için dik finli paslanmaz ısıtıcılar.",
+      "chips": [
+        "FCU",
+        "Ortam",
+        "Finli"
+      ]
+    },
+    {
+      "img": "panel",
+      "brand": "isisah",
+      "gams": [
+        "isisah_hvac"
+      ],
+      "tag": "ISIŞAH ENDÜSTRİYEL",
+      "h": "Klima Santrali (AHU) Isıtıcısı",
+      "en": "AHU Heater Unit",
+      "p": "Klima santralleri için yüksek kapasiteli paslanmaz ısıtıcı üniteler.",
+      "chips": [
+        "AHU",
+        "Yüksek Kapasite",
+        "Paslanmaz"
+      ]
+    },
+    {
+      "img": "duct",
+      "brand": "isisah",
+      "gams": [
+        "isisah_hvac"
+      ],
+      "tag": "ISIŞAH ENDÜSTRİYEL",
+      "h": "Silindirik Kanal Fan Isıtıcısı",
+      "en": "Cylindrical Duct Fan Heater",
+      "p": "Havalandırma kanalları için fanlı silindirik paslanmaz ısıtıcı.",
+      "chips": [
+        "Kanal",
+        "Fanlı",
+        "Kompakt"
+      ]
+    },
+    {
+      "img": "boykur",
+      "brand": "isisah",
+      "gams": [
+        "isisah_otomotiv"
+      ],
+      "tag": "ISIŞAH · BOYKUR",
+      "h": "BOYKUR Boya Kurutma",
+      "en": "Infrared Paint Drying",
+      "p": "Infrared, bilgisayar kontrollü mobil oto boya kurutma. Tofaş Ar-Ge projesi.",
+      "chips": [
+        "Infrared",
+        "Bilgisayar Kontrollü",
+        "Tofaş Ar-Ge"
+      ]
+    },
+    {
+      "img": "tren",
+      "brand": "isisah",
+      "gams": [
+        "isisah_rayli"
+      ],
+      "tag": "ISIŞAH · DEMİRYOLU",
+      "h": "Demiryolu İklimlendirme Çözümleri",
+      "en": "Railway HVAC & Heating Solutions",
+      "p": "80'lerin sonundan beri demiryolu sanayine: klima ısıtıcıları, yolcu/koltuk altı ve makinist ısıtıcıları, ray & makas ısıtıcıları. Görselde ürünün kullanıldığı araç gösterilmektedir; ısıtıcının kendisi değildir.",
+      "chips": [
+        "TÜVASAŞ · TÜRASAŞ",
+        "Metro & Tramvay",
+        "Yüksek Gerilim İzolasyonu"
+      ]
+    },
+    {
+      "img": "railcar",
+      "brand": "isisah",
+      "gams": [
+        "isisah_rayli"
+      ],
+      "tag": "ISIŞAH · DEMİRYOLU",
+      "h": "Demiryolu Araç Isıtıcısı",
+      "en": "Rail Car Heater",
+      "p": "Raylı araçlar için paslanmaz ısıtıcı üniteler; şok ve vibrasyon testli, yüksek gerilim izolasyonu.",
+      "chips": [
+        "Raylı Araç",
+        "Şok & Vibrasyon",
+        "Paslanmaz"
+      ]
+    },
+    {
+      "img": "gemi",
+      "brand": "isisah",
+      "gams": [
+        "isisah_savunma"
+      ],
+      "tag": "ISIŞAH · SAVUNMA",
+      "h": "Askeri Gemi İklimlendirme Çözümleri",
+      "en": "Naval Ship Heating Solutions",
+      "p": "TCG Anadolu (L400) dahil amfibi hücum gemileri ve MİLGEM sınıfı platformlar için ısıtma ve iklimlendirme çözümleri. Görselde ürünün kullanıldığı platform gösterilmektedir; ısıtıcının kendisi değildir.",
+      "chips": [
+        "TCG Anadolu",
+        "MİLGEM",
+        "Savunma Sanayi"
+      ]
+    },
+    {
+      "img": "blast",
+      "brand": "isisah",
+      "gams": [
+        "isisah_savunma"
+      ],
+      "tag": "ISIŞAH · SAVUNMA",
+      "h": "Savunma Tipi Blast Heater",
+      "en": "Defense Blast Heater",
+      "p": "MİLGEM sınıfı gemiler ve savunma platformları için fanlı blast ısıtıcı; NBC uyumlu klima santrali entegrasyonu.",
+      "chips": [
+        "MİLGEM",
+        "Fanlı",
+        "Savunma Sanayi"
+      ]
+    },
+    {
+      "img": "baseboard",
+      "brand": "isisah",
+      "gams": [
+        "isisah_savunma"
+      ],
+      "tag": "ISIŞAH · SAVUNMA",
+      "h": "Baseboard Konvektör Isıtıcı",
+      "en": "Baseboard Convector Heater",
+      "p": "Gemi ve savunma platformları için delikli kasalı süpürgelik tipi konvektör üniteler.",
+      "chips": [
+        "Gemi Tipi",
+        "Konvektör",
+        "Paslanmaz"
+      ]
+    },
+    {
+      "img": "ocak",
+      "brand": "isisah",
+      "gams": [
+        "isisah_rezistans",
+        "isisah_beyaz"
+      ],
+      "tag": "ISIŞAH · BEYAZ EŞYA",
+      "h": "Ocak Rezistansları (Spiral)",
+      "en": "Cooktop Heating Elements",
+      "p": "Elektrikli ocaklar için spiral boru rezistanslar; ev tipi ve sanayi tipi formlarda.",
+      "chips": [
+        "Spiral",
+        "Ocak",
+        "Boru Tip"
+      ]
+    },
+    {
+      "img": "disk",
+      "brand": "isisah",
+      "gams": [
+        "isisah_beyaz"
+      ],
+      "tag": "ISIŞAH · BEYAZ EŞYA",
+      "h": "Kahve & Çaydanlık Isıtıcıları",
+      "en": "Kettle & Coffee Disc Heaters",
+      "p": "Kahve makinesi, çaydanlık ve bulaşık makineleri için paslanmaz disk ısıtıcılar.",
+      "chips": [
+        "Disk Tip",
+        "Paslanmaz",
+        "Ev Aletleri"
+      ]
+    },
+    {
+      "img": "firinrez",
+      "brand": "isisah",
+      "gams": [
+        "isisah_rezistans",
+        "isisah_beyaz"
+      ],
+      "tag": "ISIŞAH · BEYAZ EŞYA",
+      "h": "Fırın Rezistansları",
+      "en": "Oven Heating Elements",
+      "p": "Ev tipi fırınlar için alt-üst ve turbo rezistanslar; farklı form ve güçlerde.",
+      "chips": [
+        "Fırın",
+        "Alt-Üst",
+        "Turbo"
+      ]
+    },
+    {
+      "img": "makas",
+      "brand": "isisah",
+      "gams": [
+        "isisah_rayli"
+      ],
+      "tag": "ISIŞAH · DEMİRYOLU",
+      "h": "Ray & Makas Isıtıcıları",
+      "en": "Rail & Switch Point Heaters",
+      "p": "Karlı ve düşük sıcaklıkta makasların donmasını önler; olası kazaların önüne geçer. 1000 W / 230 V.",
+      "chips": [
+        "1000W / 230V",
+        "Makas",
+        "Dona Karşı"
+      ]
+    },
+    {
+      "img": "personel",
+      "brand": "isisah",
+      "gams": [
+        "isisah_rayli"
+      ],
+      "tag": "ISIŞAH · DEMİRYOLU",
+      "h": "Görevli Personel Isıtıcıları",
+      "en": "Railway Staff Heaters",
+      "p": "Raylı araç personel kabinleri için finli paslanmaz ısıtıcı üniteler.",
+      "chips": [
+        "Finli",
+        "Paslanmaz",
+        "TÜVASAŞ"
+      ]
+    },
+    {
+      "img": "proses",
+      "brand": "isisah",
+      "gams": [
+        "isisah_rezistans",
+        "isisah_agir"
+      ],
+      "tag": "ISIŞAH ENDÜSTRİYEL",
+      "h": "Proses Isıtıcı Ünitesi",
+      "en": "Process Heater Unit",
+      "p": "Endüstriyel proses hatları için flanşlı, kanal gövdeli ısıtıcı üniteler.",
+      "chips": [
+        "Proses",
+        "Flanşlı",
+        "Yüksek Kapasite"
+      ]
+    },
+    {
+      "img": "salmex",
+      "brand": "salmex",
+      "gams": [
+        "salmex"
+      ],
+      "tag": "SALMEX",
+      "h": "Yoğuşmalı Isı Eşanjörü",
+      "en": "Condensing Heat Exchanger",
+      "p": "Paslanmaz çelik sarmal eşanjör borusu; yüksek verimli, farklı kapasitelerde yoğuşmalı tasarım.",
+      "chips": [
+        "Paslanmaz Çelik",
+        "Yüksek Verim",
+        "Değiştirilebilir"
+      ]
+    },
+    {
+      "img": "condhex",
+      "brand": "salmex",
+      "gams": [
+        "salmex"
+      ],
+      "tag": "SALMEX",
+      "h": "Yoğuşmalı Kombi Eşanjörü",
+      "en": "Condensing Combi Heat Exchanger",
+      "p": "Duvar tipi yoğuşmalı kombiler için alüminyum döküm eşanjör hücresi; pompa grubu ve gaz valfiyle komple ünite.",
+      "chips": [
+        "Yoğuşmalı",
+        "Alüminyum Döküm",
+        "CondHex"
+      ]
+    },
+    {
+      "img": "ehex",
+      "brand": "salmex",
+      "gams": [
+        "salmex"
+      ],
+      "tag": "SALMEX",
+      "h": "Elektrikli Kombi Eşanjörü",
+      "en": "Electric Combi Heat Exchanger",
+      "p": "Elektrikli kombiler için eşanjör ünitesi; sirkülasyon pompası ve kontrol donanımıyla komple çözüm.",
+      "chips": [
+        "Elektrikli",
+        "E-Hex",
+        "Komple Ünite"
+      ]
+    },
+    {
+      "img": "bitermik",
+      "brand": "salmex",
+      "gams": [
+        "salmex"
+      ],
+      "tag": "SALMEX",
+      "h": "Kanatlı Kombi Ana Eşanjörü",
+      "en": "Finned Main Heat Exchanger",
+      "p": "Konvansiyonel kombiler için kanatlı borulu ana eşanjör blokları; kompakt ve yüksek ısı transferi.",
+      "chips": [
+        "Kanatlı Boru",
+        "Konvansiyonel",
+        "Kompakt"
+      ]
+    },
+    {
+      "img": "kazan",
+      "brand": "salmex",
+      "gams": [
+        "salmex"
+      ],
+      "tag": "SALMEX",
+      "h": "Kazan Tipi Yoğuşmalı Eşanjör",
+      "en": "Condensing Boiler Heat Exchanger",
+      "p": "Yüksek kapasiteli kazanlar için paslanmaz gövdeli, alüminyum döküm flanşlı yoğuşmalı eşanjör.",
+      "chips": [
+        "Kazan Tipi",
+        "Yüksek Kapasite",
+        "Paslanmaz"
+      ]
+    },
+    {
+      "img": "boyler",
+      "brand": "salmex",
+      "gams": [
+        "salmex"
+      ],
+      "tag": "SALMEX",
+      "h": "Elektrikli Isıtıcı Ünitesi",
+      "en": "Electric Heater Vessel",
+      "p": "Silindirik paslanmaz gövdeli elektrikli ısıtıcı; flanşlı rezistans grubuyla kombi ve kazan sistemleri için.",
+      "chips": [
+        "Elektrikli",
+        "Paslanmaz",
+        "Flanşlı"
+      ]
+    },
+    {
+      "img": "helis",
+      "brand": "salmex",
+      "gams": [
+        "salmex"
+      ],
+      "tag": "SALMEX",
+      "h": "Helisel Boru Eşanjörü",
+      "en": "Helical Coil Heat Exchanger",
+      "p": "Paslanmaz borudan helisel sarım eşanjör; kompakt hacimde yüksek ısı transfer yüzeyi.",
+      "chips": [
+        "Helisel Sarım",
+        "Paslanmaz Boru",
+        "Kompakt"
+      ]
+    },
+    {
+      "img": "serpantin",
+      "brand": "salmex",
+      "gams": [
+        "salmex"
+      ],
+      "tag": "SALMEX",
+      "h": "Spiral Serpantin",
+      "en": "Flat Spiral Coil",
+      "p": "Yassı spiral sarımlı paslanmaz serpantin; kazan ve boyler uygulamaları için.",
+      "chips": [
+        "Spiral Sarım",
+        "Serpantin",
+        "Paslanmaz"
+      ]
+    },
+    {
+      "img": "hucre",
+      "brand": "salmex",
+      "gams": [
+        "salmex"
+      ],
+      "tag": "SALMEX",
+      "h": "Premix Yoğuşmalı Eşanjör Hücresi",
+      "en": "Premix Condensing Heat Cell",
+      "p": "Kompozit gövdeli, alüminyum brülör kapaklı premix yoğuşmalı eşanjör hücresi; ateşleme elektrotu montajlı.",
+      "chips": [
+        "Premix",
+        "Yoğuşmalı",
+        "Kompozit Gövde"
+      ]
+    },
+    {
+      "img": "emodul",
+      "brand": "salmex",
+      "gams": [
+        "salmex"
+      ],
+      "tag": "SALMEX",
+      "h": "Elektrikli Isıtma Modülü",
+      "en": "Electric Heating Module",
+      "p": "Paslanmaz plakalı gövde, kırmızı/mavi döküm kolektörlü kompakt elektrikli ısıtma modülü.",
+      "chips": [
+        "Elektrikli",
+        "Plakalı",
+        "Kompakt"
+      ]
+    },
+    {
+      "img": "boru",
+      "brand": "borsah",
+      "gams": [
+        "borsah"
+      ],
+      "tag": "BORŞAH BORU",
+      "h": "Paslanmaz Borular",
+      "en": "Stainless Steel Tubes",
+      "p": "Dikişli paslanmaz boru; Ø6–42 mm çap, 0,35–2 mm et kalınlığı, 70–300 bar test, 9 kalite kontrolü.",
+      "chips": [
+        "Ø6–42 mm",
+        "0,35–2 mm",
+        "TIG Kaynak"
+      ]
+    },
+    {
+      "img": "oval",
+      "brand": "borsah",
+      "gams": [
+        "borsah"
+      ],
+      "tag": "BORŞAH BORU",
+      "h": "Oval Borular",
+      "en": "Oval Section Tubes",
+      "p": "Rezistans imalatı, mobilya ve sanayi için oval kesitli paslanmaz profiller.",
+      "chips": [
+        "Oval Kesit",
+        "Rezistans İmalatı",
+        "Profil"
+      ]
+    },
+    {
+      "img": "kangal",
+      "brand": "borsah",
+      "gams": [
+        "borsah"
+      ],
+      "tag": "BORŞAH BORU",
+      "h": "Tavlı & Kangal Borular",
+      "en": "Annealed & Coiled Tubes",
+      "p": "Ø6–42 mm aralığında tavlı ve kangal boru; 100–400 m kangal, 100 bar test.",
+      "chips": [
+        "Ø6–42 mm",
+        "100–400 m",
+        "Tavlı & Kangal"
+      ]
+    }
+  ]
+}

@@ -1,11 +1,14 @@
 // Canlı duman testi — tarayıcı katmanı: 3 sayfayı headless açar,
 // konsol hatalarını toplar, sayfa-özel canlılık kontrolleri yapar.
-// Kullanım: node tools/smoke-browser.mjs [taban_url]   (varsayılan: https://isisah.com.tr)
+// Kullanım: node tools/smoke-browser.mjs [taban_url] [showroom_öneki]
+//   canlı:  node tools/smoke-browser.mjs                         (https://isisah.com.tr, /showroom)
+//   yerel:  node tools/smoke-browser.mjs http://localhost:8080 ''  (depo kökü düz topoloji)
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const { chromium } = require(process.env.HOME + '/.isisah-smoke/node_modules/playwright');
 
 const BASE = process.argv[2] || 'https://isisah.com.tr';
+const SR = process.argv[3] ?? '/showroom';
 const results = [];
 let fail = 0;
 
@@ -34,14 +37,23 @@ async function check(path, name, probe) {
 
 await check('/', 'ana sayfa', async p => {
   const wc = await p.locator('.wcard').count();
-  const vc = await p.locator('.vcard').count();
   const tour = await p.locator('.tourbox').count();
-  return (wc >= 4 && vc >= 12 && tour === 1)
-    ? `wcard=${wc} vcard=${vc} tourbox=${tour}`
-    : `FAIL beklenen bölümler eksik (wcard=${wc} vcard=${vc} tourbox=${tour})`;
+  const cta = await p.locator('.hero a[href^="teklif.html"]').count();
+  const navq = await p.locator('#links a[href^="teklif.html"]').count();
+  const main = await p.locator('main#main').count();
+  return (wc >= 4 && tour === 1 && cta >= 1 && navq >= 1 && main === 1)
+    ? `wcard=${wc} tourbox=${tour} hero-teklif=${cta} nav-teklif=${navq}`
+    : `FAIL beklenen bölümler eksik (wcard=${wc} tourbox=${tour} hero-teklif=${cta} nav-teklif=${navq} main=${main})`;
 });
 
-await check('/showroom/urunler.html', 'showroom', async p => {
+await check('/teklif.html?urun=kangal', 'teklif formu', async p => {
+  const form = await p.locator('form').count();
+  const hp = await p.locator('#fWeb').count();
+  const pre = await p.evaluate(() => [...document.querySelectorAll('textarea,input,select')].some(e => /kangal/i.test(e.value || '')));
+  return (form >= 1 && hp === 1) ? `form=${form} honeypot=ok onDoldurma=${pre}` : `FAIL form=${form} honeypot=${hp}`;
+});
+
+await check(SR + '/urunler.html', 'showroom', async p => {
   // kapı tıklaması YOK (ses protokolü) — yalnız lobinin kurulduğunu doğrula
   await p.waitForSelector('body.ready', { timeout: 30000 });
   const doors = await p.locator('.doorcard').count();
@@ -49,10 +61,11 @@ await check('/showroom/urunler.html', 'showroom', async p => {
   return (doors === 3 && canvasOk) ? `kapı=3 canvas=ok` : `FAIL kapı=${doors} canvas=${canvasOk}`;
 });
 
-await check('/showroom/fabrika.html', 'fabrika turu', async p => {
+await check(SR + '/fabrika.html', 'fabrika turu', async p => {
   await p.waitForFunction(() => {
+    // byte-range'siz sunucuda blob yedeğine geçiş sırasında src geçici olarak kalkar; kaydırmaya hazır = seekable
     const v = document.getElementById('film');
-    return v && v.duration > 0;
+    return v && v.duration > 0 && v.seekable.length > 0 && v.seekable.end(0) > 20;
   }, { timeout: 60000 });
   const dur = await p.evaluate(() => document.getElementById('film').duration.toFixed(1));
   const caps = await p.locator('.cap').count();

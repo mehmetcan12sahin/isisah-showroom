@@ -18,6 +18,8 @@ has(){ curl -s -m 25 "$1" | grep -qc "$2"; }
 [ "$(http "$BASE/showroom/fabrika.html?$bust")" = "200" ] && say OK "fabrika 200" || say FAIL "fabrika HTTP"
 [ "$(http "$BASE/hakkimizda.html?$bust")" = "200" ] && say OK "hakkımızda 200" || say FAIL "hakkımızda HTTP"
 [ "$(http "$BASE/vizyon-misyon.html?$bust")" = "200" ] && say OK "vizyon-misyon 200" || say FAIL "vizyon-misyon HTTP"
+[ "$(http "$BASE/teklif.html?$bust")" = "200" ] && say OK "teklif 200" || say FAIL "teklif HTTP"
+[ "$(http "$BASE/sanayi-tipi-rezistans.html?$bust")" = "200" ] && say OK "kategori 200" || say FAIL "kategori HTTP"
 has "$BASE/hakkimizda.html?$bust" "/showroom/assets/" && say OK "hakkımızda: yollar çevrili" || say FAIL "hakkımızda: yol çevirisi bozuk"
 has "$BASE/robots.txt?$bust" "Sitemap: https://isisah.com.tr/sitemap.xml" && say OK "robots.txt: Sitemap satırı" || say FAIL "robots.txt: Sitemap satırı yok"
 has "$BASE/robots.txt?$bust" "Disallow: /wp-admin/" && say OK "robots.txt: WP kuralı korunmuş" || say FAIL "robots.txt: WP kuralı kaybolmuş"
@@ -40,6 +42,8 @@ has "$BASE/?$bust" "tourbox"            && say OK "kök: tourbox var"           
 has "$BASE/?$bust" "/showroom/assets/"  && say OK "kök: yollar /showroom/'a çevrili" || say FAIL "kök: yol çevirisi bozuk"
 has "$BASE/showroom/urunler.html?$bust" "sublobby" && say OK "showroom: gam sistemi" || say FAIL "showroom: gam sistemi yok"
 has "$BASE/showroom/urunler.html?$bust" "vendor/three.module" && say OK "showroom: vendored three" || say FAIL "showroom: three import bozuk"
+# showroom /showroom/ altında: kök sayfaya göreli link (JS dizgisi dahil) /showroom/teklif.html 404 verir
+nrel=$(curl -s -m 25 "$BASE/showroom/urunler.html?$bust" | grep -c "[\"'\`]teklif\.html"); [ "$nrel" = "0" ] && say OK "showroom: teklif linkleri köke mutlak" || say FAIL "showroom: $nrel satırda göreli teklif linki (404)"
 
 # --- katman 2: tarayıcı (varsa) ---
 if [ -d "$HOME/.isisah-smoke/node_modules/playwright" ]; then

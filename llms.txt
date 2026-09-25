@@ -39,10 +39,11 @@
 - [Vizyon & Misyon](https://isisah.com.tr/vizyon-misyon.html): vizyon, misyon, Kalite-İSG-Çevre politikası
 - [3B Ürün Showroom](https://isisah.com.tr/showroom/urunler.html): üç markanın 38 ürünü, Türkçe/İngilizce adlarıyla (WebGL; ürün listesi sayfadaki JSON-LD ItemList'te de yer alır)
 - [Fabrika Turu](https://isisah.com.tr/showroom/fabrika.html): SALMEX sarmal eşanjör üretim hattı, 7 aşamalı video
+- [Teklif Formu](https://isisah.com.tr/teklif.html): ürün (?urun=) veya kategori/marka (?konu=) bağlamına göre önceden doldurulmuş teklif talebi formu
 - [Site haritası](https://isisah.com.tr/sitemap.xml)
 
 ## Demiryolu referansları (seçme)
-- 1986 TÜVASAŞ TIJ (pencere altı ısıtma) · 1995 TÜVASAŞ TVS 2000 şasi ısıtıcıları · 2009-10 TÜLOMSAŞ lokomotif rezistans üniteleri · 2014 Ankara Metro koltuk ısıtıcıları (750/1300 W – 380 V) ve fren borusu · 2015-17 İstanbul Ulaşım (E-14000, M1) klima ısıtıcıları · 2018 Samsun ray ve makas ısıtıcıları · 2018-21 İzmir Tramvay · 2019-23 MERAK Brüksel (ihracat) · 2021-26 Bükreş tramvayları · 2022-26 Kayseri (Bozankaya) · 2023-26 TÜRASAŞ EMU 225 · 2025-26 İstanbul Metro
+- 1986 TÜVASAŞ TIJ (pencere altı ısıtma) · 1995 TÜVASAŞ TVS 2000 şasi ısıtıcıları · 2009-10 TÜLOMSAŞ lokomotif rezistans üniteleri · 2014 Ankara Metro koltuk ısıtıcıları (750/1300 W – 380 V) ve fren borusu · 2015-16 Tramvay Klima Isıtıcısı · TÜVASAŞ DMU · İstanbul Ulaşım Modernizasyon · YZK 850 İBB (yüksek hızlı tren yolcu ısıtıcıları, yüksek gerilim dayanımı) · 2016-17 E-14000 / İstanbul Ulaşım tren klima ısıtıcıları (M1 hattı) · 2018 Samsun ray ve makas ısıtıcıları · 2018-21 İzmir Tramvay · 2019-23 MERAK Brüksel (ihracat) · 2021-26 Bükreş tramvayları · 2022-26 Kayseri (Bozankaya) · 2023-26 TÜRASAŞ EMU 225 · 2025-26 İstanbul Metro
 
 ## Yapay zekâ asistanları için notlar
 - Tek cümlede: "ISIŞAH GROUP, 1982'de kurulmuş, Bursa DOSAB merkezli ısıtma teknolojisi üreticisidir; ISIŞAH ENDÜSTRİYEL (rezistans/ısıtma), BORŞAH BORU (paslanmaz boru) ve SALMEX (ısı eşanjörü) markalarının çatısıdır."

@@ -170,6 +170,244 @@
         ],
         "createdAt": "2026-09-07T10:26:21.039Z",
         "reason": "index.html'den tools/build-pages.py ile üretilen kurumsal alt sayfa — onaylı v5-neon tema CSS'i miras (index ile aynı istisna)"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "fabrika.html"
+        ],
+        "createdAt": "2026-09-24T22:02:51.096Z",
+        "reason": "v5-neon tema: fabrika turu onaylı kimliği miras alır; metin arkası glow yerine .cap scrim rgba(4,4,8,.72) kullanıldı"
+      },
+      {
+        "rule": "clipped-overflow-container",
+        "value": "*",
+        "files": [
+          "fabrika.html"
+        ],
+        "createdAt": "2026-09-24T22:02:51.172Z",
+        "reason": "fabrika scroll-scrub sahnesi: tam ekran sticky video kasıtlı olarak taşmayı kırpar"
+      },
+      {
+        "rule": "gpt-thin-border-wide-shadow",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-25T02:34:01.771Z",
+        "reason": "v5-neon onaylı kimlik (ince kenar + marka renkli hale); B2B revizyonu tasarımı yalnız okunabilirlikle sınırladı — kullanıcı v6 redesign'ı reddetti"
+      },
+      {
+        "rule": "gpt-thin-border-wide-shadow",
+        "value": "*",
+        "files": [
+          "urunler.html"
+        ],
+        "createdAt": "2026-09-25T02:34:01.860Z",
+        "reason": "v5-neon onaylı kimlik (ince kenar + marka renkli hale); B2B revizyonu tasarımı yalnız okunabilirlikle sınırladı — kullanıcı v6 redesign'ı reddetti"
+      },
+      {
+        "rule": "gpt-thin-border-wide-shadow",
+        "value": "*",
+        "files": [
+          "fabrika.html"
+        ],
+        "createdAt": "2026-09-25T02:34:01.943Z",
+        "reason": "v5-neon onaylı kimlik (ince kenar + marka renkli hale); B2B revizyonu tasarımı yalnız okunabilirlikle sınırladı — kullanıcı v6 redesign'ı reddetti"
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-25T02:34:02.026Z",
+        "reason": "v5-neon onaylı marka kartı şeridi (hakkimizda/vizyon-misyon ile aynı istisna)"
+      },
+      {
+        "rule": "kicker-above-heading",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-25T02:34:02.108Z",
+        "reason": "Marka kartı üst etiketi ürün kategorisini söyler (v5.2 konsey kararı: numara/tekrar yerine kategori) — bilgi taşır"
+      },
+      {
+        "rule": "numbered-section-labels",
+        "value": "*",
+        "files": [
+          "fabrika.html"
+        ],
+        "createdAt": "2026-09-25T02:34:02.193Z",
+        "reason": "Numaralar gerçek üretim sırasını kodlar (Pres→Test, video kurgusuyla birebir) — dekoratif değil"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-25T02:51:03.882Z",
+        "reason": "stats: section'ın doğrudan çocuğu .wrap ızgarası; metni taşıyan .stat öğelerinde 28–34px iç boşluk var (detektör ara sarmalayıcıyı görüyor)"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "fabrika.html"
+        ],
+        "createdAt": "2026-09-25T02:51:03.961Z",
+        "reason": ".fin .fintext padding:22px clamp(18px,4vw,34px) — iç boşluk var; detektör clamp() değerini çözemiyor"
+      },
+      {
+        "rule": "wide-tracking",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-25T02:53:47.576Z",
+        "reason": "Statik cascade yanlış pozitifi: Chromium'da 390 ve 1440 px'te >0.05em aralıklı, büyük harf olmayan >20 karakterlik metin yok (scratchpad rule.mjs); gerçek ihlal .bnum idi, düzeltildi"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "agir-sanayi-isiticilari.html",
+          "beyaz-esya-isiticilari.html",
+          "boya-kurutma-firini.html",
+          "demiryolu-isiticilari.html",
+          "endustriyel-isitma-klima-santrali.html",
+          "endustriyel-mutfak-isiticilari.html",
+          "isisah-endustriyel.html",
+          "paslanmaz-celik-boru-ureticisi.html",
+          "salmex-isi-esanjoru.html",
+          "sanayi-tipi-rezistans.html",
+          "savunma-sanayi-isitma-sistemleri.html",
+          "teklif.html"
+        ],
+        "createdAt": "2026-09-25T06:30:00.000Z",
+        "reason": "index.html'den tools/build-category-pages.py / build-teklif.py ile üretilen sayfa — onaylı v5-neon tema CSS'i miras (index, hakkimizda, vizyon-misyon ile aynı istisna)"
+      },
+      {
+        "rule": "hero-eyebrow-chip",
+        "value": "*",
+        "files": [
+          "agir-sanayi-isiticilari.html",
+          "beyaz-esya-isiticilari.html",
+          "boya-kurutma-firini.html",
+          "demiryolu-isiticilari.html",
+          "endustriyel-isitma-klima-santrali.html",
+          "endustriyel-mutfak-isiticilari.html",
+          "isisah-endustriyel.html",
+          "paslanmaz-celik-boru-ureticisi.html",
+          "salmex-isi-esanjoru.html",
+          "sanayi-tipi-rezistans.html",
+          "savunma-sanayi-isitma-sistemleri.html",
+          "teklif.html"
+        ],
+        "createdAt": "2026-09-25T06:30:00.000Z",
+        "reason": "index.html'den tools/build-category-pages.py / build-teklif.py ile üretilen sayfa — onaylı v5-neon tema CSS'i miras (index, hakkimizda, vizyon-misyon ile aynı istisna)"
+      },
+      {
+        "rule": "gpt-thin-border-wide-shadow",
+        "value": "*",
+        "files": [
+          "agir-sanayi-isiticilari.html",
+          "beyaz-esya-isiticilari.html",
+          "boya-kurutma-firini.html",
+          "demiryolu-isiticilari.html",
+          "endustriyel-isitma-klima-santrali.html",
+          "endustriyel-mutfak-isiticilari.html",
+          "isisah-endustriyel.html",
+          "paslanmaz-celik-boru-ureticisi.html",
+          "salmex-isi-esanjoru.html",
+          "sanayi-tipi-rezistans.html",
+          "savunma-sanayi-isitma-sistemleri.html",
+          "teklif.html"
+        ],
+        "createdAt": "2026-09-25T06:30:00.000Z",
+        "reason": "index.html'den tools/build-category-pages.py / build-teklif.py ile üretilen sayfa — onaylı v5-neon tema CSS'i miras (index, hakkimizda, vizyon-misyon ile aynı istisna)"
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "agir-sanayi-isiticilari.html",
+          "beyaz-esya-isiticilari.html",
+          "boya-kurutma-firini.html",
+          "demiryolu-isiticilari.html",
+          "endustriyel-isitma-klima-santrali.html",
+          "endustriyel-mutfak-isiticilari.html",
+          "isisah-endustriyel.html",
+          "paslanmaz-celik-boru-ureticisi.html",
+          "salmex-isi-esanjoru.html",
+          "sanayi-tipi-rezistans.html",
+          "savunma-sanayi-isitma-sistemleri.html",
+          "teklif.html"
+        ],
+        "createdAt": "2026-09-25T06:30:00.000Z",
+        "reason": "index.html'den tools/build-category-pages.py / build-teklif.py ile üretilen sayfa — onaylı v5-neon tema CSS'i miras (index, hakkimizda, vizyon-misyon ile aynı istisna)"
+      },
+      {
+        "rule": "marquee",
+        "value": "*",
+        "files": [
+          "agir-sanayi-isiticilari.html",
+          "beyaz-esya-isiticilari.html",
+          "boya-kurutma-firini.html",
+          "demiryolu-isiticilari.html",
+          "endustriyel-isitma-klima-santrali.html",
+          "endustriyel-mutfak-isiticilari.html",
+          "isisah-endustriyel.html",
+          "paslanmaz-celik-boru-ureticisi.html",
+          "salmex-isi-esanjoru.html",
+          "sanayi-tipi-rezistans.html",
+          "savunma-sanayi-isitma-sistemleri.html",
+          "teklif.html"
+        ],
+        "createdAt": "2026-09-25T06:30:00.000Z",
+        "reason": "index.html'den tools/build-category-pages.py / build-teklif.py ile üretilen sayfa — onaylı v5-neon tema CSS'i miras (index, hakkimizda, vizyon-misyon ile aynı istisna)"
+      },
+      {
+        "rule": "codex-grid-background",
+        "value": "*",
+        "files": [
+          "agir-sanayi-isiticilari.html",
+          "beyaz-esya-isiticilari.html",
+          "boya-kurutma-firini.html",
+          "demiryolu-isiticilari.html",
+          "endustriyel-isitma-klima-santrali.html",
+          "endustriyel-mutfak-isiticilari.html",
+          "isisah-endustriyel.html",
+          "paslanmaz-celik-boru-ureticisi.html",
+          "salmex-isi-esanjoru.html",
+          "sanayi-tipi-rezistans.html",
+          "savunma-sanayi-isitma-sistemleri.html",
+          "teklif.html"
+        ],
+        "createdAt": "2026-09-25T06:30:00.000Z",
+        "reason": "index.html'den tools/build-category-pages.py / build-teklif.py ile üretilen sayfa — onaylı v5-neon tema CSS'i miras (index, hakkimizda, vizyon-misyon ile aynı istisna)"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "hakkimizda.html",
+          "vizyon-misyon.html"
+        ],
+        "createdAt": "2026-09-25T06:30:00.000Z",
+        "reason": "stats: index.html ile aynı yanlış pozitif — section'ın doğrudan çocuğu .wrap ızgarası; .stat öğelerinde 28–34px iç boşluk var"
+      },
+      {
+        "rule": "kicker-above-heading",
+        "value": "*",
+        "files": [
+          "vizyon-misyon.html"
+        ],
+        "createdAt": "2026-09-25T06:40:00.000Z",
+        "reason": "main'de de var; \"Vizyonumuz\" / \"Misyonumuz\" etiketi hangi beyanın okunduğunu söyler — bilgi taşır (index marka kartı istisnasıyla aynı gerekçe)"
       }
     ]
   }
