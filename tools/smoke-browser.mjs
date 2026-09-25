@@ -63,8 +63,9 @@ await check(SR + '/urunler.html', 'showroom', async p => {
 
 await check(SR + '/fabrika.html', 'fabrika turu', async p => {
   await p.waitForFunction(() => {
+    // byte-range'siz sunucuda blob yedeğine geçiş sırasında src geçici olarak kalkar; kaydırmaya hazır = seekable
     const v = document.getElementById('film');
-    return v && v.duration > 0;
+    return v && v.duration > 0 && v.seekable.length > 0 && v.seekable.end(0) > 20;
   }, { timeout: 60000 });
   const dur = await p.evaluate(() => document.getElementById('film').duration.toFixed(1));
   const caps = await p.locator('.cap').count();

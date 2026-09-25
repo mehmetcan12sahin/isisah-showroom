@@ -286,6 +286,7 @@ def load_urunler_model(files_text):
 
 # --------------------------------------------------------------------- per-file kontroller
 IMG_TAG_RE = re.compile(r"<img\b([^>]*)>", re.I)
+VIDEO_TAG_RE = re.compile(r"<video\b([^>]*)>", re.I)
 ATTR_RE = re.compile(r'\b([a-zA-Z-]+)\s*=\s*"([^"]*)"')
 LINK_RE = re.compile(r'\b(?:href|src)\s*=\s*"([^"]*)"')
 JSONLD_RE = re.compile(r'<script[^>]*type=["\']application/ld\+json["\'][^>]*>(.*?)</script>', re.S | re.I)
@@ -466,6 +467,27 @@ def check_images(fname, text, F):
                     if size > 200 * 1024:
                         F.add(fname, line, UYARI, "img-size",
                               f"görsel > 200KB: {src} ({size // 1024} KB)")
+
+
+def check_video_posters(fname, text, F):
+    """<video poster="..."> img-missing kontrolüyle aynı mantıkla; check_images() <img>
+    dışına bakmaz ve LINK_RE 'poster=' içinde 'src'/'href' alt dizesi olmadığı için bunu
+    yakalamaz — kırık bir video poster'ı sessizce geçerdi."""
+    for m in VIDEO_TAG_RE.finditer(text):
+        attrs_str = m.group(1)
+        if not attrs_str.strip():
+            continue
+        line = line_of(text, m.start())
+        attrs = dict(ATTR_RE.findall(attrs_str))
+        poster = attrs.get("poster")
+        if poster is None:
+            continue
+        rel, skip = resolve_local_path(fname, poster)
+        if skip or rel is None:
+            continue
+        full = os.path.join(ROOT, rel)
+        if not os.path.isfile(full):
+            F.add(fname, line, HATA, "video-poster", f"video poster bulunamadı: {poster} -> {rel}")
 
 
 DATA_COUNT_RE = re.compile(
@@ -656,6 +678,7 @@ def main():
         check_jsonld(fname, text, F, agg_brand)
         check_meta(fname, text, F, titles, descs)
         check_images(fname, text, F)
+        check_video_posters(fname, text, F)
         check_stat_counters(fname, text, F)
         check_forbidden_copy(fname, text, F)
         check_nav_teklif(fname, text, F)
