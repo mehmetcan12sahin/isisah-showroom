@@ -58,10 +58,22 @@ function json_out(int $status, array $body) {
     exit;
 }
 
-/** CRLF/header-injection koruması: satır sonlarını boşluğa çevirir, baş/son boşluğu kırpar. */
+/** CRLF/header-injection koruması: satır sonlarını boşluğa çevirir, baş/son boşluğu kırpar.
+ *  SADECE bir mail HEADER'ına gidebilecek alanlar için kullan (ad_soyad, eposta, telefon, urun_konu,
+ *  adet, firma) — çok satırlı aciklama gövde-dışı hiçbir yere yazılmadığı için bunu KULLANMA,
+ *  bkz. clean_body_field(). */
 function clean_field(string $v): string {
     $v = preg_replace('/[\r\n]+/', ' ', $v);
     return trim($v ?? '');
+}
+
+/** Sadece mail GÖVDESİNE giden çok satırlı alanlar için (şu an tek kullanım: aciklama, bkz. satır ~230).
+ *  Header injection riski yok — bu değer hiçbir zaman bir header satırına yazılmaz, sadece $body'ye.
+ *  Bu yüzden clean_field() gibi tüm satır sonlarını silmez; kullanıcının yazdığı satır yapısını (madde
+ *  madde uygulama/ölçü/teslim gibi) korur, sadece CRLF/CR'yi LF'e normalize eder ve kırpar. */
+function clean_body_field(string $v): string {
+    $v = preg_replace('/\r\n|\r/', "\n", $v ?? '');
+    return trim($v);
 }
 
 function client_ip(): string {
@@ -175,7 +187,7 @@ $eposta    = clean_field($get($input, 'eposta'));
 $telefon   = clean_field($get($input, 'telefon'));
 $urunKonu  = clean_field($get($input, 'urun_konu'));
 $adet      = clean_field($get($input, 'adet'));
-$aciklama  = clean_field($get($input, 'aciklama'));
+$aciklama  = clean_body_field($get($input, 'aciklama'));
 $hpWeb     = trim($get($input, 'hp_web'));
 $tStartRaw = $get($input, 't_start');
 
@@ -229,6 +241,9 @@ $lines[] = '';
 $lines[] = 'İhtiyaç açıklaması:';
 $lines[] = $aciklama;
 $body = implode("\r\n", $lines);
+// aciklama artık kendi içindeki \n satır sonlarını koruyor (clean_body_field) — mail gövdesi boyunca
+// TEK biçimde CRLF olsun diye implode sonrası kalan yalnız-\n'leri de \r\n'e normalize et (A4).
+$body = preg_replace('/\r\n|\r|\n/', "\r\n", $body);
 
 $headers = [];
 $headers[] = 'From: ISIŞAH GROUP Teklif Formu <' . FROM_ADDRESS . '>';

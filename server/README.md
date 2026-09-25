@@ -73,7 +73,18 @@ python3 tools/build-teklif.py
    (400 + `fields` listesi), geçersiz Origin başlıklı istek (403).
 4. Ancak bu testler net bittikten sonra site üzerinden gerçek kullanıcı trafiğine açın.
 
-## 6. Bilinen sınırlar / veri ihtiyaçları (data_needed'e bakın)
+## 6. aciklama alanı satır sonlarını korur
+
+`clean_field()` (CRLF→boşluk) yalnızca bir mail HEADER'ına gidebilecek alanlar için kullanılır
+(ad_soyad, eposta, telefon, urun_konu, adet, firma). `aciklama` çok satırlı bir `<textarea>`'dır
+ve SADECE mail gövdesine yazılır (asla bir header'a) — bu yüzden kendi ayrı sanitize edicisi
+`clean_body_field()`'den geçer: CRLF/CR'yi LF'e normalize eder, kırpar, ama kullanıcının yazdığı
+satır sonlarını SİLMEZ. Kullanıcı "Uygulama: X\nÖlçü: 42mm\nTeslim: 6 hafta" gibi madde madde
+yazarsa, e-posta gövdesinde de öyle görünür (öncesinde tüm satırlar tek satıra sıkıştırılıyordu —
+mailto: yolunda `composeMailto()` hiçbir zaman böyle bir sıkıştırma yapmadığı için bu, iki gönderim
+yolu arasındaki bir tutarsızlığı da düzeltir). Gövde son adımda tek biçime (`\r\n`) normalize edilir.
+
+## 7. Bilinen sınırlar / veri ihtiyaçları (data_needed'e bakın)
 
 - Dosya eki YOK (v1 kapsamı dışı — brief §10, "gerçekten ihtiyaçsa" notu; şu an hiçbir akışta
   teknik çizim eki talebi yok).

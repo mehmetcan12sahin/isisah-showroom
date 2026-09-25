@@ -94,6 +94,10 @@ TEKLIF_CSS = '''
   .tferr::before{content:"!";flex:none;width:18px;height:18px;border-radius:50%;background:color-mix(in srgb,var(--mag2) 20%,transparent);
     color:var(--mag2);font-weight:700;font-size:.78rem;display:flex;align-items:center;justify-content:center;margin-top:1px}
   .tfield.has-error .tferr{display:flex}
+  /* errContact (E-posta/Telefon paylaşımlı hata) .tfield içinde DEĞİL — .trow2'nin dışında, iki alanın
+     ortak hatası olduğu için tek bir .tfield'a ait değil; yukarıdaki ata-seçici onu asla açamaz.
+     JS validate() bunu doğrudan .show sınıfıyla açar/kapatır (A2: aria-describedby görünür olmalı). */
+  #errContact.show{display:flex}
   .tfield.has-error input,.tfield.has-error textarea{border-color:var(--mag2);box-shadow:0 0 0 1px color-mix(in srgb,var(--mag2) 40%,transparent)}
   .hp{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   #errSummary{display:none;border:1px solid color-mix(in srgb,var(--mag2) 55%,transparent);border-radius:12px;padding:18px 20px;margin-bottom:26px;
@@ -133,7 +137,7 @@ FORM_HTML = '''
 <section class="pad" style="padding-top:30px">
   <div class="wrap tgrid">
     <div class="tcard reveal">
-      <form id="teklifForm" class="tform" novalidate autocomplete="on">
+      <form id="teklifForm" class="tform" method="post" novalidate autocomplete="on">
         <div id="errSummary" role="alert" tabindex="-1">
           <h2>Formda eksik veya hatalı alan var</h2>
           <ul id="errList"></ul>
@@ -192,7 +196,7 @@ FORM_HTML = '''
         <div class="tkvkk-slot"><!-- KVKK aydınlatma metni onaylanınca buraya <p> olarak eklenecek; onay kutusu metinsiz eklenmez --></div>
 
         <div class="tactions">
-          <button type="submit" class="btn" id="submitBtn">Teklif İste <span>→</span></button>
+          <button type="button" class="btn" id="submitBtn" disabled>Teklif İste <span>→</span></button>
           <a class="btn ghost" href="tel:+902242610527">Ara: 0224 261 05 27</a>
         </div>
         <p id="formStatus" role="status" aria-live="polite"></p>
@@ -253,6 +257,11 @@ FORM_HTML = '''
 
   try { fStart.value = String(Date.now()); } catch (e) {}
 
+  // A1: buton statik HTML'de type="button" disabled — JS'siz ziyaretçi hiçbir şekilde native
+  // GET submit tetikleyemez (form ayrıca method="post" ile de korunur). Script çalıştığına göre
+  // artık gerçek submit kontrolüne dönüştür.
+  try { submitBtn.disabled = false; submitBtn.type = 'submit'; } catch (e) {}
+
   // ---- Bağlam ön-doldurma: ?urun=<slug> veya ?konu=<key> — yalnız bilinen anahtarlar, HTML enjeksiyonu yok ----
   try {
     var qs = new URLSearchParams(location.search);
@@ -284,14 +293,20 @@ FORM_HTML = '''
     if (!adOk) errs.push({id: 'fAd', label: 'Ad Soyad girin.'});
 
     var epostaWrap = fEposta.closest('.tfield'), telWrap = fTel.closest('.tfield');
+    var errContact = document.getElementById('errContact');
     var epostaVal = fEposta.value.trim(), telVal = fTel.value.trim();
     var emailRe = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
     var epostaGecerli = epostaVal === '' || emailRe.test(epostaVal);
     var contactOk = (epostaVal !== '' || telVal !== '') && epostaGecerli;
-    setError(epostaWrap, document.getElementById('errContact'), '', !contactOk);
+    setError(epostaWrap, null, '', !contactOk);
     setError(telWrap, null, '', !contactOk);
     fEposta.setAttribute('aria-invalid', contactOk ? 'false' : 'true');
     fTel.setAttribute('aria-invalid', contactOk ? 'false' : 'true');
+    // A2: errContact .trow2'nin DIŞINDA, iki alanın paylaştığı tek mesaj — .tfield.has-error ata-seçicisi
+    // onu hiçbir zaman gösteremez (bkz. CSS'teki not). Görünürlüğünü doğrudan .show ile yönet, aksi halde
+    // aria-describedby="errContact" görünmeyen (display:none) bir elemana işaret eder ve hiçbir AT'ye
+    // okutulmaz.
+    if (errContact) errContact.classList.toggle('show', !contactOk);
     if (!contactOk) {
       var msg = (epostaVal !== '' && !epostaGecerli)
         ? 'Geçerli bir e-posta adresi yazın veya telefon numarası girin.'
@@ -337,7 +352,7 @@ FORM_HTML = '''
     formStatus.setAttribute('data-show', msg ? '1' : '0');
   }
 
-  function bodyLines() {
+  function bodyLines(aciklamaOverride) {
     var rows = [
       ['Firma', fFirma.value.trim()],
       ['Ad Soyad', fAd.value.trim()],
@@ -349,16 +364,47 @@ FORM_HTML = '''
     var lines = rows.filter(function(r){return r[1];}).map(function(r){return r[0] + ': ' + r[1];});
     lines.push('');
     lines.push('İhtiyaç açıklaması:');
-    lines.push(fAciklama.value.trim());
+    lines.push(aciklamaOverride !== undefined ? aciklamaOverride : fAciklama.value.trim());
     return lines.join('\\n');
   }
 
+  // A3: mailto: href'in uzunluğunu koru — bazı OS/e-posta istemci mailto handler'ları ~2000-2083 karakter
+  // civarında sessizce keser. Sınırı aşarsa SADECE aciklama'yı (tek serbest-uzunluklu alan) görünür bir
+  // Türkçe işaretle kısalt; kullanıcıyı durum mesajıyla bilgilendir. Teslim edildi iddiası YOK — mailto sadece
+  // istemciyi hazırlar, gönderimi kullanıcı yapar.
+  var MAILTO_MAX_LEN = 1800;
+
   function composeMailto() {
     var subject = 'Teklif Talebi — ' + (fUrun.value.trim() || 'Genel');
-    var url = 'mailto:info@isisah.com.tr'
-      + '?subject=' + encodeURIComponent(subject)
-      + '&body=' + encodeURIComponent(bodyLines());
-    setStatus('E-posta uygulamanızda teklif e-postası hazırlandı. Göndermek için e-postada Gönder\\'e basın. Açılmadıysa 0224 261 05 27\\'yi arayabilir veya info@isisah.com.tr\\'ye yazabilirsiniz.', false);
+    var acFull = fAciklama.value.trim();
+    var marker = ' … (devamı kısaltıldı — tam metni telefon veya e-posta ile iletin)';
+
+    function buildUrl(ac) {
+      return 'mailto:info@isisah.com.tr'
+        + '?subject=' + encodeURIComponent(subject)
+        + '&body=' + encodeURIComponent(bodyLines(ac));
+    }
+
+    var url = buildUrl(acFull);
+    var truncated = false;
+    if (url.length > MAILTO_MAX_LEN && acFull.length > 0) {
+      truncated = true;
+      // acFull karakter sayısı üzerinde ikili arama: encodeURIComponent Türkçe karakterlerde sabit
+      // olmayan bir oranda büyüdüğü için doğrudan hesap yerine deneyerek en uzun sığan kesimi bul.
+      var lo = 0, hi = acFull.length, fit = 0;
+      while (lo <= hi) {
+        var mid = (lo + hi) >> 1;
+        if (buildUrl(acFull.slice(0, mid).trim() + marker).length <= MAILTO_MAX_LEN) { fit = mid; lo = mid + 1; }
+        else hi = mid - 1;
+      }
+      url = buildUrl(acFull.slice(0, fit).trim() + marker);
+    }
+
+    if (truncated) {
+      setStatus('E-posta uygulamanızda hazırlandı; ancak açıklamanız uzun olduğu için kısaltıldı. Tam metni iletmek için lütfen 0224 261 05 27\\'yi arayın veya info@isisah.com.tr\\'ye yazın.', true);
+    } else {
+      setStatus('E-posta uygulamanızda teklif e-postası hazırlandı. Göndermek için e-postada Gönder\\'e basın. Açılmadıysa 0224 261 05 27\\'yi arayabilir veya info@isisah.com.tr\\'ye yazabilirsiniz.', false);
+    }
     mailtoOpenLink.href = url;
     mailtoOpenLink.hidden = false;
     location.href = url;
