@@ -50,21 +50,20 @@
 <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png" />
 <link rel="manifest" href="assets/site.webmanifest" />
 <link rel="stylesheet" href="assets/fonts/inter.css">
-<!-- R7: importmap MUTLAKA modulepreload'lardan ÖNCE gelmeli — aksi halde tarayıcı
-     "three" bare specifier'ını çözemez (import map, herhangi bir modül fetch'i
-     tetiklenmeden ÖNCE kayıtlı olmalı; sıra bozulursa modül tamamen çalışmaz). -->
+<!-- R7: importmap herhangi bir modül fetch'inden ÖNCE kayıtlı olmalı — ileride
+     <link rel=modulepreload> eklenirse importmap'in ALTINA konmalı, yoksa "three"
+     bare specifier'ı çözülemez ve modül tamamen çalışmaz. -->
 <script type="importmap">
 { "imports": {
   "three": "./vendor/three.module.min.js",
   "three/addons/": "./vendor/addons/"
 }}
 </script>
-<!-- en ağır kritik-yol kaynakları (3B modül + lobi dokusu) paralelde ısınsın —
-     modül gövdesi çalışmaya başlamadan önce ağ isteği zaten yolda olsun. -->
-<link rel="modulepreload" href="vendor/three.module.min.js">
-<link rel="modulepreload" href="vendor/addons/controls/OrbitControls.js">
-<link rel="modulepreload" href="vendor/addons/environments/RoomEnvironment.js">
-<link rel="preload" as="image" href="assets/img/lobby.webp" fetchpriority="high">
+<!-- Bilerek preload YOK: three.js modulepreload'u + lobby.webp preload'u (fetchpriority=high)
+     yükleme ekranı logosuyla bant genişliği yarıştırıp FCP/LCP'yi ~1,3 sn geciktiriyordu; ayrıca
+     TextureLoader crossOrigin='anonymous' istediği için crossorigin'siz preload lobby.webp'i İKİ
+     KEZ indirtiyordu. Yavaş 4G + 4x CPU A/B'de (25 Eyl 2026) preload'suz sürüm "lobi-kullanilabilir"e
+     de en erken ulaştı. Preload geri eklenirse: crossorigin="anonymous" şart ve yeniden ölç. -->
 <style>
   :root{color-scheme:dark;--bg:#000;--ink:#fff;--muted:#8f93a3;--line:#1b1c26;
     /* neon aileler */
@@ -106,7 +105,7 @@
   .loader.hide{opacity:0;pointer-events:none}
   .loader .bar{width:210px;height:2px;background:#14141c;border-radius:3px;overflow:hidden}
   .loader .bar i{display:block;height:100%;width:100%;background:var(--grad);transform:scaleX(.06);transform-origin:left;transition:transform .3s var(--ease-out)}
-  .loader .lt{font-family:var(--tech);letter-spacing:.24em;text-transform:uppercase;font-size:.72rem;color:var(--muted)}
+  .loader .lt{font-family:var(--tech);letter-spacing:.14em;text-transform:uppercase;font-size:.72rem;color:var(--muted)}
   .loader .lt #lpct,.loader #lpct{color:var(--a1);text-shadow:0 0 10px color-mix(in srgb,var(--a1) 50%,transparent)}
   .loader img{height:42px;width:auto;animation:breatheGlow 3.2s var(--ease-io) infinite}
 
@@ -114,7 +113,7 @@
     padding:16px max(28px,env(safe-area-inset-right,0px)) 16px max(28px,env(safe-area-inset-left,0px));background:linear-gradient(#000c,#0000)}
   header .l{display:flex;align-items:center;gap:14px}header .l img{height:30px;width:auto}
   header .l .t{font-family:var(--disp);font-weight:700;font-size:.95rem;letter-spacing:.04em;border-left:1px solid var(--line);padding-left:14px}
-  header .l .t small{display:block;font-family:var(--tech);font-weight:500;font-size:.58rem;letter-spacing:.3em;color:var(--muted)}
+  header .l .t small{display:block;font-family:var(--tech);font-weight:500;font-size:.7rem;letter-spacing:.2em;color:var(--muted)}
   header .r{display:flex;align-items:center;gap:18px}
   header .back{font-family:var(--tech);font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
   header .back:hover{color:#fff}
@@ -160,12 +159,12 @@
   .doorcard img{height:40px;filter:drop-shadow(0 0 10px color-mix(in srgb,var(--dc) 75%,transparent)) drop-shadow(0 0 26px color-mix(in srgb,var(--dc) 40%,transparent));
     transition:filter 320ms var(--ease-io)}
   .doorcard .dn{display:block;font-family:var(--disp);font-weight:700;font-size:1.25rem;letter-spacing:.02em}
-  .doorcard .ds{display:block;font-family:var(--tech);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .doorcard .ds{display:block;font-family:var(--tech);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
   .doorcard .go{display:block;font-family:var(--tech);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dc,var(--vio1));margin-top:4px;
     text-shadow:0 0 12px color-mix(in srgb,var(--dc,var(--vio1)) 55%,transparent)}
   .intro .big .sr{display:block;font-size:.95rem;font-weight:500;letter-spacing:.02em;color:var(--muted);margin-top:10px;background:none;-webkit-text-fill-color:initial}
   .intro .katalog{max-width:760px;width:100%;text-align:left;color:#c9ccd8;font-size:.84rem;background:#000000b8;border:1px solid var(--line);border-radius:12px;padding:10px 16px;margin-top:8px}
-  .intro .katalog summary{cursor:pointer;font-family:var(--tech);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-align:center;
+  .intro .katalog summary{cursor:pointer;font-family:var(--tech);font-size:.82rem;letter-spacing:.04em;color:var(--muted);text-align:center;
     min-height:44px;display:flex;align-items:center;justify-content:center;padding:10px 8px}
   .intro .katalog h2{font-size:.9rem;margin:16px 0 8px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
   .intro .katalog h3{font-size:.76rem;margin:14px 0 6px;letter-spacing:.16em;text-transform:uppercase;color:var(--ele1)}
@@ -205,8 +204,8 @@
   @keyframes icoDraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
   @media(hover:hover){.catcard:hover .ico :is(path,circle,line,rect){animation:icoDraw .8s var(--ease-io) both}}
   .catcard .cn{font-family:var(--disp);font-weight:700;font-size:1.02rem;letter-spacing:.01em;text-transform:uppercase}
-  .catcard .cd{font-family:var(--tech);font-size:.68rem;letter-spacing:.05em;color:var(--muted)}
-  .catcard .cnt{font-family:var(--tech);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--emb1);margin-top:2px;
+  .catcard .cd{font-family:var(--tech);font-size:.76rem;letter-spacing:.03em;color:var(--muted)}
+  .catcard .cnt{font-family:var(--tech);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--emb1);margin-top:2px;
     text-shadow:0 0 10px color-mix(in srgb,var(--emb1) 55%,transparent)}
   .subback{pointer-events:auto;cursor:pointer;margin-top:10px;font-family:var(--tech);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
     border:1px solid var(--line);border-radius:40px;padding:9px 18px;background:#05050acc;box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
@@ -289,7 +288,7 @@
     max-width:min(560px,84vw);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
     opacity:0;transition:opacity 200ms var(--ease-out)}
   @media(max-width:820px){.posLabel{top:calc(52px + env(safe-area-inset-top,0px));font-size:.6rem;padding:5px 12px}}
-  .scrollhint{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;z-index:40;font-family:var(--tech);font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;pointer-events:none;transition:opacity .4s var(--ease-io);opacity:0;
+  .scrollhint{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;z-index:40;font-family:var(--tech);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;pointer-events:none;transition:opacity .4s var(--ease-io);opacity:0;
     color:var(--a2);transform:translateX(-50%);animation:breatheText 2.6s var(--ease-io) infinite}
   body.fair .scrollhint{display:none}  /* fuar TV modunda "kaydır" ipucu anlamsız */
 
@@ -324,10 +323,10 @@
     header .r{gap:8px}
     header .l img{height:24px}
     header .l .t{font-size:.8rem;padding-left:10px}
-    header .l .t small{font-size:.5rem;letter-spacing:.2em}
-    header .back{font-size:.64rem;letter-spacing:.06em}
+    header .l .t small{font-size:.7rem;letter-spacing:.08em}
+    header .back{font-size:.7rem;letter-spacing:.04em}
     .counter{font-size:.9rem}.counter span{font-size:.7rem}
-    .lobbybtn{font-size:.64rem;padding:6px 10px;letter-spacing:.06em}
+    .lobbybtn{font-size:.7rem;padding:6px 10px;letter-spacing:.04em}
     /* mobil: kompakt yatay kapı kartları */
     .doors{flex-direction:column;gap:10px;width:100%;max-width:420px}
     .doorcard{width:100%;min-width:0;flex-direction:row;justify-content:flex-start;text-align:left;padding:14px 16px;gap:14px}
@@ -424,7 +423,7 @@
 <main id="main">
 
 <div class="loader" id="loader">
-  <img src="assets/catalog/logo-group.webp" alt="ISIŞAH GROUP">
+  <img src="assets/catalog/logo-group.webp" alt="ISIŞAH GROUP" width="105" height="42" fetchpriority="high">
   <div class="lt">3B showroom hazırlanıyor <span id="lpct">%0</span></div>
   <div class="bar"><i id="lbar"></i></div>
 </div>
@@ -450,20 +449,20 @@
   <h1 class="big">Üç marka,<br><span class="g">üç kapı.</span><span class="sr">Rezistans, ısı eşanjörü ve paslanmaz boru ürünleri</span></h1>
   <p>Bir kapıdan geçin; o markanın showroom'unda kaydırarak uçun, ürünler kendi kaidelerinde sizi karşılasın.</p>
   <div class="doors">
-    <button type="button" class="doorcard" data-brand="isisah" aria-label="ISIŞAH showroom kapısı">
+    <button type="button" class="doorcard" data-brand="isisah">
       <img src="assets/catalog/logo-isisah.webp" alt="" aria-hidden="true">
       <span class="dn">ISIŞAH</span><span class="ds">Endüstriyel Rezistans & Isıtma</span>
-      <span class="go">Kapıdan geç →</span>
+      <span class="go">Kapıdan geç <span aria-hidden="true">→</span></span>
     </button>
-    <button type="button" class="doorcard" data-brand="salmex" aria-label="SALMEX showroom kapısı">
+    <button type="button" class="doorcard" data-brand="salmex">
       <img src="assets/catalog/logo-salmex.webp" alt="" aria-hidden="true">
       <span class="dn">SALMEX</span><span class="ds">Isı Eşanjörleri</span>
-      <span class="go">Kapıdan geç →</span>
+      <span class="go">Kapıdan geç <span aria-hidden="true">→</span></span>
     </button>
-    <button type="button" class="doorcard" data-brand="borsah" aria-label="BORŞAH showroom kapısı">
+    <button type="button" class="doorcard" data-brand="borsah">
       <img src="assets/catalog/logo-borsah.webp" alt="" aria-hidden="true">
       <span class="dn">BORŞAH</span><span class="ds">Paslanmaz Çelik Borular</span>
-      <span class="go">Kapıdan geç →</span>
+      <span class="go">Kapıdan geç <span aria-hidden="true">→</span></span>
     </button>
   </div>
   <div class="hint">bir kapı seçin</div>
