@@ -200,7 +200,7 @@ FORM_HTML = '''
           <a class="btn ghost" href="tel:+902242610527">Ara: 0224 261 05 27</a>
         </div>
         <p id="formStatus" role="status" aria-live="polite"></p>
-        <a id="mailtoOpenLink" class="btn ghost" href="#" hidden>E-posta hazır — burada da açabilirsiniz</a>
+        <a id="mailtoOpenLink" class="btn ghost sc" href="#" hidden>E-posta hazır — burada da açabilirsiniz</a>
 
         <div class="tfallback">
           <span>Formu kullanmadan doğrudan ulaşın:</span>

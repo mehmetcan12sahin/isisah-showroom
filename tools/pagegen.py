@@ -31,9 +31,10 @@ EXTRA_CSS = '''
   .logorow a span{font-family:var(--tech);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
   .logorow a[data-b=isisah]:hover{border-color:var(--emb1)}.logorow a[data-b=borsah]:hover{border-color:var(--mnt1)}.logorow a[data-b=salmex]:hover{border-color:var(--ele1)}
   @media(hover:hover){.logorow a:hover{transform:translateY(-4px)}}
-  @media(max-width:960px){.pg{padding:120px 0 30px}.pg .wrap{grid-template-columns:1fr}.pg .hero-visual{aspect-ratio:16/9}.kareler{grid-template-columns:1fr}.logorow{grid-template-columns:1fr}}
-  .pg .kick{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:40px;padding:7px 16px;font-family:var(--tech);font-size:.72rem;letter-spacing:.2em;color:var(--steel);text-transform:uppercase;background:#05050acc}
+  @media(max-width:960px){.pg{padding:120px 0 30px}.pg .wrap{grid-template-columns:minmax(0,1fr)}.pg .hero-visual{aspect-ratio:16/9}.kareler{grid-template-columns:1fr}.logorow{grid-template-columns:1fr}}
+  .pg .kick{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:40px;padding:7px 16px;font-family:var(--tech);font-size:.76rem;letter-spacing:.04em;color:var(--steel);background:#05050acc}
   .pg h1{font-size:clamp(2.6rem,6vw,4.6rem);margin:22px 0 0;line-height:1.02}
+  @media(max-width:560px){.pg h1{font-size:clamp(2.1rem,11vw,2.6rem)}}
   .pg .lead{color:var(--muted);font-size:1.12rem;max-width:760px;margin-top:22px}
   .prose{max-width:820px}
   .prose p{color:var(--steel);margin-top:18px;font-size:1.02rem}
@@ -43,7 +44,7 @@ EXTRA_CSS = '''
   .prose li{display:flex;gap:12px;color:var(--steel)}
   .prose li::before{content:"";flex:none;width:7px;height:7px;margin-top:10px;border-radius:2px;background:var(--grad);box-shadow:0 0 8px var(--vio2)}
   .quote{border-left:2px solid var(--vio1);padding:6px 0 6px 24px;margin-top:26px;color:var(--steel);font-size:1.05rem}
-  .quote footer{border:0;padding:12px 0 0;background:none;color:var(--muted);font-size:.86rem;font-family:var(--tech);letter-spacing:.08em;text-transform:uppercase}
+  .quote footer{border:0;padding:12px 0 0;background:none;color:var(--muted);font-size:.86rem;font-family:var(--tech);letter-spacing:.02em}
   .two{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
   .two .time{margin-top:0}
   .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}

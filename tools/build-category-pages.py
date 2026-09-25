@@ -68,7 +68,7 @@ KATGRID_CSS = '''
   .katcard h3{font-size:1.08rem;margin:0}
   .katcard p{color:var(--steel);font-size:.92rem;margin-top:10px;line-height:1.55}
   .katcard .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-  .katcard .chips span{font-family:var(--tech);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:40px;padding:5px 10px}
+  .katcard .chips span{font-family:var(--tech);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:40px;padding:5px 10px}
   .hubgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:10px}
   .hubcard{display:flex;flex-direction:column;gap:8px;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:22px;background:linear-gradient(165deg,rgba(16,16,24,.9),rgba(4,4,8,.95));transition:border-color 200ms}
   .hubcard:hover{border-color:var(--vio1)}
@@ -129,7 +129,7 @@ def cat_body(h1, slug_noext, holkey, brandhub, brandhubname, intro_p, src, keys,
 <section class="pad" style="padding-top:0">
   <div class="wrap">
     <div class="pgcta reveal">
-      <a class="btn ghost" href="{brandhub}">{brandhubname} markasının tamamı <span>→</span></a>
+      <a class="btn ghost sc" href="{brandhub}">{brandhubname} markasının tamamı <span>→</span></a>
       <a class="btn ghost" href="hakkimizda.html">Hakkımızda</a>
       <a class="btn ghost" href="index.html#iletisim">İletişim</a>
     </div>
@@ -166,7 +166,7 @@ def build_hub(slug, title, desc, kick, h1, lead, intro_p, spokes, doorkey, logo,
     <p>{intro_p}</p>
     <div class="pgcta">
       <a class="btn" href="teklif.html?konu={slug_noext}">Teklif İste <span>→</span></a>
-      <a class="btn ghost" href="urunler.html#marka={doorkey}">3B Showroom'da marka kapısını aç</a>
+      <a class="btn ghost sc" href="urunler.html#marka={doorkey}">3B Showroom'da marka kapısını aç</a>
       <a class="btn ghost" href="tel:+902242610527">Ara</a>
     </div>
     <p class="pgcta-mail">veya e-posta ile yazın: <a href="mailto:info@isisah.com.tr?subject={mail_subject}">info@isisah.com.tr</a></p>
