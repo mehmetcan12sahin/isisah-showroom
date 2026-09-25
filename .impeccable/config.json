@@ -242,6 +242,33 @@
         ],
         "createdAt": "2026-09-25T02:34:02.193Z",
         "reason": "Numaralar gerçek üretim sırasını kodlar (Pres→Test, video kurgusuyla birebir) — dekoratif değil"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-25T02:51:03.882Z",
+        "reason": "stats: section'ın doğrudan çocuğu .wrap ızgarası; metni taşıyan .stat öğelerinde 28–34px iç boşluk var (detektör ara sarmalayıcıyı görüyor)"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "fabrika.html"
+        ],
+        "createdAt": "2026-09-25T02:51:03.961Z",
+        "reason": ".fin .fintext padding:22px clamp(18px,4vw,34px) — iç boşluk var; detektör clamp() değerini çözemiyor"
+      },
+      {
+        "rule": "wide-tracking",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-25T02:53:47.576Z",
+        "reason": "Statik cascade yanlış pozitifi: Chromium'da 390 ve 1440 px'te >0.05em aralıklı, büyük harf olmayan >20 karakterlik metin yok (scratchpad rule.mjs); gerçek ihlal .bnum idi, düzeltildi"
       }
     ]
   }

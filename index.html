@@ -85,10 +85,9 @@
   .glow.a{width:520px;height:520px;background:var(--vio2);top:-160px;right:-120px}
   .glow.b{width:460px;height:460px;background:var(--vio1);top:40%;left:-160px;opacity:.14;animation-delay:2.7s}
   .wm{position:fixed;top:86px;right:26px;z-index:49;pointer-events:none;user-select:none;
-    font-family:var(--disp);font-weight:700;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+    font-family:var(--disp);font-weight:700;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.58)}
 
   h1,h2,h3,.disp{font-family:var(--disp);font-weight:700;line-height:1.02;letter-spacing:-.02em;text-transform:uppercase}
-  .eyebrow{font-family:var(--tech);font-weight:600;font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--vio-text)}
   .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
     filter:drop-shadow(0 0 22px color-mix(in srgb,var(--vio2) 45%,transparent))}
   @media (prefers-reduced-motion:reduce){*{animation-duration:.01s !important;animation-iteration-count:1 !important}html{scroll-behavior:auto}}
@@ -102,8 +101,6 @@
   .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
   .brand{display:flex;align-items:center;gap:12px}
   .brand img{height:38px;width:auto;filter:drop-shadow(0 2px 10px #000c)}
-  .brand .bt{font-family:var(--disp);font-weight:700;font-size:1.05rem;letter-spacing:.02em;line-height:1}
-  .brand .bt small{display:block;font-family:var(--tech);font-weight:500;font-size:.6rem;letter-spacing:.34em;color:var(--muted)}
   nav.links{display:flex;gap:30px;align-items:center}
   nav.links a{font-size:.83rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--steel);position:relative;padding:4px 0}
   nav.links a::after{content:"";position:absolute;left:0;bottom:-2px;width:100%;height:2px;background:var(--grad);box-shadow:0 0 8px var(--vio2);transform:scaleX(0);transform-origin:left;transition:transform 200ms var(--ease-out)}
@@ -217,7 +214,7 @@
   .wcard .wk{font-family:var(--tech);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--wc,var(--vio1));
     text-shadow:0 0 10px color-mix(in srgb,var(--wc,var(--vio1)) 55%,transparent)}
   .wcard h3{font-size:1.5rem;margin-top:6px}
-  .wcard .wgo{display:inline-block;margin-top:8px;font-family:var(--tech);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--steel)}
+  .wcard .wgo{display:inline-block;margin-top:8px;font-family:var(--tech);font-size:.8rem;letter-spacing:.03em;color:var(--steel)}
   .wcard[data-c=ember]{--wc:var(--emb1)}.wcard[data-c=violet]{--wc:var(--vio-text)}.wcard[data-c=electric]{--wc:var(--ele1)}
   @media(hover:hover) and (pointer:fine){
     .wcard:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--wc,var(--vio2)) 40%,transparent);
@@ -233,7 +230,7 @@
   /* HERO */
   .hero{min-height:100vh;display:flex;align-items:center;padding-top:0;overflow:hidden}
   .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;width:100%}
-  .hero .kick{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:40px;padding:7px 16px;font-family:var(--tech);font-size:.72rem;letter-spacing:.2em;color:var(--steel);text-transform:uppercase;
+  .hero .kick{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:40px;padding:7px 16px;font-family:var(--tech);font-size:.76rem;letter-spacing:.04em;color:var(--steel);
     background:#05050acc;box-shadow:inset 0 1px 0 rgba(255,255,255,.09)}
   .hero .kick b{color:var(--vio-text)}
   .hero h1{font-size:clamp(2.6rem,6vw,4.6rem);margin:22px 0 0}
@@ -248,7 +245,7 @@
     text-transform:uppercase;color:#fff;background:#000c;backdrop-filter:blur(4px);padding:8px 14px;border-radius:8px}
   .hero-visual::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,#000,transparent 45%);z-index:1}
   .hero .bchips{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:26px;font-family:var(--tech)}
-  .hero .bchips span{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+  .hero .bchips span{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-right:6px}
   .hero .bchips button{background:none;font-family:inherit;display:inline-flex;align-items:center;min-height:44px;font-weight:600;font-size:.74rem;letter-spacing:.14em;border:1px solid var(--line);border-radius:40px;padding:12px 14px;color:var(--steel);cursor:pointer;transition:border-color 160ms var(--ease-out),color 160ms var(--ease-out)}
   .hero .bchips button[data-b=isisah]:hover{border-color:var(--emb1);color:#fff}.hero .bchips button[data-b=borsah]:hover{border-color:var(--mnt1);color:#fff}.hero .bchips button[data-b=salmex]:hover{border-color:var(--ele1);color:#fff}
   .hero .cta .tertiary{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:11px 6px;
@@ -264,7 +261,7 @@
   .stat{padding:34px 26px;border-right:1px solid var(--line)}
   .stat:last-child{border-right:none}
   .stat .n{font-family:var(--disp);font-weight:700;font-size:clamp(2.6rem,4.6vw,4.2rem);line-height:1;font-variant-numeric:tabular-nums}
-  .stat .k{color:var(--muted);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;margin-top:6px;font-family:var(--tech)}
+  .stat .k{color:var(--muted);font-size:.82rem;letter-spacing:.04em;margin-top:6px;font-family:var(--tech)}
 
   /* marquee — koyu cam bant, arkadan violet ışıma */
   .marquee{overflow:hidden;border-top:1px solid color-mix(in srgb,var(--vio2) 30%,transparent);border-bottom:1px solid color-mix(in srgb,var(--vio2) 30%,transparent);
@@ -316,7 +313,7 @@
     .tourbox:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--ele1) 55%,transparent);
       box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 48px -10px var(--ele1)}}
   .tourbox:active{transform:scale(.98)}
-  .brandcard .bnum{font-family:var(--tech);color:var(--bt,var(--vio1));letter-spacing:.2em;font-size:.75rem;text-shadow:0 0 10px color-mix(in srgb,var(--bt,var(--vio1)) 50%,transparent)}
+  .brandcard .bnum{font-family:var(--tech);color:var(--bt,var(--vio1));letter-spacing:.05em;font-size:.78rem}
   .brandcard h3{font-size:2rem;margin:14px 0 12px}
   .brandcard p{color:var(--muted);font-size:.98rem}
   .brandcard ul{list-style:none;margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
@@ -459,7 +456,7 @@
   @media(max-width:560px){.grid{grid-template-columns:1fr}.pad{padding:70px 0}.feature .txt{padding:34px}.cbox{padding:28px}
     .hero .wrap{grid-template-columns:minmax(0,1fr)}.hero h1{font-size:clamp(2.1rem,11vw,2.6rem)}
     .stats .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}.stat{padding:28px 14px}.stat .n{font-size:clamp(2rem,10vw,2.6rem)}
-    .hero .kick{display:inline-block;max-width:100%;font-size:.7rem;letter-spacing:.02em;padding:6px 12px;line-height:1.5;border-radius:16px}}
+    .hero .kick{display:inline-block;max-width:100%;font-size:.75rem;letter-spacing:.02em;padding:6px 12px;line-height:1.5;border-radius:16px}}
 
   /* 3B Showroom köprü kartı — showroom'un canlı önizlemesi */
   .bridge{border:1px solid color-mix(in srgb,var(--vio2) 45%,transparent);border-radius:18px;overflow:hidden;
@@ -468,8 +465,7 @@
   .bridge .shot{position:relative;min-height:300px}
   .bridge .shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
   .bridge .txt{padding:48px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:14px}
-  .bridge .bk{font-family:var(--tech);font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--vio-text);
-    text-shadow:0 0 10px color-mix(in srgb,var(--vio1) 50%,transparent)}
+  .bridge .bk{font-family:var(--tech);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--vio-text)}
   .bridge h2{font-size:clamp(1.8rem,3.4vw,2.6rem);margin:0}
   .bridge p{color:var(--muted);font-size:.98rem}
   @media(max-width:960px){.bridge{grid-template-columns:1fr}.bridge .txt{padding:32px}}
@@ -539,7 +535,7 @@
 <section class="hero">
   <div class="wrap">
     <div class="reveal in">
-      <span class="kick">KURULUŞ <b>1982</b> · DOSAB BURSA · ISO 9001:2015</span>
+      <span class="kick">Kuruluş <b>1982</b> · DOSAB Bursa · ISO 9001:2015</span>
       <h1>Isının gücü,<span class="l2 grad-text">teknolojinin hassasiyeti.</span></h1>
       <p class="lead">1982'den bu yana paslanmaz çelik borudan sanayi tipi rezistansa, doğalgazlı yoğuşmalı kombi eşanjörlerinden oto boya kurutma sistemlerine uzanan üretim: ısıtma teknolojisinde Türkiye'nin köklü mühendislik gücü.</p>
       <div class="cta">
