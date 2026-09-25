@@ -343,10 +343,21 @@
   @media(pointer:coarse){body.inhall .rail{display:none}}
   @media(max-width:820px){
     .lobbybtn{min-height:44px;min-width:44px}
-    header .back{padding:12px 4px;display:inline-block}
+    header .back{padding:12px 4px;display:inline-flex;align-items:center;min-height:44px}
     body:not(.inhall) .counter{display:none}
     .info .act{padding:12px 18px;font-size:.72rem}
     .info .acts{gap:10px}
+  }
+  /* SHOWROOM-5: 390/360px genişlikte header'ın sağ kümesi (.r) 6 kontrole kadar çıkabiliyor
+     (mute, ☰ Liste, ⌂ Lobi, Teklif Al, sayaç, ← Ana Sayfa — hol içindeyken hepsi görünür).
+     Silmek yerine ikinci satıra sar + ikon-only kısalt: hiçbiri viewport dışına taşmasın,
+     hiçbiri silinmesin, hepsi >=44px dokunma alanında kalsın (üstteki .lobbybtn kuralı zaten
+     min 44x44 sağlıyor). posLabel bu taşan başlığın altına inecek şekilde aşağı kaydırılır. */
+  @media(max-width:480px){
+    header{flex-wrap:wrap;row-gap:6px}
+    header .r{flex:1 1 100%;flex-wrap:wrap;justify-content:flex-end;gap:6px;row-gap:6px}
+    .lbl{display:none}   /* "Liste"/"Lobi"/"Sayfa" metni gizlenir — ikon + aria-label anlamı korur */
+    .posLabel{top:calc(104px + env(safe-area-inset-top,0px))}
   }
   @media (prefers-reduced-motion:reduce){.intro .hint{animation:none}}
 
@@ -402,11 +413,11 @@
     <span class="t">3B SHOWROOM<small id="hallName">MARKA LOBİSİ</small></span></a>
   <div class="r">
     <button type="button" class="lobbybtn" id="muteBtn" style="display:inline-flex">🔊</button>
-    <button type="button" class="lobbybtn" id="catalogBtn" style="display:inline-flex" aria-label="Ürün Listesi" aria-haspopup="dialog">☰ Liste</button>
-    <button type="button" class="lobbybtn" id="lobbyBtn">⌂ Lobi</button>
+    <button type="button" class="lobbybtn" id="catalogBtn" style="display:inline-flex" aria-label="Ürün Listesi" aria-haspopup="dialog">☰ <span class="lbl">Liste</span></button>
+    <button type="button" class="lobbybtn" id="lobbyBtn" aria-label="Lobiye dön">⌂ <span class="lbl">Lobi</span></button>
     <a class="lobbybtn quote" id="quoteHeaderLink" style="display:inline-flex" href="teklif.html">Teklif Al</a>
     <div class="counter"><b id="cur">—</b> <span>/ <span id="tot">—</span></span></div>
-    <a class="back" href="index.html">← Ana Sayfa</a>
+    <a class="back" href="index.html" aria-label="Ana Sayfa">← Ana <span class="lbl">Sayfa</span></a>
   </div>
 </header>
 
@@ -777,9 +788,23 @@ if(renderer){
 // bloklanabilir — playTrack zaten catch'li, sessiz başlar.
 let currentHallKey=null, currentHallName='';
 let transitioning=false;   // enterHall/exitToLobby'nin fade geçişi sürerken true — applyDeepLink bu sırada devre dışı
-function applyDeepLink(){
-  if(MODE==='entering'||transitioning)return;   // geçiş sürerken hashchange'i yut — yarım geçişe müdahale etme
-  const h=location.hash;
+// SHOWROOM-3: geçiş sürerken gelen hashchange'ler artık sessizce KAYBOLMUYOR — en son isteneni
+// pendingHash'e kaydediyoruz; enterHall/exitToLobby geçişi bitirince resumePending() onu SENKRON
+// olarak tekrar dener. Bilerek location.hash= atayıp gerçek bir hashchange event'i BEKLEMİYORUZ:
+// frame()'in her karede çalışan hash-senkron satırları (aşağıda, "!transitioning" korumalı) bir
+// sonraki rAF karesinde location.hash'i currentHallKey/prodIdx'e göre GERİ YAZARDI (transitioning
+// henüz false olduğu için) — event asenkron geldiğinde hash zaten eskiye dönmüş oluyordu. Senkron
+// çağrı, applyDeepLink transitioning=true'yu event'i beklemeden hemen set ettiği için bu yarışı bitirir.
+let pendingHash=null;
+function resumePending(){
+  if(pendingHash===null)return false;
+  const ph=pendingHash; pendingHash=null;
+  applyDeepLink(ph);
+  return true;
+}
+function applyDeepLink(hashOverride){
+  const h=(typeof hashOverride==='string')?hashOverride:location.hash;
+  if(MODE==='entering'||transitioning){ pendingHash=h; return; }   // geçiş sürerken hashchange'i yut, ama en sonuncusunu sakla
   const mHol=h.match(/^#hol=([a-z_]+)$/);
   const mMarka=h.match(/^#marka=(isisah|salmex|borsah)$/);
   const mUrun=h.match(/^#urun=([a-z0-9]+)$/);
@@ -809,7 +834,17 @@ function applyDeepLink(){
     }
   }
 }
-addEventListener('hashchange',applyDeepLink);
+addEventListener('hashchange',(e)=>{
+  // SHOWROOM-3: event'in KENDİ newURL'inden hash'i çıkar — location.hash'i YENİDEN OKUMUYORUZ.
+  // hashchange dispatch'i asenkron; ağır yük altında bir event'in işlenmesi geciktiğinde, o an
+  // location.hash zaten SONRAKİ bir değişiklik (örn. exitToLobby'nin lobiye dönerken hash'i
+  // temizleyen replaceState'i) tarafından ezilmiş olabilir — bu durumda location.hash okumak bu
+  // event'in TAŞIDIĞI hash değil, o anki ilgisiz değeri işletir (gözlenen: hall doğru holde
+  // takılı kalıyor). newURL her event'e ait sabit bir değer olduğu için bu yarışa kapalıdır.
+  let h='';
+  try{ h=new URL(e.newURL).hash; }catch(_){ h=location.hash; }
+  applyDeepLink(h);
+});
 {
   const w=setInterval(()=>{ if(document.body.classList.contains('ready')){
     clearInterval(w); setTimeout(applyDeepLink,600); } },300);
@@ -1153,6 +1188,10 @@ function exitInspect(){ if(!inspect)return; inspect=null; controls.enabled=false
 inspectCloseBtn.onclick=exitInspect;
 addEventListener('keydown',(e)=>{
   if(!inspect)return;
+  // SHOWROOM-1/2: katalog diyaloğu (☰ Liste) üstte açıksa bu handler'ı devre dışı bırak —
+  // aksi halde iki modal'ın Tab/Escape'i çakışır (katalog'un kendi capture-phase trap'i tek
+  // yetkili olmalı; inspect burada topmost değil).
+  if(!document.getElementById('catalogPanel').hidden)return;
   if(e.key==='Escape'){exitInspect();return;}
   if(e.key==='Tab'){ e.preventDefault(); inspectCloseBtn.focus(); }   // N5: basit tab-trap — tek focusable eleman
 });
@@ -1206,6 +1245,8 @@ function enterHall(brandKey,onReady){
     shint.style.opacity=1;
     history.replaceState(null,'',location.pathname+location.search+'#hol='+brandKey);   // N1: giriş = hash senkron
     if(onReady)onReady();
+    onDemandRender();   // SHOWROOM-4: reduced-motion'da hol her zaman en az bir kare render etsin
+    resumePending();    // SHOWROOM-3: bu geçiş sürerken daha yeni bir hash istendiyse şimdi onu uygula
   },REDUCED?60:1000);
 }
 function exitToLobby(onDone){
@@ -1230,6 +1271,8 @@ function exitToLobby(onDone){
     currentHallKey=null; currentHallName='';
     history.replaceState(null,'',location.pathname+location.search);   // N1: lobiye dönünce hash temizlenir
     if(onDone)onDone();
+    onDemandRender();   // SHOWROOM-4: reduced-motion'da lobiye dönüşte de en az bir kare render etsin
+    resumePending();    // SHOWROOM-3: bu geçiş sürerken daha yeni bir hash istendiyse şimdi onu uygula
   },420);
 }
 document.getElementById('lobbyBtn').onclick=()=>exitToLobby();
@@ -1305,8 +1348,12 @@ document.querySelectorAll('.doorcard').forEach(c=>c.onclick=()=>openDoor(c.datas
   }
   function focusables(){ return [...dialog.querySelectorAll('button,input,select,a[href]')].filter(el=>!el.disabled&&el.offsetParent!==null); }
   function onKeydown(e){
-    if(e.key==='Escape'){ e.preventDefault(); closePanel(true); return; }
+    // SHOWROOM-2: bu diyalog açıkken topmost olan oyuz — event'i burada kes ki inspect'in
+    // window'daki bubble-phase handler'ı (preventDefault propagation'ı durdurmaz) AYNI
+    // Escape/Tab'i bir kez daha işlemesin (örn. Escape ile katalog kapanınca inspect de kapanmasın).
+    if(e.key==='Escape'){ e.preventDefault(); e.stopPropagation(); closePanel(true); return; }
     if(e.key==='Tab'){
+      e.stopPropagation();
       const f=focusables(); if(!f.length)return;
       const first=f[0], last=f[f.length-1];
       if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
@@ -1342,7 +1389,8 @@ document.querySelectorAll('.doorcard').forEach(c=>c.onclick=()=>openDoor(c.datas
 
 function goTo(i){ const total=scrollEl.offsetHeight-innerHeight; let p;
   if(i===0)p=0; else if(i===TOT-1)p=1; else {const A=0.08,B=0.94,span=(B-A)/NP; p=A+(i-1)*span+span/2;}
-  scrollTo({top:scrollEl.offsetTop+p*total,behavior:'smooth'}); }
+  scrollTo({top:scrollEl.offsetTop+p*total,behavior:'smooth'});
+  onDemandRender(); }   // SHOWROOM-4: programatik ürün değişimi (liste/ok tuşları) reduced-motion'da da render etsin
 function progress(){ const r=scrollEl.getBoundingClientRect(); const total=scrollEl.offsetHeight-innerHeight;
   return total>0?clamp((-r.top)/total):0; }
 
@@ -1488,25 +1536,30 @@ function finishLoad(){
   setTimeout(()=>{document.getElementById('loader').classList.add('hide');document.body.classList.add('ready');},250);
 }
 addEventListener('resize',()=>{PORTRAIT=innerWidth/innerHeight<0.8;camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
-// R3: azaltılmış hareket tercihinde boşta sürekli rAF döngüsü YOK — sadece talep üzerine
-// (scroll/resize/işaretçi/tuş) tek kare render + kısa (400ms) "yatışma" kuyruğu (kolay geçiş
-// ve OrbitControls damping'inin sıfırlanmadan doğal durması için); sekme gizli/overlay açıkken
-// zaten frame() kendi içinde erken çıkar (yukarıda). Normal kullanıcıda sürekli döngü değişmez.
+// R3 + SHOWROOM-4: azaltılmış hareket tercihinde boşta sürekli rAF döngüsü YOK — sadece talep
+// üzerine (scroll/resize/işaretçi/tuş/hashchange VEYA programatik hol/ürün değişimi — bkz.
+// enterHall/exitToLobby/goTo) tek kare render + kısa (400ms) "yatışma" kuyruğu (kolay geçiş ve
+// OrbitControls damping'inin sıfırlanmadan doğal durması için); sekme gizli/overlay açıkken zaten
+// frame() kendi içinde erken çıkar (yukarıda). Normal kullanıcıda sürekli döngü değişmez.
+// onDemandRender modül kapsamında tanımlı (yalnız if(REDUCED) bloğu içinde değil) — böylece
+// enterHall/exitToLobby/goTo gibi daha önce tanımlanan fonksiyonlar REDUCED=false iken de güvenle
+// çağırabilir (no-op olur); ReferenceError riski yok.
+let settleUntil=0, settleRunning=false;
+function settleTick(){
+  frame();
+  if(performance.now()<settleUntil){ requestAnimationFrame(settleTick); }
+  else { settleRunning=false; }
+}
+function onDemandRender(){ if(!REDUCED)return; settleUntil=performance.now()+400; if(!settleRunning){settleRunning=true;requestAnimationFrame(settleTick);} }
 if(REDUCED){
   frame();
-  let settleUntil=0, settleRunning=false;
-  function settleTick(){
-    frame();
-    if(performance.now()<settleUntil){ requestAnimationFrame(settleTick); }
-    else { settleRunning=false; }
-  }
-  const onDemandRender=()=>{ settleUntil=performance.now()+400; if(!settleRunning){settleRunning=true;requestAnimationFrame(settleTick);} };
   addEventListener('scroll',onDemandRender,{passive:true});
   addEventListener('resize',onDemandRender);
   addEventListener('pointerdown',onDemandRender,{passive:true});
   addEventListener('pointermove',onDemandRender,{passive:true});
   addEventListener('wheel',onDemandRender,{passive:true});
   addEventListener('keydown',onDemandRender);
+  addEventListener('hashchange',onDemandRender);
 }else{
   requestAnimationFrame(loop);
 }
