@@ -157,8 +157,8 @@
 
   /* kart içi ikincil CTA — Apple'ın "Learn more / Buy" ikilisi */
   .card .go3d,.brandcard .go3d{display:inline-flex;align-items:center;gap:6px;margin-top:12px;min-height:44px;padding:11px 0;
-    font-family:var(--tech);font-weight:600;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
-    color:var(--cc,var(--bc,var(--vio1)));text-shadow:0 0 10px color-mix(in srgb,var(--cc,var(--bc,var(--vio1))) 50%,transparent)}
+    font-family:var(--tech);font-weight:600;font-size:.8rem;letter-spacing:.02em;
+    color:var(--cc,var(--bc,var(--vio1)))}
   @media(hover:hover){.card .go3d:hover,.brandcard .go3d:hover{color:#fff}}
   .news{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
   .newscard{border:1px solid var(--line);border-radius:12px;padding:24px;background:var(--panel)}
@@ -198,7 +198,7 @@
   .wcard.contain img{object-fit:contain;padding:12% 10% 28%}
   .wcard::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,#000f 8%,#0006 34%,transparent 60%)}
   .wcard .wtx{position:absolute;left:22px;right:22px;bottom:20px;z-index:2}
-  .wcard .wk{font-family:var(--tech);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--wc,var(--vio1));
+  .wcard .wk{font-family:var(--tech);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--wc,var(--vio1));
     text-shadow:0 0 10px color-mix(in srgb,var(--wc,var(--vio1)) 55%,transparent)}
   .wcard h3{font-size:1.5rem;margin-top:6px}
   .wcard .wgo{display:inline-block;margin-top:8px;font-family:var(--tech);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--steel)}
@@ -310,7 +310,7 @@
   .brandcard .bactions{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:10px}
   .brandcard .bactions .go3d{margin-top:0}
   .brandcard .bhint{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:6px 4px;margin:0;
-    font-family:var(--tech);font-weight:600;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
+    font-family:var(--tech);font-weight:600;font-size:.8rem;letter-spacing:.03em;
     color:var(--muted);background:none;border:0;cursor:pointer}
   .brandcard.sel .bhint{color:var(--bt,var(--vio1))}
   @media(hover:hover){.brandcard .bhint:hover{color:var(--bt,var(--vio1))}}
@@ -340,7 +340,7 @@
     .card:hover .ph img{transform:scale(1.05)}
   }
   .card .body{padding:22px}
-  .card .cat{font-family:var(--tech);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cc,var(--vio1));text-shadow:0 0 10px color-mix(in srgb,var(--cc,var(--vio1)) 50%,transparent)}
+  .card .cat{font-family:var(--tech);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cc,var(--vio1))}
   .card h3{font-size:1.35rem;margin:8px 0 8px}
   .card p{color:var(--muted);font-size:.9rem}
 
@@ -351,14 +351,14 @@
   .feature .txt{padding:56px}
   .feature .txt h2{font-size:clamp(2rem,4vw,3.2rem);margin:0 0 16px}
   .feature .txt p{color:var(--muted);margin-bottom:12px}
-  .feature .txt .tofas{display:inline-block;margin-top:10px;font-family:var(--tech);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--emb1);border:1px solid color-mix(in srgb,var(--emb2) 40%,transparent);border-radius:40px;padding:8px 16px;
-    text-shadow:0 0 10px color-mix(in srgb,var(--emb1) 55%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 22px -8px var(--emb2)}
+  .feature .txt .tofas{display:inline-block;margin-top:10px;font-family:var(--tech);font-size:.8rem;letter-spacing:.04em;color:var(--emb1);border:1px solid color-mix(in srgb,var(--emb2) 40%,transparent);border-radius:40px;padding:8px 16px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 22px -8px var(--emb2)}
   .feature .ph{position:relative;min-height:340px}
   .feature .ph img,.feature .ph video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .feature .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#120a06,transparent 30%)}
   .feature.salmex{background:linear-gradient(120deg,#061014,#050508);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 0 60px -20px var(--ele1)}
   .feature.salmex .txt .tofas{color:var(--ele1);border-color:color-mix(in srgb,var(--ele1) 40%,transparent);
-    text-shadow:0 0 10px color-mix(in srgb,var(--ele1) 55%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 22px -8px var(--ele2)}
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 22px -8px var(--ele2)}
   .feature.salmex .ph::after{background:linear-gradient(90deg,#061014,transparent 30%)}
 
   /* railway */
@@ -390,6 +390,7 @@
 
   /* contact */
   .contact{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:stretch}
+  .contact>*{min-width:0}
   .cbox{border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:40px;background:linear-gradient(165deg,rgba(20,12,22,.92),rgba(6,3,8,.96));
     box-shadow:inset 0 1px 0 rgba(255,255,255,.11),0 0 56px -18px var(--mag1)}
   .cbox h3{font-size:1.8rem;margin-bottom:24px}
@@ -399,7 +400,8 @@
     box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 18px -6px var(--mag1);display:grid;place-items:center;color:var(--mag1)}
   .cline .ic svg{width:18px;height:18px}
   .cline .k{font-family:var(--tech);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-  .cline .v{color:var(--ink);font-weight:600;font-size:1rem}
+  .cline .v{color:var(--ink);font-weight:600;font-size:1rem;overflow-wrap:anywhere}
+  .cline>div:last-child{min-width:0}
   .cline a.v:hover{color:var(--mag2)}
   .map{border:1px solid rgba(255,255,255,.07);border-radius:18px;overflow:hidden;min-height:440px;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}
   .map iframe{width:100%;height:100%;min-height:440px;border:0;filter:grayscale(.55) invert(.92) hue-rotate(190deg) contrast(.95)}
@@ -439,7 +441,9 @@
     header.open nav.links{display:flex;position:absolute;top:74px;left:0;right:0;flex-direction:column;background:#0E1013f8;padding:20px 28px;border-bottom:1px solid var(--line);gap:16px}
   }
   @media(max-width:560px){.grid{grid-template-columns:1fr}.pad{padding:70px 0}.feature .txt{padding:34px}.cbox{padding:28px}
-    .hero .kick{font-size:.6rem;letter-spacing:.13em}}
+    .hero .wrap{grid-template-columns:minmax(0,1fr)}.hero h1{font-size:clamp(2.1rem,11vw,2.6rem)}
+    .stats .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}.stat{padding:28px 14px}.stat .n{font-size:clamp(2rem,10vw,2.6rem)}
+    .hero .kick{display:inline-block;max-width:100%;font-size:.7rem;letter-spacing:.02em;padding:6px 12px;line-height:1.5;border-radius:16px}}
 
   /* 3B Showroom köprü kartı — showroom'un canlı önizlemesi */
   .bridge{border:1px solid color-mix(in srgb,var(--vio2) 45%,transparent);border-radius:18px;overflow:hidden;

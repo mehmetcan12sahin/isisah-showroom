@@ -188,6 +188,60 @@
         ],
         "createdAt": "2026-09-24T22:02:51.172Z",
         "reason": "fabrika scroll-scrub sahnesi: tam ekran sticky video kasıtlı olarak taşmayı kırpar"
+      },
+      {
+        "rule": "gpt-thin-border-wide-shadow",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-25T02:34:01.771Z",
+        "reason": "v5-neon onaylı kimlik (ince kenar + marka renkli hale); B2B revizyonu tasarımı yalnız okunabilirlikle sınırladı — kullanıcı v6 redesign'ı reddetti"
+      },
+      {
+        "rule": "gpt-thin-border-wide-shadow",
+        "value": "*",
+        "files": [
+          "urunler.html"
+        ],
+        "createdAt": "2026-09-25T02:34:01.860Z",
+        "reason": "v5-neon onaylı kimlik (ince kenar + marka renkli hale); B2B revizyonu tasarımı yalnız okunabilirlikle sınırladı — kullanıcı v6 redesign'ı reddetti"
+      },
+      {
+        "rule": "gpt-thin-border-wide-shadow",
+        "value": "*",
+        "files": [
+          "fabrika.html"
+        ],
+        "createdAt": "2026-09-25T02:34:01.943Z",
+        "reason": "v5-neon onaylı kimlik (ince kenar + marka renkli hale); B2B revizyonu tasarımı yalnız okunabilirlikle sınırladı — kullanıcı v6 redesign'ı reddetti"
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-25T02:34:02.026Z",
+        "reason": "v5-neon onaylı marka kartı şeridi (hakkimizda/vizyon-misyon ile aynı istisna)"
+      },
+      {
+        "rule": "kicker-above-heading",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-25T02:34:02.108Z",
+        "reason": "Marka kartı üst etiketi ürün kategorisini söyler (v5.2 konsey kararı: numara/tekrar yerine kategori) — bilgi taşır"
+      },
+      {
+        "rule": "numbered-section-labels",
+        "value": "*",
+        "files": [
+          "fabrika.html"
+        ],
+        "createdAt": "2026-09-25T02:34:02.193Z",
+        "reason": "Numaralar gerçek üretim sırasını kodlar (Pres→Test, video kurgusuyla birebir) — dekoratif değil"
       }
     ]
   }
