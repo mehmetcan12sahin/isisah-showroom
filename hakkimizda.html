@@ -52,6 +52,13 @@
   img{max-width:100%;display:block}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
   ::selection{background:var(--mag2);color:#fff}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .skip-link{position:absolute;left:14px;top:-60px;z-index:100;background:#0b0b12;color:#fff;padding:12px 18px;border-radius:8px;
+    border:1px solid var(--line);font-family:var(--tech);font-weight:600;font-size:.85rem;letter-spacing:.04em;
+    transition:top 160ms var(--ease-out)}
+  .skip-link:focus-visible{top:14px}
+  :focus-visible{outline:2px solid var(--vio-text);outline-offset:3px;border-radius:4px}
+  nav.links a:focus-visible,footer a:focus-visible{outline-offset:2px}
 
   /* blueprint / atmosphere */
   body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
@@ -70,6 +77,7 @@
     filter:drop-shadow(0 0 22px color-mix(in srgb,var(--vio2) 45%,transparent))}
   @media (prefers-reduced-motion:reduce){*{animation-duration:.01s !important;animation-iteration-count:1 !important}html{scroll-behavior:auto}}
   section[id]{scroll-margin-top:90px}
+#demiryolu{scroll-margin-top:90px}
 
   /* header */
   header{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(12px);
@@ -96,12 +104,36 @@
   }
   .btn:active{transform:scale(0.97)}
   .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--steel);box-shadow:none}
-  .menu-btn{display:none;background:none;border:1px solid var(--line);color:#fff;padding:8px 12px;border-radius:2px;font-size:1.1rem}
+  .menu-btn{display:none;align-items:center;justify-content:center;min-width:44px;min-height:44px;background:none;border:1px solid var(--line);color:#fff;padding:11px 14px;border-radius:6px;font-size:1.1rem}
   @media(max-width:1320px){nav.links{gap:20px}nav.links a{font-size:.78rem;letter-spacing:.04em}}
   @media(max-width:1120px){
-    nav.links{display:none}.menu-btn{display:block}
-    header.open nav.links{display:flex;position:absolute;top:74px;left:0;right:0;flex-direction:column;background:#0E1013f8;padding:20px 28px;border-bottom:1px solid var(--line);gap:16px}
+    nav.links{display:none}.menu-btn{display:flex}
+    header.open nav.links{display:flex;position:absolute;top:74px;left:0;right:0;flex-direction:column;background:#0E1013f8;padding:20px 28px;border-bottom:1px solid var(--line);gap:16px;max-height:calc(100vh - 74px);overflow-y:auto}
     header.open nav.links a{font-size:.9rem}
+  }
+
+  /* nav dropdowns — disclosure pattern (Sektörler / Kurumsal) */
+  .navdd{position:relative}
+  .navdd .dd-btn{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:14px 0;
+    background:none;border:0;cursor:pointer;font:inherit;color:var(--steel);
+    font-size:.83rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+  .navdd .dd-btn:hover{color:#fff}
+  .navdd .care{font-size:.62em;transition:transform 160ms var(--ease-out)}
+  .navdd.open .care{transform:rotate(180deg)}
+  nav.links .navdd .dd-menu{display:none;flex-direction:column;gap:2px;position:absolute;top:100%;left:50%;
+    transform:translateX(-50%);min-width:236px;margin-top:6px;padding:10px;
+    background:#0b0b12f5;border:1px solid var(--line);border-radius:12px;box-shadow:0 20px 44px -12px #000c;
+    backdrop-filter:blur(12px);z-index:60}
+  nav.links .navdd.open .dd-menu{display:flex}
+  nav.links .navdd .dd-menu a{padding:10px 12px;min-height:44px;display:flex;align-items:center;border-radius:8px;
+    font-size:.85rem;font-weight:500;letter-spacing:normal;text-transform:none;color:var(--steel);white-space:nowrap}
+  nav.links .navdd .dd-menu a::after{display:none}
+  @media(hover:hover){nav.links .navdd .dd-menu a:hover{background:color-mix(in srgb,var(--vio2) 16%,transparent);color:#fff}}
+  @media(max-width:1120px){
+    .navdd .dd-btn{width:100%;justify-content:space-between}
+    nav.links .navdd .dd-menu{display:none;position:static;transform:none;min-width:0;margin:2px 0 4px 10px;padding:2px 0 2px 14px;
+      background:none;border:0;border-left:2px solid var(--line);box-shadow:none;backdrop-filter:none}
+    nav.links .navdd.open .dd-menu{display:flex}
   }
 
   section{position:relative;z-index:1}
@@ -124,7 +156,7 @@
   @media(max-width:640px){.ribbon .rb-s{display:none}}
 
   /* kart içi ikincil CTA — Apple'ın "Learn more / Buy" ikilisi */
-  .card .go3d,.brandcard .go3d{display:inline-flex;align-items:center;gap:6px;margin-top:12px;min-height:24px;padding:4px 0;
+  .card .go3d,.brandcard .go3d{display:inline-flex;align-items:center;gap:6px;margin-top:12px;min-height:44px;padding:11px 0;
     font-family:var(--tech);font-weight:600;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
     color:var(--cc,var(--bc,var(--vio1)));text-shadow:0 0 10px color-mix(in srgb,var(--cc,var(--bc,var(--vio1))) 50%,transparent)}
   @media(hover:hover){.card .go3d:hover,.brandcard .go3d:hover{color:#fff}}
@@ -170,7 +202,7 @@
     text-shadow:0 0 10px color-mix(in srgb,var(--wc,var(--vio1)) 55%,transparent)}
   .wcard h3{font-size:1.5rem;margin-top:6px}
   .wcard .wgo{display:inline-block;margin-top:8px;font-family:var(--tech);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--steel)}
-  .wcard[data-c=ember]{--wc:var(--emb1)}.wcard[data-c=violet]{--wc:var(--vio1)}.wcard[data-c=electric]{--wc:var(--ele1)}
+  .wcard[data-c=ember]{--wc:var(--emb1)}.wcard[data-c=violet]{--wc:var(--vio-text)}.wcard[data-c=electric]{--wc:var(--ele1)}
   @media(hover:hover) and (pointer:fine){
     .wcard:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--wc,var(--vio2)) 40%,transparent);
       box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 56px -14px var(--wc,var(--vio2)),0 24px 48px -18px #000}
@@ -201,8 +233,14 @@
   .hero-visual::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,#000,transparent 45%);z-index:1}
   .hero .bchips{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:26px;font-family:var(--tech)}
   .hero .bchips span{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-right:6px}
-  .hero .bchips b{font-weight:600;font-size:.74rem;letter-spacing:.14em;border:1px solid var(--line);border-radius:40px;padding:7px 14px;color:var(--steel);cursor:pointer;transition:border-color 160ms var(--ease-out),color 160ms var(--ease-out)}
-  .hero .bchips b[data-b=isisah]:hover{border-color:var(--emb1);color:#fff}.hero .bchips b[data-b=borsah]:hover{border-color:var(--mnt1);color:#fff}.hero .bchips b[data-b=salmex]:hover{border-color:var(--ele1);color:#fff}
+  .hero .bchips button{background:none;font-family:inherit;display:inline-flex;align-items:center;min-height:44px;font-weight:600;font-size:.74rem;letter-spacing:.14em;border:1px solid var(--line);border-radius:40px;padding:12px 14px;color:var(--steel);cursor:pointer;transition:border-color 160ms var(--ease-out),color 160ms var(--ease-out)}
+  .hero .bchips button[data-b=isisah]:hover{border-color:var(--emb1);color:#fff}.hero .bchips button[data-b=borsah]:hover{border-color:var(--mnt1);color:#fff}.hero .bchips button[data-b=salmex]:hover{border-color:var(--ele1);color:#fff}
+  .hero .cta .tertiary{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:11px 6px;
+    font-family:var(--tech);font-weight:600;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--steel)}
+  @media(hover:hover){.hero .cta .tertiary:hover{color:#fff}}
+  .hero .bchips a.bphone{display:inline-flex;align-items:center;min-height:44px;padding:10px 4px;margin-left:2px;
+    font-family:var(--tech);font-weight:600;font-size:.76rem;letter-spacing:.04em;color:var(--steel)}
+  @media(hover:hover){.hero .bchips a.bphone:hover{color:#fff}}
 
   /* stats strip */
   .stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#00000030}
@@ -223,8 +261,8 @@
 
   /* about */
   .about{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-  .about .imgcol{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .about .imgcol img{border-radius:5px;border:1px solid var(--line);aspect-ratio:1;object-fit:cover;width:100%}
+  .about .imgcol{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+  .about .imgcol img{border-radius:5px;border:1px solid var(--line);aspect-ratio:1;object-fit:cover;width:100%;height:auto}
   .about .imgcol img:first-child{grid-column:1/-1;aspect-ratio:16/9}
   .about p{color:var(--muted);margin-top:18px}
   .about .time{margin-top:28px;display:flex;flex-direction:column;gap:0}
@@ -267,11 +305,15 @@
   .brandcard p{color:var(--muted);font-size:.98rem}
   .brandcard ul{list-style:none;margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
   .brandcard li{font-family:var(--tech);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--steel);border:1px solid var(--line);border-radius:40px;padding:6px 13px}
-  .brandcard{cursor:pointer}
   .brandcard.sel{border-color:color-mix(in srgb,var(--bc,var(--vio2)) 65%,transparent);box-shadow:0 0 0 1px color-mix(in srgb,var(--bc,var(--vio2)) 30%,transparent),0 30px 70px -34px var(--bc,var(--vio2))}
   .brandcard.sel::before{transform:scaleX(1)}
-  .brandcard .bhint{display:inline-flex;align-items:center;gap:6px;margin:12px 0 0 18px;font-family:var(--tech);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .brandcard .bactions{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:10px}
+  .brandcard .bactions .go3d{margin-top:0}
+  .brandcard .bhint{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:6px 4px;margin:0;
+    font-family:var(--tech);font-weight:600;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);background:none;border:0;cursor:pointer}
   .brandcard.sel .bhint{color:var(--bt,var(--vio1))}
+  @media(hover:hover){.brandcard .bhint:hover{color:var(--bt,var(--vio1))}}
 
   /* products */
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -281,13 +323,14 @@
   .card[data-b=borsah]{--cc:var(--mnt2)}
   .card[data-b=isisah]{--cc:var(--emb2)}
   .card .ph{aspect-ratio:4/3;overflow:hidden;background:#0a0a12}
+  .card .ph picture{display:block;width:100%;height:100%}
   .card .ph img{width:100%;height:100%;object-fit:cover;transition:transform 480ms var(--ease-out)}
   .card[data-b=salmex]{--cc:var(--ele1)}
   .card.cut .ph{display:grid;place-items:center;background:radial-gradient(ellipse at 50% 62%,#151a2a,#07070c 72%)}
   .card.cut .ph img{width:76%;height:76%;object-fit:contain;filter:drop-shadow(0 18px 24px #000c)}
   .card.off,.vcard.off{display:none}
   .bfilter{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:-28px 0 34px}
-  .bfilter button{font-family:var(--tech);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--steel);background:transparent;border:1px solid var(--line);border-radius:40px;padding:8px 16px;cursor:pointer;transition:border-color 160ms var(--ease-out),background 160ms var(--ease-out),color 160ms var(--ease-out)}
+  .bfilter button{font-family:var(--tech);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--steel);background:transparent;border:1px solid var(--line);border-radius:40px;min-height:44px;padding:12px 16px;cursor:pointer;transition:border-color 160ms var(--ease-out),background 160ms var(--ease-out),color 160ms var(--ease-out)}
   .bfilter button[data-b=borsah]{--bc2:var(--mnt1)}.bfilter button[data-b=isisah]{--bc2:var(--emb1)}.bfilter button[data-b=salmex]{--bc2:var(--ele1)}
   .bfilter button[aria-selected=true]{color:#fff;border-color:var(--bc2,var(--vio1));background:color-mix(in srgb,var(--bc2,var(--vio1)) 18%,transparent)}
   @media(hover:hover){.bfilter button:hover{color:#fff;border-color:var(--bc2,var(--vio1))}}
@@ -340,7 +383,7 @@
   .railbox ul{list-style:none;display:flex;flex-direction:column;gap:8px}
   .railbox li{display:flex;gap:10px;color:var(--muted);font-size:.9rem}
   .railbox li::before{content:"";flex:none;width:7px;height:7px;margin-top:7px;border-radius:2px;background:linear-gradient(100deg,var(--vio1),var(--vio2));box-shadow:0 0 8px var(--vio2)}
-  .railrefs{margin-top:34px;color:var(--muted);font-family:var(--tech);font-size:.8rem;letter-spacing:.06em;line-height:2;text-transform:uppercase}
+  .railrefs{margin-top:34px;color:var(--muted);font-family:var(--tech);font-size:.8rem;letter-spacing:.02em;line-height:2}
   .railrefs b{color:var(--steel)}
   @media(max-width:960px){.rail-hero{grid-template-columns:1fr}.railgrid{grid-template-columns:1fr 1fr}.railcols{grid-template-columns:1fr}}
   @media(max-width:560px){.railgrid{grid-template-columns:1fr}.railtime .row{grid-template-columns:84px 1fr}}
@@ -365,8 +408,10 @@
   footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
   footer .brand img{height:30px}
   footer .fnav{display:flex;gap:24px;flex-wrap:wrap;font-size:.82rem;color:var(--muted)}
+  footer .fnav a{display:inline-flex;align-items:center;min-height:44px}
   footer .fnav a:hover{color:var(--vio1)}
   footer .fnav2{display:flex;gap:16px;flex-wrap:wrap;font-size:.72rem;color:var(--muted);width:100%;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);opacity:.85}
+  footer .fnav2 a{display:inline-flex;align-items:center;min-height:44px}
   footer .fnav2 a:hover{color:var(--vio1);opacity:1}
   footer .cp{color:var(--muted);font-size:.78rem;width:100%;border-top:1px solid var(--line);padding-top:20px;margin-top:8px}
 
@@ -390,7 +435,7 @@
     .grid{grid-template-columns:1fr 1fr}.feature{grid-template-columns:1fr}.feature .ph{min-height:280px}
     .contact{grid-template-columns:1fr}.stats .wrap{grid-template-columns:1fr 1fr}
     .stat:nth-child(2n){border-right:none}.stat{border-bottom:1px solid var(--line)}
-    nav.links{display:none}.menu-btn{display:block}
+    nav.links{display:none}.menu-btn{display:flex}
     header.open nav.links{display:flex;position:absolute;top:74px;left:0;right:0;flex-direction:column;background:#0E1013f8;padding:20px 28px;border-bottom:1px solid var(--line);gap:16px}
   }
   @media(max-width:560px){.grid{grid-template-columns:1fr}.pad{padding:70px 0}.feature .txt{padding:34px}.cbox{padding:28px}
@@ -467,29 +512,45 @@
 </style>
 </head>
 <body>
-<a id="top"></a>
+<a class="skip-link" href="#main">İçeriğe atla</a>
 <div class="wm" aria-hidden="true">ISIŞAH GROUP</div>
 <div class="glow a"></div><div class="glow b"></div>
 <header id="hdr">
   <div class="wrap nav">
     <a class="brand" href="index.html">
-      <img src="assets/catalog/logo-isisah.webp" alt="ISIŞAH Endüstriyel" />
+      <img src="assets/catalog/logo-isisah.webp" alt="ISIŞAH Endüstriyel" width="133" height="38" />
     </a>
-    <nav class="links" id="links">
-      <a href="hakkimizda.html" aria-current="page">Hakkımızda</a>
-      <a href="vizyon-misyon.html">Vizyon &amp; Misyon</a>
-      <a href="index.html#markalar">Markalar</a>
-      <a href="index.html#urunler">Ürünler</a>
-      <a href="urunler.html">Showroom</a>
-      <a href="index.html#haberler">Haberler</a>
-      <a href="index.html#iletisim">İletişim</a>
-      <a class="btn" href="index.html#iletisim">Teklif Al</a>
-    </nav>
     <button class="menu-btn" id="menuBtn" aria-label="Menü" aria-controls="links" aria-expanded="false">☰</button>
+    <nav class="links" id="links">
+      <a href="index.html#urunler">Ürünler</a>
+      <div class="navdd">
+        <button type="button" class="dd-btn" aria-expanded="false" aria-controls="dd-sektorler">Sektörler<span class="care" aria-hidden="true">▾</span></button>
+        <div class="dd-menu" id="dd-sektorler">
+          <a href="demiryolu-isiticilari.html">Demiryolu Isıtıcıları</a>
+          <a href="savunma-sanayi-isitma-sistemleri.html">Savunma Sanayi Isıtma</a>
+          <a href="beyaz-esya-isiticilari.html">Beyaz Eşya Isıtıcıları</a>
+          <a href="agir-sanayi-isiticilari.html">Ağır Sanayi</a>
+          <a href="endustriyel-mutfak-isiticilari.html">Endüstriyel Mutfak</a>
+        </div>
+      </div>
+      <a href="index.html#markalar">Markalar</a>
+      <a href="urunler.html">Showroom</a>
+      <div class="navdd">
+        <button type="button" class="dd-btn" aria-expanded="false" aria-controls="dd-kurumsal">Kurumsal<span class="care" aria-hidden="true">▾</span></button>
+        <div class="dd-menu" id="dd-kurumsal">
+          <a href="hakkimizda.html" aria-current="page">Hakkımızda</a>
+          <a href="vizyon-misyon.html">Vizyon &amp; Misyon</a>
+          <a href="fabrika.html">Fabrika Turu</a>
+        </div>
+      </div>
+      <a href="index.html#iletisim">İletişim</a>
+      <a class="btn" href="teklif.html">Teklif Al</a>
+    </nav>
   </div>
 </header>
 
-<main>
+<main id="main">
+<a id="top"></a>
 <section class="pg">
   <div class="wrap">
     <div class="reveal in">
@@ -503,10 +564,10 @@
 
 <section class="stats" style="margin-top:30px">
   <div class="wrap">
-    <div class="stat reveal"><div class="n grad-text" data-count="44" data-suffix=" yıl">0 yıl</div><div class="k">Kesintisiz Üretim</div></div>
-    <div class="stat reveal" data-d="1"><div class="n grad-text" data-count="3" data-suffix=" marka">0 marka</div><div class="k">Tek Çatı Altında</div></div>
-    <div class="stat reveal" data-d="2"><div class="n grad-text" data-count="8">0</div><div class="k">Ürün Gamı · Mutfaktan Savunmaya</div></div>
-    <div class="stat reveal" data-d="3"><div class="n grad-text" data-count="100" data-prefix="%">%0</div><div class="k">Yerli Üretim</div></div>
+    <div class="stat reveal"><div class="n grad-text" data-count="44" data-suffix=" yıl">44 yıl</div><div class="k">Kesintisiz Üretim</div></div>
+    <div class="stat reveal" data-d="1"><div class="n grad-text" data-count="3" data-suffix=" marka">3 marka</div><div class="k">Tek Çatı Altında</div></div>
+    <div class="stat reveal" data-d="2"><div class="n grad-text" data-count="8">8</div><div class="k">Ürün Gamı · Mutfaktan Savunmaya</div></div>
+    <div class="stat reveal" data-d="3"><div class="n grad-text" data-count="100" data-prefix="%">%100</div><div class="k">Yerli Üretim</div></div>
   </div>
 </section>
 
@@ -542,9 +603,9 @@
   <div class="wrap">
     <div class="sec-head reveal"><h2>Üretimden kareler.</h2><p>DOSAB Bursa tesislerimizden — robotlu eşanjör hattı, profil hattı ve test istasyonu.</p></div>
     <div class="kareler reveal">
-      <figure><img src="assets/img/uretim-k1.webp" alt="Robotlu üretim hücresi" loading="lazy" decoding="async"><figcaption>Robotlu Hat</figcaption></figure>
-      <figure><img src="assets/img/uretim-k2.webp" alt="Profil şekillendirme hattı" loading="lazy" decoding="async"><figcaption>Şekillendirme</figcaption></figure>
-      <figure><img src="assets/img/uretim-k3.webp" alt="Sızdırmazlık test istasyonu" loading="lazy" decoding="async"><figcaption>Test İstasyonu</figcaption></figure>
+      <figure><img src="assets/img/uretim-k1.webp" alt="Robotlu üretim hücresi" loading="lazy" decoding="async" width="1200" height="675"><figcaption>Robotlu Hat</figcaption></figure>
+      <figure><img src="assets/img/uretim-k2.webp" alt="Profil şekillendirme hattı" loading="lazy" decoding="async" width="1200" height="675"><figcaption>Şekillendirme</figcaption></figure>
+      <figure><img src="assets/img/uretim-k3.webp" alt="Sızdırmazlık test istasyonu" loading="lazy" decoding="async" width="1200" height="675"><figcaption>Test İstasyonu</figcaption></figure>
     </div>
     <div class="pgcta reveal" style="margin-top:22px"><a class="btn ghost" href="fabrika.html">Fabrika turuna çık <span>→</span></a></div>
   </div>
@@ -606,7 +667,7 @@
 
 <footer>
   <div class="wrap">
-    <a class="brand" href="index.html"><img src="assets/catalog/logo-isisah.webp" alt="ISIŞAH Endüstriyel"></a>
+    <a class="brand" href="index.html"><img src="assets/catalog/logo-isisah.webp" alt="ISIŞAH Endüstriyel" width="105" height="30" loading="lazy"></a>
     <nav class="fnav">
       <a href="hakkimizda.html" aria-current="page">Hakkımızda</a><a href="vizyon-misyon.html">Vizyon &amp; Misyon</a><a href="index.html#markalar">Markalar</a><a href="index.html#urunler">Ürünler</a>
       <a href="index.html#haberler">Haberler</a><a href="index.html#iletisim">İletişim</a>
@@ -620,13 +681,32 @@
   </div>
 </footer>
 <script>
+  // header shrink
   const hdr=document.getElementById('hdr');
   addEventListener('scroll',()=>hdr.classList.toggle('small',scrollY>40),{passive:true});
+  // mobile menu
   const menuBtn=document.getElementById('menuBtn');
+  const linksNav=document.getElementById('links');
   const syncMenu=()=>menuBtn.setAttribute('aria-expanded',hdr.classList.contains('open')?'true':'false');
-  menuBtn.onclick=()=>{hdr.classList.toggle('open');syncMenu();};
-  document.querySelectorAll('#links a').forEach(a=>a.addEventListener('click',()=>{hdr.classList.remove('open');syncMenu();}));
-  addEventListener('keydown',(e)=>{if(e.key==='Escape'&&hdr.classList.contains('open')){hdr.classList.remove('open');syncMenu();menuBtn.focus();}});
+  function closeAllDD(){document.querySelectorAll('.navdd').forEach(dd=>{dd.classList.remove('open');dd.querySelector('.dd-btn').setAttribute('aria-expanded','false');});}
+  function openMenu(){hdr.classList.add('open');syncMenu();const first=linksNav.querySelector('a,button');if(first)first.focus();}
+  function closeMenu(focusBtn){hdr.classList.remove('open');syncMenu();closeAllDD();if(focusBtn)menuBtn.focus();}
+  menuBtn.onclick=()=>{hdr.classList.contains('open')?closeMenu(false):openMenu();};
+  document.querySelectorAll('#links a').forEach(a=>a.addEventListener('click',()=>closeMenu(false)));
+  addEventListener('keydown',(e)=>{if(e.key==='Escape'&&hdr.classList.contains('open')){closeMenu(true);}});
+  // nav açılır menüleri (Sektörler / Kurumsal) — disclosure pattern (index.html ile birebir)
+  document.querySelectorAll('.navdd').forEach(dd=>{
+    const btn=dd.querySelector('.dd-btn'),menu=dd.querySelector('.dd-menu');
+    const open=()=>{closeAllDD();dd.classList.add('open');btn.setAttribute('aria-expanded','true');};
+    const close=(focusBtn)=>{dd.classList.remove('open');btn.setAttribute('aria-expanded','false');if(focusBtn)btn.focus();};
+    btn.addEventListener('click',e=>{e.stopPropagation();dd.classList.contains('open')?close(false):open();});
+    btn.addEventListener('keydown',e=>{
+      if(e.key==='Escape'&&dd.classList.contains('open')){e.stopPropagation();close(true);}
+      else if(e.key==='ArrowDown'&&!dd.classList.contains('open')){e.preventDefault();open();const f=menu.querySelector('a');if(f)f.focus();}
+    });
+    menu.addEventListener('keydown',e=>{if(e.key==='Escape'){e.stopPropagation();close(true);}});
+  });
+  document.addEventListener('click',e=>{if(!e.target.closest('.navdd'))closeAllDD();});
   const reveals=[...document.querySelectorAll('.reveal')];
   let raf=0;
   function showReveals(){raf=0;const vh=innerHeight;let remaining=false;

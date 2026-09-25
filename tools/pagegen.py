@@ -59,13 +59,32 @@ EXTRA_CSS = '''
 '''
 
 CORE_JS = '''<script>
+  // header shrink
   const hdr=document.getElementById('hdr');
   addEventListener('scroll',()=>hdr.classList.toggle('small',scrollY>40),{passive:true});
+  // mobile menu
   const menuBtn=document.getElementById('menuBtn');
+  const linksNav=document.getElementById('links');
   const syncMenu=()=>menuBtn.setAttribute('aria-expanded',hdr.classList.contains('open')?'true':'false');
-  menuBtn.onclick=()=>{hdr.classList.toggle('open');syncMenu();};
-  document.querySelectorAll('#links a').forEach(a=>a.addEventListener('click',()=>{hdr.classList.remove('open');syncMenu();}));
-  addEventListener('keydown',(e)=>{if(e.key==='Escape'&&hdr.classList.contains('open')){hdr.classList.remove('open');syncMenu();menuBtn.focus();}});
+  function closeAllDD(){document.querySelectorAll('.navdd').forEach(dd=>{dd.classList.remove('open');dd.querySelector('.dd-btn').setAttribute('aria-expanded','false');});}
+  function openMenu(){hdr.classList.add('open');syncMenu();const first=linksNav.querySelector('a,button');if(first)first.focus();}
+  function closeMenu(focusBtn){hdr.classList.remove('open');syncMenu();closeAllDD();if(focusBtn)menuBtn.focus();}
+  menuBtn.onclick=()=>{hdr.classList.contains('open')?closeMenu(false):openMenu();};
+  document.querySelectorAll('#links a').forEach(a=>a.addEventListener('click',()=>closeMenu(false)));
+  addEventListener('keydown',(e)=>{if(e.key==='Escape'&&hdr.classList.contains('open')){closeMenu(true);}});
+  // nav açılır menüleri (Sektörler / Kurumsal) — disclosure pattern (index.html ile birebir)
+  document.querySelectorAll('.navdd').forEach(dd=>{
+    const btn=dd.querySelector('.dd-btn'),menu=dd.querySelector('.dd-menu');
+    const open=()=>{closeAllDD();dd.classList.add('open');btn.setAttribute('aria-expanded','true');};
+    const close=(focusBtn)=>{dd.classList.remove('open');btn.setAttribute('aria-expanded','false');if(focusBtn)btn.focus();};
+    btn.addEventListener('click',e=>{e.stopPropagation();dd.classList.contains('open')?close(false):open();});
+    btn.addEventListener('keydown',e=>{
+      if(e.key==='Escape'&&dd.classList.contains('open')){e.stopPropagation();close(true);}
+      else if(e.key==='ArrowDown'&&!dd.classList.contains('open')){e.preventDefault();open();const f=menu.querySelector('a');if(f)f.focus();}
+    });
+    menu.addEventListener('keydown',e=>{if(e.key==='Escape'){e.stopPropagation();close(true);}});
+  });
+  document.addEventListener('click',e=>{if(!e.target.closest('.navdd'))closeAllDD();});
   const reveals=[...document.querySelectorAll('.reveal')];
   let raf=0;
   function showReveals(){raf=0;const vh=innerHeight;let remaining=false;
@@ -94,8 +113,12 @@ CORE_JS = '''<script>
   document.getElementById('yr').textContent=new Date().getFullYear();
 </script>'''
 
-def page(fn, title, desc, kick, h1, lead, body, ld, vis):
+def page(fn, title, desc, kick, h1, lead, body, ld, vis, og_image=None, og_w=1200, og_h=630):
+    # og_image: assets/... köküne göreli yol (gerçek görsel, showroom altında barındırılır — deploy topolojisi).
+    # Verilmezse (veya boyutu okunamadıysa) jenerik og-cover.jpg 1200x630'a düşer; ASLA sahte 1200x630 iddia etme
+    # (çağıran taraf gerçek piksel boyutunu sips/python ile ölçüp og_w/og_h ile geçirmeli).
     url = f'https://isisah.com.tr/{fn}'
+    og_url = f'https://isisah.com.tr/showroom/{og_image}' if og_image else 'https://isisah.com.tr/showroom/assets/img/og-cover.jpg'
     return f'''<!doctype html>
 <html lang="tr">
 <head>
@@ -110,14 +133,14 @@ def page(fn, title, desc, kick, h1, lead, body, ld, vis):
 <meta property="og:title" content="{title}" />
 <meta property="og:description" content="{desc}" />
 <meta property="og:url" content="{url}" />
-<meta property="og:image" content="https://isisah.com.tr/showroom/assets/img/og-cover.jpg" />
-<meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+<meta property="og:image" content="{og_url}" />
+<meta property="og:image:width" content="{og_w}" /><meta property="og:image:height" content="{og_h}" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1" />
 <meta property="og:locale" content="tr_TR" />
 <meta name="twitter:title" content="{title}" />
 <meta name="twitter:description" content="{desc}" />
-<meta name="twitter:image" content="https://isisah.com.tr/showroom/assets/img/og-cover.jpg" />
+<meta name="twitter:image" content="{og_url}" />
 <script type="application/ld+json">{ld}</script>
 <link rel="icon" href="/favicon.ico" sizes="32x32" />
 <link rel="icon" type="image/png" sizes="48x48" href="assets/img/favicon-48.png" />
@@ -129,12 +152,13 @@ def page(fn, title, desc, kick, h1, lead, body, ld, vis):
 {style[:-8]}{EXTRA_CSS}</style>
 </head>
 <body>
-<a id="top"></a>
+<a class="skip-link" href="#main">İçeriğe atla</a>
 <div class="wm" aria-hidden="true">ISIŞAH GROUP</div>
 <div class="glow a"></div><div class="glow b"></div>
 {sub(header, fn)}
 
-<main>
+<main id="main">
+<a id="top"></a>
 <section class="pg">
   <div class="wrap">
     <div class="reveal in">

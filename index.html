@@ -68,6 +68,13 @@
   img{max-width:100%;display:block}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
   ::selection{background:var(--mag2);color:#fff}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .skip-link{position:absolute;left:14px;top:-60px;z-index:100;background:#0b0b12;color:#fff;padding:12px 18px;border-radius:8px;
+    border:1px solid var(--line);font-family:var(--tech);font-weight:600;font-size:.85rem;letter-spacing:.04em;
+    transition:top 160ms var(--ease-out)}
+  .skip-link:focus-visible{top:14px}
+  :focus-visible{outline:2px solid var(--vio-text);outline-offset:3px;border-radius:4px}
+  nav.links a:focus-visible,footer a:focus-visible{outline-offset:2px}
 
   /* blueprint / atmosphere */
   body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
@@ -86,6 +93,7 @@
     filter:drop-shadow(0 0 22px color-mix(in srgb,var(--vio2) 45%,transparent))}
   @media (prefers-reduced-motion:reduce){*{animation-duration:.01s !important;animation-iteration-count:1 !important}html{scroll-behavior:auto}}
   section[id]{scroll-margin-top:90px}
+#demiryolu{scroll-margin-top:90px}
 
   /* header */
   header{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(12px);
@@ -112,12 +120,36 @@
   }
   .btn:active{transform:scale(0.97)}
   .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--steel);box-shadow:none}
-  .menu-btn{display:none;background:none;border:1px solid var(--line);color:#fff;padding:8px 12px;border-radius:2px;font-size:1.1rem}
+  .menu-btn{display:none;align-items:center;justify-content:center;min-width:44px;min-height:44px;background:none;border:1px solid var(--line);color:#fff;padding:11px 14px;border-radius:6px;font-size:1.1rem}
   @media(max-width:1320px){nav.links{gap:20px}nav.links a{font-size:.78rem;letter-spacing:.04em}}
   @media(max-width:1120px){
-    nav.links{display:none}.menu-btn{display:block}
-    header.open nav.links{display:flex;position:absolute;top:74px;left:0;right:0;flex-direction:column;background:#0E1013f8;padding:20px 28px;border-bottom:1px solid var(--line);gap:16px}
+    nav.links{display:none}.menu-btn{display:flex}
+    header.open nav.links{display:flex;position:absolute;top:74px;left:0;right:0;flex-direction:column;background:#0E1013f8;padding:20px 28px;border-bottom:1px solid var(--line);gap:16px;max-height:calc(100vh - 74px);overflow-y:auto}
     header.open nav.links a{font-size:.9rem}
+  }
+
+  /* nav dropdowns — disclosure pattern (Sektörler / Kurumsal) */
+  .navdd{position:relative}
+  .navdd .dd-btn{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:14px 0;
+    background:none;border:0;cursor:pointer;font:inherit;color:var(--steel);
+    font-size:.83rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+  .navdd .dd-btn:hover{color:#fff}
+  .navdd .care{font-size:.62em;transition:transform 160ms var(--ease-out)}
+  .navdd.open .care{transform:rotate(180deg)}
+  nav.links .navdd .dd-menu{display:none;flex-direction:column;gap:2px;position:absolute;top:100%;left:50%;
+    transform:translateX(-50%);min-width:236px;margin-top:6px;padding:10px;
+    background:#0b0b12f5;border:1px solid var(--line);border-radius:12px;box-shadow:0 20px 44px -12px #000c;
+    backdrop-filter:blur(12px);z-index:60}
+  nav.links .navdd.open .dd-menu{display:flex}
+  nav.links .navdd .dd-menu a{padding:10px 12px;min-height:44px;display:flex;align-items:center;border-radius:8px;
+    font-size:.85rem;font-weight:500;letter-spacing:normal;text-transform:none;color:var(--steel);white-space:nowrap}
+  nav.links .navdd .dd-menu a::after{display:none}
+  @media(hover:hover){nav.links .navdd .dd-menu a:hover{background:color-mix(in srgb,var(--vio2) 16%,transparent);color:#fff}}
+  @media(max-width:1120px){
+    .navdd .dd-btn{width:100%;justify-content:space-between}
+    nav.links .navdd .dd-menu{display:none;position:static;transform:none;min-width:0;margin:2px 0 4px 10px;padding:2px 0 2px 14px;
+      background:none;border:0;border-left:2px solid var(--line);box-shadow:none;backdrop-filter:none}
+    nav.links .navdd.open .dd-menu{display:flex}
   }
 
   section{position:relative;z-index:1}
@@ -140,7 +172,7 @@
   @media(max-width:640px){.ribbon .rb-s{display:none}}
 
   /* kart içi ikincil CTA — Apple'ın "Learn more / Buy" ikilisi */
-  .card .go3d,.brandcard .go3d{display:inline-flex;align-items:center;gap:6px;margin-top:12px;min-height:24px;padding:4px 0;
+  .card .go3d,.brandcard .go3d{display:inline-flex;align-items:center;gap:6px;margin-top:12px;min-height:44px;padding:11px 0;
     font-family:var(--tech);font-weight:600;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
     color:var(--cc,var(--bc,var(--vio1)));text-shadow:0 0 10px color-mix(in srgb,var(--cc,var(--bc,var(--vio1))) 50%,transparent)}
   @media(hover:hover){.card .go3d:hover,.brandcard .go3d:hover{color:#fff}}
@@ -186,7 +218,7 @@
     text-shadow:0 0 10px color-mix(in srgb,var(--wc,var(--vio1)) 55%,transparent)}
   .wcard h3{font-size:1.5rem;margin-top:6px}
   .wcard .wgo{display:inline-block;margin-top:8px;font-family:var(--tech);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--steel)}
-  .wcard[data-c=ember]{--wc:var(--emb1)}.wcard[data-c=violet]{--wc:var(--vio1)}.wcard[data-c=electric]{--wc:var(--ele1)}
+  .wcard[data-c=ember]{--wc:var(--emb1)}.wcard[data-c=violet]{--wc:var(--vio-text)}.wcard[data-c=electric]{--wc:var(--ele1)}
   @media(hover:hover) and (pointer:fine){
     .wcard:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--wc,var(--vio2)) 40%,transparent);
       box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 56px -14px var(--wc,var(--vio2)),0 24px 48px -18px #000}
@@ -217,8 +249,14 @@
   .hero-visual::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,#000,transparent 45%);z-index:1}
   .hero .bchips{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:26px;font-family:var(--tech)}
   .hero .bchips span{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-right:6px}
-  .hero .bchips b{font-weight:600;font-size:.74rem;letter-spacing:.14em;border:1px solid var(--line);border-radius:40px;padding:7px 14px;color:var(--steel);cursor:pointer;transition:border-color 160ms var(--ease-out),color 160ms var(--ease-out)}
-  .hero .bchips b[data-b=isisah]:hover{border-color:var(--emb1);color:#fff}.hero .bchips b[data-b=borsah]:hover{border-color:var(--mnt1);color:#fff}.hero .bchips b[data-b=salmex]:hover{border-color:var(--ele1);color:#fff}
+  .hero .bchips button{background:none;font-family:inherit;display:inline-flex;align-items:center;min-height:44px;font-weight:600;font-size:.74rem;letter-spacing:.14em;border:1px solid var(--line);border-radius:40px;padding:12px 14px;color:var(--steel);cursor:pointer;transition:border-color 160ms var(--ease-out),color 160ms var(--ease-out)}
+  .hero .bchips button[data-b=isisah]:hover{border-color:var(--emb1);color:#fff}.hero .bchips button[data-b=borsah]:hover{border-color:var(--mnt1);color:#fff}.hero .bchips button[data-b=salmex]:hover{border-color:var(--ele1);color:#fff}
+  .hero .cta .tertiary{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:11px 6px;
+    font-family:var(--tech);font-weight:600;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--steel)}
+  @media(hover:hover){.hero .cta .tertiary:hover{color:#fff}}
+  .hero .bchips a.bphone{display:inline-flex;align-items:center;min-height:44px;padding:10px 4px;margin-left:2px;
+    font-family:var(--tech);font-weight:600;font-size:.76rem;letter-spacing:.04em;color:var(--steel)}
+  @media(hover:hover){.hero .bchips a.bphone:hover{color:#fff}}
 
   /* stats strip */
   .stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#00000030}
@@ -239,8 +277,8 @@
 
   /* about */
   .about{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-  .about .imgcol{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .about .imgcol img{border-radius:5px;border:1px solid var(--line);aspect-ratio:1;object-fit:cover;width:100%}
+  .about .imgcol{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+  .about .imgcol img{border-radius:5px;border:1px solid var(--line);aspect-ratio:1;object-fit:cover;width:100%;height:auto}
   .about .imgcol img:first-child{grid-column:1/-1;aspect-ratio:16/9}
   .about p{color:var(--muted);margin-top:18px}
   .about .time{margin-top:28px;display:flex;flex-direction:column;gap:0}
@@ -283,11 +321,15 @@
   .brandcard p{color:var(--muted);font-size:.98rem}
   .brandcard ul{list-style:none;margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
   .brandcard li{font-family:var(--tech);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--steel);border:1px solid var(--line);border-radius:40px;padding:6px 13px}
-  .brandcard{cursor:pointer}
   .brandcard.sel{border-color:color-mix(in srgb,var(--bc,var(--vio2)) 65%,transparent);box-shadow:0 0 0 1px color-mix(in srgb,var(--bc,var(--vio2)) 30%,transparent),0 30px 70px -34px var(--bc,var(--vio2))}
   .brandcard.sel::before{transform:scaleX(1)}
-  .brandcard .bhint{display:inline-flex;align-items:center;gap:6px;margin:12px 0 0 18px;font-family:var(--tech);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .brandcard .bactions{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:10px}
+  .brandcard .bactions .go3d{margin-top:0}
+  .brandcard .bhint{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:6px 4px;margin:0;
+    font-family:var(--tech);font-weight:600;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);background:none;border:0;cursor:pointer}
   .brandcard.sel .bhint{color:var(--bt,var(--vio1))}
+  @media(hover:hover){.brandcard .bhint:hover{color:var(--bt,var(--vio1))}}
 
   /* products */
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -297,13 +339,14 @@
   .card[data-b=borsah]{--cc:var(--mnt2)}
   .card[data-b=isisah]{--cc:var(--emb2)}
   .card .ph{aspect-ratio:4/3;overflow:hidden;background:#0a0a12}
+  .card .ph picture{display:block;width:100%;height:100%}
   .card .ph img{width:100%;height:100%;object-fit:cover;transition:transform 480ms var(--ease-out)}
   .card[data-b=salmex]{--cc:var(--ele1)}
   .card.cut .ph{display:grid;place-items:center;background:radial-gradient(ellipse at 50% 62%,#151a2a,#07070c 72%)}
   .card.cut .ph img{width:76%;height:76%;object-fit:contain;filter:drop-shadow(0 18px 24px #000c)}
   .card.off,.vcard.off{display:none}
   .bfilter{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:-28px 0 34px}
-  .bfilter button{font-family:var(--tech);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--steel);background:transparent;border:1px solid var(--line);border-radius:40px;padding:8px 16px;cursor:pointer;transition:border-color 160ms var(--ease-out),background 160ms var(--ease-out),color 160ms var(--ease-out)}
+  .bfilter button{font-family:var(--tech);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--steel);background:transparent;border:1px solid var(--line);border-radius:40px;min-height:44px;padding:12px 16px;cursor:pointer;transition:border-color 160ms var(--ease-out),background 160ms var(--ease-out),color 160ms var(--ease-out)}
   .bfilter button[data-b=borsah]{--bc2:var(--mnt1)}.bfilter button[data-b=isisah]{--bc2:var(--emb1)}.bfilter button[data-b=salmex]{--bc2:var(--ele1)}
   .bfilter button[aria-selected=true]{color:#fff;border-color:var(--bc2,var(--vio1));background:color-mix(in srgb,var(--bc2,var(--vio1)) 18%,transparent)}
   @media(hover:hover){.bfilter button:hover{color:#fff;border-color:var(--bc2,var(--vio1))}}
@@ -356,7 +399,7 @@
   .railbox ul{list-style:none;display:flex;flex-direction:column;gap:8px}
   .railbox li{display:flex;gap:10px;color:var(--muted);font-size:.9rem}
   .railbox li::before{content:"";flex:none;width:7px;height:7px;margin-top:7px;border-radius:2px;background:linear-gradient(100deg,var(--vio1),var(--vio2));box-shadow:0 0 8px var(--vio2)}
-  .railrefs{margin-top:34px;color:var(--muted);font-family:var(--tech);font-size:.8rem;letter-spacing:.06em;line-height:2;text-transform:uppercase}
+  .railrefs{margin-top:34px;color:var(--muted);font-family:var(--tech);font-size:.8rem;letter-spacing:.02em;line-height:2}
   .railrefs b{color:var(--steel)}
   @media(max-width:960px){.rail-hero{grid-template-columns:1fr}.railgrid{grid-template-columns:1fr 1fr}.railcols{grid-template-columns:1fr}}
   @media(max-width:560px){.railgrid{grid-template-columns:1fr}.railtime .row{grid-template-columns:84px 1fr}}
@@ -381,8 +424,10 @@
   footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
   footer .brand img{height:30px}
   footer .fnav{display:flex;gap:24px;flex-wrap:wrap;font-size:.82rem;color:var(--muted)}
+  footer .fnav a{display:inline-flex;align-items:center;min-height:44px}
   footer .fnav a:hover{color:var(--vio1)}
   footer .fnav2{display:flex;gap:16px;flex-wrap:wrap;font-size:.72rem;color:var(--muted);width:100%;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);opacity:.85}
+  footer .fnav2 a{display:inline-flex;align-items:center;min-height:44px}
   footer .fnav2 a:hover{color:var(--vio1);opacity:1}
   footer .cp{color:var(--muted);font-size:.78rem;width:100%;border-top:1px solid var(--line);padding-top:20px;margin-top:8px}
 
@@ -406,7 +451,7 @@
     .grid{grid-template-columns:1fr 1fr}.feature{grid-template-columns:1fr}.feature .ph{min-height:280px}
     .contact{grid-template-columns:1fr}.stats .wrap{grid-template-columns:1fr 1fr}
     .stat:nth-child(2n){border-right:none}.stat{border-bottom:1px solid var(--line)}
-    nav.links{display:none}.menu-btn{display:block}
+    nav.links{display:none}.menu-btn{display:flex}
     header.open nav.links{display:flex;position:absolute;top:74px;left:0;right:0;flex-direction:column;background:#0E1013f8;padding:20px 28px;border-bottom:1px solid var(--line);gap:16px}
   }
   @media(max-width:560px){.grid{grid-template-columns:1fr}.pad{padding:70px 0}.feature .txt{padding:34px}.cbox{padding:28px}
@@ -442,35 +487,46 @@
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">İçeriğe atla</a>
 <div class="wm" aria-hidden="true">ISIŞAH GROUP</div>
 <div class="glow a"></div><div class="glow b"></div>
 
 <header id="hdr">
   <div class="wrap nav">
     <a class="brand" href="#top">
-      <img src="assets/catalog/logo-isisah.webp" alt="ISIŞAH Endüstriyel" />
+      <img src="assets/catalog/logo-isisah.webp" alt="ISIŞAH Endüstriyel" width="133" height="38" />
     </a>
-    <nav class="links" id="links">
-      <a href="hakkimizda.html">Hakkımızda</a>
-      <a href="vizyon-misyon.html">Vizyon &amp; Misyon</a>
-      <a href="#markalar">Markalar</a>
-      <a href="#urunler">Ürünler</a>
-      <a href="urunler.html">Showroom</a>
-      <a href="#haberler">Haberler</a>
-      <a href="#iletisim">İletişim</a>
-      <a class="btn" href="#iletisim">Teklif Al</a>
-    </nav>
     <button class="menu-btn" id="menuBtn" aria-label="Menü" aria-controls="links" aria-expanded="false">☰</button>
+    <nav class="links" id="links">
+      <a href="#urunler">Ürünler</a>
+      <div class="navdd">
+        <button type="button" class="dd-btn" aria-expanded="false" aria-controls="dd-sektorler">Sektörler<span class="care" aria-hidden="true">▾</span></button>
+        <div class="dd-menu" id="dd-sektorler">
+          <a href="demiryolu-isiticilari.html">Demiryolu Isıtıcıları</a>
+          <a href="savunma-sanayi-isitma-sistemleri.html">Savunma Sanayi Isıtma</a>
+          <a href="beyaz-esya-isiticilari.html">Beyaz Eşya Isıtıcıları</a>
+          <a href="agir-sanayi-isiticilari.html">Ağır Sanayi</a>
+          <a href="endustriyel-mutfak-isiticilari.html">Endüstriyel Mutfak</a>
+        </div>
+      </div>
+      <a href="#markalar">Markalar</a>
+      <a href="urunler.html">Showroom</a>
+      <div class="navdd">
+        <button type="button" class="dd-btn" aria-expanded="false" aria-controls="dd-kurumsal">Kurumsal<span class="care" aria-hidden="true">▾</span></button>
+        <div class="dd-menu" id="dd-kurumsal">
+          <a href="hakkimizda.html">Hakkımızda</a>
+          <a href="vizyon-misyon.html">Vizyon &amp; Misyon</a>
+          <a href="fabrika.html">Fabrika Turu</a>
+        </div>
+      </div>
+      <a href="#iletisim">İletişim</a>
+      <a class="btn" href="teklif.html">Teklif Al</a>
+    </nav>
   </div>
 </header>
 
+<main id="main">
 <a id="top"></a>
-<!-- DUYURU BANDI -->
-<a class="ribbon" href="urunler.html">
-  <span class="rb-t">3B Showroom yayında</span>
-  <span class="rb-s">Üç markanın ürünlerini kendi kaidelerinde, kaydırarak uçarak gezin</span>
-  <span class="rb-cta">Gez →</span>
-</a>
 <!-- HERO -->
 <section class="hero">
   <div class="wrap">
@@ -479,11 +535,11 @@
       <h1>Isının gücü,<span class="l2 grad-text">teknolojinin hassasiyeti.</span></h1>
       <p class="lead">1982'den bu yana paslanmaz çelik borudan sanayi tipi rezistansa, doğalgazlı yoğuşmalı kombi eşanjörlerinden oto boya kurutma sistemlerine uzanan üretim: ısıtma teknolojisinde Türkiye'nin köklü mühendislik gücü.</p>
       <div class="cta">
-        <a class="btn" href="urunler.html">Ürün Showroom'u Gez <span>→</span></a>
-        <a class="btn ghost" href="#urunler">Ürünler</a>
-        <a class="btn ghost" href="tel:+902242610527">Ara: +90 224 261 05 27</a>
+        <a class="btn" href="teklif.html">Teklif Al <span>→</span></a>
+        <a class="btn ghost" href="#urunler">Ürünleri İncele</a>
+        <a class="tertiary" href="urunler.html">3B Showroom'u Gez <span>→</span></a>
       </div>
-      <div class="bchips" aria-label="Grup markaları"><span>Markalar</span><b data-b="isisah">ISIŞAH</b><b data-b="borsah">BORŞAH</b><b data-b="salmex">SALMEX</b></div>
+      <div class="bchips" aria-label="Grup markaları"><span>Markalar</span><button type="button" data-b="isisah">ISIŞAH</button><button type="button" data-b="borsah">BORŞAH</button><button type="button" data-b="salmex">SALMEX</button><a class="bphone" href="tel:+902242610527">Ara: +90 224 261 05 27</a></div>
     </div>
     <div class="hero-visual reveal in" data-d="2">
       <img src="assets/img/bina-gece-3marka.webp" alt="ISIŞAH GROUP merkez binası — ISIŞAH ENDÜSTRİYEL, BORŞAH BORU ve SALMEX aynı çatı altında" fetchpriority="high" width="1600" height="905">
@@ -504,21 +560,30 @@
         <h3>Borşah Boru</h3>
         <p>Rezistans imalatı ve sanayi için yüksek standartlarda paslanmaz çelik boru üretimi. Soğuk şekillendirme (roll forming) ve TIG kaynağıyla Ø6–42 mm çap, 0,35–2 mm et kalınlığında dikişli boru; tavlı ve kangal olarak da üretilir.</p>
         <ul><li>Paslanmaz Çelik</li><li>Ø6–42 mm</li><li>TIG Kaynak</li><li>Tavlı / Kangal</li><li>Oval / Yuvarlak</li></ul>
-        <a class="go3d" href="urunler.html#hol=borsah">Showroom'da Gör →</a>
+        <div class="bactions">
+          <button type="button" class="bhint" data-b="borsah">Ürünleri gör <span aria-hidden="true">↓</span><span class="sr-only"> — BORŞAH Boru</span></button>
+          <a class="go3d" href="urunler.html#hol=borsah">Showroom'da Gör →</a>
+        </div>
       </div>
       <div class="brandcard reveal" data-d="2" data-b="isisah">
         <div class="bnum">REZİSTANS &amp; ISITMA SİSTEMLERİ</div>
         <h3>ISIŞAH Endüstriyel</h3>
         <p>Sanayi tipi rezistans, endüstriyel fırın, kanal tipi ve mobil ısıtma üniteleri ile mühendislik projeleri. Elektrikli ev cihazlarından ağır sanayiye ısıtma çözümleri.</p>
         <ul><li>Rezistans</li><li>Fırın</li><li>Isıtma Sistemleri</li><li>Mühendislik</li></ul>
-        <a class="go3d" href="urunler.html">Showroom'da Gör →</a>
+        <div class="bactions">
+          <button type="button" class="bhint" data-b="isisah">Ürünleri gör <span aria-hidden="true">↓</span><span class="sr-only"> — ISIŞAH Endüstriyel</span></button>
+          <a class="go3d" href="urunler.html">Showroom'da Gör →</a>
+        </div>
       </div>
       <div class="brandcard reveal" data-d="3" data-b="salmex">
         <div class="bnum">ISI EŞANJÖRLERİ</div>
         <h3>Salmex Isı Eşanjörleri</h3>
         <p>Yoğuşmalı, elektrikli ve konvansiyonel kombi ile kazan eşanjörleri. Paslanmaz sarmal eşanjör boruları, helisel ve kanatlı eşanjör aileleriyle ısı transferi çözümleri.</p>
         <ul><li>Yoğuşmalı Eşanjör</li><li>Kombi</li><li>Kazan</li><li>Robotlu Üretim Hattı</li></ul>
-        <a class="go3d" href="urunler.html#hol=salmex">Showroom'da Gör →</a>
+        <div class="bactions">
+          <button type="button" class="bhint" data-b="salmex">Ürünleri gör <span aria-hidden="true">↓</span><span class="sr-only"> — SALMEX Isı Eşanjörleri</span></button>
+          <a class="go3d" href="urunler.html#hol=salmex">Showroom'da Gör →</a>
+        </div>
         <a class="tourbox" href="fabrika.html">
           <video autoplay muted loop playsinline preload="none" poster="assets/img/uretim-poster.webp" aria-hidden="true"><source data-src="assets/img/uretim-salmex.mp4" type="video/mp4"></video>
           <span class="tb-t"><b>Fabrika Turu</b><small>Kaydır; üretim hattında uç →</small></span>
@@ -542,13 +607,22 @@
       <button type="button" role="tab" data-b="salmex" aria-selected="false">SALMEX</button>
     </div>
     <div class="grid">
-      <article data-b="borsah" class="card reveal"><div class="ph"><img src="assets/img/paslanmaz-boru.jpg" alt="Paslanmaz Boru" width="1400" height="933" loading="lazy" decoding="async"></div>
+      <article data-b="borsah" class="card reveal"><div class="ph"><picture>
+        <source type="image/webp" srcset="assets/img/paslanmaz-boru-480.webp 480w, assets/img/paslanmaz-boru-800.webp 800w" sizes="(max-width:700px) 50vw, 320px">
+        <img src="assets/img/paslanmaz-boru.jpg" alt="Paslanmaz Boru" width="1400" height="933" loading="lazy" decoding="async">
+      </picture></div>
         <div class="body"><div class="cat">Borşah Boru</div><h3>Paslanmaz Boru</h3>
         <p>Ø6–42 mm, et kalınlığı 0,35–2 mm. Argon/hidrojen koruyucu gaz altında TIG kaynak.</p><a class="go3d" href="urunler.html#hol=borsah">Paslanmaz Boru — showroom'da gör →</a></div></article>
-      <article data-b="borsah" class="card reveal" data-d="1"><div class="ph"><img src="assets/img/kangal-boru.jpg" alt="Tavlı ve Kangal Boru" width="1400" height="933" loading="lazy" decoding="async"></div>
+      <article data-b="borsah" class="card reveal" data-d="1"><div class="ph"><picture>
+        <source type="image/webp" srcset="assets/img/kangal-boru-480.webp 480w, assets/img/kangal-boru-800.webp 800w" sizes="(max-width:700px) 50vw, 320px">
+        <img src="assets/img/kangal-boru.jpg" alt="Tavlı ve Kangal Boru" width="1400" height="933" loading="lazy" decoding="async">
+      </picture></div>
         <div class="body"><div class="cat">Borşah Boru</div><h3>Tavlı & Kangal Boru</h3>
         <p>Ø6–42 mm aralığında tavlı ve kangal boru; 100–400 m kangal boyu, 100 bar basınç testi.</p><a class="go3d" href="urunler.html#hol=borsah">Tavlı & Kangal Boru — showroom'da gör →</a></div></article>
-      <article data-b="borsah" class="card reveal" data-d="2"><div class="ph"><img src="assets/img/oval-boru.jpg" alt="Oval Boru" width="1400" height="933" loading="lazy" decoding="async"></div>
+      <article data-b="borsah" class="card reveal" data-d="2"><div class="ph"><picture>
+        <source type="image/webp" srcset="assets/img/oval-boru-480.webp 480w, assets/img/oval-boru-800.webp 800w" sizes="(max-width:700px) 50vw, 320px">
+        <img src="assets/img/oval-boru.jpg" alt="Oval Boru" width="1400" height="933" loading="lazy" decoding="async">
+      </picture></div>
         <div class="body"><div class="cat">Borşah Boru</div><h3>Oval Boru</h3>
         <p>Rezistans imalatı, mobilya ve sanayi uygulamaları için oval kesitli boru profilleri.</p><a class="go3d" href="urunler.html#hol=borsah">Oval Boru — showroom'da gör →</a></div></article>
       <article data-b="isisah" class="card reveal"><div class="ph"><img src="assets/img/rezistanslar.jpg" alt="Rezistanslar" width="800" height="600" loading="lazy" decoding="async"></div>
@@ -566,13 +640,13 @@
       <article data-b="isisah" class="card reveal" data-d="1"><div class="ph"><img src="assets/img/boykur.jpg" alt="BOYKUR Oto Boya Kurutma" width="800" height="600" loading="lazy" decoding="async"></div>
         <div class="body"><div class="cat">ISIŞAH Endüstriyel</div><h3>BOYKUR Boya Kurutma</h3>
         <p>Infrared teknolojili, bilgisayar kontrollü mobil oto boya kurutma sistemi.</p><a class="go3d" href="urunler.html#hol=isisah_otomotiv">BOYKUR Boya Kurutma — showroom'da gör →</a></div></article>
-      <article data-b="salmex" class="card cut reveal"><div class="ph"><img src="assets/products/salmex.webp" alt="Yoğuşmalı Isı Eşanjörü" loading="lazy" decoding="async"></div>
+      <article data-b="salmex" class="card cut reveal"><div class="ph"><img src="assets/products/salmex.webp" alt="Yoğuşmalı Isı Eşanjörü" width="900" height="645" loading="lazy" decoding="async"></div>
         <div class="body"><div class="cat">SALMEX</div><h3>Yoğuşmalı Isı Eşanjörü</h3>
         <p>Paslanmaz çelik sarmal eşanjör borusu; yüksek verimli, farklı kapasitelerde yoğuşmalı tasarım.</p><a class="go3d" href="urunler.html#hol=salmex">Yoğuşmalı Isı Eşanjörü — showroom'da gör →</a></div></article>
-      <article data-b="salmex" class="card cut reveal" data-d="1"><div class="ph"><img src="assets/products/helis.webp" alt="Helisel Boru Eşanjörü" loading="lazy" decoding="async"></div>
+      <article data-b="salmex" class="card cut reveal" data-d="1"><div class="ph"><img src="assets/products/helis.webp" alt="Helisel Boru Eşanjörü" width="467" height="900" loading="lazy" decoding="async"></div>
         <div class="body"><div class="cat">SALMEX</div><h3>Helisel Boru Eşanjörü</h3>
         <p>Paslanmaz borudan helisel sarım eşanjör; kompakt hacimde yüksek ısı transfer yüzeyi.</p><a class="go3d" href="urunler.html#hol=salmex">Helisel Boru Eşanjörü — showroom'da gör →</a></div></article>
-      <article data-b="salmex" class="card cut reveal" data-d="2"><div class="ph"><img src="assets/products/kazan.webp" alt="Kazan Tipi Yoğuşmalı Eşanjör" loading="lazy" decoding="async"></div>
+      <article data-b="salmex" class="card cut reveal" data-d="2"><div class="ph"><img src="assets/products/kazan.webp" alt="Kazan Tipi Yoğuşmalı Eşanjör" width="730" height="900" loading="lazy" decoding="async"></div>
         <div class="body"><div class="cat">SALMEX</div><h3>Kazan Tipi Yoğuşmalı Eşanjör</h3>
         <p>Yüksek kapasiteli kazanlar için paslanmaz gövdeli, alüminyum döküm flanşlı yoğuşmalı eşanjör.</p><a class="go3d" href="urunler.html#hol=salmex">Kazan Tipi Yoğuşmalı Eşanjör — showroom'da gör →</a></div></article>
     </div>
@@ -634,6 +708,10 @@
         <a class="btn ghost" href="hakkimizda.html">Hakkımızda <span>→</span></a>
         <a class="btn ghost" href="vizyon-misyon.html">Vizyon &amp; Misyon <span>→</span></a>
       </div>
+      <div style="margin-top:40px">
+        <h3>Referanslarımızdan</h3>
+        <p class="railrefs">TÜVASAŞ · TÜLOMSAŞ · TÜRASAŞ · Durmazlar · Bozankaya · MERAK · Safkar · Yazkar · Elite KL · Eltesan · CSR MNG · Air Trade Centre · Heinen &amp; Hopman · Hispacold · Alfa Laval · Bronswerk · Erdemir · Eti Maden · Componenta · Mimsan Grup · Akkim · Elsitel · Alp Enerji · Calorflex · Revenga · Trakya Cam · TPI</p>
+      </div>
     </div>
     <div class="imgcol reveal" data-d="2">
       <img src="assets/img/fabrika-genel.webp" alt="ISIŞAH üretim tesisi — DOSAB Bursa" width="1400" height="788" loading="lazy" decoding="async">
@@ -644,22 +722,20 @@
 </section>
 
 
-<!-- SALMEX ROBOTLU HAT -->
+<!-- SALMEX ROBOTLU HAT + ÜRETİM FİLMİ (birleştirildi) -->
 <section class="pad" id="salmex-hat" style="padding-top:0">
   <div class="wrap">
     <div class="feature salmex reveal">
       <div class="txt">
         <h2>SALMEX<br>Robotlu Eşanjör Hattı</h2>
         <p>SALMEX ısı eşanjörleri artık DOSAB'daki yeni robotlu üretim hattında üretiliyor: sarmal eşanjör boruları robotik hücrede işleniyor, hat çıkışında kalite kontrolden geçiyor.</p>
-        <p>Yeni yatırımla artan kapasite; seri üretimde tutarlı kaynak ve form kalitesi.</p>
+        <p>Presten robotlu paketlemeye — kendi tesisimizden, kesintisiz bir hat. Yeni yatırımla artan kapasite; seri üretimde tutarlı kaynak ve form kalitesi.</p>
         <span class="tofas">Yeni yatırım · Robotlu üretim hücresi</span>
       </div>
-      <div class="ph"><video autoplay muted loop playsinline preload="none" poster="assets/img/uretim-robot-poster.webp" aria-label="SALMEX robotlu eşanjör üretim hattı — DOSAB Bursa"><source data-src="assets/img/uretim-robot.mp4" type="video/mp4"></video></div>
+      <div class="ph"><video autoplay muted loop playsinline preload="none" poster="assets/img/uretim-film-poster.webp" aria-label="SALMEX robotlu eşanjör üretim hattı filmi — DOSAB Bursa"><source data-src="assets/img/uretim-film.mp4?v=3" type="video/mp4"></video></div>
     </div>
   </div>
 </section>
-
-
 
 <!-- ISIŞAH DÜNYASI (hikaye kartları) -->
 <section class="pad" id="dunya" style="padding-top:0">
@@ -670,11 +746,11 @@
     </div>
     <div class="world">
       <a class="wcard reveal" data-c="violet" href="#kurumsal">
-        <img src="assets/img/bina-gece.webp" alt="ISIŞAH GROUP merkez binası" loading="lazy">
+        <img src="assets/img/bina-gece.webp" alt="ISIŞAH GROUP merkez binası" width="1600" height="905" loading="lazy">
         <div class="wtx"><div class="wk">Miras</div><h3>1982'den bugüne</h3><span class="wgo">Hikayemiz →</span></div>
       </a>
       <a class="wcard contain reveal" data-c="ember" data-d="1" href="urunler.html#hol=isisah_savunma">
-        <img src="assets/products/gemi.webp" alt="TCG Anadolu" loading="lazy">
+        <img src="assets/products/gemi.webp" alt="TCG Anadolu" width="900" height="463" loading="lazy">
         <div class="wtx"><div class="wk">Savunma Sanayi</div><h3>Milli platformlarda</h3><span class="wgo">Savunma holünü gez →</span></div>
       </a>
       <a class="wcard reveal" data-c="electric" data-d="2" href="urunler.html#hol=salmex">
@@ -682,29 +758,20 @@
         <div class="wtx"><div class="wk">Üretim</div><h3>Kendi hattımızdan</h3><span class="wgo">SALMEX holünü gez →</span></div>
       </a>
       <a class="wcard contain reveal" data-c="electric" data-d="3" href="#demiryolu">
-        <img src="assets/products/tren.webp" alt="Demiryolu projeleri" loading="lazy">
+        <img src="assets/products/tren.webp" alt="Demiryolu projeleri" width="1171" height="758" loading="lazy">
         <div class="wtx"><div class="wk">İhracat</div><h3>Raylardan dünyaya</h3><span class="wgo">Proje geçmişi →</span></div>
       </a>
     </div>
   </div>
 </section>
 
-<!-- ÜRETİM FİLMİ -->
-<section class="pad" id="uretim" style="padding-top:0">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <h2>Üretim gücü.</h2>
-      <p>Presten robotlu paketlemeye — SALMEX eşanjör hattı, kendi tesisimizden.</p>
-    </div>
-    <div class="film reveal">
-      <video autoplay muted loop playsinline preload="none" poster="assets/img/uretim-film-poster.webp" aria-label="SALMEX üretim hattı filmi"><source data-src="assets/img/uretim-film.mp4?v=3" type="video/mp4"></video>
-    </div>
-  </div>
-</section>
-
-<!-- BOYKUR FEATURE -->
+<!-- PROJE ÖRNEKLERİ (BOYKUR + Demiryolu özet, birleştirildi) -->
 <section class="pad" id="boykur" style="padding-top:0">
   <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Proje örnekleri.</h2>
+      <p>Otomotivden demiryoluna: sahada kanıtlanmış mühendislik çözümlerimizden ikisi.</p>
+    </div>
     <div class="feature reveal">
       <div class="txt">
         <h2>BOYKUR<br>Oto Boya Kurutma</h2>
@@ -714,99 +781,15 @@
       </div>
       <div class="ph"><img src="assets/img/boykur.jpg" alt="BOYKUR infrared oto boya kurutma" loading="lazy" decoding="async" width="800" height="600"></div>
     </div>
-  </div>
-</section>
 
-<!-- DEMIRYOLU -->
-<section class="pad" id="demiryolu" style="padding-top:0">
-  <div class="wrap">
-    <div class="rail-hero">
-      <div class="reveal">
-        <h2 style="font-size:clamp(2.2rem,5vw,3.4rem)">Demiryolu<br>İklimlendirme.</h2>
-        <p>ISIŞAH ENDÜSTRİYEL, 80'li yılların sonundan bu yana yurt içi ve yurt dışındaki demiryolu sanayine klima ısıtıcıları, personel ve yolcu koltuk ısıtıcıları, TIJ kasaları, şasi ısıtıcıları ile ray ve makas ısıtıcıları üretiyor.</p>
-        <p>Yüksek hızlı tren standartlarında yüksek gerilime dayanıklı, şok ve vibrasyon testlerinden geçen rezistanslar; GP03 ve mika izolasyonla kaçak akım gövdeye iletilmez. Her ısıtma ünitesinde çift kademeli termostat koruması bulunur.</p>
+    <div class="feature reveal" data-d="2" id="demiryolu">
+      <div class="txt">
+        <h2>Demiryolu<br>İklimlendirme</h2>
+        <p>ISIŞAH ENDÜSTRİYEL, 80'li yılların sonundan bu yana yurt içi ve yurt dışındaki demiryolu sanayine klima ısıtıcıları, personel ve yolcu koltuk ısıtıcıları, TIJ kasaları, şasi ısıtıcıları ile ray ve makas ısıtıcıları üretiyor. 1986'dan bugüne TÜVASAŞ, TÜLOMSAŞ, TÜRASAŞ ve Bozankaya gibi firmalar için üretilen ısıtıcılar; yüksek hızlı tren standartlarında şok ve vibrasyon testlerinden geçiyor.</p>
+        <a class="go3d" href="demiryolu-isiticilari.html">Tüm proje geçmişi ve testler →</a>
       </div>
-      <div class="reveal" data-d="2"><img src="assets/products/tren.webp" alt="Demiryolu iklimlendirme çözümleri" width="1171" height="758" loading="lazy" decoding="async"></div>
+      <div class="ph"><img src="assets/products/tren.webp" alt="Demiryolu iklimlendirme çözümleri" width="1171" height="758" loading="lazy" decoding="async"></div>
     </div>
-
-    <div class="railgrid">
-      <div class="railcard reveal"><h3>Klima (HVAC) Isıtıcıları</h3><p>Tren ve tramvay klima santralleri için ısıtıcı elemanlar; fin etkili verimli ısıtma, düşük yüzey yükü.</p></div>
-      <div class="railcard reveal" data-d="1"><h3>Yolcu & Koltuk Altı Isıtıcılar</h3><p>Mevcut koltuk düzenine göre tasarlanan elektrikli ısıtıcılar; yolcu, vestibül ve makinist üniteleri.</p></div>
-      <div class="railcard reveal" data-d="2"><h3>TIJ Kasaları</h3><p>Yolcu vagonlarında pencere altı ısıtma üniteleri; demiryolu çaplarına göre üretilen "tij"ler.</p></div>
-      <div class="railcard reveal"><h3>Şasi Isıtıcıları</h3><p>Vagon altı (under-chassis) ısıtıcı üniteler; TVS 2000'den bu yana süregelen deneyim.</p></div>
-      <div class="railcard reveal" data-d="1"><h3>Ray & Makas Isıtıcıları</h3><p>Karlı ve düşük sıcaklıkta makasların donmasını önler; olası kazaların önüne geçer. 1000 W / 230 V.</p></div>
-      <div class="railcard reveal" data-d="2"><h3>Özel Çözümler</h3><p>Vagon mutfağı ısıtma plakaları (AC-DC), kOhm seviyesinde dirençler, batarya ısıtıcıları.</p></div>
-    </div>
-
-    <div class="sec-head reveal"><h2>Proje geçmişi.</h2><p>1986'dan bugüne demiryolu projelerimiz.</p></div>
-    <div class="railtime reveal">
-      <div class="row"><span class="yr">1986</span><span class="tx"><b>TÜVASAŞ TIJ Projesi:</b> yolcu vagonları pencere altı ısıtma üniteleri.</span></div>
-      <div class="row"><span class="yr">1995</span><span class="tx"><b>TÜVASAŞ TVS 2000:</b> vagon altı (şasi) ısıtıcılar.</span></div>
-      <div class="row"><span class="yr">2009-10</span><span class="tx"><b>TÜLOMSAŞ Projesi:</b> lokomotif rezistans üniteleri.</span></div>
-      <div class="row"><span class="yr">2011-26</span><span class="tx"><b>Makas & Ray Isıtıcıları + Personel Isıtıcıları:</b> tamamı paslanmaz personel ısıtma üniteleri; termostatik aşırı ısınma emniyeti.</span></div>
-      <div class="row"><span class="yr">2014</span><span class="tx"><b>Ankara Metro:</b> koltuk ısıtıcıları (750 W / 1300 W – 380 V), HVAC ısıtma elemanları ve fren borusu projesi (Borşah paslanmaz borularıyla).</span></div>
-      <div class="row"><span class="yr">2015-16</span><span class="tx"><b>Tramvay Klima Isıtıcısı · TÜVASAŞ DMU · İstanbul Ulaşım Modernizasyon · YZK 850 İBB:</b> yüksek hızlı tren yolcu ısıtıcıları, yüksek gerilim dayanımı.</span></div>
-      <div class="row"><span class="yr">2016-17</span><span class="tx"><b>E-14000 / İstanbul Ulaşım:</b> tren klima ısıtıcıları (M1 hattı).</span></div>
-      <div class="row"><span class="yr">2018</span><span class="tx"><b>Samsun Projesi:</b> ray ve makas ısıtıcıları.</span></div>
-      <div class="row"><span class="yr">2018-19</span><span class="tx"><b>Durmazlar Alibeyköy:</b> koltuk altı ısıtıcılar (Eminönü–Alibeyköy hattı) ve <b>Yazkar</b> klima batarya ısıtıcısı.</span></div>
-      <div class="row"><span class="yr">2018-21</span><span class="tx"><b>İzmir Tramvay Projesi:</b> klima rezistans üniteleri.</span></div>
-      <div class="row"><span class="yr">2019-23</span><span class="tx"><b>MERAK Brüksel Projesi:</b> ihracat: fanlı ısıtma üniteleri.</span></div>
-      <div class="row"><span class="yr">2020</span><span class="tx"><b>TÜLOMSAŞ & TÜVASAŞ:</b> vagon mutfağı ısıtma plakaları (AC-DC), kOhm dirençler, çubuk rezistanslar.</span></div>
-      <div class="row"><span class="yr">2021-26</span><span class="tx"><b>Romanya Projesi:</b> Bükreş tramvayları için koltuk düzenine özel elektrikli ısıtıcılar.</span></div>
-      <div class="row"><span class="yr">2022-26</span><span class="tx"><b>Kayseri 5 UT:</b> Bozankaya üretimi; Prag–Belgrad–Kayseri hatları için ısıtıcılar.</span></div>
-      <div class="row"><span class="yr">2023-26</span><span class="tx"><b>TÜRASAŞ EMU 225:</b> yolcu, vestibül ve makinist ısıtıcıları.</span></div>
-      <div class="row"><span class="yr">2025-26</span><span class="tx"><b>İstanbul Metro:</b> klima ve koltuk altı ısıtıcıları.</span></div>
-      <div class="row"><span class="yr">2026</span><span class="tx"><b>Samsun Projesi:</b> tramvay koltuk düzenine özel elektrikli ısıtıcılar.</span></div>
-      <div class="row"><span class="yr">—</span><span class="tx"><b>Havalimanı Treni Projesi:</b> raylı araç ısıtıcı üniteleri.</span></div>
-    </div>
-
-    <div class="railcols">
-      <div class="railbox reveal">
-        <h3>Standart Testler</h3>
-        <ul>
-          <li>Güç testi ve izolasyon direnci testi</li>
-          <li>Yüksek gerilimde kaçak akım (dielektrik) testi</li>
-          <li>Şok ve vibrasyon testleri (demiryolu standartlarına uygun); yangına dayanım</li>
-          <li>Boyut kontrolleri, çekme testi, topraklama direnci</li>
-          <li>Yüzey/ısıtıcı sıcaklık ve IP seviye testleri; fan gürültü seviyesi (desibel) ölçümü</li>
-        </ul>
-      </div>
-      <div class="railbox reveal" data-d="2">
-        <h3>Malzeme Seçimi</h3>
-        <ul>
-          <li>Korozyona dayanıklı AISI 304 / AISI 316 sac parçalar</li>
-          <li>Isıya dayanıklı cam elyaf izoleli, alev geciktirici 3GKW / 4GKW kablolar</li>
-          <li>Yüksek kaliteli EBM fanlar</li>
-          <li>Titreşime dayanıklı, çözülmez bağlantı ekipmanları</li>
-          <li>Her ünitede çift kademeli termostat koruması</li>
-        </ul>
-      </div>
-    </div>
-
-    <p class="railrefs reveal">Referanslar: <b>TÜVASAŞ · TÜLOMSAŞ · TÜRASAŞ · Durmazlar · Bozankaya · MERAK · Safkar · Yazkar · Elite KL · Eltesan · CSR MNG · Air Trade Centre · Heinen & Hopman · Hispacold · Alfa Laval · Bronswerk · Erdemir · Eti Maden · Componenta · Mimsan Grup · Akkim · Elsitel · Alp Enerji · Calorflex · Revenga · Trakya Cam · TPI</b></p>
-  </div>
-</section>
-
-<!-- VITRIN (yatay kaydırmalı) -->
-<section class="pad" id="vitrin" style="padding-top:0">
-  <div class="wrap"><div class="sec-head reveal">
-    <h2>Vitrinden seçmeler.</h2>
-    <p>Kaydırın; beğendiğiniz ürünün 3B holüne geçin.</p>
-  </div></div>
-  <div class="vitrin reveal">
-    <a class="vcard" data-c="electric" href="urunler.html#hol=salmex"><video autoplay muted loop playsinline preload="none" poster="assets/img/uretim-robot-poster.webp" aria-label="SALMEX robotlu üretim hattı"><source data-src="assets/img/uretim-robot.mp4" type="video/mp4"></video><span class="vn">Robotlu Üretim Hattı</span><span class="vb">SALMEX holü →</span></a>
-    <a class="vcard" data-c="ember" href="urunler.html#hol=isisah_savunma"><img src="assets/products/gemi.webp" alt="TCG Anadolu" loading="lazy"><span class="vn">Askeri Gemi Çözümleri</span><span class="vb">Savunma holü →</span></a>
-    <a class="vcard" data-c="ember" href="urunler.html#hol=isisah_rayli"><img src="assets/products/tren.webp" alt="Demiryolu" loading="lazy"><span class="vn">Demiryolu İklimlendirme</span><span class="vb">Raylı sistemler holü →</span></a>
-    <a class="vcard" data-c="electric" href="urunler.html#hol=salmex"><img src="assets/products/kazan.webp" alt="Kazan eşanjörü" loading="lazy"><span class="vn">Kazan Eşanjörü</span><span class="vb">SALMEX holü →</span></a>
-    <a class="vcard" data-c="ember" href="urunler.html#hol=isisah_otomotiv"><img src="assets/products/boykur.webp" alt="BOYKUR" loading="lazy"><span class="vn">BOYKUR Boya Kurutma</span><span class="vb">Otomotiv holü →</span></a>
-    <a class="vcard" data-c="mint" href="urunler.html#hol=borsah"><img src="assets/products/boru.webp" alt="Paslanmaz boru" loading="lazy"><span class="vn">Paslanmaz Borular</span><span class="vb">BORŞAH holü →</span></a>
-    <a class="vcard" data-c="electric" href="urunler.html#hol=salmex"><img src="assets/products/condhex.webp" alt="Yoğuşmalı eşanjör" loading="lazy"><span class="vn">Yoğuşmalı Kombi Eşanjörü</span><span class="vb">SALMEX holü →</span></a>
-    <a class="vcard" data-c="ember" href="urunler.html#hol=isisah_agir"><img src="assets/products/rezistans.webp" alt="Rezistanslar" loading="lazy"><span class="vn">Flanş Rezistansları</span><span class="vb">Ağır sanayi holü →</span></a>
-    <a class="vcard" data-c="ember" href="urunler.html#hol=isisah_savunma"><img src="assets/products/blast.webp" alt="Blast heater" loading="lazy"><span class="vn">Savunma Tipi Blast Heater</span><span class="vb">Savunma holü →</span></a>
-    <a class="vcard" data-c="ember" href="urunler.html#hol=isisah_beyaz"><img src="assets/products/firinrez.webp" alt="Fırın rezistansı" loading="lazy"><span class="vn">Fırın Rezistansları</span><span class="vb">Beyaz eşya holü →</span></a>
-    <a class="vcard" data-c="electric" href="urunler.html#hol=salmex"><img src="assets/products/helis.webp" alt="Helisel eşanjör" loading="lazy"><span class="vn">Helisel Boru Eşanjörü</span><span class="vb">SALMEX holü →</span></a>
-    <a class="vcard" data-c="ember" href="urunler.html#hol=isisah_agir"><img src="assets/products/mobil.webp" alt="Mobil ısıtıcı" loading="lazy"><span class="vn">Mobil Isıtıcılar</span><span class="vb">Ağır sanayi holü →</span></a>
-    <a class="vcard" data-c="ember" href="urunler.html#hol=isisah_rayli"><img src="assets/products/makas.webp" alt="Makas ısıtıcısı" loading="lazy"><span class="vn">Ray & Makas Isıtıcıları</span><span class="vb">Raylı sistemler holü →</span></a>
   </div>
 </section>
 
@@ -816,7 +799,7 @@
   <div class="wrap">
     <div class="sec-head reveal"><h2>Haberler.</h2><p>ISIŞAH GROUP'tan gelişmeler.</p></div>
     <div class="news">
-      <article class="newscard reveal"><time>Ağustos 2026</time><h3>3B ürün showroom'u yayında</h3><p>Üç markanın ürünleri kendi hollerinde; kaydırarak uçulan interaktif 3B showroom isisah.com.tr'de açıldı.</p><a class="go3d" href="urunler.html">Showroom'u gez →</a></article>
+      <article class="newscard reveal"><time>Ağustos 2026</time><h3>3B ürün showroom'u yayında</h3><p>Üç markanın ürünleri kendi hollerinde; kaydırarak uçulan interaktif 3B showroom isisah.com.tr'de açıldı.</p></article>
       <article class="newscard reveal" data-d="1"><time>2026</time><h3>SALMEX robotlu eşanjör hattı devrede</h3><p>Sarmal eşanjör boruları DOSAB'daki robotlu üretim hattında işleniyor; her ünite hat çıkışında sızdırmazlık testinden geçiyor.</p><a class="go3d" href="#salmex-hat">Hattı incele →</a></article>
       <article class="newscard reveal" data-d="2"><time>2026</time><h3>Fabrika turu: üretimi kaydırarak gezin</h3><p>Presten test istasyonuna kesintisiz üretim filmi, sizin kaydırma hızınızda akıyor.</p><a class="go3d" href="fabrika.html">Tura çık →</a></article>
     </div>
@@ -837,7 +820,7 @@
         <div class="cline"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="7"/></svg></div><div><div class="k">Faks</div><div class="v">+90 224 261 01 77</div></div></div>
         <div class="cline"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></div><div><div class="k">E-posta</div><a class="v" href="mailto:info@isisah.com.tr">info@isisah.com.tr</a></div></div>
         <div class="cline"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg></div><div><div class="k">Sosyal</div><a class="v" href="https://instagram.com/isisah_group" target="_blank" rel="noopener">instagram.com/isisah_group</a><br><a class="v" href="https://www.linkedin.com/in/isi%C5%9Fah-group-9b45aa125/" target="_blank" rel="noopener">linkedin.com/in/isişah-group</a></div></div>
-        <div style="margin-top:26px"><a class="btn" href="mailto:info@isisah.com.tr">Teklif İste <span>→</span></a></div>
+        <div style="margin-top:26px;display:flex;gap:14px;flex-wrap:wrap"><a class="btn" href="teklif.html">Teklif Formu <span>→</span></a><a class="btn ghost" href="mailto:info@isisah.com.tr">E-posta ile Teklif İste <span>→</span></a></div>
       </div>
       <div class="map reveal" data-d="2">
         <iframe loading="lazy" title="ISIŞAH DOSAB Bursa konum haritası" referrerpolicy="no-referrer-when-downgrade"
@@ -846,10 +829,11 @@
     </div>
   </div>
 </section>
+</main>
 
 <footer>
   <div class="wrap">
-    <a class="brand" href="#top"><img src="assets/catalog/logo-isisah.webp" alt="ISIŞAH Endüstriyel"></a>
+    <a class="brand" href="#top"><img src="assets/catalog/logo-isisah.webp" alt="ISIŞAH Endüstriyel" width="105" height="30" loading="lazy"></a>
     <nav class="fnav">
       <a href="hakkimizda.html">Hakkımızda</a><a href="vizyon-misyon.html">Vizyon &amp; Misyon</a><a href="#markalar">Markalar</a><a href="#urunler">Ürünler</a>
       <a href="#haberler">Haberler</a><a href="#iletisim">İletişim</a>
@@ -874,10 +858,27 @@
   addEventListener('scroll',()=>hdr.classList.toggle('small',scrollY>40),{passive:true});
   // mobile menu
   const menuBtn=document.getElementById('menuBtn');
+  const linksNav=document.getElementById('links');
   const syncMenu=()=>menuBtn.setAttribute('aria-expanded',hdr.classList.contains('open')?'true':'false');
-  menuBtn.onclick=()=>{hdr.classList.toggle('open');syncMenu();};
-  document.querySelectorAll('#links a').forEach(a=>a.addEventListener('click',()=>{hdr.classList.remove('open');syncMenu();}));
-  addEventListener('keydown',(e)=>{if(e.key==='Escape'&&hdr.classList.contains('open')){hdr.classList.remove('open');syncMenu();menuBtn.focus();}});
+  function closeAllDD(){document.querySelectorAll('.navdd').forEach(dd=>{dd.classList.remove('open');dd.querySelector('.dd-btn').setAttribute('aria-expanded','false');});}
+  function openMenu(){hdr.classList.add('open');syncMenu();const first=linksNav.querySelector('a,button');if(first)first.focus();}
+  function closeMenu(focusBtn){hdr.classList.remove('open');syncMenu();closeAllDD();if(focusBtn)menuBtn.focus();}
+  menuBtn.onclick=()=>{hdr.classList.contains('open')?closeMenu(false):openMenu();};
+  document.querySelectorAll('#links a').forEach(a=>a.addEventListener('click',()=>closeMenu(false)));
+  addEventListener('keydown',(e)=>{if(e.key==='Escape'&&hdr.classList.contains('open')){closeMenu(true);}});
+  // nav açılır menüleri (Sektörler / Kurumsal) — disclosure pattern
+  document.querySelectorAll('.navdd').forEach(dd=>{
+    const btn=dd.querySelector('.dd-btn'),menu=dd.querySelector('.dd-menu');
+    const open=()=>{closeAllDD();dd.classList.add('open');btn.setAttribute('aria-expanded','true');};
+    const close=(focusBtn)=>{dd.classList.remove('open');btn.setAttribute('aria-expanded','false');if(focusBtn)btn.focus();};
+    btn.addEventListener('click',e=>{e.stopPropagation();dd.classList.contains('open')?close(false):open();});
+    btn.addEventListener('keydown',e=>{
+      if(e.key==='Escape'&&dd.classList.contains('open')){e.stopPropagation();close(true);}
+      else if(e.key==='ArrowDown'&&!dd.classList.contains('open')){e.preventDefault();open();const f=menu.querySelector('a');if(f)f.focus();}
+    });
+    menu.addEventListener('keydown',e=>{if(e.key==='Escape'){e.stopPropagation();close(true);}});
+  });
+  document.addEventListener('click',e=>{if(!e.target.closest('.navdd'))closeAllDD();});
   // reveal — geometry-based (works no matter which element is the scroller);
   // interval safety net guarantees no section stays hidden after an anchor jump.
   const reveals=[...document.querySelectorAll('.reveal')];
@@ -923,30 +924,23 @@
               isisah:{h:'ISIŞAH ENDÜSTRİYEL ürünleri.',p:'Sanayi tipi rezistanstan endüstriyel fırına, kanal tipi ve mobil ısıtıcılara.'},
               salmex:{h:'SALMEX ürünleri.',p:'Yoğuşmalı kombi ve kazanlar için sarmal eşanjör boruları ve eşanjör aileleri.'}};
     const DEF={h:'Üretim yelpazesi.',p:'Gerçek ürün gruplarımızdan bir seçki: hammadde borusundan bitmiş ısıtma sistemine.'};
-    const cards=[...document.querySelectorAll('#urunler .card')],vcards=[...document.querySelectorAll('.vcard')];
+    const cards=[...document.querySelectorAll('#urunler .card')];
     const H=document.getElementById('urH'),Pp=document.getElementById('urP');
-    const brandOf=a=>{const m=(a.getAttribute('href')||'').match(/#hol=([a-z]+)/);return m?m[1]:''};
     function apply(b,scroll){
       b=BR[b]?b:'';
       document.documentElement.dataset.marka=b;
       document.querySelectorAll('.brandcard').forEach(c=>c.classList.toggle('sel',c.dataset.b===b));
       document.querySelectorAll('.bfilter button').forEach(x=>x.setAttribute('aria-selected',String((x.dataset.b||'')===b)));
       cards.forEach(c=>c.classList.toggle('off',!!b&&c.dataset.b!==b));
-      vcards.forEach(v=>v.classList.toggle('off',!!b&&brandOf(v)!==b));
       const t=b?BR[b]:DEF; H.textContent=t.h; Pp.textContent=t.p;
       if(b) history.replaceState(null,'','#marka='+b); else if(location.hash.startsWith('#marka=')) history.replaceState(null,'',location.pathname);
       if(scroll) document.getElementById('urunler').scrollIntoView({behavior:'smooth',block:'start'});
     }
-    document.querySelectorAll('.brandcard').forEach(c=>{
-      c.setAttribute('role','button'); c.tabIndex=0; c.setAttribute('aria-label',c.querySelector('h3').textContent+' ürünlerini göster');
-      const hint=document.createElement('span'); hint.className='bhint'; hint.textContent='Ürünleri gör ↓'; c.appendChild(hint);
-      c.addEventListener('click',e=>{ if(e.target.closest('a')) return; apply(c.dataset.b,true); });
-      c.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); apply(c.dataset.b,true); } });
+    document.querySelectorAll('.brandcard .bhint').forEach(btn=>{
+      btn.addEventListener('click',()=>apply(btn.dataset.b,true));
     });
     document.querySelectorAll('.bfilter button').forEach(x=>x.addEventListener('click',()=>apply(x.dataset.b||'',false)));
-    const MAP={'ISIŞAH':'isisah','BORŞAH':'borsah','SALMEX':'salmex'};
-    document.querySelectorAll('.hero .bchips b').forEach(x=>{ x.setAttribute('role','button'); x.tabIndex=0; x.dataset.b=x.dataset.b||MAP[x.textContent.trim()]||'';
-      x.addEventListener('click',()=>apply(x.dataset.b,true)); });
+    document.querySelectorAll('.hero .bchips button[data-b]').forEach(x=>x.addEventListener('click',()=>apply(x.dataset.b,true)));
     const rd=()=>{ const m=location.hash.match(/^#marka=([a-z]+)$/); return m?m[1]:null; };
     if(rd()) apply(rd(),false);
     addEventListener('hashchange',()=>{ const b=rd(); if(b) apply(b,true); });

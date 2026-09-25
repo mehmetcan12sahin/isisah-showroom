@@ -1,56 +1,43 @@
 #!/usr/bin/env python3
 # 10 kategori (gam) sayfası + 3 marka hub sayfası — index.html'in stil/header/footer'ından (tools/pagegen.py).
-# İçerik urunler.html'deki ISISAH_LIST/SALMEX_LIST/BORSAH_LIST metinlerinin AYNISI (fabrikasyon yok).
-# Ürün metni değişince önce urunler.html'i güncelle, bu dosyadaki mirror'ı da elle senkron et.
+# İçerik TEK KAYNAK assets/data/products.json'dan gelir (fabrikasyon yok; bkz. tools/build-products.py,
+# .claude/skills/isisah-urun-ekle/SKILL.md). Ürün metni değişince önce products.json'u güncelleyip
+# build-products.py'yi, ardından bu scripti çalıştırın. Kategori/hub başlıkları, girişleri ve her
+# sayfanın hangi ürün anahtarlarını (keys) içerdiği hâlâ bu dosyada elle tanımlanır.
 # Çalıştır: python3 tools/build-category-pages.py  (repo kökünden veya tools/ içinden)
-import pathlib
+import json, pathlib, re, subprocess
+from urllib.parse import quote
 from pagegen import ROOT, page, ORG
 
-# ---------------- ürün mirror'ı (urunler.html ISISAH_LIST/SALMEX_LIST/BORSAH_LIST ile birebir) ----------------
-ISISAH = {
- 'rezistans':('Özel Tip Flanş Rezistansları','Daldırma ve boru tipi ısıtıcı elemanlar; sanayi ve proses uygulamaları için.',['Daldırma Tip','Boru Tip','Yerli Üretim']),
- 'izgara':('Konveksiyonel Fırın Rezistansları','Konveksiyonel fırınlar için dairesel ısıtıcı elemanlar.',['Konveksiyon','Fırın','Paslanmaz']),
- 'fritoz':('Fritöz Rezistansları (Yassı Rezistans)','Endüstriyel fritözler için daldırma tip ısıtıcı raflar; hızlı ve homojen ısıtma.',['Fritöz','Daldırma Tip','Hızlı Isıtma']),
- 'bulasik':('Bulaşık Makinesi Rezistansları','Sanayi tipi bulaşık makineleri için boyler ve tank ısıtıcı elemanları.',['Boyler Tip','Tank Isıtıcı','Sanayi Tipi']),
- 'makarna':('Makarna Haşlama Rezistansları (Yassı Rezistans)','Makarna haşlama üniteleri için daldırma tip ısıtıcı elemanlar.',['Haşlama','Daldırma Tip','Mutfak']),
- 'beyaz':('Arçelik & Vestel Kurutma Makinesi Isıtıcıları','Arçelik ve Vestel kurutma makineleri için ısıtıcı üniteler.',['Arçelik','Vestel','Kurutma']),
- 'defrost':('Defrost Rezistansları','Soğutma sistemleri için defrost elemanları; Ø6,5–11,2 mm, yüksek sıcaklığa dayanıklı.',['Ø6,5–11,2 mm','Yüksek Sıcaklık','Paslanmaz']),
- 'firin':('Endüstriyel Fırın','Kontrol panelli sanayi tipi ısıl işlem ve kurutma fırınları; projeye özel.',['PLC Kontrol','Isıl İşlem','Projeye Özel']),
- 'kanal':('Kanal Tipi Isıtıcı','Kanatlı rezistanslı santral, dikdörtgen ve yuvarlak kanal ısıtıcıları.',['Santral','Dikdörtgen','Yuvarlak']),
- 'mobil':('Mobil Elektrikli Isıtıcı','Uğur Böceği serisi taşınabilir fanlı ısıtıcılar; atölye ve saha için.',['Taşınabilir','Fanlı','3 Boy']),
- 'fincoil':('Fan-Coil & Ortam Isıtıcısı','Fan-coil üniteleri ve ortam ısıtması için dik finli paslanmaz ısıtıcılar.',['FCU','Ortam','Finli']),
- 'panel':('Klima Santrali (AHU) Isıtıcısı','Klima santralleri için yüksek kapasiteli paslanmaz ısıtıcı üniteler.',['AHU','Yüksek Kapasite','Paslanmaz']),
- 'duct':('Silindirik Kanal Fan Isıtıcısı','Havalandırma kanalları için fanlı silindirik paslanmaz ısıtıcı.',['Kanal','Fanlı','Kompakt']),
- 'boykur':('BOYKUR Boya Kurutma','Infrared, bilgisayar kontrollü mobil oto boya kurutma. Tofaş Ar-Ge projesi.',['Infrared','Bilgisayar Kontrollü','Tofaş Ar-Ge']),
- 'tren':('Demiryolu İklimlendirme Çözümleri',"80'lerin sonundan beri demiryolu sanayine: klima ısıtıcıları, yolcu/koltuk altı ve makinist ısıtıcıları, ray & makas ısıtıcıları.",['TÜVASAŞ · TÜRASAŞ','Metro & Tramvay','Yüksek Gerilim İzolasyonu']),
- 'railcar':('Demiryolu Araç Isıtıcısı','Raylı araçlar için paslanmaz ısıtıcı üniteler; şok ve vibrasyon testli, yüksek gerilim izolasyonu.',['Raylı Araç','Şok & Vibrasyon','Paslanmaz']),
- 'gemi':('Askeri Gemi İklimlendirme Çözümleri','TCG Anadolu (L400) dahil amfibi hücum gemileri ve MİLGEM sınıfı platformlar için ısıtma ve iklimlendirme çözümleri.',['TCG Anadolu','MİLGEM','Savunma Sanayi']),
- 'blast':('Savunma Tipi Blast Heater','MİLGEM sınıfı gemiler ve savunma platformları için fanlı blast ısıtıcı; NBC uyumlu klima santrali entegrasyonu.',['MİLGEM','Fanlı','Savunma Sanayi']),
- 'baseboard':('Baseboard Konvektör Isıtıcı','Gemi ve savunma platformları için delikli kasalı süpürgelik tipi konvektör üniteler.',['Gemi Tipi','Konvektör','Paslanmaz']),
- 'ocak':('Ocak Rezistansları (Spiral)','Elektrikli ocaklar için spiral boru rezistanslar; ev tipi ve sanayi tipi formlarda.',['Spiral','Ocak','Boru Tip']),
- 'disk':('Kahve & Çaydanlık Isıtıcıları','Kahve makinesi, çaydanlık ve bulaşık makineleri için paslanmaz disk ısıtıcılar.',['Disk Tip','Paslanmaz','Ev Aletleri']),
- 'firinrez':('Fırın Rezistansları','Ev tipi fırınlar için alt-üst ve turbo rezistanslar; farklı form ve güçlerde.',['Fırın','Alt-Üst','Turbo']),
- 'makas':('Ray & Makas Isıtıcıları','Karlı ve düşük sıcaklıkta makasların donmasını önler; olası kazaların önüne geçer. 1000 W / 230 V.',['1000W / 230V','Makas','Dona Karşı']),
- 'personel':('Görevli Personel Isıtıcıları','Raylı araç personel kabinleri için finli paslanmaz ısıtıcı üniteler.',['Finli','Paslanmaz','TÜVASAŞ']),
- 'proses':('Proses Isıtıcı Ünitesi','Endüstriyel proses hatları için flanşlı, kanal gövdeli ısıtıcı üniteler.',['Proses','Flanşlı','Yüksek Kapasite']),
-}
-SALMEX = {
- 'salmex':('Yoğuşmalı Isı Eşanjörü','Paslanmaz çelik sarmal eşanjör borusu; yüksek verimli, farklı kapasitelerde yoğuşmalı tasarım.',['Paslanmaz Çelik','Yüksek Verim','Değiştirilebilir']),
- 'condhex':('Yoğuşmalı Kombi Eşanjörü','Duvar tipi yoğuşmalı kombiler için alüminyum döküm eşanjör hücresi; pompa grubu ve gaz valfiyle komple ünite.',['Yoğuşmalı','Alüminyum Döküm','CondHex']),
- 'ehex':('Elektrikli Kombi Eşanjörü','Elektrikli kombiler için eşanjör ünitesi; sirkülasyon pompası ve kontrol donanımıyla komple çözüm.',['Elektrikli','E-Hex','Komple Ünite']),
- 'bitermik':('Kanatlı Kombi Ana Eşanjörü','Konvansiyonel kombiler için kanatlı borulu ana eşanjör blokları; kompakt ve yüksek ısı transferi.',['Kanatlı Boru','Konvansiyonel','Kompakt']),
- 'kazan':('Kazan Tipi Yoğuşmalı Eşanjör','Yüksek kapasiteli kazanlar için paslanmaz gövdeli, alüminyum döküm flanşlı yoğuşmalı eşanjör.',['Kazan Tipi','Yüksek Kapasite','Paslanmaz']),
- 'boyler':('Elektrikli Isıtıcı Ünitesi','Silindirik paslanmaz gövdeli elektrikli ısıtıcı; flanşlı rezistans grubuyla kombi ve kazan sistemleri için.',['Elektrikli','Paslanmaz','Flanşlı']),
- 'helis':('Helisel Boru Eşanjörü','Paslanmaz borudan helisel sarım eşanjör; kompakt hacimde yüksek ısı transfer yüzeyi.',['Helisel Sarım','Paslanmaz Boru','Kompakt']),
- 'serpantin':('Spiral Serpantin','Yassı spiral sarımlı paslanmaz serpantin; kazan ve boyler uygulamaları için.',['Spiral Sarım','Serpantin','Paslanmaz']),
- 'hucre':('Premix Yoğuşmalı Eşanjör Hücresi','Kompozit gövdeli, alüminyum brülör kapaklı premix yoğuşmalı eşanjör hücresi; ateşleme elektrotu montajlı.',['Premix','Yoğuşmalı','Kompozit Gövde']),
- 'emodul':('Elektrikli Isıtma Modülü','Paslanmaz plakalı gövde, kırmızı/mavi döküm kolektörlü kompakt elektrikli ısıtma modülü.',['Elektrikli','Plakalı','Kompakt']),
-}
-BORSAH = {
- 'boru':('Paslanmaz Borular','Dikişli paslanmaz boru; Ø6–42 mm çap, 0,35–2 mm et kalınlığı, 70–300 bar test, 9 kalite kontrolü.',['Ø6–42 mm','0,35–2 mm','TIG Kaynak']),
- 'oval':('Oval Borular','Rezistans imalatı, mobilya ve sanayi için oval kesitli paslanmaz profiller.',['Oval Kesit','Rezistans İmalatı','Profil']),
- 'kangal':('Tavlı & Kangal Borular','Ø6–42 mm aralığında tavlı ve kangal boru; 100–400 m kangal, 100 bar test.',['Ø6–42 mm','100–400 m','Tavlı & Kangal']),
-}
+def img_size(rel_path):
+    """Görselin GERÇEK piksel boyutu (macOS 'sips' ile, yeni bağımlılık eklemeden).
+    Okunamazsa (None, None) döner — çağıran taraf bu durumda eski 1200x800/1200x630
+    varsayılanına düşer; ASLA sahte/tahmini boyut iddia ETME (G2 kuralı)."""
+    try:
+        out = subprocess.run(['sips', '-g', 'pixelWidth', '-g', 'pixelHeight', str(ROOT / rel_path)],
+                              capture_output=True, text=True, timeout=10, check=True).stdout
+        w = re.search(r'pixelWidth:\s*(\d+)', out)
+        h = re.search(r'pixelHeight:\s*(\d+)', out)
+        if w and h:
+            return int(w.group(1)), int(h.group(1))
+    except Exception:
+        pass
+    return None, None
+
+# ---------------- ürün verisi: TEK KAYNAK assets/data/products.json (fabrikasyon yok) ----------------
+_PRODUCTS_PATH = ROOT / 'assets/data/products.json'
+_products = json.loads(_PRODUCTS_PATH.read_text(encoding='utf-8'))['products']
+if len(_products) < 30:
+    raise SystemExit(f'HATA: {_PRODUCTS_PATH} beklenenden az ürün içeriyor ({len(_products)}).')
+
+
+def _by_brand(brand):
+    return {p['img']: (p['h'], p['p'], p['chips']) for p in _products if p['brand'] == brand}
+
+
+ISISAH = _by_brand('isisah')
+SALMEX = _by_brand('salmex')
+BORSAH = _by_brand('borsah')
 
 def cards(src, keys):
     out = ['<div class="katgrid reveal">']
@@ -67,8 +54,10 @@ def breadcrumb_ld(name, url):
             '{"@type":"ListItem","position":2,"name":"Ürünler","item":"https://isisah.com.tr/showroom/urunler.html"},'
             f'{{"@type":"ListItem","position":3,"name":"{name}","item":"{url}"}}]}}')
 
-def collection_ld(name, url, desc, items):
-    li = ','.join(f'{{"@type":"Product","position":{i+1},"name":"{h}","description":"{p}","brand":{{"@type":"Brand","name":"ISIŞAH GROUP"}}}}' for i,(h,p,_) in enumerate(items))
+def collection_ld(name, url, desc, items, brandname):
+    # brandname: sayfanın gerçek marka hub'ı (ISIŞAH ENDÜSTRİYEL / SALMEX / BORŞAH BORU) —
+    # urunler.html'in kendi JSON-LD ItemList'indeki marka adlarıyla birebir (fabrikasyon yok, F1 düzeltmesi).
+    li = ','.join(f'{{"@type":"Product","position":{i+1},"name":"{h}","description":"{p}","brand":{{"@type":"Brand","name":"{brandname}"}}}}' for i,(h,p,_) in enumerate(items))
     return ('{"@context":"https://schema.org","@type":"CollectionPage","name":"'+name+'","url":"'+url+'","description":"'+desc+'",'
             '"isPartOf":{"@type":"WebSite","name":"ISIŞAH GROUP","url":"https://isisah.com.tr/"},'
             '"mainEntity":{"@type":"ItemList","itemListElement":['+li+']}}')
@@ -87,19 +76,47 @@ KATGRID_CSS = '''
   .hubcard span{color:var(--muted);font-size:.86rem}
   @media(max-width:900px){.katgrid{grid-template-columns:1fr 1fr}.hubgrid{grid-template-columns:1fr}}
   @media(max-width:640px){.katgrid{grid-template-columns:1fr}}
+  .pgcta-mail{margin-top:14px;color:var(--steel);font-size:.92rem}
+  .pgcta-mail a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
 '''
 
-def cat_body(name, holkey, brandhub, brandhubname, intro_p, src, keys, extra_cta=''):
+def cat_body(h1, slug_noext, holkey, brandhub, brandhubname, intro_p, src, keys,
+             secim_kriterleri=None, teklif_bilgileri=None, extra_body=''):
+    # secim_kriterleri / teklif_bilgileri: veri yok (CC-3) — hiçbir çağrı bunları şu an geçmiyor.
+    # Şirketten gerçek "nasıl seçilir" kriterleri / teklif için istenen bilgi listesi gelmeden
+    # buraya fabrikasyon madde EKLENMEMELİ; parametreler sadece veri gelince render edilsin diye var.
+    h1_plain = h1.replace('<br>', ' ')
+    mail_subject = quote(f'Teklif Talebi — {h1_plain}')
+    extra = ''
+    if secim_kriterleri:
+        lis = ''.join(f'<li>{x}</li>' for x in secim_kriterleri)
+        extra += f'''
+<section class="pad" style="padding-top:0">
+  <div class="wrap prose" style="max-width:820px">
+    <h2>Nasıl seçilir?</h2>
+    <ul>{lis}</ul>
+  </div>
+</section>'''
+    if teklif_bilgileri:
+        lis = ''.join(f'<li>{x}</li>' for x in teklif_bilgileri)
+        extra += f'''
+<section class="pad" style="padding-top:0">
+  <div class="wrap prose" style="max-width:820px">
+    <h2>Teklif için gerekli bilgiler</h2>
+    <ul>{lis}</ul>
+  </div>
+</section>'''
     return f'''
 <style>{KATGRID_CSS}</style>
 <section class="pad" style="padding-top:30px">
   <div class="wrap prose" style="max-width:900px">
     <p>{intro_p}</p>
     <div class="pgcta">
-      <a class="btn" href="urunler.html#hol={holkey}">3B Showroom'da incele <span>→</span></a>
+      <a class="btn" href="teklif.html?konu={slug_noext}">Teklif İste <span>→</span></a>
+      <a class="btn ghost" href="urunler.html#hol={holkey}">3B Showroom'da incele</a>
       <a class="btn ghost" href="tel:+902242610527">Ara</a>
-      <a class="btn ghost" href="mailto:info@isisah.com.tr?subject=Teklif%20Talebi">Teklif İste</a>
     </div>
+    <p class="pgcta-mail">veya e-posta ile yazın: <a href="mailto:info@isisah.com.tr?subject={mail_subject}">info@isisah.com.tr</a></p>
   </div>
 </section>
 <section class="pad" style="padding-top:0">
@@ -108,6 +125,7 @@ def cat_body(name, holkey, brandhub, brandhubname, intro_p, src, keys, extra_cta
     {cards(src, keys)}
   </div>
 </section>
+{extra}{extra_body}
 <section class="pad" style="padding-top:0">
   <div class="wrap">
     <div class="pgcta reveal">
@@ -119,17 +137,27 @@ def cat_body(name, holkey, brandhub, brandhubname, intro_p, src, keys, extra_cta
 </section>
 '''
 
-def build_cat(slug, holkey, title, desc, kick, h1, lead, intro_p, src, keys, brandhub, brandhubname, vis_img, vis_alt):
+def build_cat(slug, holkey, title, desc, kick, h1, lead, intro_p, src, keys, brandhub, brandhubname, vis_img, vis_alt,
+              secim_kriterleri=None, teklif_bilgileri=None, extra_body=''):
     url = f'https://isisah.com.tr/{slug}'
+    slug_noext = slug[:-5] if slug.endswith('.html') else slug
     items = [src[k] for k in keys]
-    ld = '[' + collection_ld(h1.replace('<br>',' '), url, desc, items) + ',' + breadcrumb_ld(h1.replace('<br>',' '), url) + ']'
-    body = cat_body(h1, holkey, brandhub, brandhubname, intro_p, src, keys)
-    vis = f'<img src="{vis_img}" alt="{vis_alt}" loading="eager" width="1200" height="800"><span class="tag">{brandhubname}</span>'
-    (ROOT/slug).write_text(page(slug, title, desc, kick, h1, lead, body, ld, vis), encoding='utf-8')
+    h1_plain = h1.replace('<br>',' ')
+    ld = '[' + collection_ld(h1_plain, url, desc, items, brandhubname) + ',' + breadcrumb_ld(h1_plain, url) + ']'
+    body = cat_body(h1, slug_noext, holkey, brandhub, brandhubname, intro_p, src, keys,
+                     secim_kriterleri, teklif_bilgileri, extra_body)
+    w, h = img_size(vis_img)  # gerçek piksel boyutu (sips) — okunamazsa eski 1200x800 varsayılanına düş
+    dims = f'width="{w}" height="{h}"' if w and h else 'width="1200" height="800"'
+    vis = f'<img src="{vis_img}" alt="{vis_alt}" loading="eager" {dims}><span class="tag">{brandhubname}</span>'
+    og_w, og_h = (w, h) if w and h else (1200, 630)
+    (ROOT/slug).write_text(page(slug, title, desc, kick, h1, lead, body, ld, vis,
+                                 og_image=vis_img, og_w=og_w, og_h=og_h), encoding='utf-8')
     return len(title), len(desc)
 
 def build_hub(slug, title, desc, kick, h1, lead, intro_p, spokes, doorkey, logo, vis_img, vis_alt):
     url = f'https://isisah.com.tr/{slug}'
+    slug_noext = slug[:-5] if slug.endswith('.html') else slug
+    mail_subject = quote(f'Teklif Talebi — {h1}')
     cardsHtml = ''.join(f'<a class="hubcard reveal" href="{s[0]}"><b>{s[1]}</b><span>{s[2]}</span></a>' for s in spokes)
     body = f'''
 <style>{KATGRID_CSS}</style>
@@ -137,10 +165,11 @@ def build_hub(slug, title, desc, kick, h1, lead, intro_p, spokes, doorkey, logo,
   <div class="wrap prose" style="max-width:900px">
     <p>{intro_p}</p>
     <div class="pgcta">
-      <a class="btn" href="urunler.html#marka={doorkey}">3B Showroom'da marka kapısını aç <span>→</span></a>
+      <a class="btn" href="teklif.html?konu={slug_noext}">Teklif İste <span>→</span></a>
+      <a class="btn ghost" href="urunler.html#marka={doorkey}">3B Showroom'da marka kapısını aç</a>
       <a class="btn ghost" href="tel:+902242610527">Ara</a>
-      <a class="btn ghost" href="mailto:info@isisah.com.tr?subject=Teklif%20Talebi">Teklif İste</a>
     </div>
+    <p class="pgcta-mail">veya e-posta ile yazın: <a href="mailto:info@isisah.com.tr?subject={mail_subject}">info@isisah.com.tr</a></p>
   </div>
 </section>
 <section class="pad" style="padding-top:0">
@@ -161,9 +190,68 @@ def build_hub(slug, title, desc, kick, h1, lead, intro_p, spokes, doorkey, logo,
 '''
     ld = '[' + ('{"@context":"https://schema.org","@type":"CollectionPage","name":"'+h1+'","url":"'+url+'","description":"'+desc+'",'
           '"isPartOf":{"@type":"WebSite","name":"ISIŞAH GROUP","url":"https://isisah.com.tr/"}}') + ',' + breadcrumb_ld(h1, url) + ']'
-    vis = f'<img src="{vis_img}" alt="{vis_alt}" loading="eager" width="1200" height="800"><span class="tag">{h1}</span>'
-    (ROOT/slug).write_text(page(slug, title, desc, kick, h1, lead, body, ld, vis), encoding='utf-8')
+    w, h = img_size(vis_img)  # gerçek piksel boyutu (sips) — okunamazsa eski 1200x800 varsayılanına düş
+    dims = f'width="{w}" height="{h}"' if w and h else 'width="1200" height="800"'
+    vis = f'<img src="{vis_img}" alt="{vis_alt}" loading="eager" {dims}><span class="tag">{h1}</span>'
+    og_w, og_h = (w, h) if w and h else (1200, 630)
+    (ROOT/slug).write_text(page(slug, title, desc, kick, h1, lead, body, ld, vis,
+                                 og_image=vis_img, og_w=og_w, og_h=og_h), encoding='utf-8')
     return len(title), len(desc)
+
+# G4: index.html'in eski #demiryolu bölümünden VERBATİM taşınan zaman çizelgesi + test/malzeme kutuları
+# (kaynak: git show HEAD:index.html, eski #demiryolu satır ~741-783). Metin harfiyen aynı, olgular değişmedi.
+# "Referanslar" listesi (railrefs) buraya taşınMADI — H tarafından zaten #kurumsal'a "Referanslarımızdan"
+# olarak taşındı; burada tekrarlanırsa aynı liste iki yerde mükerrer olur.
+DEMIRYOLU_EXTRA = '''
+<section class="pad" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Proje geçmişi.</h2><p>1986'dan bugüne demiryolu projelerimiz.</p></div>
+    <div class="railtime reveal">
+      <div class="row"><span class="yr">1986</span><span class="tx"><b>TÜVASAŞ TIJ Projesi:</b> yolcu vagonları pencere altı ısıtma üniteleri.</span></div>
+      <div class="row"><span class="yr">1995</span><span class="tx"><b>TÜVASAŞ TVS 2000:</b> vagon altı (şasi) ısıtıcılar.</span></div>
+      <div class="row"><span class="yr">2009-10</span><span class="tx"><b>TÜLOMSAŞ Projesi:</b> lokomotif rezistans üniteleri.</span></div>
+      <div class="row"><span class="yr">2011-26</span><span class="tx"><b>Makas & Ray Isıtıcıları + Personel Isıtıcıları:</b> tamamı paslanmaz personel ısıtma üniteleri; termostatik aşırı ısınma emniyeti.</span></div>
+      <div class="row"><span class="yr">2014</span><span class="tx"><b>Ankara Metro:</b> koltuk ısıtıcıları (750 W / 1300 W – 380 V), HVAC ısıtma elemanları ve fren borusu projesi (Borşah paslanmaz borularıyla).</span></div>
+      <div class="row"><span class="yr">2015-16</span><span class="tx"><b>Tramvay Klima Isıtıcısı · TÜVASAŞ DMU · İstanbul Ulaşım Modernizasyon · YZK 850 İBB:</b> yüksek hızlı tren yolcu ısıtıcıları, yüksek gerilim dayanımı.</span></div>
+      <div class="row"><span class="yr">2016-17</span><span class="tx"><b>E-14000 / İstanbul Ulaşım:</b> tren klima ısıtıcıları (M1 hattı).</span></div>
+      <div class="row"><span class="yr">2018</span><span class="tx"><b>Samsun Projesi:</b> ray ve makas ısıtıcıları.</span></div>
+      <div class="row"><span class="yr">2018-19</span><span class="tx"><b>Durmazlar Alibeyköy:</b> koltuk altı ısıtıcılar (Eminönü–Alibeyköy hattı) ve <b>Yazkar</b> klima batarya ısıtıcısı.</span></div>
+      <div class="row"><span class="yr">2018-21</span><span class="tx"><b>İzmir Tramvay Projesi:</b> klima rezistans üniteleri.</span></div>
+      <div class="row"><span class="yr">2019-23</span><span class="tx"><b>MERAK Brüksel Projesi:</b> ihracat: fanlı ısıtma üniteleri.</span></div>
+      <div class="row"><span class="yr">2020</span><span class="tx"><b>TÜLOMSAŞ & TÜVASAŞ:</b> vagon mutfağı ısıtma plakaları (AC-DC), kOhm dirençler, çubuk rezistanslar.</span></div>
+      <div class="row"><span class="yr">2021-26</span><span class="tx"><b>Romanya Projesi:</b> Bükreş tramvayları için koltuk düzenine özel elektrikli ısıtıcılar.</span></div>
+      <div class="row"><span class="yr">2022-26</span><span class="tx"><b>Kayseri 5 UT:</b> Bozankaya üretimi; Prag–Belgrad–Kayseri hatları için ısıtıcılar.</span></div>
+      <div class="row"><span class="yr">2023-26</span><span class="tx"><b>TÜRASAŞ EMU 225:</b> yolcu, vestibül ve makinist ısıtıcıları.</span></div>
+      <div class="row"><span class="yr">2025-26</span><span class="tx"><b>İstanbul Metro:</b> klima ve koltuk altı ısıtıcıları.</span></div>
+      <div class="row"><span class="yr">2026</span><span class="tx"><b>Samsun Projesi:</b> tramvay koltuk düzenine özel elektrikli ısıtıcılar.</span></div>
+      <div class="row"><span class="yr">—</span><span class="tx"><b>Havalimanı Treni Projesi:</b> raylı araç ısıtıcı üniteleri.</span></div>
+    </div>
+
+    <div class="railcols">
+      <div class="railbox reveal">
+        <h3>Standart Testler</h3>
+        <ul>
+          <li>Güç testi ve izolasyon direnci testi</li>
+          <li>Yüksek gerilimde kaçak akım (dielektrik) testi</li>
+          <li>Şok ve vibrasyon testleri (demiryolu standartlarına uygun); yangına dayanım</li>
+          <li>Boyut kontrolleri, çekme testi, topraklama direnci</li>
+          <li>Yüzey/ısıtıcı sıcaklık ve IP seviye testleri; fan gürültü seviyesi (desibel) ölçümü</li>
+        </ul>
+      </div>
+      <div class="railbox reveal" data-d="2">
+        <h3>Malzeme Seçimi</h3>
+        <ul>
+          <li>Korozyona dayanıklı AISI 304 / AISI 316 sac parçalar</li>
+          <li>Isıya dayanıklı cam elyaf izoleli, alev geciktirici 3GKW / 4GKW kablolar</li>
+          <li>Yüksek kaliteli EBM fanlar</li>
+          <li>Titreşime dayanıklı, çözülmez bağlantı ekipmanları</li>
+          <li>Her ünitede çift kademeli termostat koruması</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+'''
 
 sizes = []
 
@@ -226,7 +314,8 @@ sizes.append(build_cat('demiryolu-isiticilari.html', 'isisah_rayli',
     "1980'lerin sonundan beri demiryolu sanayine tedarik: TÜVASAŞ ve TÜRASAŞ için raylı araç ısıtıcıları, metro/tramvay klima ısıtıcıları, ray & makas donma önleyici ısıtıcılar ve personel kabini ısıtıcıları. Şok/vibrasyon testli, yüksek gerilim izolasyonlu üretim.",
     ISISAH, ['tren','railcar','makas','personel'],
     'isisah-endustriyel.html','ISIŞAH ENDÜSTRİYEL',
-    'assets/products/tren.webp','Demiryolu iklimlendirme çözümü — ISIŞAH'))
+    'assets/products/tren.webp','Demiryolu iklimlendirme çözümü — ISIŞAH',
+    extra_body=DEMIRYOLU_EXTRA))
 
 sizes.append(build_cat('savunma-sanayi-isitma-sistemleri.html', 'isisah_savunma',
     'Savunma Sanayi Isıtma Sistemleri | ISIŞAH Bursa',
