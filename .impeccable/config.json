@@ -170,6 +170,24 @@
         ],
         "createdAt": "2026-09-07T10:26:21.039Z",
         "reason": "index.html'den tools/build-pages.py ile üretilen kurumsal alt sayfa — onaylı v5-neon tema CSS'i miras (index ile aynı istisna)"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "fabrika.html"
+        ],
+        "createdAt": "2026-09-24T22:02:51.096Z",
+        "reason": "v5-neon tema: fabrika turu onaylı kimliği miras alır; metin arkası glow yerine .cap scrim rgba(4,4,8,.72) kullanıldı"
+      },
+      {
+        "rule": "clipped-overflow-container",
+        "value": "*",
+        "files": [
+          "fabrika.html"
+        ],
+        "createdAt": "2026-09-24T22:02:51.172Z",
+        "reason": "fabrika scroll-scrub sahnesi: tam ekran sticky video kasıtlı olarak taşmayı kırpar"
       }
     ]
   }
