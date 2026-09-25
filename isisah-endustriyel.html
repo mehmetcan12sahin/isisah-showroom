@@ -422,7 +422,7 @@
   .reveal[data-d="1"]{transition-delay:.06s}.reveal[data-d="2"]{transition-delay:.12s}
   .reveal[data-d="3"]{transition-delay:.18s}.reveal[data-d="4"]{transition-delay:.24s}
   .reveal[data-d="5"]{transition-delay:.3s}.reveal[data-d="6"]{transition-delay:.36s}
-  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.marquee .track{animation:none}}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.marquee .track{animation:none}.stickybar,html.sb-show .stickybar{transition:none}}
 
   @media(max-width:960px){
     .wm{display:none}
@@ -465,6 +465,10 @@
       background:#050508f5;color:#fff;backdrop-filter:blur(10px)}
     .stickybar a.call{color:var(--mnt1)}
     .stickybar a.quote{color:var(--mag1)}
+    /* hero'daki CTA/marka çipleri ekrandayken çubuk gizli — üst üste binip dokunuşu çalmasın; geçilince gelir */
+    .stickybar{transition:transform .25s var(--ease-out),visibility 0s linear .25s}
+    html.js:not(.sb-show) .stickybar{transform:translateY(110%);visibility:hidden}
+    html.sb-show .stickybar{transition:transform .25s var(--ease-out),visibility 0s}
     body{padding-bottom:calc(53px + env(safe-area-inset-bottom,0px))}
     footer{padding-bottom:70px}
   }
@@ -648,6 +652,7 @@
       else if(e.key==='ArrowDown'&&!dd.classList.contains('open')){e.preventDefault();open();const f=menu.querySelector('a');if(f)f.focus();}
     });
     menu.addEventListener('keydown',e=>{if(e.key==='Escape'){e.stopPropagation();close(true);}});
+    dd.addEventListener('focusout',e=>{if(!dd.contains(e.relatedTarget))close(false);});
   });
   document.addEventListener('click',e=>{if(!e.target.closest('.navdd'))closeAllDD();});
   const reveals=[...document.querySelectorAll('.reveal')];

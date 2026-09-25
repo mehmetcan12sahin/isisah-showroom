@@ -83,6 +83,7 @@ CORE_JS = '''<script>
       else if(e.key==='ArrowDown'&&!dd.classList.contains('open')){e.preventDefault();open();const f=menu.querySelector('a');if(f)f.focus();}
     });
     menu.addEventListener('keydown',e=>{if(e.key==='Escape'){e.stopPropagation();close(true);}});
+    dd.addEventListener('focusout',e=>{if(!dd.contains(e.relatedTarget))close(false);});
   });
   document.addEventListener('click',e=>{if(!e.target.closest('.navdd'))closeAllDD();});
   const reveals=[...document.querySelectorAll('.reveal')];
