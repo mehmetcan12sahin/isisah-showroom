@@ -40,17 +40,30 @@ PY
 # Bu adım ağa dokunmaz — DRY_RUN ve gerçek yükleme aynı /tmp/sr_* çıktısını kullanır.
 python3 - <<'PY'
 import glob
+import re
+import sys
 PAGES = [p for p in sorted(glob.glob('*.html')) if p not in ('urunler.html', 'fabrika.html')]
+bad = []
 for f in ('urunler.html', 'fabrika.html'):
     s = open(f).read()
     s = s.replace('href="index.html#', 'href="/#').replace('href="index.html"', 'href="/"')
+    # JS dizgileri (setAttribute('href','teklif.html?urun=...') vb.) — nitelik kuralları bunları yakalamaz
+    s = s.replace("'index.html#", "'/#").replace("'index.html'", "'/'")
     for p in PAGES:
         if p == 'index.html':
             continue  # yukarıda özel olarak zaten ele alındı (#-anchor + bare href)
-        s = s.replace(f'href="{p}#', f'href="/{p}#')
-        s = s.replace(f'href="{p}?', f'href="/{p}?')
-        s = s.replace(f'href="{p}"', f'href="/{p}"')
+        for q in ('href="', "'"):
+            s = s.replace(f'{q}{p}#', f'{q}/{p}#')
+            s = s.replace(f'{q}{p}?', f'{q}/{p}?')
+            s = s.replace(f'{q}{p}{q[-1]}', f'{q}/{p}{q[-1]}')
+    # güvenlik ağı: kök sayfaya hâlâ göreli giden bir dizgi kaldıysa canlıda /showroom/<sayfa> 404 verir → yayını durdur
+    for p in PAGES:
+        for m in re.finditer(r'["\'`]' + re.escape(p), s):
+            bad.append(f"{f}:{s.count(chr(10), 0, m.start()) + 1}: {s[m.start():m.start() + 60]!r}")
     open('/tmp/sr_'+f,'w').write(s)
+if bad:
+    print("!! showroom sayfalarında kök sayfaya göreli link kaldı (canlıda /showroom/ altında 404 olur):", *bad, sep="\n  ")
+    sys.exit(1)
 PY
 # kök sayfalar: index + kurumsal alt sayfalar showroom kopyasından türetilir, httpdocs/ köküne yazılır.
 # Bu adım da ağa dokunmaz — DRY_RUN ve gerçek yükleme aynı /tmp/root_* çıktısını kullanır.
@@ -59,7 +72,9 @@ PY
 python3 - <<'PY'
 import os
 import re
+import sys
 import glob
+bad=[]
 ROOT_PAGES=[f for f in sorted(glob.glob('*.html')) if f not in ('urunler.html','fabrika.html','404.html')]  # showroom-only sayfalar hariç, kalan her sayfa köke türetilir
 open('/tmp/root_pages.txt','w').write(' '.join(ROOT_PAGES))
 def _rewrite_srcset(m):
@@ -81,7 +96,13 @@ for f in ROOT_PAGES:
     s=s.replace('href="urunler.html','href="/showroom/urunler.html')
     s=s.replace('poster="assets/img/','poster="/showroom/assets/img/')
     s=s.replace('href="fabrika.html"','href="/showroom/fabrika.html"')
+    # güvenlik ağı: kökte göreli kalan showroom yolu httpdocs/<yol> olarak 404 verir → yayını durdur
+    for m in re.finditer(r'["\'`(](?:assets/|urunler\.html|fabrika\.html)', s):
+        bad.append(f"{f}:{s.count(chr(10), 0, m.start()) + 1}: {s[m.start():m.start() + 60]!r}")
     open('/tmp/root_'+f,'w').write(s)
+if bad:
+    print("!! kök sayfalarda /showroom/'a çevrilmemiş göreli yol kaldı (canlıda 404 olur):", *bad, sep="\n  ")
+    sys.exit(1)
 PY
 
 if [ "${DRY_RUN:-0}" = "1" ]; then
