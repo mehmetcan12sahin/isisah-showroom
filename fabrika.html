@@ -74,7 +74,7 @@
 
   /* video yüklenme göstergesi: küçük, köşede, tıklamayı asla yutmaz */
   .vprog{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50;
-    display:flex;align-items:center;gap:10px;pointer-events:none;
+    display:none;align-items:center;gap:10px;pointer-events:none;
     background:#05050ad9;border:1px solid var(--line);border-radius:40px;padding:7px 16px 7px 7px;
     opacity:1;transition:opacity .4s var(--ease-io)}
   .vprog.hide{opacity:0}
@@ -105,9 +105,9 @@
 
   /* final CTA */
   .fin{position:fixed;inset:0;z-index:25;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;
-    padding:0 24px;opacity:0;pointer-events:none;transition:opacity .5s var(--ease-io);
+    padding:0 24px;opacity:0;pointer-events:none;visibility:hidden;transition:opacity .5s var(--ease-io),visibility 0s linear .5s;
     background:radial-gradient(ellipse 60% 50% at 50% 58%,color-mix(in srgb,var(--mag2) 10%,transparent),transparent 72%)}
-  .fin.on{opacity:1;pointer-events:auto}
+  .fin.on{opacity:1;pointer-events:auto;visibility:visible;transition:opacity .5s var(--ease-io),visibility 0s}
   .fin .fintext{background:rgba(4,4,8,.72);border-radius:20px;padding:22px clamp(18px,4vw,34px);max-width:min(92vw,640px)}
   .fin h2{font-weight:700;text-transform:uppercase;font-size:clamp(1.7rem,5.6vw,3.6rem);text-shadow:0 2px 20px #000;line-height:1.2}
   .fin p{color:#e6e8f0;max-width:520px;line-height:1.5;margin-top:8px}
@@ -137,10 +137,18 @@
   @media(hover:hover){.playToggle:hover{border-color:color-mix(in srgb,var(--ele1) 55%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 22px -6px var(--ele2)}}
 
   /* azaltılmış hareket bildirimi — sadece prefers-reduced-motion:reduce'ta görünür, CSS ile (JS'e bağlı değil) */
-  .rnotice{display:none;position:fixed;top:calc(64px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);z-index:41;
-    max-width:min(90vw,520px);text-align:center;background:#0b0b12ee;border:1px solid var(--line);border-radius:12px;
-    padding:12px 18px;font-size:.8rem;color:#d5d8e2;line-height:1.5}
-  @media(max-width:480px){.rnotice{top:calc(112px + env(safe-area-inset-top,0px))}}
+  /* üst bildirim yığını: rnotice + sıradan-oynatıcı CTA şeridi aynı sütunda, çakışmadan alt alta dizilir */
+  .topnotice{position:fixed;top:calc(64px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);z-index:41;
+    display:flex;flex-direction:column;align-items:center;gap:10px;width:max-content;max-width:min(92vw,560px)}
+  @media(max-width:480px){.topnotice{top:calc(112px + env(safe-area-inset-top,0px))}}
+  .rnotice{display:none;text-align:center;background:#0b0b12ee;border:1px solid var(--line);border-radius:12px;
+    padding:12px 18px;font-size:.8rem;color:#d5d8e2;line-height:1.5;max-width:min(90vw,520px)}
+  /* sıradan oynatıcı modunda kaydırmaya bağlı olmayan, her zaman ulaşılabilir teklif/iletişim şeridi */
+  .plainCta{display:none;text-align:center;background:#0b0b12ee;border:1px solid var(--line);border-radius:12px;
+    padding:10px 16px;font-size:.78rem;color:#d5d8e2;line-height:1.5}
+  .plainCta a{text-decoration:underline;text-underline-offset:2px;color:#fff}
+  .plainCta a:hover{color:var(--ele1)}
+  body.plain .plainCta{display:block}
 
   #scroll{position:relative;z-index:5}
   .fh1{position:fixed;left:24px;bottom:22px;z-index:6;margin:0;font-size:.75rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted,#8f93a3);pointer-events:none}
@@ -161,8 +169,11 @@
   }
 
   /* sıradan oynatıcı modu: kaydırma-kilitli katmanlar gizlenir, native kontrol görünür */
-  body.plain .cap,body.plain .fin,body.plain .pbar,body.plain .vig,body.plain .shint{display:none}
+  body.plain .cap,body.plain .pbar,body.plain .vig,body.plain .shint{display:none}
   body.plain .stage video{cursor:auto}
+  /* native kontrol şeridi alt kenarda render olur: üstte kalan öğeleri o şeritten yukarı taşı */
+  body.plain .fh1{bottom:calc(80px + env(safe-area-inset-bottom,0px))}
+  body.plain .scrollhint{bottom:calc(80px + env(safe-area-inset-bottom,0px))}
 </style>
 </head>
 <body>
@@ -174,6 +185,7 @@
   <div class="vt">Video hazırlanıyor <b id="lpct"></b></div>
   <div class="vb"><i id="lbar"></i></div>
 </div>
+<script>document.getElementById('vprog').style.display='flex';</script>
 
 <header>
   <a class="l" href="index.html"><img src="assets/catalog/logo-group.png" alt="ISIŞAH GROUP" width="70" height="28">
@@ -184,7 +196,10 @@
   </div>
 </header>
 
-<div class="rnotice" id="rnotice">Azaltılmış hareket tercihi algılandı — film, kaydırmaya bağlı olmadan normal oynatıcıyla gösteriliyor. Kaydırarak izlemek isterseniz aşağıdaki düğmeyi kullanabilirsiniz.</div>
+<div class="topnotice">
+  <div class="rnotice" id="rnotice">Azaltılmış hareket tercihi algılandı — film, kaydırmaya bağlı olmadan normal oynatıcıyla gösteriliyor. Kaydırarak izlemek isterseniz aşağıdaki düğmeyi kullanabilirsiniz.</div>
+  <div class="plainCta" id="plainCta">Kaydırmadan da: <a href="teklif.html?konu=fabrika-turu">Teklif İste</a> · <a href="urunler.html">3B Showroom'u Gez</a> · <a href="mailto:info@isisah.com.tr?subject=Fabrika%20Turu%20Teklif%20Talebi">e-posta gönderin</a> · <a href="tel:+902242610527">+90 224 261 05 27</a></div>
+</div>
 
 <main id="main" tabindex="-1">
   <h1 class="fh1">SALMEX sarmal eşanjör üretim hattı — fabrika turu</h1>
@@ -266,6 +281,12 @@ function isSeekable(){
 }
 
 function startBlobFallback(){
+  const resumeAt=film.currentTime||0;
+  // <video src> zaten aynı URL'ye kendi isteğini açmış durumda; onu önce sonlandır
+  // (removeAttribute+load ile), yoksa tarayıcı fetch() ile açılan ikinci isteği
+  // ilkinin arkasına kuyruğa alıp ~20s bekletebiliyor (bkz. F2).
+  film.removeAttribute('src');
+  film.load();
   fetch(SRC).then(async r=>{
     const total=+r.headers.get('Content-Length')||0;
     const reader=r.body.getReader(); const chunks=[]; let got=0;
@@ -276,10 +297,12 @@ function startBlobFallback(){
       lpct.textContent='%'+Math.round(p*100);
     }
     const blob=new Blob(chunks,{type:'video/mp4'});
-    const resumeAt=film.currentTime||0;
     film.addEventListener('loadedmetadata',()=>{
       seekReady=true; hideProg();
       try{ film.currentTime=resumeAt; }catch(e){}
+      // plainMode'da play() src-swap'tan önce çağrılmış olabilir (bkz. F1) —
+      // swap tamamlandığında oynatmayı burada yeniden tetikle.
+      if(plainMode){ film.play().catch(()=>{}); }
     },{once:true});
     film.src=URL.createObjectURL(blob);
   }).catch(()=>{ seekReady=true; hideProg(); }); // ağ hatasında da sayfa kilitli kalmasın
@@ -342,6 +365,10 @@ function exitPlain(){
   playToggle.setAttribute('aria-pressed','false');
 }
 playToggle.addEventListener('click',()=>{ plainMode?exitPlain():enterPlain(); });
+
+// sıradan oynatıcıda film doğal sonuna ulaştığında teklif/showroom CTA'sını göster
+// (kaydırmaya bağlı fin.on geçişi plainMode'da çalışmaz, bkz. F4).
+film.addEventListener('ended',()=>{ if(plainMode) fin.classList.add('on'); });
 
 // azaltılmış hareket: kaydırmaya bağlı otomatik sahne animasyonunu başlatma,
 // öntanımlı olarak sıradan oynatıcıyı kullan (kaydırma isteğe bağlı kalır).
